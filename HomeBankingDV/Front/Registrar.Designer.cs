@@ -229,6 +229,5 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxContrasenia;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

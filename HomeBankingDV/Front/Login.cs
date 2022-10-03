@@ -15,10 +15,16 @@ namespace HomeBankingDV
     {
     
         public TransfDelegado transfDelegado;
+        public Banco elBanco;
+        public int dniIngresado;
+        public string contraseniaIngresada;
 
         public Login()
         {
-           InitializeComponent();
+            elBanco = new Banco();
+            elBanco.AltaUsuario(39500600, "Tomas", "Rodriguez", "rodriguezt@banco.com", "123456");
+            InitializeComponent();
+        
 
         }
         
@@ -33,6 +39,17 @@ namespace HomeBankingDV
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dniIngresado = int.Parse(textUsuario.Text);
+            contraseniaIngresada = textContrasenia.Text;
+
+            elBanco.IniciarSesion(dniIngresado,contraseniaIngresada);
+
+
+        }
+
     }
 
     public delegate void TransfDelegado();

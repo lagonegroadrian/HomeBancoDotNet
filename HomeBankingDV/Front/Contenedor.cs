@@ -4,6 +4,7 @@ namespace HomeBankingDV
     {
         Login hijoLogin;
         Registrar hijoRegistrar;
+        public Banco elBanco;
 
 
         public Contenedor()
