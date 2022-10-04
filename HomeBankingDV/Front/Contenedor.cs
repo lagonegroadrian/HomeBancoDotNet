@@ -4,13 +4,15 @@ namespace HomeBankingDV
     {
         Login hijoLogin;
         Registrar hijoRegistrar;
-        public Banco elBanco;
+        public Banco elBanco = new Banco();
 
-
+        
         public Contenedor()
         {
+            elBanco.AltaUsuario(39500600, "Tomas", "Rodriguez", "rodriguezt@banco.com", "123456");
+
             InitializeComponent();
-            hijoLogin = new Login();
+            hijoLogin = new Login(elBanco);
             hijoLogin.MdiParent = this;
             hijoLogin.transfDelegado += TransfDelegado;
             hijoLogin.Show(); 

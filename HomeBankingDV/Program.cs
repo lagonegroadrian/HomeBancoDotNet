@@ -10,7 +10,7 @@ namespace HomeBankingDV
         {
             //DATOS DE PRUEBA
 
-            Usuario u0 = new Usuario(3999594, "pepito", "gomez", "as@a", "123");
+            //Usuario u0 = new Usuario(3999594, "pepito", "gomez", "as@a", "123");
            
  
        

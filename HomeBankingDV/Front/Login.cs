@@ -19,13 +19,16 @@ namespace HomeBankingDV
         public int dniIngresado;
         public string contraseniaIngresada;
 
-        public Login()
+        public Login(Banco elBanco)
         {
-            elBanco = new Banco();
-            elBanco.AltaUsuario(39500600, "Tomas", "Rodriguez", "rodriguezt@banco.com", "123456");
+            //elBanco = new Banco();
+            seteoElBanco(elBanco);            
             InitializeComponent();
-        
+        }
 
+        private void seteoElBanco(Banco eBanco) 
+        {
+            elBanco = eBanco;
         }
         
   
