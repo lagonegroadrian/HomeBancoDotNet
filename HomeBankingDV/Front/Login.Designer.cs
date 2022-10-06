@@ -76,6 +76,7 @@ namespace HomeBankingDV
             resources.ApplyResources(this.Cancelar, "Cancelar");
             this.Cancelar.Name = "Cancelar";
             this.Cancelar.UseVisualStyleBackColor = false;
+            this.Cancelar.Click += new System.EventHandler(this.Cancelar_Click);
             // 
             // labelIntentos
             // 

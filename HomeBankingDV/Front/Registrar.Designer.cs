@@ -43,6 +43,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxContrasenia = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.labelMensajes = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -72,6 +73,7 @@
             this.textBoxDNI.Name = "textBoxDNI";
             this.textBoxDNI.Size = new System.Drawing.Size(181, 23);
             this.textBoxDNI.TabIndex = 2;
+            this.textBoxDNI.Leave += new System.EventHandler(this.onBlurDNI);
             // 
             // textBoxNombre
             // 
@@ -79,6 +81,7 @@
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(181, 23);
             this.textBoxNombre.TabIndex = 4;
+            this.textBoxNombre.Leave += new System.EventHandler(this.onBlurNombre);
             // 
             // label3
             // 
@@ -96,6 +99,7 @@
             this.textBoxApellido.Name = "textBoxApellido";
             this.textBoxApellido.Size = new System.Drawing.Size(181, 23);
             this.textBoxApellido.TabIndex = 6;
+            this.textBoxApellido.Leave += new System.EventHandler(this.onBlurApellido);
             // 
             // label4
             // 
@@ -113,6 +117,7 @@
             this.textBoxMail.Name = "textBoxMail";
             this.textBoxMail.Size = new System.Drawing.Size(181, 23);
             this.textBoxMail.TabIndex = 8;
+            this.textBoxMail.Leave += new System.EventHandler(this.onBlurMail);
             // 
             // label5
             // 
@@ -130,10 +135,9 @@
             this.Cancelar.Location = new System.Drawing.Point(48, 540);
             this.Cancelar.Name = "Cancelar";
             this.Cancelar.Size = new System.Drawing.Size(121, 33);
-            this.Cancelar.TabIndex = 9;
+            this.Cancelar.TabIndex = 12;
             this.Cancelar.Text = "Cancelar";
             this.Cancelar.UseVisualStyleBackColor = false;
-     
             // 
             // Confirmar
             // 
@@ -141,9 +145,10 @@
             this.Confirmar.Location = new System.Drawing.Point(223, 540);
             this.Confirmar.Name = "Confirmar";
             this.Confirmar.Size = new System.Drawing.Size(121, 33);
-            this.Confirmar.TabIndex = 10;
+            this.Confirmar.TabIndex = 11;
             this.Confirmar.Text = "Confirmar";
             this.Confirmar.UseVisualStyleBackColor = false;
+            this.Confirmar.Click += new System.EventHandler(this.Confirmar_Click);
             // 
             // textBoxContraseniaRepetida
             // 
@@ -151,7 +156,8 @@
             this.textBoxContraseniaRepetida.Name = "textBoxContraseniaRepetida";
             this.textBoxContraseniaRepetida.PasswordChar = '*';
             this.textBoxContraseniaRepetida.Size = new System.Drawing.Size(181, 23);
-            this.textBoxContraseniaRepetida.TabIndex = 14;
+            this.textBoxContraseniaRepetida.TabIndex = 10;
+            this.textBoxContraseniaRepetida.Leave += new System.EventHandler(this.onBlurPassVerification);
             // 
             // label6
             // 
@@ -169,7 +175,8 @@
             this.textBoxContrasenia.Name = "textBoxContrasenia";
             this.textBoxContrasenia.PasswordChar = '*';
             this.textBoxContrasenia.Size = new System.Drawing.Size(181, 23);
-            this.textBoxContrasenia.TabIndex = 12;
+            this.textBoxContrasenia.TabIndex = 9;
+            this.textBoxContrasenia.Leave += new System.EventHandler(this.onBlurPass);
             // 
             // label7
             // 
@@ -181,6 +188,16 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "PASS";
             // 
+            // labelMensajes
+            // 
+            this.labelMensajes.AutoSize = true;
+            this.labelMensajes.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelMensajes.ForeColor = System.Drawing.Color.Red;
+            this.labelMensajes.Location = new System.Drawing.Point(48, 471);
+            this.labelMensajes.Name = "labelMensajes";
+            this.labelMensajes.Size = new System.Drawing.Size(0, 22);
+            this.labelMensajes.TabIndex = 14;
+            // 
             // Registrar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -188,6 +205,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(415, 609);
+            this.Controls.Add(this.labelMensajes);
             this.Controls.Add(this.textBoxContraseniaRepetida);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxContrasenia);
@@ -207,6 +225,7 @@
             this.Name = "Registrar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar";
+            this.Load += new System.EventHandler(this.cargaDeForm);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,5 +248,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxContrasenia;
         private System.Windows.Forms.Label label7;
+        private Label labelMensajes;
     }
 }

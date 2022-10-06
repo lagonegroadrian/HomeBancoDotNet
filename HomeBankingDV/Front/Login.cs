@@ -19,17 +19,15 @@ namespace HomeBankingDV
         public int dniIngresado;
         public string contraseniaIngresada;
 
-        public Login(Banco elBanco)
+        public Login(Banco elBancoFora)
         {
             //elBanco = new Banco();
-            seteoElBanco(elBanco);            
+            elBanco = elBancoFora;
+            //seteoElBanco(elBanco);            
             InitializeComponent();
         }
 
-        private void seteoElBanco(Banco eBanco) 
-        {
-            elBanco = eBanco;
-        }
+        //private void seteoElBanco(Banco eBanco) {elBanco = eBanco;}
         
   
 
@@ -49,10 +47,12 @@ namespace HomeBankingDV
             contraseniaIngresada = textContrasenia.Text;
 
             elBanco.IniciarSesion(dniIngresado,contraseniaIngresada);
-
-
         }
 
+        private void Cancelar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public delegate void TransfDelegado();

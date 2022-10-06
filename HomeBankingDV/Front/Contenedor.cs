@@ -23,7 +23,7 @@ namespace HomeBankingDV
         private void TransfDelegado()
         {
             hijoLogin.Close();
-            hijoRegistrar = new Registrar();   
+            hijoRegistrar = new Registrar(elBanco);   
             hijoRegistrar.MdiParent = this;
             hijoRegistrar.Show();
         }
