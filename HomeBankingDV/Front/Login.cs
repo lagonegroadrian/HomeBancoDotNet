@@ -14,7 +14,10 @@ namespace HomeBankingDV
     public partial class Login : Form
     {
     
-        public TransfDelegado transfDelegado;
+        public DelegadoRegistroStart delegadoRegistroStart;
+        public DelegadoCloseLogin delegadoCloseLogin;
+        public DelegadoHommeStart delegadoHommeStart;
+
         public Banco elBanco;
         public int dniIngresado;
         public string contraseniaIngresada;
@@ -33,7 +36,7 @@ namespace HomeBankingDV
 
         private void Registrar_Click(object sender, EventArgs e)
         {
-            transfDelegado();
+            delegadoRegistroStart();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -43,20 +46,30 @@ namespace HomeBankingDV
 
         private void button1_Click(object sender, EventArgs e)
         {
+            try { 
             dniIngresado = int.Parse(textUsuario.Text);
             contraseniaIngresada = textContrasenia.Text;
-
-            elBanco.IniciarSesion(dniIngresado,contraseniaIngresada);
+                //elBanco.IniciarSesion(dniIngresado,contraseniaIngresada);
+                if (elBanco.IniciarSesion(dniIngresado, contraseniaIngresada))
+                {
+                    delegadoHommeStart();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error en el ingreso de datos.");
+            }  
+         
         }
 
         private void Cancelar_Click(object sender, EventArgs e)
         {
-
+            delegadoCloseLogin();
         }
     }
 
-    public delegate void TransfDelegado();
-
-    
+    public delegate void DelegadoRegistroStart();
+    public delegate void DelegadoHommeStart();
+    public delegate void DelegadoCloseLogin();
 }
 

@@ -10,10 +10,7 @@ namespace HomeBankingDV
         {
             //DATOS DE PRUEBA
 
-            //Usuario u0 = new Usuario(3999594, "pepito", "gomez", "as@a", "123");
-           
- 
-       
+            //bool u1 = AltaUsuario(95939524, "pepito", "gomez", "as@a", "123");
 
             
             // To customize application configuration such as set high DPI settings or default font,

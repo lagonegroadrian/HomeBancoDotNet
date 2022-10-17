@@ -9,11 +9,11 @@ namespace HomeBankingDV
     public class TarjetaDeCredito
     {
         public int id { get; set; }
-        public Usuario titular { get; set; } //en el diagrama dice user?
+        public Usuario titular { get; set; }
         public int numero { get; set; }
         public int codigoV { get; set; }
         public float limite { get; set; }
-        public float consumos { get; set; } //deberia ser singular, no?
+        public float consumos { get; set; }
 
         //constructor
         public TarjetaDeCredito(int id, Usuario titular, int numero, int codigoV, float limite, float consumos)

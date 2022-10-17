@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 namespace HomeBankingDV
 {
     public class Usuario
-        //Segun diagrama tendriamos que heredar de Banco?,
-        //pero no tiene sentido
     {
-        public int id { get; }
+        public int id { get; set; }
         public int dni { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
@@ -27,9 +25,12 @@ namespace HomeBankingDV
         public List<TarjetaDeCredito> tarjetas { get; set; }
         public List<Pago> pagos { get; set; }
 
+        static int aux { get; set; }
+
         //constructor
-        public Usuario(int dni, string nombre, string apellido, string mail, string password)
+        public Usuario(int id, int dni, string nombre, string apellido, string mail, string password)
         {
+            //this.id = id;
             this.dni = dni;
             this.nombre = nombre;
             this.apellido = apellido;
@@ -41,60 +42,33 @@ namespace HomeBankingDV
             pfs = new List<PlazoFijo>();
             tarjetas = new List<TarjetaDeCredito>();
             pagos = new List<Pago>();
-            this.id = dni;
-        }
+            this.id = aux++;
+         }
 
-        ////-------------ABM----------------
-        /// Hice este metodo en clase banco directamente
-        //public string AltaUsuario(List<Usuario> lista, Usuario u) {
-        //    //Agrega el usuario u a la lista.
+        public Usuario(int dni, string nombre, string apellido, string mail, string password)
+        {
+            //this.id = id;
+            this.dni = dni;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.mail = mail;
+            this.password = password;
+            intentosFallidos = 0;
+            bloqueado = false;
+            cajas = new List<CajaDeAhorro>();
+            pfs = new List<PlazoFijo>();
+            tarjetas = new List<TarjetaDeCredito>();
+            pagos = new List<Pago>();
+            this.id = aux++;        }
+        //VIAJARIA COMO PARAMETRO EL USUARIO LOGUEADO?//
 
-        //    foreach (Usuario usuario in lista)
-        //    {
-        //        if (usuario.dni == u.dni){
-        //            return "No se pudo agregar. El usuario ya existe";
-        //        }
-        //    }
+        public List<CajaDeAhorro> MostrarCajasDeAhorro() { return cajas; }
 
-        //    lista.Add(u);
- 
-        //    return "Usuario agregado exitosamente";
-        //}
-
-
-        public string ModificarUsuario(List<Usuario> lista, Usuario u) {
-            // buscamos el u.id en la lista
-            // validar si el id pasado por parametro es igual al del usuario logeado
-            foreach (Usuario usuario in lista)
-            {
-                if (usuario.id == u.id){
-                    usuario.dni = u.dni;
-                    usuario.nombre = u.nombre;
-                    usuario.apellido = u.apellido;
-                    usuario.mail = u.mail;
-                    usuario.password = u.password;
-                    usuario.intentosFallidos = u.intentosFallidos;
-                    usuario.bloqueado = u.bloqueado;
-                    usuario.cajas = u.cajas;
-                    usuario.pfs = u.pfs;
-                    usuario.tarjetas = u.tarjetas;
-                    usuario.pagos = u.pagos;
-
-                    return "Usuario modificado exitosamente";
-                }
-            }
-            return "El id del usuario no se pudo encontrar";
-
-
-        }
-        public bool EliminarUsuario() {
-            //pendiente porque necesitamos tener listos los metodos de
-            //baja de caja de ahorro, flazo fijo, y las demas listas
-
-            return true;
-
-        }
-
+        public List<Usuario> MostrarTitularesCajasDeAhorro(int _cbu) 
+        {
+            List<Usuario>  tituDeCBU = new List<Usuario>();
+            foreach (CajaDeAhorro cajase in cajas) {if (cajase.cbu == _cbu){foreach (Usuario titularAsociadoAlCBU in cajase.titulares) { tituDeCBU.Add(titularAsociadoAlCBU); }}}
+        return tituDeCBU; }
         
 
     }

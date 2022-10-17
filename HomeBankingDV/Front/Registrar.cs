@@ -12,8 +12,9 @@ namespace HomeBankingDV
 {
     public partial class Registrar : Form
     {
-
+        public DelegadoCloseRegistro delegadoCloseRegistro;
         public Banco elBancpRegistro;
+
 
 
         public Registrar(Banco elBancpRegistroFora)
@@ -24,12 +25,22 @@ namespace HomeBankingDV
 
         private void Confirmar_Click(object sender, EventArgs e)
         {
-            if (labelMensajes.Text == "") {elBancpRegistro.AltaUsuario(Int32.Parse(textBoxDNI.Text), textBoxNombre.Text, textBoxApellido.Text, textBoxMail.Text, textBoxContrasenia.Text);}
+            if (labelMensajes.Text == "")
+            {
+                bool respuesta= elBancpRegistro.AltaUsuario(Int32.Parse(textBoxDNI.Text), textBoxNombre.Text, textBoxApellido.Text, textBoxMail.Text, textBoxContrasenia.Text);
+                if (respuesta)
+                {
+                    labelMensajes.Text = "Usuario creado con exito.";
+                    delegadoCloseRegistro();
+                    MessageBox.Show("Cuenta creada con éxito.");
+                }
+                else {
+                    labelMensajes.Text = " Hubo un error al dar de alta el usuario";
+                }
+            }
             else { labelMensajes.Text = " Revisar datos ingresados"; }
         }
 
- 
-      
 
         private void onBlurDNI(object sender, EventArgs e)
         {
@@ -51,7 +62,7 @@ namespace HomeBankingDV
         }
 
         private void onBlurApellido(object sender, EventArgs e)
-        {            
+        {
             if (textBoxApellido.Text == "") { labelMensajes.Text = " ingresar APELLIDO "; } else { labelMensajes.Text = ""; }
             //labelMensajes.Text = " --> " + textBoxApellido.TextLength;
         }
@@ -63,7 +74,7 @@ namespace HomeBankingDV
             {
                 if ((!textBoxMail.Text.Contains("@")) || (!textBoxMail.Text.Contains(".com")) ) { labelMensajes.Text = " MAIL invalido"; }
                 else { labelMensajes.Text = "";}
-            }            
+            }
         }
 
         private void onBlurPass(object sender, EventArgs e)
@@ -94,6 +105,11 @@ namespace HomeBankingDV
             textBoxMail.MaxLength = 30;
         }
 
-       
+        private void Cancelar_Click(object sender, EventArgs e)
+        {
+            delegadoCloseRegistro();
+        }
+
+        public delegate void DelegadoCloseRegistro();
     }
 }
