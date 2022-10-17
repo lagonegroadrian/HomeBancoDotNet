@@ -97,16 +97,16 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 107</value>
+    <value>2, 199</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 18</value>
+    <value>344, 18</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Clicar 2 veces para operar con CUENTA</value>
+    <value>Clicar 2 veces para operar con CUENTA seleccionada</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
@@ -124,7 +124,7 @@
     <value>NoControl</value>
   </data>
   <data name="button9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 138</value>
+    <value>296, 224</value>
   </data>
   <data name="button9.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 29</value>
@@ -151,7 +151,7 @@
     <value>NoControl</value>
   </data>
   <data name="button8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>197, 138</value>
+    <value>197, 224</value>
   </data>
   <data name="button8.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 29</value>
@@ -178,7 +178,7 @@
     <value>NoControl</value>
   </data>
   <data name="button7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 138</value>
+    <value>106, 224</value>
   </data>
   <data name="button7.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 29</value>
@@ -205,7 +205,7 @@
     <value>NoControl</value>
   </data>
   <data name="button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 138</value>
+    <value>6, 224</value>
   </data>
   <data name="button6.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 29</value>
@@ -235,7 +235,7 @@
     <value>NoControl</value>
   </data>
   <data name="button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 291</value>
+    <value>294, 259</value>
   </data>
   <data name="button5.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 29</value>
@@ -265,7 +265,7 @@
     <value>NoControl</value>
   </data>
   <data name="button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 291</value>
+    <value>207, 259</value>
   </data>
   <data name="button3.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 29</value>
@@ -331,7 +331,7 @@
     <value>51</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 103</value>
+    <value>406, 195</value>
   </data>
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -349,7 +349,7 @@
     <value>8</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 183</value>
+    <value>8, 259</value>
   </data>
   <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 29</value>

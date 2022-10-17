@@ -24,9 +24,7 @@ namespace HomeBankingDV
 
         public Home(Banco elBancoFora)
         {
-            //elBanco = new Banco();
             elBanco = elBancoFora;
-            //seteoElBanco(elBanco);            
             InitializeComponent();
             List <string> cajasDeAhorro = new List<string>();
             List<CajaDeAhorro> cajaDeAhorroList = new List<CajaDeAhorro>();
@@ -40,34 +38,6 @@ namespace HomeBankingDV
             dataGridView1.Rows.Clear();
             foreach (CajaDeAhorro salida in elBanco.usuarioActual.MostrarCajasDeAhorro()) { dataGridView1.Rows.Add(salida.id, salida.cbu, salida.saldo); }
         }
-
-        //private void seteoElBanco(Banco eBanco) {elBanco = eBanco;}
-
-
-
-        private void Registrar_Click(object sender, EventArgs e)
-        {
-            //transfDelegado();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //dniIngresado = int.Parse(textUsuario.Text);
-            //contraseniaIngresada = textContrasenia.Text;
-
-            //elBanco.IniciarSesion(dniIngresado,contraseniaIngresada);
-        }
-
-        private void Cancelar_Click(object sender, EventArgs e)
-        {
-            delegadoCloseHomme();
-        }
-
 
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -135,10 +105,6 @@ namespace HomeBankingDV
             formulario.Show();
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void label4_Click(object sender, EventArgs e)
         {
@@ -165,20 +131,7 @@ namespace HomeBankingDV
 
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void dataGridView5_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void label8_Click(object sender, EventArgs e)
         {

@@ -33,6 +33,7 @@ namespace HomeBankingDV
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.cajasDeAhorroTab = new System.Windows.Forms.TabPage();
+            this.button17 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -88,7 +89,6 @@ namespace HomeBankingDV
             this.button4 = new System.Windows.Forms.Button();
             this.labelIntentos = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button17 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.cajasDeAhorroTab.SuspendLayout();
@@ -141,6 +141,17 @@ namespace HomeBankingDV
             this.cajasDeAhorroTab.Name = "cajasDeAhorroTab";
             this.cajasDeAhorroTab.UseVisualStyleBackColor = true;
             this.cajasDeAhorroTab.Click += new System.EventHandler(this.cajasDeAhorroTab_Click);
+            // 
+            // button17
+            // 
+            this.button17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.button17.FlatAppearance.BorderSize = 4;
+            this.button17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.button17.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.button17, "button17");
+            this.button17.Name = "button17";
+            this.button17.UseVisualStyleBackColor = false;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // label2
             // 
@@ -567,17 +578,6 @@ namespace HomeBankingDV
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Name = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // button17
-            // 
-            this.button17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button17.FlatAppearance.BorderSize = 4;
-            this.button17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
-            this.button17.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            resources.ApplyResources(this.button17, "button17");
-            this.button17.Name = "button17";
-            this.button17.UseVisualStyleBackColor = false;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // Home
             // 
