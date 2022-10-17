@@ -189,6 +189,16 @@ namespace HomeBankingDV
         {
 
         }
+
+        private void cajasDeAhorroTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            delegadoCloseHomme();
+        }
     }
 
     //public delegate void TransfDelegado();

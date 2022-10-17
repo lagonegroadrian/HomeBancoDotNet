@@ -88,6 +88,7 @@ namespace HomeBankingDV
             this.button4 = new System.Windows.Forms.Button();
             this.labelIntentos = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button17 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.cajasDeAhorroTab.SuspendLayout();
@@ -126,6 +127,7 @@ namespace HomeBankingDV
             // 
             // cajasDeAhorroTab
             // 
+            this.cajasDeAhorroTab.Controls.Add(this.button17);
             this.cajasDeAhorroTab.Controls.Add(this.label2);
             this.cajasDeAhorroTab.Controls.Add(this.button9);
             this.cajasDeAhorroTab.Controls.Add(this.button8);
@@ -138,6 +140,7 @@ namespace HomeBankingDV
             resources.ApplyResources(this.cajasDeAhorroTab, "cajasDeAhorroTab");
             this.cajasDeAhorroTab.Name = "cajasDeAhorroTab";
             this.cajasDeAhorroTab.UseVisualStyleBackColor = true;
+            this.cajasDeAhorroTab.Click += new System.EventHandler(this.cajasDeAhorroTab_Click);
             // 
             // label2
             // 
@@ -565,6 +568,17 @@ namespace HomeBankingDV
             this.label1.Name = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // button17
+            // 
+            this.button17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.button17.FlatAppearance.BorderSize = 4;
+            this.button17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.button17.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.button17, "button17");
+            this.button17.Name = "button17";
+            this.button17.UseVisualStyleBackColor = false;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
             // Home
             // 
             resources.ApplyResources(this, "$this");
@@ -657,6 +671,7 @@ namespace HomeBankingDV
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn cbu;
         private DataGridViewTextBoxColumn Saldo;
+        private Button button17;
     }
 }
 
