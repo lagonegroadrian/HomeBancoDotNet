@@ -19,7 +19,6 @@ namespace HomeBankingDV
 
         public Usuario usuarioActual { get; set; }
 
-        //constructor
         public Banco()
         {
             usuarios= new List<Usuario>();
@@ -30,7 +29,6 @@ namespace HomeBankingDV
             pfs = new List<PlazoFijo>();
         }
 
-        //DAR DE ALTA UN USUARIO EN LA LISTA BANCO//
         public bool AltaUsuario(int dni, string nombre, string apellido, string mail, string password)
         {
             if (!existeUsuario(dni))
@@ -63,28 +61,12 @@ namespace HomeBankingDV
             return false;
         }
 
-        //MODIFICAR UN USUARIO DE LA LISTA BANCO//
-        public bool ModificarUsuario(int dni, string nombre, string apellido, string mail, string password) {
-            
-            usuarioActual.dni = dni;
-            usuarioActual.nombre = nombre;
-            usuarioActual.apellido = apellido;
-            usuarioActual.mail = mail;
-            usuarioActual.password = password;
-
-            return true;
-        }
+        //public bool ModificarUsuario(int dni, string nombre, string apellido, string mail, string password) {usuarioActual.dni = dni;usuarioActual.nombre = nombre;usuarioActual.apellido = apellido;usuarioActual.mail = mail;usuarioActual.password = password;return true;}
 
         //COMPRUEBA SI EXISTE UN USUARIO EN LA LISTA DE USUARIOS DEL BANCO//
         public bool existeUsuario(int dni)
         {
-            foreach (Usuario usuario in usuarios)
-            {
-                if (usuario.dni == dni)
-                {
-                    return true;
-                }
-            }
+            foreach (Usuario usuario in usuarios){if (usuario.dni == dni){return true;}}
             return false;
         }
 
@@ -127,7 +109,6 @@ namespace HomeBankingDV
         //INICIA SESION CON UN USUARIO EXISTENTE EN LA LISTA DE USUARIOS DEL BANCO//    
         public bool AltaCajaAhorro(Usuario usuario)
         {
-
             List<Usuario> usuarioList = new List<Usuario>();
             usuarioList.Add(usuario);
             List<Movimiento> movimientos = new List<Movimiento>();
@@ -150,93 +131,65 @@ namespace HomeBankingDV
             return true;
         }
 
-        public List<String> MostrarTitularesDeCA(Usuario usuario)
-        {
-            List<String> datoSalida = new List<String>();
-            foreach (CajaDeAhorro laCajaDeAhorro in usuario.MostrarCajasDeAhorro())
-            {
-                foreach (Usuario titu in laCajaDeAhorro.titulares)
-                {
-                    datoSalida.Add(titu.nombre);
-                }
-            }
-            return datoSalida;
-        }
+
+        //public List<String> MostrarTitularesDeCA(Usuario usuario)
+        //{   List<String> datoSalida = new List<String>();
+        //  foreach (CajaDeAhorro laCajaDeAhorro in usuario.MostrarCajasDeAhorro()){foreach (Usuario titu in laCajaDeAhorro.titulares){datoSalida.Add(titu.nombre);}}
+        //return datoSalida;
+        //}
 
 
-        public List<String> MostrarTitularesDeCA(Usuario usuario, int CBU)
-        {
-            List<String> datoSalida = new List<String>();
-
-            foreach (CajaDeAhorro laCajaDeAhorro in usuario.MostrarCajasDeAhorro())
-            {
-                foreach (Usuario titu in laCajaDeAhorro.titulares)
-                {
-                    datoSalida.Add(titu.nombre);
-                }
-            }
-            return datoSalida;
-        }
+        //public List<String> MostrarTitularesDeCA(Usuario usuario, int CBU)
+        //{List<String> datoSalida = new List<String>();
+        //  foreach (CajaDeAhorro laCajaDeAhorro in usuario.MostrarCajasDeAhorro())
+        //{foreach (Usuario titu in laCajaDeAhorro.titulares){datoSalida.Add(titu.nombre);}}
+        //return datoSalida;
+        //}
 
 
 
         //INICIA SESION CON UN USUARIO EXISTENTE EN LA LISTA DE USUARIOS DEL BANCO//
         //MISMO CASO CON LOS ID A ALTAUSUARIO//
-        public bool AltaCajaAhorro() {
-            //ESTAS LISTAS PASARLAS AL CONSTRUCTOR DE CAJA DE AHORRO//
+        //public bool AltaCajaAhorro() {
+        //ESTAS LISTAS PASARLAS AL CONSTRUCTOR DE CAJA DE AHORRO//
 
-            //Buscamos el id que vamos a asignar
-            int id = 0;
-            if (cajas.Count > 0)
-            {
-                //si hay al menos 1 elemento en la lista previamente
-                var lastItem = cajas[^1];//accede al ultimo elemento de la lista
-                id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
-            }
-            else { 
-                //si la lista esta vacia (count = 0)
-                id = 1;
-            }
-
-            //Genera CBU a partir del DNI.
-            int cbu = usuarioActual.dni*1000;
-
-            //Inicializamos las listas
-            //List<Usuario> titulares = null;
-            //List<Movimiento> movimientos ;
-
-            //Agregamos la caja
-            CajaDeAhorro caja = new CajaDeAhorro(id, cbu, null , 0, null);
-
-            cajas.Add(caja);
-
-            usuarioActual.cajas.Add(caja);
-
-            return true;
-        }
+        //Buscamos el id que vamos a asignar
+        //int id = 0;
+        //if (cajas.Count > 0){
+        //si hay al menos 1 elemento en la lista previamente
+        //var lastItem = cajas[^1];//accede al ultimo elemento de la lista
+        //id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
+        //}
+        //    else { 
+        //si la lista esta vacia (count = 0)
+        //id = 1;
+        //}
+        //Genera CBU a partir del DNI.
+        //int cbu = usuarioActual.dni*1000;
+        //Inicializamos las listas
+        //List<Usuario> titulares = null;
+        //List<Movimiento> movimientos ;
+        //Agregamos la caja
+        //CajaDeAhorro caja = new CajaDeAhorro(id, cbu, null , 0, null);
+        //cajas.Add(caja);
+        //usuarioActual.cajas.Add(caja);
+        //return true;
+        //}
 
         //DA DE BAJA UNA CAJA DE AHORRO DE LA LISTA DEL BANCO Y DE LA LISTA DE CADA USUARIO TITULAR DE LA CAJA//   
-        public bool BajaCajaAhorro (int id)
-        {
-            bool result = false;
-            foreach (CajaDeAhorro caja in usuarioActual.cajas)
-            {
-                if (caja.id == id)
-                {
-                    if (caja.saldo == 0)
-                    {
-                        cajas.Remove(caja);
-                        usuarioActual.cajas.Remove(caja);
-                        return result = true;
-                    }
-                    //return false;
-                }
-                //return false;
-            }
-            return result;
-        }
+        //public bool BajaCajaAhorro (int id)
+        //{
+        //bool result = false;
+        //foreach (CajaDeAhorro caja in usuarioActual.cajas)
+        //{if (caja.id == id){if (caja.saldo == 0){
+        //cajas.Remove(caja);
+        //usuarioActual.cajas.Remove(caja);
+        //return result = true;}}}
+        //return result;
+        //}
 
         //AGREGA O ELIMINA USUARIOS TITULARES DE UNA CAJA DE AHORRO --FLAG DEBE TRAER "Agregar" o "Eliminar"//   
+        
         public bool AgregarTitularCajaAhorro (int id, int dni)
         {//REEMPLAZAR POR DATO IDENTIFICABLE DNI O ID, NUNCA PASAR OBJETO DESD LA VISTA
 
