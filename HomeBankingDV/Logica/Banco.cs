@@ -166,8 +166,17 @@ namespace HomeBankingDV
         }
         //Genera CBU a partir del DNI.
         int cbu = usuarioActual.dni*1000;
-        //Inicializamos las listas
-        List<Usuario> titulares = null;
+            
+
+              Random rd = new Random();
+                  int rand_num = rd.Next(cbu, cbu * 1109);
+                  cbu = rand_num;
+
+
+            //Inicializamos las listas
+
+
+            List<Usuario> titulares = null;
         List<Movimiento> movimientos =null ;
             
         //Agregamos la caja
