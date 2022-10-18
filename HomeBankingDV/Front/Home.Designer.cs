@@ -83,12 +83,6 @@ namespace HomeBankingDV
             this.button4 = new System.Windows.Forms.Button();
             this.labelIntentos = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.cajasDeAhorroTab.SuspendLayout();
@@ -129,12 +123,6 @@ namespace HomeBankingDV
             // 
             this.cajasDeAhorroTab.Controls.Add(this.button17);
             this.cajasDeAhorroTab.Controls.Add(this.label2);
-            this.cajasDeAhorroTab.Controls.Add(this.button9);
-            this.cajasDeAhorroTab.Controls.Add(this.button8);
-            this.cajasDeAhorroTab.Controls.Add(this.button7);
-            this.cajasDeAhorroTab.Controls.Add(this.button6);
-            this.cajasDeAhorroTab.Controls.Add(this.button5);
-            this.cajasDeAhorroTab.Controls.Add(this.button3);
             this.cajasDeAhorroTab.Controls.Add(this.dataGridView1);
             this.cajasDeAhorroTab.Controls.Add(this.button1);
             resources.ApplyResources(this.cajasDeAhorroTab, "cajasDeAhorroTab");
@@ -526,60 +514,6 @@ namespace HomeBankingDV
             this.label1.Name = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // button9
-            // 
-            this.button9.BackColor = System.Drawing.Color.Green;
-            this.button9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            resources.ApplyResources(this.button9, "button9");
-            this.button9.Name = "button9";
-            this.button9.UseVisualStyleBackColor = false;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.Color.Green;
-            this.button8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            resources.ApplyResources(this.button8, "button8");
-            this.button8.Name = "button8";
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.Green;
-            this.button7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            resources.ApplyResources(this.button7, "button7");
-            this.button7.Name = "button7";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.Green;
-            this.button6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            resources.ApplyResources(this.button6, "button6");
-            this.button6.Name = "button6";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.IndianRed;
-            resources.ApplyResources(this.button5, "button5");
-            this.button5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button5.Name = "button5";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.IndianRed;
-            resources.ApplyResources(this.button3, "button3");
-            this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button3.Name = "button3";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // Home
             // 
             resources.ApplyResources(this, "$this");
@@ -667,12 +601,6 @@ namespace HomeBankingDV
         private DataGridViewTextBoxColumn cbu;
         private DataGridViewTextBoxColumn Saldo;
         private Button button17;
-        private Button button9;
-        private Button button8;
-        private Button button7;
-        private Button button6;
-        private Button button5;
-        private Button button3;
     }
 }
 

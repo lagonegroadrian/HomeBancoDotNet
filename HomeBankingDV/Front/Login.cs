@@ -25,9 +25,7 @@ namespace HomeBankingDV
         // prueba
         public Login(Banco elBancoFora)
         {
-            //elBanco = new Banco();
             elBanco = elBancoFora;
-            //seteoElBanco(elBanco);            
             InitializeComponent();
         }
 

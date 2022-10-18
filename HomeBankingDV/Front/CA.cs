@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HomeBankingDV.Front;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -89,8 +90,26 @@ namespace HomeBankingDV
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //Form formulario = new Depositar();
-            //formulario.Show();
+            Form formulario = new Depositar();
+            formulario.Show();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Form formulario = new Retirar();
+            formulario.Show();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Form formulario = new Transferir();
+            formulario.Show();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Form formulario = new VerDetalle();
+            formulario.Show();
         }
     }
 
