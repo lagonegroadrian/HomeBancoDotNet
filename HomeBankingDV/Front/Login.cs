@@ -49,14 +49,17 @@ namespace HomeBankingDV
             dniIngresado = int.Parse(textUsuario.Text);
             contraseniaIngresada = textContrasenia.Text;
                 //elBanco.IniciarSesion(dniIngresado,contraseniaIngresada);
-                if (elBanco.IniciarSesion(dniIngresado, contraseniaIngresada))
-                {
-                    MessageBox.Show("Login Correcto:");
-                    delegadoHommeStart();
+              
+                    if (elBanco.IniciarSesion(dniIngresado, contraseniaIngresada))
+                    {
+                        delegadoHommeStart();
+
+                    }
+                
                 }
-            }
             catch (Exception)
             {
+               
                 MessageBox.Show("Error en el ingreso de datos.");
             }  
          

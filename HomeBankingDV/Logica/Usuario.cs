@@ -18,9 +18,9 @@ namespace HomeBankingDV
         public string password { get; set; }
         public int intentosFallidos { get; set; }
 
-        public bool bloqueado { get; set; }
-
         public bool isAdmin { get; set; }
+
+        public bool bloqueado { get; set; }
 
         public List<CajaDeAhorro> cajas { get; set; }
         public List<PlazoFijo> pfs { get; set; }
@@ -30,7 +30,7 @@ namespace HomeBankingDV
         static int aux { get; set; }
 
         //constructor
-        public Usuario(int id, int dni, string nombre, string apellido, string mail, string password, bool isAdmin)
+        public Usuario(int id, int dni, string nombre, string apellido, string mail, string password,bool isAdmin)
         {
             //this.id = id;
             this.dni = dni;
@@ -45,8 +45,7 @@ namespace HomeBankingDV
             tarjetas = new List<TarjetaDeCredito>();
             pagos = new List<Pago>();
             this.id = aux++;
-            this.isAdmin = isAdmin;
-        }
+         }
 
         public Usuario(int dni, string nombre, string apellido, string mail, string password)
         {

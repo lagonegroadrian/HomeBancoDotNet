@@ -73,6 +73,7 @@ namespace HomeBankingDV
         //INICIA SESION CON UN USUARIO EXISTENTE EN LA LISTA DE USUARIOS DEL BANCO//        
         public bool IniciarSesion(int DNI, string Contraseña)
         {
+          
             foreach (Usuario usuario in usuarios)
             {
                 if (usuario.dni == DNI && usuario.password == Contraseña && usuario.bloqueado == false)
