@@ -11,7 +11,7 @@ namespace HomeBankingDV
         public Contenedor()
         {
             elBanco.AltaUsuario(1, "Tomas", "Rodriguez", "rodriguezt@banco.com", "1");
-            elBanco.AltaUsuario(35147312, "Adrian", "Lagonegro", "Lagonegro@cobanco.com", "123456");
+            elBanco.AltaUsuario(35147312, "Adrian", "Lagonegro", "Lagonegro@cobanco.com", "123");
             
             ActivoLogin();
         }

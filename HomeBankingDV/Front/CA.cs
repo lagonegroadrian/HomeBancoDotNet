@@ -86,6 +86,12 @@ namespace HomeBankingDV
         {
             this.Close();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //Form formulario = new Depositar();
+            //formulario.Show();
+        }
     }
 
     //public delegate void TransfDelegado();

@@ -40,11 +40,22 @@ namespace HomeBankingDV
             this.button4 = new System.Windows.Forms.Button();
             this.labelIntentos = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.button5);
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
@@ -113,6 +124,66 @@ namespace HomeBankingDV
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.Color.Green;
+            this.button9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(this.button9, "button9");
+            this.button9.Name = "button9";
+            this.button9.UseVisualStyleBackColor = false;
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.Green;
+            this.button8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(this.button8, "button8");
+            this.button8.Name = "button8";
+            this.button8.UseVisualStyleBackColor = false;
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.Green;
+            this.button7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(this.button7, "button7");
+            this.button7.Name = "button7";
+            this.button7.UseVisualStyleBackColor = false;
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.Green;
+            this.button6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            resources.ApplyResources(this.button6, "button6");
+            this.button6.Name = "button6";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.IndianRed;
+            resources.ApplyResources(this.button5, "button5");
+            this.button5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button5.Name = "button5";
+            this.button5.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.IndianRed;
+            resources.ApplyResources(this.button3, "button3");
+            this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button3.Name = "button3";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.button9);
+            this.groupBox1.Controls.Add(this.button7);
+            this.groupBox1.Controls.Add(this.button8);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
             // CA
             // 
             resources.ApplyResources(this, "$this");
@@ -125,6 +196,7 @@ namespace HomeBankingDV
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -141,6 +213,13 @@ namespace HomeBankingDV
         private Label label3;
         private Label label2;
         private ListBox listBox1;
+        private GroupBox groupBox1;
+        private Button button6;
+        private Button button9;
+        private Button button7;
+        private Button button8;
+        private Button button5;
+        private Button button3;
     }
 }
 
