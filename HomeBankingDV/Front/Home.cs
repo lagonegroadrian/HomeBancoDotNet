@@ -44,7 +44,7 @@ namespace HomeBankingDV
         {
             //Form crearCaja = new CrearNuevaCaja();
             //crearCaja.Show();
-            elBanco.AltaCajaAhorro(elBanco.usuarioActual);
+            elBanco.AltaCajaAhorro();
             llenarDatosDataGrid1();
         }
 

@@ -51,6 +51,7 @@ namespace HomeBankingDV
                 //elBanco.IniciarSesion(dniIngresado,contraseniaIngresada);
                 if (elBanco.IniciarSesion(dniIngresado, contraseniaIngresada))
                 {
+                    MessageBox.Show("Login Correcto:");
                     delegadoHommeStart();
                 }
             }

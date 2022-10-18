@@ -27,7 +27,7 @@ namespace HomeBankingDV
         {
             if (labelMensajes.Text == "")
             {
-                bool respuesta= elBancpRegistro.AltaUsuario(Int32.Parse(textBoxDNI.Text), textBoxNombre.Text, textBoxApellido.Text, textBoxMail.Text, textBoxContrasenia.Text);
+                bool respuesta= elBancpRegistro.AltaUsuario(Int32.Parse(textBoxDNI.Text), textBoxNombre.Text, textBoxApellido.Text, textBoxMail.Text, textBoxContrasenia.Text,false);
                 if (respuesta)
                 {
                     labelMensajes.Text = "Usuario creado con exito.";

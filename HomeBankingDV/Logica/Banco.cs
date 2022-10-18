@@ -29,7 +29,7 @@ namespace HomeBankingDV
             pfs = new List<PlazoFijo>();
         }
 
-        public bool AltaUsuario(int dni, string nombre, string apellido, string mail, string password)
+        public bool AltaUsuario(int dni, string nombre, string apellido, string mail, string password,bool isAdmin)
         {
             if (!existeUsuario(dni))
             {
@@ -49,7 +49,7 @@ namespace HomeBankingDV
                 //Agregamos el usuario
                 try
                 {
-                    Usuario usuario = new Usuario(id, dni,nombre,apellido,mail,password);
+                    Usuario usuario = new Usuario(id, dni,nombre,apellido,mail,password,isAdmin);
                     usuarios.Add(usuario);
                     return true;
                 }
@@ -78,58 +78,58 @@ namespace HomeBankingDV
                 if (usuario.dni == DNI && usuario.password == Contraseña && usuario.bloqueado == false)
                 {
                     usuarioActual = usuario;
-                    MessageBox.Show("Login correcto"); //ESTO TIENE QUE SALIR DE LA VISTA, LO MISMO CON TODOS LOS MESSAGEBOX
+                   // MessageBox.Show("Login correcto"); //ESTO TIENE QUE SALIR DE LA VISTA, LO MISMO CON TODOS LOS MESSAGEBOX
                     return true;
                 }
                 if (usuario.dni == DNI && usuario.password != Contraseña && usuario.bloqueado == false)
                 {
                     usuario.intentosFallidos++;
-                    MessageBox.Show("Password mal. A los 3 intentos fallidos se bloqueara cuenta." +
-                        "Intentos Fallidos: " + usuario.intentosFallidos);
+                   // MessageBox.Show("Password mal. A los 3 intentos fallidos se bloqueara cuenta." +
+                      //  "Intentos Fallidos: " + usuario.intentosFallidos);
                     if (usuario.intentosFallidos == 3)
                     {
-                        MessageBox.Show("El usuario " + usuario.nombre + " " + usuario.apellido + " se ha bloqueado." );
+                     //   MessageBox.Show("El usuario " + usuario.nombre + " " + usuario.apellido + " se ha bloqueado." );
                         usuario.bloqueado = true;
                     }
                     return false;
                 }
                 if (usuario.bloqueado == true)
                 {
-                    MessageBox.Show("El usuario esta bloqueado");
+                //    MessageBox.Show("El usuario esta bloqueado");
                     return false;
                 }
                 
                
             }
 
-            MessageBox.Show("El usuario no se encuentra en la base de datos");
+          //  MessageBox.Show("El usuario no se encuentra en la base de datos");
             return false;
         }
 
         //INICIA SESION CON UN USUARIO EXISTENTE EN LA LISTA DE USUARIOS DEL BANCO//    
-        public bool AltaCajaAhorro(Usuario usuario)
-        {
-            List<Usuario> usuarioList = new List<Usuario>();
-            usuarioList.Add(usuario);
-            List<Movimiento> movimientos = new List<Movimiento>();
+      //  public bool AltaCajaAhorro(Usuario usuario)
+     //   {
+        //    List<Usuario> usuarioList = new List<Usuario>();
+       //     usuarioList.Add(usuario);
+      //      List<Movimiento> movimientos = new List<Movimiento>();
             //genera CBU a partir del DNI.
             //int cbu = usuario.dni * 1000;
             //genero un numero CBU random
-            int cbu = usuario.dni * 1000;
+     //       int cbu = usuario.dni * 1000;
 
-            Random rd = new Random();
-            int rand_num = rd.Next(cbu, cbu * 1109);
-            cbu = rand_num;
+      //      Random rd = new Random();
+      //      int rand_num = rd.Next(cbu, cbu * 1109);
+      //      cbu = rand_num;
 
-            int id = usuario.cajas.Count() + 1;
+      //      int id = usuario.cajas.Count() + 1;
 
             //CajaDeAhorro caja = new CajaDeAhorro(id, cbu, usuarioList, 0, movimientos);
-            CajaDeAhorro caja = new CajaDeAhorro(cbu, usuario);
+     //       CajaDeAhorro caja = new CajaDeAhorro(cbu, usuario);
 
-            cajas.Add(caja);
-            usuario.cajas.Add(caja);
-            return true;
-        }
+     //       cajas.Add(caja);
+     //       usuario.cajas.Add(caja);
+     //       return true;
+    //    }
 
 
         //public List<String> MostrarTitularesDeCA(Usuario usuario)
@@ -150,43 +150,44 @@ namespace HomeBankingDV
 
         //INICIA SESION CON UN USUARIO EXISTENTE EN LA LISTA DE USUARIOS DEL BANCO//
         //MISMO CASO CON LOS ID A ALTAUSUARIO//
-        //public bool AltaCajaAhorro() {
+        public bool AltaCajaAhorro() {
         //ESTAS LISTAS PASARLAS AL CONSTRUCTOR DE CAJA DE AHORRO//
 
         //Buscamos el id que vamos a asignar
-        //int id = 0;
-        //if (cajas.Count > 0){
+        int id = 0;
+        if (cajas.Count > 0){
         //si hay al menos 1 elemento en la lista previamente
-        //var lastItem = cajas[^1];//accede al ultimo elemento de la lista
-        //id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
-        //}
-        //    else { 
+        var lastItem = cajas[^1];//accede al ultimo elemento de la lista
+        id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
+        }
+            else { 
         //si la lista esta vacia (count = 0)
-        //id = 1;
-        //}
+        id = 1;
+        }
         //Genera CBU a partir del DNI.
-        //int cbu = usuarioActual.dni*1000;
+        int cbu = usuarioActual.dni*1000;
         //Inicializamos las listas
-        //List<Usuario> titulares = null;
-        //List<Movimiento> movimientos ;
+        List<Usuario> titulares = null;
+        List<Movimiento> movimientos =null ;
+            
         //Agregamos la caja
-        //CajaDeAhorro caja = new CajaDeAhorro(id, cbu, null , 0, null);
-        //cajas.Add(caja);
-        //usuarioActual.cajas.Add(caja);
-        //return true;
-        //}
+        CajaDeAhorro caja = new CajaDeAhorro(id, cbu, titulares , 0, movimientos);
+        cajas.Add(caja);
+        usuarioActual.cajas.Add(caja);
+        return true;
+        }
 
         //DA DE BAJA UNA CAJA DE AHORRO DE LA LISTA DEL BANCO Y DE LA LISTA DE CADA USUARIO TITULAR DE LA CAJA//   
-        //public bool BajaCajaAhorro (int id)
-        //{
-        //bool result = false;
-        //foreach (CajaDeAhorro caja in usuarioActual.cajas)
-        //{if (caja.id == id){if (caja.saldo == 0){
-        //cajas.Remove(caja);
-        //usuarioActual.cajas.Remove(caja);
-        //return result = true;}}}
-        //return result;
-        //}
+        public bool BajaCajaAhorro (int id)
+        {
+        bool result = false;
+        foreach (CajaDeAhorro caja in usuarioActual.cajas)
+        {if (caja.id == id){if (caja.saldo == 0){
+        cajas.Remove(caja);
+        usuarioActual.cajas.Remove(caja);
+        return result = true;}}}
+        return result;
+        }
 
         //AGREGA O ELIMINA USUARIOS TITULARES DE UNA CAJA DE AHORRO --FLAG DEBE TRAER "Agregar" o "Eliminar"//   
         
@@ -528,35 +529,6 @@ namespace HomeBankingDV
         }
 
         // Operaciones del usuario..
-        public bool crearCajaAhorro()
-        {
-            int id = 0;
-            int cbu = 0;
-            
-            if (usuarioActual.cajas.Count>0)
-            {
-                var lastItem=usuarioActual.cajas[^1];
-                id = lastItem.id + 1;
-            }else
-            {
-                id = 1;
-            }
-            
-            
-            try
-            {
-                
-                CajaDeAhorro cajaNew = new CajaDeAhorro(id,cbu, null, 0, null);
-                usuarioActual.cajas.Add(cajaNew);
-                MessageBox.Show("caja creada con exito.");
-                return true;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error: la operacion no pudo ser realizada.");
-                return false;
-            }
-            }
         public bool TransferirDinero(int MontoTranferido, int CBUOrigen, int CBUDestino)
         {
             foreach (CajaDeAhorro Caja in usuarioActual.cajas)
