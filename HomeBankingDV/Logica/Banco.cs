@@ -580,18 +580,21 @@ namespace HomeBankingDV
             return false;
         }
 
-        public bool DepositarDinero(int montoRetirado, int cbu)
+        public bool DepositarDinero(int _monto, int cbu)
         {
+            bool resultado=false;
+
             foreach (CajaDeAhorro Caja in usuarioActual.cajas)
             {
                 if (Caja.cbu == cbu)
                 {
-                    Caja.saldo = Caja.saldo - montoRetirado;
-                    return true;
+                    Caja.saldo = Caja.saldo + _monto;
+                    resultado=true;
+                    return resultado;
                 }
-                return false;
+                //return false;
             }
-            return false;
+            return resultado;
         }
 
         public bool RetirarDinero(int montoDepositado, int cbu)

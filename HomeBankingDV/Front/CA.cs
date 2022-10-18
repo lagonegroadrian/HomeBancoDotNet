@@ -21,13 +21,15 @@ namespace HomeBankingDV
         public Banco elBanco;
         public int dniIngresado;
         public string contraseniaIngresada;
+        public int elCBU;
+        
 
         public CA(Banco elBancoFora, int _elCBU, int _elSaldo)
         {
             elBanco = elBancoFora;
+            elCBU = _elCBU;
 
             InitializeComponent();
-
             label5.Text = _elCBU.ToString();
             label6.Text = _elSaldo.ToString();
 
@@ -90,7 +92,7 @@ namespace HomeBankingDV
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Form formulario = new Depositar();
+            Form formulario = new Depositar(elBanco, elCBU);
             formulario.Show();
         }
 

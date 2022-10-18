@@ -55,8 +55,8 @@ namespace HomeBankingDV
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Form formulario = new Depositar();
-            formulario.Show();
+            //Form formulario = new Depositar();
+            //formulario.Show();
         }
 
         private void label1_Click(object sender, EventArgs e)
