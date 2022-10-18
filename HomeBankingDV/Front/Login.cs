@@ -22,6 +22,7 @@ namespace HomeBankingDV
         public int dniIngresado;
         public string contraseniaIngresada;
 
+        // prueba
         public Login(Banco elBancoFora)
         {
             //elBanco = new Banco();
