@@ -18,7 +18,7 @@ namespace HomeBankingDV
         public List<Movimiento> movimientos { get; set; }
 
         public Usuario usuarioActual { get; set; }
-
+        //prueba de git
         public Banco()
         {
             usuarios= new List<Usuario>();
