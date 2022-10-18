@@ -70,6 +70,7 @@ namespace HomeBankingDV
         private void DelegadoCloseHomme()
         {
             hijoHomme.Close();
+            elBanco.usuarioActual = null;
             ActivoLogin();
         }
 
