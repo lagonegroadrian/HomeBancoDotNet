@@ -4,8 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms.PropertyGridInternal;
 
 namespace HomeBankingDV
 {
@@ -16,6 +16,7 @@ namespace HomeBankingDV
         {
             //Cargo la cadena de conexión desde el archivo de properties
             connectionString = Properties.Resources.ConnectionStr;
+             
         }
         public List<Usuario> inicializarUsuarios()
         {

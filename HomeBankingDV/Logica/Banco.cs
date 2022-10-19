@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,7 +45,7 @@ namespace HomeBankingDV
            misDomicilios = DB.inicializarDomicilios();
             // faltan agregar los atributos restantes!
         }
-        public bool AltaUsuario(int dni, string nombre, string apellido, string mail, string password,bool isAdmin)
+        public bool AltaUsuario(int dni, string nombre, string apellido, string mail, string password,bool isAdmin ,bool bloqueado)
         {
             if (!existeUsuario(dni))
             {
@@ -64,7 +65,7 @@ namespace HomeBankingDV
                 //Agregamos el usuario
                 try
                 {
-                    Usuario usuario = new Usuario(id, dni,nombre,apellido,mail,password,isAdmin);
+                    Usuario usuario = new Usuario(id, dni,nombre,apellido,mail,password,isAdmin,bloqueado);
                     usuarios.Add(usuario);
                     return true;
                 }
@@ -89,6 +90,7 @@ namespace HomeBankingDV
         public bool IniciarSesion(int DNI, string Contraseña)
         {
           
+
             foreach (Usuario usuario in usuarios)
             {
                 if (usuario.dni == DNI && usuario.password == Contraseña && usuario.bloqueado == false)
@@ -99,14 +101,14 @@ namespace HomeBankingDV
                 }
                 if (usuario.dni == DNI && usuario.password != Contraseña && usuario.bloqueado == false)
                 {
-                    usuario.intentosFallidos++;
+                  //  usuario.intentosFallidos++;
                    // MessageBox.Show("Password mal. A los 3 intentos fallidos se bloqueara cuenta." +
                       //  "Intentos Fallidos: " + usuario.intentosFallidos);
-                    if (usuario.intentosFallidos == 3)
-                    {
+                 //   if (usuario.intentosFallidos == 3)
+                //    {
                      //   MessageBox.Show("El usuario " + usuario.nombre + " " + usuario.apellido + " se ha bloqueado." );
-                        usuario.bloqueado = true;
-                    }
+                  //      usuario.bloqueado = true;
+                //    }
                     return false;
                 }
                 if (usuario.bloqueado == true)
