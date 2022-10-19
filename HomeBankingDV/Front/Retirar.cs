@@ -13,8 +13,15 @@ namespace HomeBankingDV.Front
     public partial class Retirar : Form
     {
         public DelegadoHommeStart delegadoHommeStart;
-        public Retirar()
+
+        private int elCBU;
+        private int monto;
+        private Banco elBanco;
+
+        public Retirar(Banco _elBanco, int _elCBU)
         {
+            elBanco = _elBanco;
+            elCBU = _elCBU;
             InitializeComponent();
         }
 
@@ -35,7 +42,9 @@ namespace HomeBankingDV.Front
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            //retirar monto
+            monto = Int32.Parse(textBox2.Text);
+            elBanco.RetirarDinero(monto, elCBU);
         }
     
     }

@@ -87,24 +87,7 @@ namespace HomeBankingDV
             delegadoCloseHomme();
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            Form formulario = new Retirar();
-            formulario.Show();
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            Form formulario = new Transferir();
-            formulario.Show();
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            Form formulario = new VerDetalle();
-            formulario.Show();
-        }
-
+        
 
         private void label4_Click(object sender, EventArgs e)
         {

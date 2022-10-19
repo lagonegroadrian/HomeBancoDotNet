@@ -98,7 +98,7 @@ namespace HomeBankingDV
 
         private void button7_Click(object sender, EventArgs e)
         {
-            Form formulario = new Retirar();
+            Form formulario = new Retirar(elBanco, elCBU);
             formulario.Show();
         }
 

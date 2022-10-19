@@ -579,18 +579,21 @@ namespace HomeBankingDV
             return resultado;
         }
 
-        public bool RetirarDinero(int montoDepositado, int cbu)
+        public bool RetirarDinero(int _monto, int cbu)
         {
+            bool resultado = false;
+
             foreach (CajaDeAhorro Caja in usuarioActual.cajas)
             {
                 if (Caja.cbu == cbu)
                 {
-                    Caja.saldo = Caja.saldo + montoDepositado;
-                    return true;
+                    Caja.saldo = Caja.saldo - _monto;
+                    resultado = true;
+                    return resultado;
                 }
-                return false;
+                //return false;
             }
-            return false;
+            return resultado;
         }
         
         // metodos BuscarMovimiento con 3,2 y 1 parametros (sobrecarga de metodos)
