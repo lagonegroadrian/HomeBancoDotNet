@@ -74,7 +74,7 @@
             this.textBox1.Enabled = false;
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.textBox1.Location = new System.Drawing.Point(142, 57);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(94, 27);
             this.textBox1.TabIndex = 3;
@@ -83,7 +83,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(142, 90);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(94, 23);
             this.textBox2.TabIndex = 4;
@@ -92,7 +92,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(52, 150);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(72, 21);
             this.button1.TabIndex = 5;
@@ -104,7 +104,7 @@
             // 
             this.button2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.button2.Location = new System.Drawing.Point(159, 150);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(61, 21);
             this.button2.TabIndex = 6;
@@ -125,9 +125,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Retirar";
             this.Text = "Retirar";
+            this.Load += new System.EventHandler(this.Retirar_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

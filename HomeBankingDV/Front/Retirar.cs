@@ -45,8 +45,13 @@ namespace HomeBankingDV.Front
             //retirar monto
             monto = Int32.Parse(textBox2.Text);
             elBanco.RetirarDinero(monto, elCBU);
+            Close();
         }
-    
+
+        private void Retirar_Load(object sender, EventArgs e)
+        {
+            textBox1.Text = elCBU.ToString();
+        }
     }
     public delegate void DelegadoDelegadoHommeStart();
 }

@@ -104,7 +104,7 @@ namespace HomeBankingDV
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Form formulario = new Transferir();
+            Form formulario = new Transferir(elBanco, elCBU);
             formulario.Show();
         }
 
@@ -112,6 +112,11 @@ namespace HomeBankingDV
         {
             Form formulario = new VerDetalle();
             formulario.Show();
+        }
+
+        private void CA_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show(" sherek ");
         }
     }
 

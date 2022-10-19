@@ -541,6 +541,8 @@ namespace HomeBankingDV
         // Operaciones del usuario..
         public bool TransferirDinero(int MontoTranferido, int CBUOrigen, int CBUDestino)
         {
+            bool salida = false;
+
             foreach (CajaDeAhorro Caja in usuarioActual.cajas)
             {
                 if (Caja.cbu == CBUOrigen)
@@ -551,15 +553,13 @@ namespace HomeBankingDV
                         if (cajaDestino.cbu == CBUDestino)
                         {
                             cajaDestino.saldo = cajaDestino.saldo + MontoTranferido;
-                            return true;
+                            salida = true;
+                            return salida;
                         }
-                        return false;
                     }
-                    return false;
                 }
-                return false;
             }
-            return false;
+            return salida;
         }
 
         public bool DepositarDinero(int _monto, int cbu)
