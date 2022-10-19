@@ -53,6 +53,7 @@ namespace HomeBankingDV.Front
 
             elCBUdestino = Int32.Parse(textBox2.Text);
             //elBanco.TransferirDinero(monto, elCBUorigen, elCBUdestino);
+             monto= Int32.Parse(textBox3.Text);
             if (elBanco.TransferirDinero(monto, elCBUorigen, elCBUdestino)) 
             {aux = "";}
             MessageBox.Show("transferencia "+aux+" realizada ");

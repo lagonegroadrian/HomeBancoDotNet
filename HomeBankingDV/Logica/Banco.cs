@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -18,7 +20,11 @@ namespace HomeBankingDV
         public List<Movimiento> movimientos { get; set; }
 
         public Usuario usuarioActual { get; set; }
-        //prueba de git
+
+        private List<Domicilio> misDomicilios;
+
+        private CONNECTION DB; 
+  
         public Banco()
         {
             usuarios= new List<Usuario>();
@@ -27,8 +33,17 @@ namespace HomeBankingDV
             pagos= new List<Pago>();
             movimientos= new List<Movimiento>();
             pfs = new List<PlazoFijo>();
+            misDomicilios = new List<Domicilio>();
+            DB = new CONNECTION();
+            inicializarAtributos();
         }
 
+        private void inicializarAtributos()
+        {
+           usuarios = DB.inicializarUsuarios();
+           misDomicilios = DB.inicializarDomicilios();
+            // faltan agregar los atributos restantes!
+        }
         public bool AltaUsuario(int dni, string nombre, string apellido, string mail, string password,bool isAdmin)
         {
             if (!existeUsuario(dni))
