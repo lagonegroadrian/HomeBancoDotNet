@@ -24,14 +24,15 @@ namespace HomeBankingDV
         public int elCBU;
         
 
-        public CA(Banco elBancoFora, int _elCBU, int _elSaldo)
+        public CA(Banco elBancoFora, int _elCBU)
         {
             elBanco = elBancoFora;
             elCBU = _elCBU;
 
             InitializeComponent();
             label5.Text = _elCBU.ToString();
-            label6.Text = _elSaldo.ToString();
+
+            label6.Text = elBanco.MostrarSaldoDeCAdeUsuarioActual(_elCBU).ToString();
 
             foreach (Usuario titul in elBanco.usuarioActual.MostrarTitularesCajasDeAhorro(_elCBU)){listBox1.Items.Add(titul.apellido + " * " + titul.nombre);}
         }
@@ -87,7 +88,7 @@ namespace HomeBankingDV
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.delegadoCloseCA();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -116,7 +117,7 @@ namespace HomeBankingDV
 
         private void CA_Load(object sender, EventArgs e)
         {
-            MessageBox.Show(" sherek ");
+            
         }
     }
 

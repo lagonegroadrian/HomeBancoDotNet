@@ -125,29 +125,29 @@ namespace HomeBankingDV
         }
 
         //INICIA SESION CON UN USUARIO EXISTENTE EN LA LISTA DE USUARIOS DEL BANCO//    
-      //  public bool AltaCajaAhorro(Usuario usuario)
-     //   {
+        //  public bool AltaCajaAhorro(Usuario usuario)
+        //   {
         //    List<Usuario> usuarioList = new List<Usuario>();
-       //     usuarioList.Add(usuario);
-      //      List<Movimiento> movimientos = new List<Movimiento>();
-            //genera CBU a partir del DNI.
-            //int cbu = usuario.dni * 1000;
-            //genero un numero CBU random
-     //       int cbu = usuario.dni * 1000;
+        //     usuarioList.Add(usuario);
+        //      List<Movimiento> movimientos = new List<Movimiento>();
+        //genera CBU a partir del DNI.
+        //int cbu = usuario.dni * 1000;
+        //genero un numero CBU random
+        //       int cbu = usuario.dni * 1000;
 
-      //      Random rd = new Random();
-      //      int rand_num = rd.Next(cbu, cbu * 1109);
-      //      cbu = rand_num;
+        //      Random rd = new Random();
+        //      int rand_num = rd.Next(cbu, cbu * 1109);
+        //      cbu = rand_num;
 
-      //      int id = usuario.cajas.Count() + 1;
+        //      int id = usuario.cajas.Count() + 1;
 
-            //CajaDeAhorro caja = new CajaDeAhorro(id, cbu, usuarioList, 0, movimientos);
-     //       CajaDeAhorro caja = new CajaDeAhorro(cbu, usuario);
+        //CajaDeAhorro caja = new CajaDeAhorro(id, cbu, usuarioList, 0, movimientos);
+        //       CajaDeAhorro caja = new CajaDeAhorro(cbu, usuario);
 
-     //       cajas.Add(caja);
-     //       usuario.cajas.Add(caja);
-     //       return true;
-    //    }
+        //       cajas.Add(caja);
+        //       usuario.cajas.Add(caja);
+        //       return true;
+        //    }
 
 
         //public List<String> MostrarTitularesDeCA(Usuario usuario)
@@ -155,6 +155,20 @@ namespace HomeBankingDV
         //  foreach (CajaDeAhorro laCajaDeAhorro in usuario.MostrarCajasDeAhorro()){foreach (Usuario titu in laCajaDeAhorro.titulares){datoSalida.Add(titu.nombre);}}
         //return datoSalida;
         //}
+
+
+        public float MostrarSaldoDeCAdeUsuarioActual(int _elCBU)
+        {
+          float saldo_ = 0;
+
+          foreach (CajaDeAhorro laCajaDeAhorro in usuarioActual.cajas)
+            {
+                if(laCajaDeAhorro.cbu == _elCBU)
+                {  saldo_= laCajaDeAhorro.saldo; }
+
+            }
+        return saldo_;
+        }
 
 
         //public List<String> MostrarTitularesDeCA(Usuario usuario, int CBU)

@@ -17,6 +17,9 @@ namespace HomeBankingDV
     
         //public DelegadoRegistroStart delegadoRegistroStart;
         public DelegadoCloseHomme delegadoCloseHomme;
+        public DelegadoHommeToCA delegadoHommeToCA;
+
+        
         public Banco elBanco;
         public int dniIngresado;
         public string contraseniaIngresada;
@@ -78,8 +81,10 @@ namespace HomeBankingDV
             nroCBU = Int32.Parse(elCBU.ToString());
             valorSaldo = Int32.Parse(elSaldo.ToString());
 
-            Form formulario = new CA(elBanco, nroCBU, valorSaldo);
-            formulario.Show();
+            this.delegadoHommeToCA(nroCBU);
+
+            //Form formulario = new CA(elBanco, nroCBU, valorSaldo);
+            //formulario.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -144,8 +149,5 @@ namespace HomeBankingDV
 
     //public delegate void TransfDelegado();
     public delegate void DelegadoCloseHomme();
-
-    
-
+    public delegate void DelegadoHommeToCA(int nroCBU);
 }
-
