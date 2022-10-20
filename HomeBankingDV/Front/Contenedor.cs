@@ -80,6 +80,7 @@ namespace HomeBankingDV
         private void DelegadoDespositarClose(int _elCBU)
         {
             hijoDepositar.Close();
+            hijoCA.Close();
             //ActivoCA(_elCBU);
             ActivoCA(_elCBU);
         }
