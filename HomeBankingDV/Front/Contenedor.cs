@@ -1,20 +1,22 @@
 namespace HomeBankingDV
 {
+    using Front;
     public partial class Contenedor : Form
     {
         Login hijoLogin;
         Registrar hijoRegistrar;
         Home hijoHomme;
         CA hijoCA;
+        Depositar hijoDepositar;
 
         public Banco elBanco = new Banco();
 
-        
+
         public Contenedor()
         {
-            elBanco.AltaUsuario(1, "Tomas", "Rodriguez", "rodriguezt@banco.com", "1",false,false);
-            elBanco.AltaUsuario(35147312, "Adrian", "Lagonegro", "Lagonegro@cobanco.com", "123",false,false);
-            
+            elBanco.AltaUsuario(1, "Tomas", "Rodriguez", "rodriguezt@banco.com", "1", false, false);
+            elBanco.AltaUsuario(35147312, "Adrian", "Lagonegro", "Lagonegro@cobanco.com", "123", false, false);
+
             ActivoLogin();
         }
 
@@ -34,9 +36,8 @@ namespace HomeBankingDV
             hijoCA = new CA(elBanco, _elCBU);
 
             hijoCA.MdiParent = this;
-
             hijoCA.delegadoCloseCA += DelegadoCloseCA;
-
+            hijoCA.delegadoDepositar += DelegadoDepositar;
             hijoCA.Show();
         }
 
@@ -58,10 +59,35 @@ namespace HomeBankingDV
             hijoHomme.Show();
         }
 
+        public void ActivoDepositar(int _elCBU)
+        {
+            hijoDepositar = new Depositar(elBanco, _elCBU);
+            hijoDepositar.MdiParent = this;
+            hijoDepositar.delegadoDespositarClose += DelegadoDespositarClose;
+            
+
+            hijoDepositar.Show();
+        }
+        
+
         private void DelegadoHommeToCA(int _elCBU) 
         {
             hijoHomme.Close();
             ActivoCA(_elCBU);
+        }
+
+
+        private void DelegadoDespositarClose(int _elCBU)
+        {
+            hijoDepositar.Close();
+            //ActivoCA(_elCBU);
+            ActivoCA(_elCBU);
+        }
+
+        private void DelegadoDepositar(int _elCBU)
+        {
+            hijoHomme.Close();
+            ActivoDepositar(_elCBU);
         }
 
         private void DelegadoRegistroStart()

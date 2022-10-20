@@ -197,6 +197,7 @@ namespace HomeBankingDV
             this.MinimizeBox = false;
             this.Name = "CA";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Load += new System.EventHandler(this.CA_Load_1);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

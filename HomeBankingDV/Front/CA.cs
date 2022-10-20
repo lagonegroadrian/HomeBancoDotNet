@@ -17,6 +17,8 @@ namespace HomeBankingDV
     
         //public DelegadoRegistroStart delegadoRegistroStart;
         public DelegadoCloseCA delegadoCloseCA;
+        public DelegadoDepositar delegadoDepositar;
+        
 
         public Banco elBanco;
         public int dniIngresado;
@@ -93,8 +95,9 @@ namespace HomeBankingDV
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Form formulario = new Depositar(elBanco, elCBU);
-            formulario.Show();
+            this.delegadoDepositar(elCBU);
+            //Form formulario = new Depositar(elBanco, elCBU);
+            //formulario.Show();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -119,12 +122,19 @@ namespace HomeBankingDV
         {
             
         }
+
+        private void CA_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 
     //public delegate void TransfDelegado();
     public delegate void DelegadoCloseCA();
 
-    
+    public delegate void DelegadoDepositar(int elCBU);
+
+
 
 }
 

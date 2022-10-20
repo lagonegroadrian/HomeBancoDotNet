@@ -12,8 +12,9 @@ namespace HomeBankingDV.Front
 {
     public partial class Depositar : Form
     {
-        public DelegadoHommeStart delegadoHommeStart;
-        
+        //public DelegadoHommeStart delegadoHommeStart;
+        public DelegadoDespositarClose delegadoDespositarClose;
+
         private int elCBU;
         private int monto;
         
@@ -43,7 +44,9 @@ namespace HomeBankingDV.Front
 
         private void btn_depositar_Click(object sender, EventArgs e)
         {
+            monto = Int32.Parse(textMonto.Text);
             elBanco.DepositarDinero(monto, elCBU);
+            this.delegadoDespositarClose(elCBU);
         }
 
         private void textCuentaOrigen_TextChanged(object sender, EventArgs e)
@@ -53,7 +56,7 @@ namespace HomeBankingDV.Front
 
         private void textMonto_TextChanged(object sender, EventArgs e)
         {
-            monto = Int32.Parse(textMonto.Text);
+            
         }
 
         private void textCbuDestino_TextChanged(object sender, EventArgs e)
@@ -61,4 +64,6 @@ namespace HomeBankingDV.Front
 
         }
     }
+    
+        public delegate void DelegadoDespositarClose(int _elCBU);
 }
