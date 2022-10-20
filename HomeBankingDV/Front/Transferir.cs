@@ -12,6 +12,8 @@ namespace HomeBankingDV.Front
 {
     public partial class Transferir : Form
     {
+        public DelegadoTransferirClose delegadoTransferirClose;
+
         private int elCBUorigen;
         private int elCBUdestino;
         private int monto;
@@ -49,15 +51,11 @@ namespace HomeBankingDV.Front
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string aux = " NO ";
-
             elCBUdestino = Int32.Parse(textBox2.Text);
-            //elBanco.TransferirDinero(monto, elCBUorigen, elCBUdestino);
-             monto= Int32.Parse(textBox3.Text);
-            if (elBanco.TransferirDinero(monto, elCBUorigen, elCBUdestino)) 
-            {aux = "";}
-            MessageBox.Show("transferencia "+aux+" realizada ");
-            Close();
+            monto= Int32.Parse(textBox3.Text);
+
+            elBanco.TransferirDinero(monto, elCBUorigen, elCBUdestino);
+            this.delegadoTransferirClose(elCBUorigen);
         }
 
         private void Transferir_Load(object sender, EventArgs e)
@@ -65,4 +63,6 @@ namespace HomeBankingDV.Front
             textBox1.Text = elCBUorigen.ToString();
         }
     }
+    
+        public delegate void DelegadoTransferirClose(int _elCBU);
 }
