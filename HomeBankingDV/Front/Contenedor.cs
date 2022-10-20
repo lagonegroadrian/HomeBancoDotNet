@@ -8,6 +8,7 @@ namespace HomeBankingDV
         Home hijoHomme;
         CA hijoCA;
         Depositar hijoDepositar;
+        Retirar hijoRetirar;
 
         public Banco elBanco = new Banco();
 
@@ -38,6 +39,7 @@ namespace HomeBankingDV
             hijoCA.MdiParent = this;
             hijoCA.delegadoCloseCA += DelegadoCloseCA;
             hijoCA.delegadoDepositar += DelegadoDepositar;
+            hijoCA.delegadoRetirar += DelegadoRetirar; 
             hijoCA.Show();
         }
 
@@ -68,7 +70,18 @@ namespace HomeBankingDV
 
             hijoDepositar.Show();
         }
-        
+
+
+        public void ActivoRetirar(int _elCBU)
+        {
+            hijoRetirar = new Retirar(elBanco, _elCBU);
+            hijoRetirar.MdiParent = this;
+            hijoRetirar.delegadoRetirarClose += DelegadoRetirarClose;
+
+
+            hijoRetirar.Show();
+        }
+
 
         private void DelegadoHommeToCA(int _elCBU) 
         {
@@ -85,10 +98,25 @@ namespace HomeBankingDV
             ActivoCA(_elCBU);
         }
 
+        private void DelegadoRetirarClose(int _elCBU)
+        {
+            hijoRetirar.Close();
+            hijoCA.Close();
+            //ActivoCA(_elCBU);
+            ActivoCA(_elCBU);
+        }
+        
+
         private void DelegadoDepositar(int _elCBU)
         {
             hijoHomme.Close();
             ActivoDepositar(_elCBU);
+        }
+
+        private void DelegadoRetirar(int _elCBU)
+        {
+            hijoHomme.Close();
+            ActivoRetirar(_elCBU);
         }
 
         private void DelegadoRegistroStart()

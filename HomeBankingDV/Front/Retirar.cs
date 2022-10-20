@@ -12,7 +12,7 @@ namespace HomeBankingDV.Front
 {
     public partial class Retirar : Form
     {
-        public DelegadoHommeStart delegadoHommeStart;
+        public DelegadoRetirarClose delegadoRetirarClose;
 
         private int elCBU;
         private int monto;
@@ -45,7 +45,7 @@ namespace HomeBankingDV.Front
             //retirar monto
             monto = Int32.Parse(textBox2.Text);
             elBanco.RetirarDinero(monto, elCBU);
-            Close();
+            this.delegadoRetirarClose(elCBU);
         }
 
         private void Retirar_Load(object sender, EventArgs e)
@@ -53,5 +53,5 @@ namespace HomeBankingDV.Front
             textBox1.Text = elCBU.ToString();
         }
     }
-    public delegate void DelegadoDelegadoHommeStart();
+    public delegate void DelegadoRetirarClose(int _elCBU);
 }

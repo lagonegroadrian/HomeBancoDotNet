@@ -18,7 +18,8 @@ namespace HomeBankingDV
         //public DelegadoRegistroStart delegadoRegistroStart;
         public DelegadoCloseCA delegadoCloseCA;
         public DelegadoDepositar delegadoDepositar;
-        
+        public DelegadoRetirar delegadoRetirar;
+
 
         public Banco elBanco;
         public int dniIngresado;
@@ -102,8 +103,9 @@ namespace HomeBankingDV
 
         private void button7_Click(object sender, EventArgs e)
         {
-            Form formulario = new Retirar(elBanco, elCBU);
-            formulario.Show();
+            this.delegadoRetirar(elCBU);
+            //Form formulario = new Retirar(elBanco, elCBU);
+            //formulario.Show();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -133,6 +135,8 @@ namespace HomeBankingDV
     public delegate void DelegadoCloseCA();
 
     public delegate void DelegadoDepositar(int elCBU);
+    public delegate void DelegadoRetirar(int elCBU);
+    
 
 
 
