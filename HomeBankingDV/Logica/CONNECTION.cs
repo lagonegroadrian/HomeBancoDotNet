@@ -23,7 +23,7 @@ namespace HomeBankingDV
             List<Usuario> misUsuarios = new List<Usuario>();
 
             //Defino el string con la consulta que quiero realizar
-            string queryString = "SELECT * from dbo.Usuarios";
+            string queryString = "SELECT * from dbo.Usuario";
 
             // Creo una conexión SQL con un Using, de modo que al finalizar, la conexión se cierra y se liberan recursos
             using (SqlConnection connection =
@@ -67,7 +67,7 @@ namespace HomeBankingDV
                 new SqlConnection(connectionString))
             {
                 //Ahora cargo los domicilios
-                string queryString = "SELECT * from dbo.Domicilios";
+                string queryString = "SELECT * from dbo.Domicilio";
                 SqlCommand command = new SqlCommand(queryString, connection);
                 try
                 {
