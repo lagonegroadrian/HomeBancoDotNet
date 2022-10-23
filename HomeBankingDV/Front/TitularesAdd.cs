@@ -62,7 +62,19 @@ namespace HomeBankingDV.Front
 
             nroDoc = Int32.Parse(dni.ToString());
 
-            if (esTitu == "No") { elBanco.AgregarTitularCajaAhorro(elCBU, nroDoc); }
+            string message = "Designar titular?";
+            string caption = "Mensaje";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
+
+            // Displays the MessageBox.
+            result = MessageBox.Show(message, caption, buttons);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                string salida = "El usuario ya es titular";
+                if (esTitu == "No") { elBanco.AgregarTitularCajaAhorro(elCBU, nroDoc); salida = "Operacion exitosa"; }
+                MessageBox.Show(salida);
+            }
 
             // recargar...
             llenarDatosDataGrid1();
