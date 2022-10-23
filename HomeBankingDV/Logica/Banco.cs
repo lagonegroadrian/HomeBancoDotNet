@@ -245,26 +245,20 @@ namespace HomeBankingDV
 
         //AGREGA O ELIMINA USUARIOS TITULARES DE UNA CAJA DE AHORRO --FLAG DEBE TRAER "Agregar" o "Eliminar"//   
         
-        public bool AgregarTitularCajaAhorro (int id, int dni)
+        public bool AgregarTitularCajaAhorro (int _cbu, int _dni)
         {//REEMPLAZAR POR DATO IDENTIFICABLE DNI O ID, NUNCA PASAR OBJETO DESD LA VISTA
 
             foreach (CajaDeAhorro cajaU in usuarioActual.cajas)
             {
-                if (cajaU.id == id )
+                if (cajaU.cbu == _cbu)
                 {
                     foreach (Usuario usuario in usuarios)
 	                {
-                        if(usuario.dni == dni)
+                        if(usuario.dni == _dni)
                         {
                             cajaU.titulares.Add(usuario);
                             
-                            foreach (CajaDeAhorro caja in cajas)
-                            {
-                                if(caja.id == id)
-                                {
-                                    caja.titulares.Add(usuario);
-                                }
-                            }
+                            //foreach (CajaDeAhorro caja in cajas){if(caja.cbu == _cbu){caja.titulares.Add(usuario);}}
                             return true;
                         }
 	                }  
