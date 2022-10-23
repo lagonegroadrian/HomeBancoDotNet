@@ -21,7 +21,8 @@ namespace HomeBankingDV
         public DelegadoTransferir delegadoTransferir;
         public DelegadoVerDetalle delegadoVerDetalle;
         public DelegadoBajaCA delegadoBajaCA;
-        
+        public DelegadoModificar delegadoModificar;
+
 
         public Banco elBanco;
         public int dniIngresado;
@@ -151,6 +152,11 @@ namespace HomeBankingDV
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.delegadoModificar(elCBU);
+        }
     }
 
     //public delegate void TransfDelegado();
@@ -161,5 +167,9 @@ namespace HomeBankingDV
     public delegate void DelegadoTransferir(int elCBU);
     public delegate void DelegadoVerDetalle(int elCBU);
     public delegate void DelegadoBajaCA(int elCBU);
+    //public delegate void DelegadoelegadoModificar(int elCBU);
+    public delegate void DelegadoModificar(int elCBU);
+    
+
 }
 
