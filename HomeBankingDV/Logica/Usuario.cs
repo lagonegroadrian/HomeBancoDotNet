@@ -53,18 +53,19 @@ namespace HomeBankingDV
             this.isAdmin = isAdmin;
 
         }
-        //VIAJARIA COMO PARAMETRO EL USUARIO LOGUEADO?//
 
         public List<CajaDeAhorro> MostrarCajasDeAhorro() { return cajas; }
 
         public List<Usuario> MostrarTitularesCajasDeAhorro(int _cbu)
         {
             List<Usuario> tituDeCBU = new List<Usuario>();
-            foreach (CajaDeAhorro cajase in cajas) { if (cajase.cbu == _cbu) { foreach (Usuario titularAsociadoAlCBU in cajase.titulares) { tituDeCBU.Add(titularAsociadoAlCBU); } } }
+            foreach (CajaDeAhorro cajase in cajas) { if (cajase.cbu == _cbu) 
+                {
+                    foreach (Usuario titularAsociadoAlCBU in cajase.titulares) 
+                    { tituDeCBU.Add(titularAsociadoAlCBU); } } 
+                }
             return tituDeCBU; }
     }
-   
-
 }
 
 

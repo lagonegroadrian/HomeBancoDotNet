@@ -36,7 +36,10 @@ namespace HomeBankingDV
 
             label6.Text = elBanco.MostrarSaldoDeCAdeUsuarioActual(_elCBU).ToString();
 
-            foreach (Usuario titul in elBanco.usuarioActual.MostrarTitularesCajasDeAhorro(_elCBU)){listBox1.Items.Add(titul.apellido + " * " + titul.nombre);}
+            foreach (Usuario titul in elBanco.usuarioActual.MostrarTitularesCajasDeAhorro(_elCBU))
+            {
+                listBox1.Items.Add(titul.apellido + ", " + titul.nombre);
+            }
         }
 
 
@@ -129,6 +132,11 @@ namespace HomeBankingDV
         private void CA_Load_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //dar de baja caja de ahorro
         }
     }
 

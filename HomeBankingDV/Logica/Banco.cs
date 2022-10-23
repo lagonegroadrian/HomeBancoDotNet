@@ -67,6 +67,7 @@ namespace HomeBankingDV
                 {
                     Usuario usuario = new Usuario(id, dni,nombre,apellido,mail,password,isAdmin,bloqueado);
                     usuarios.Add(usuario);
+                    
                     return true;
                 }
                 catch (Exception)
@@ -213,13 +214,18 @@ namespace HomeBankingDV
             
         //Agregamos la caja
         CajaDeAhorro caja = new CajaDeAhorro(id, cbu, titulares , 0, movimientos);
+        
+        caja.titulares.Add(usuarioActual); // lo doy de alta como titular 
+
         cajas.Add(caja);
         usuarioActual.cajas.Add(caja);
+        
         return true;
         }
 
         //DA DE BAJA UNA CAJA DE AHORRO DE LA LISTA DEL BANCO Y DE LA LISTA DE CADA USUARIO TITULAR DE LA CAJA//   
-        public bool BajaCajaAhorro (int id)
+        //public bool BajaCajaAhorro (int id)
+        public bool BajaCajaAhorro(int id)
         {
         bool result = false;
         foreach (CajaDeAhorro caja in usuarioActual.cajas)
