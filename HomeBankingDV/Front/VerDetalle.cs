@@ -12,14 +12,31 @@ namespace HomeBankingDV.Front
 {
     public partial class VerDetalle : Form
     {
-        public VerDetalle()
+        private int laCAja;
+        private Banco elBanco;
+
+        public VerDetalle(Banco _elBanco, int _laCA)
         {
             InitializeComponent();
+            laCAja = _laCA;
+            elBanco = _elBanco;
+            llenarDatosDataGrid1();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e){Close();}
+
+        private void llenarDatosDataGrid1()
         {
-            Close();
+            dataGridView1.Rows.Clear();
+            
+            List<Movimiento> detalles = elBanco.BuscarMovimientos(laCAja);
+
+            foreach (Movimiento salida in detalles)
+            {
+                dataGridView1.Rows.Add(salida.id, salida.monto, salida.detalle, salida.fecha);
+            }            
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e){}
     }
 }

@@ -13,21 +13,18 @@ using System.Windows.Forms;
 namespace HomeBankingDV
 {
     public partial class CA : Form
-    {
-    
+    {    
         //public DelegadoRegistroStart delegadoRegistroStart;
         public DelegadoCloseCA delegadoCloseCA;
         public DelegadoDepositar delegadoDepositar;
         public DelegadoRetirar delegadoRetirar;
         public DelegadoTransferir delegadoTransferir;
-        
-
+        public DelegadoVerDetalle delegadoVerDetalle;
 
         public Banco elBanco;
         public int dniIngresado;
         public string contraseniaIngresada;
         public int elCBU;
-        
 
         public CA(Banco elBancoFora, int _elCBU)
         {
@@ -119,8 +116,9 @@ namespace HomeBankingDV
 
         private void button9_Click(object sender, EventArgs e)
         {
-            Form formulario = new VerDetalle();
-            formulario.Show();
+            this.delegadoVerDetalle(elCBU);
+            //Form formulario = new VerDetalle();
+            //formulario.Show();
         }
 
         private void CA_Load(object sender, EventArgs e)
@@ -140,7 +138,8 @@ namespace HomeBankingDV
     public delegate void DelegadoDepositar(int elCBU);
     public delegate void DelegadoRetirar(int elCBU);
     public delegate void DelegadoTransferir(int elCBU);
-    
+    public delegate void DelegadoVerDetalle(int elCBU);
+
 
 
 

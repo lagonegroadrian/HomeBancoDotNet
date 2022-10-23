@@ -584,6 +584,9 @@ namespace HomeBankingDV
                         if (cajaDestino.cbu == CBUDestino)
                         {
                             cajaDestino.saldo = cajaDestino.saldo + MontoTranferido;
+
+                            cajaDestino.movimientos.Add(new Movimiento(99, MontoTranferido, cajaDestino, "Transferencia desde :"+CBUOrigen));
+
                             salida = true;
                             return salida;
                         }
@@ -602,7 +605,10 @@ namespace HomeBankingDV
                 if (Caja.cbu == cbu)
                 {
                     Caja.saldo = Caja.saldo + _monto;
-                    resultado=true;
+
+                    Caja.movimientos.Add(new Movimiento(99, _monto, Caja, " (+) Deposito de dinero: "));
+
+                    resultado =true;
                     return resultado;
                 }
                 //return false;
@@ -619,6 +625,7 @@ namespace HomeBankingDV
                 if (Caja.cbu == cbu)
                 {
                     Caja.saldo = Caja.saldo - _monto;
+                    Caja.movimientos.Add(new Movimiento(99, _monto, Caja, " (-) Extraccion de dinero: "));
                     resultado = true;
                     return resultado;
                 }
@@ -676,6 +683,14 @@ namespace HomeBankingDV
             return movimientos;
         }
 
+        public List<Movimiento> BuscarMovimientos(int _elCBU)
+        {
+            foreach (CajaDeAhorro laCajaDeAhorro in usuarioActual.cajas)
+            {   if (laCajaDeAhorro.cbu == _elCBU)
+                {movimientos= laCajaDeAhorro.movimientos;}
+            }
+            return movimientos; ;
+        }
         public bool PagarTarjeta(int NumeroDeTarjeta, int CBU, String detalle, DateTime fecha)
         {
             foreach (TarjetaDeCredito TarjetaAPagar in usuarioActual.tarjetas)
