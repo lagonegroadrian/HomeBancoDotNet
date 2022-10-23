@@ -14,7 +14,6 @@ namespace HomeBankingDV
 {
     public partial class CA : Form
     {    
-        //public DelegadoRegistroStart delegadoRegistroStart;
         public DelegadoCloseCA delegadoCloseCA;
         public DelegadoDepositar delegadoDepositar;
         public DelegadoRetirar delegadoRetirar;
@@ -159,15 +158,13 @@ namespace HomeBankingDV
         }
     }
 
-    //public delegate void TransfDelegado();
+    
     public delegate void DelegadoCloseCA();
-
     public delegate void DelegadoDepositar(int elCBU);
     public delegate void DelegadoRetirar(int elCBU);
     public delegate void DelegadoTransferir(int elCBU);
     public delegate void DelegadoVerDetalle(int elCBU);
-    public delegate void DelegadoBajaCA(int elCBU);
-    //public delegate void DelegadoelegadoModificar(int elCBU);
+    public delegate void DelegadoBajaCA(int elCBU);   
     public delegate void DelegadoModificar(int elCBU);
     
 

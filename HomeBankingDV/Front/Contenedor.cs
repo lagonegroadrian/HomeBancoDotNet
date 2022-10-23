@@ -111,12 +111,21 @@ namespace HomeBankingDV
         {
             hijoModificarCA = new TitularesAdd(elBanco, _elCBU);
             hijoModificarCA.MdiParent = this;
+            hijoModificarCA.delegadoCArecargar += DelegadoCArecargar;
             hijoModificarCA.Show();
         }
 
         private void DelegadoHommeToCA(int _elCBU) 
         {
             hijoHomme.Close();
+            ActivoCA(_elCBU);
+        }
+
+
+        private void DelegadoCArecargar(int _elCBU)
+        {
+            hijoModificarCA.Close();
+            hijoCA.Close();
             ActivoCA(_elCBU);
         }
 

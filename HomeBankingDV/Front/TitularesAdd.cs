@@ -12,35 +12,36 @@ namespace HomeBankingDV.Front
 {
     public partial class TitularesAdd : Form
     {
-        private int laCAja;
+        public DelegadoCArecargar delegadoCArecargar;
+
+        private int elCBU;
         private Banco elBanco;
 
         public TitularesAdd(Banco _elBanco, int _laCA)
         {
             InitializeComponent();
-            laCAja = _laCA;
+            elCBU = _laCA;
             elBanco = _elBanco;
             llenarDatosDataGrid1();
         }
 
-        private void button1_Click(object sender, EventArgs e){Close();}
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.delegadoCArecargar(elCBU);
+        }
 
         private void llenarDatosDataGrid1()
         {
             dataGridView1.Rows.Clear();
-            
-            //List<Movimiento> detalles = elBanco.BuscarMovimientos(laCAja);
             List<Usuario> detalles = elBanco.usuarios;
-
-            
 
             foreach (Usuario salida in detalles)
             {
                 string aux_ = "No";
                 //INI
-                elBanco.usuarioActual.MostrarTitularesCajasDeAhorro(laCAja);
+                elBanco.usuarioActual.MostrarTitularesCajasDeAhorro(elCBU);
 
-                foreach (Usuario titul in elBanco.usuarioActual.MostrarTitularesCajasDeAhorro(laCAja))
+                foreach (Usuario titul in elBanco.usuarioActual.MostrarTitularesCajasDeAhorro(elCBU))
                 {
                     if(salida.dni == titul.dni) { aux_ = "Si"; }
                 }
@@ -51,7 +52,7 @@ namespace HomeBankingDV.Front
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        {   //CUANDO LE SELECCIONAS
             int nroDoc = 0;
 
             object dni = dataGridView1.Rows[e.RowIndex].Cells[0].Value;
@@ -61,7 +62,11 @@ namespace HomeBankingDV.Front
 
             nroDoc = Int32.Parse(dni.ToString());
 
-            if (esTitu == "No") { elBanco.AgregarTitularCajaAhorro(laCAja, nroDoc); }
+            if (esTitu == "No") { elBanco.AgregarTitularCajaAhorro(elCBU, nroDoc); }
+
+            // recargar...
+            llenarDatosDataGrid1();
         }
     }
+    public delegate void DelegadoCArecargar(int elCBU);
 }
