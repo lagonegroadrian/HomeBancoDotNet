@@ -225,14 +225,21 @@ namespace HomeBankingDV
 
         //DA DE BAJA UNA CAJA DE AHORRO DE LA LISTA DEL BANCO Y DE LA LISTA DE CADA USUARIO TITULAR DE LA CAJA//   
         //public bool BajaCajaAhorro (int id)
-        public bool BajaCajaAhorro(int id)
+        public bool BajaCajaAhorro(int _elCBU)
         {
         bool result = false;
         foreach (CajaDeAhorro caja in usuarioActual.cajas)
-        {if (caja.id == id){if (caja.saldo == 0){
-        cajas.Remove(caja);
-        usuarioActual.cajas.Remove(caja);
-        return result = true;}}}
+        {
+            if (caja.cbu == _elCBU)
+            {
+                    if (caja.saldo == 0)
+                    {
+                    cajas.Remove(caja);
+                    usuarioActual.cajas.Remove(caja);
+                    return result = true; // para que una vez que lo remueva del listado, salga.
+                    }
+            }
+        }
         return result;
         }
 

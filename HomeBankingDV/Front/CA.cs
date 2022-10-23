@@ -20,6 +20,8 @@ namespace HomeBankingDV
         public DelegadoRetirar delegadoRetirar;
         public DelegadoTransferir delegadoTransferir;
         public DelegadoVerDetalle delegadoVerDetalle;
+        public DelegadoBajaCA delegadoBajaCA;
+        
 
         public Banco elBanco;
         public int dniIngresado;
@@ -136,7 +138,18 @@ namespace HomeBankingDV
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //dar de baja caja de ahorro
+            //Dar de baja caja de ahorro
+            this.delegadoBajaCA(elCBU);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.delegadoBajaCA(elCBU);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
@@ -147,10 +160,6 @@ namespace HomeBankingDV
     public delegate void DelegadoRetirar(int elCBU);
     public delegate void DelegadoTransferir(int elCBU);
     public delegate void DelegadoVerDetalle(int elCBU);
-
-
-
-
-
+    public delegate void DelegadoBajaCA(int elCBU);
 }
 

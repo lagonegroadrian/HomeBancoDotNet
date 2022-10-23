@@ -44,6 +44,8 @@ namespace HomeBankingDV
             hijoCA.delegadoRetirar += DelegadoRetirar;
             hijoCA.delegadoTransferir += DelegadoTransferir;
             hijoCA.delegadoVerDetalle += DelegadoVerDetalle;
+            hijoCA.delegadoBajaCA += DelegadoBajaCA;
+            
             hijoCA.Show();
         }
 
@@ -108,6 +110,41 @@ namespace HomeBankingDV
             hijoHomme.Close();
             ActivoCA(_elCBU);
         }
+
+        private void DelegadoBajaCA(int _elCBU)
+        {
+            string salida="Operacion no Exitosa, CA posee saldo";
+
+            //INICIO
+            // Checks the value of the text.
+            
+                // Initializes the variables to pass to the MessageBox.Show method.
+                string message = "Desea dar de baja la cuenta?";
+                string caption = "*Importante*";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result;
+
+                // Displays the MessageBox.
+                result = MessageBox.Show(message, caption, buttons);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                // Closes the parent form.
+                if (elBanco.BajaCajaAhorro(_elCBU)) 
+                {
+                    salida = "Cuenta dada de baja correctamente";
+                }
+                MessageBox.Show(salida);
+                hijoCA.Close();
+                ActivoHomme();
+                //this.Close();
+            }
+            
+            //FIN
+
+        }
+
+
+        
 
 
         private void DelegadoDespositarClose(int _elCBU)
