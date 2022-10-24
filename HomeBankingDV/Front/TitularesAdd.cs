@@ -64,15 +64,24 @@ namespace HomeBankingDV.Front
 
             string message = "Designar titular?";
             string caption = "Mensaje";
+            string salida = "Operacion fallida";
+
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result;
 
-            // Displays the MessageBox.
-            result = MessageBox.Show(message, caption, buttons);
+            if (esTitu == "Si") { message = "Sacar Titular"; }
+
+                // Displays the MessageBox.
+                result = MessageBox.Show(message, caption, buttons);
+
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                string salida = "El usuario ya es titular";
-                if (esTitu == "No") { elBanco.AgregarTitularCajaAhorro(elCBU, nroDoc); salida = "Operacion exitosa"; }
+                if (esTitu == "Si") {
+                    if (elBanco.EliminarTitularCajaAhorro(elCBU, nroDoc)) { salida = "Operacion exitosa"; }
+                }
+                else {
+                    if (elBanco.AgregarTitularCajaAhorro(elCBU, nroDoc)) { salida = "Operacion exitosa"; }
+                }
                 MessageBox.Show(salida);
             }
 

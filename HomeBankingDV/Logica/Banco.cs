@@ -270,34 +270,28 @@ namespace HomeBankingDV
             return false;
         }
 
-        public bool EliminarTitularCajaAhorro (int id, int dni, string flag)
+        //public bool EliminarTitularCajaAhorro (int id, int dni, string flag)
+
+        public bool EliminarTitularCajaAhorro(int _cbu, int _dni)
         {//REEMPLAZAR POR DATO IDENTIFICABLE DNI O ID, NUNCA PASAR OBJETO DESD LA VISTA
             foreach (CajaDeAhorro cajaU in usuarioActual.cajas)
             {
-                if (cajaU.id == id )
+                if (cajaU.cbu == _cbu )
                 {
                     if (cajaU.titulares.Count >= 2)
                     {
                         foreach (Usuario usuario in usuarios)
 	                    {
-                            if(usuario.dni == dni)
+                            if(usuario.dni == _dni)
                             {
-                                cajaU.titulares.Add(usuario);
-                            
-                                foreach (CajaDeAhorro caja in cajas)
-                                {
-                                    if(caja.id == id) 
-                                    {
-                                        caja.titulares.Add(usuario);
-                                    }
-                                }
+                                cajaU.titulares.Remove(usuario);
+                                return true;
                             }
-	                    }  
-                        return true;
+                        }  
+                        
                     }
                     return false; //tiene 1 o menos titulares
                 }   
-                return false; //no se encontro el id de la caja
             }
             return false;
         }
