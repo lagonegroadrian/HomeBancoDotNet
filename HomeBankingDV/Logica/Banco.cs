@@ -67,7 +67,9 @@ namespace HomeBankingDV
                 {
                     Usuario usuario = new Usuario(id, dni,nombre,apellido,mail,password,isAdmin,bloqueado);
                     usuarios.Add(usuario);
-                    
+                    DB.agregarUsuario(dni, nombre +", "+ apellido, mail, password, isAdmin, bloqueado);
+
+
                     return true;
                 }
                 catch (Exception)
