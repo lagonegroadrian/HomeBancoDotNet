@@ -61,7 +61,7 @@ namespace HomeBankingDV.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Data Source=SSONESS\SQLEXPRESS;Initial Catalog=BancoDB;Integrated Security=True.
+        ///   Busca una cadena traducida similar a Data Source=DESKTOP-7HF6F66\SQLSERVERLOCAL;Initial Catalog=BancoDB;Integrated Security=True.
         /// </summary>
         internal static string ConnectionStr {
             get {
