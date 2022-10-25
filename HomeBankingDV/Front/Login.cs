@@ -44,25 +44,10 @@ namespace HomeBankingDV
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            try { 
-            dniIngresado = int.Parse(textUsuario.Text);
-            contraseniaIngresada = textContrasenia.Text;
-                //elBanco.IniciarSesion(dniIngresado,contraseniaIngresada);
-              
-                    if (elBanco.IniciarSesion(dniIngresado, contraseniaIngresada))
-                    {
-                        delegadoHommeStart();
-
-                    }
-                
-                }
-            catch (Exception)
-            {
-               
-                MessageBox.Show("Error en el ingreso de datos.");
-            }  
-         
+        {   try {   dniIngresado = int.Parse(textUsuario.Text);
+                    contraseniaIngresada = textContrasenia.Text;
+                    if (elBanco.IniciarSesion(dniIngresado, contraseniaIngresada)){delegadoHommeStart();}else { MessageBox.Show("Password Erronea"); }
+                } catch (Exception){MessageBox.Show("Error en el ingreso de datos.");}
         }
 
         private void Cancelar_Click(object sender, EventArgs e)

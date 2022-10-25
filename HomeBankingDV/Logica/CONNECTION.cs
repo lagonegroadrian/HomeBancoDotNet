@@ -90,6 +90,95 @@ namespace HomeBankingDV
             return misDomicilios;
         }
 
+
+
+
+        public int agregaragregarUsuario_v2(int _Dni, string _Nombre, string _Apellido, string _Mail, string _Password)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "INSERT INTO [dbo].[Usuario] ([userDni],[userNombre],[userApellido],[userMail],[userPassword],[userIsAdmin],[userBloqueado]) VALUES (@userDni,@userNombre,@userApellido,@userMail,@userPassword,@userIsAdmin,@UserBloqueado);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@userDni", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@userNombre", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@userApellido", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@userMail", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@userPassword", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@userIsAdmin", SqlDbType.Bit));
+                command.Parameters.Add(new SqlParameter("@userBloqueado", SqlDbType.Bit));
+                command.Parameters["@UserDni"].Value = _Dni;
+                command.Parameters["@userNombre"].Value = _Nombre;
+                command.Parameters["@userApellido"].Value = _Apellido;
+                command.Parameters["@userMail"].Value = _Mail;
+                command.Parameters["@userPassword"].Value = _Password;
+                command.Parameters["@userIsAdmin"].Value = 0;
+                command.Parameters["@userBloqueado"].Value = 0;
+
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
+
+
+
+
+
+        public List<Usuario> traerUsuarios_v2()
+        {
+            List<Usuario> posts = new List<Usuario>();
+
+            string queryString = "SELECT userId , userDni , userNombre , userApellido , userMail , userPassword , userIsAdmin , userBloqueado from dbo.usuario ";
+
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    Usuario auxv2;
+
+                    while (reader.Read())
+                    {
+                        auxv2 = new Usuario(reader.GetInt32(0),reader.GetInt32(1),reader.GetString(2),reader.GetString(3),reader.GetString(4),reader.GetString(5),reader.GetBoolean(6),reader.GetBoolean(7));
+                        posts.Add(auxv2);
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return posts;
+        }
+
+
+
+
+
+
+
+
+
+
         //devuelve el ID del usuario agregado a la base, si algo falla devuelve -1
         public int agregarUsuario(int Dni, string Nombre, string Mail, string Password, bool IsAdmin, bool Bloqueado)
         {
@@ -97,7 +186,7 @@ namespace HomeBankingDV
             int resultadoQuery;
             int idNuevoUsuario = -1;
             string connectionString = Properties.Resources.ConnectionStr;
-            string queryString = "INSERT INTO [dbo].[Usuario] ([Dni],[Nombre],[Mail],[Password],[IsAdmin],[Bloqueado]) VALUES (@userDni,@userNombre,@userMail,@userPassword,@userIsAdmin,@UserBloqueado);";
+            string queryString = "INSERT INTO [dbo].[Usuario] ([userDni],[userNombre],[userApellido],[userMail],[userPassword],[userIsAdmin],[userBloqueado]) VALUES (@userDni,@userNombre,@userMail,@userPassword,@userIsAdmin,@UserBloqueado);";
             using (SqlConnection connection =
                 new SqlConnection(connectionString))
             {

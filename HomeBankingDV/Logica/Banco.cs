@@ -26,106 +26,15 @@ namespace HomeBankingDV
 
         private CONNECTION DB; 
   
-        public Banco()
-        {
-            usuarios= new List<Usuario>();
-            cajas= new List<CajaDeAhorro>();
-            tarjetas= new List<TarjetaDeCredito>();
-            pagos= new List<Pago>();
-            movimientos= new List<Movimiento>();
-            pfs = new List<PlazoFijo>();
-            misDomicilios = new List<Domicilio>();
-            DB = new CONNECTION();
-            inicializarAtributos();
-        }
 
-        private void inicializarAtributos()
-        {
-           usuarios = DB.inicializarUsuarios();
-           misDomicilios = DB.inicializarDomicilios();
-            // faltan agregar los atributos restantes!
-        }
-        public bool AltaUsuario(int dni, string nombre, string apellido, string mail, string password,bool isAdmin ,bool bloqueado)
-        {
-            if (!existeUsuario(dni))
-            {
-                //Buscamos el id que vamos a asignar
-                int id = 0;
-                if (usuarios.Count > 0)
-                {
-                    //si hay al menos 1 elemento en la lista previamente
-                    var lastItem = usuarios[^1];//accede al ultimo elemento de la lista
-                    id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
-                }
-                else { 
-                    //si la lista esta vacia (count = 0)
-                    id = 1;
-                }
-
-                //Agregamos el usuario
-                try
-                {
-                    Usuario usuario = new Usuario(id, dni,nombre,apellido,mail,password,isAdmin,bloqueado);
-                    usuarios.Add(usuario);
-                    DB.agregarUsuario(dni, nombre +", "+ apellido, mail, password, isAdmin, bloqueado);
-
-
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-            return false;
-        }
 
         //public bool ModificarUsuario(int dni, string nombre, string apellido, string mail, string password) {usuarioActual.dni = dni;usuarioActual.nombre = nombre;usuarioActual.apellido = apellido;usuarioActual.mail = mail;usuarioActual.password = password;return true;}
 
         //COMPRUEBA SI EXISTE UN USUARIO EN LA LISTA DE USUARIOS DEL BANCO//
         public bool existeUsuario(int dni)
-        {
-            foreach (Usuario usuario in usuarios){if (usuario.dni == dni){return true;}}
-            return false;
-        }
+        {   foreach (Usuario usuario in usuarios){if (usuario.dni == dni){return true;}}
+            return false;}
 
-        //INICIA SESION CON UN USUARIO EXISTENTE EN LA LISTA DE USUARIOS DEL BANCO//        
-        public bool IniciarSesion(int DNI, string Contraseña)
-        {
-          
-
-            foreach (Usuario usuario in usuarios)
-            {
-                if (usuario.dni == DNI && usuario.password == Contraseña && usuario.bloqueado == false)
-                {
-                    usuarioActual = usuario;
-                   // MessageBox.Show("Login correcto"); //ESTO TIENE QUE SALIR DE LA VISTA, LO MISMO CON TODOS LOS MESSAGEBOX
-                    return true;
-                }
-                if (usuario.dni == DNI && usuario.password != Contraseña && usuario.bloqueado == false)
-                {
-                  //  usuario.intentosFallidos++;
-                   // MessageBox.Show("Password mal. A los 3 intentos fallidos se bloqueara cuenta." +
-                      //  "Intentos Fallidos: " + usuario.intentosFallidos);
-                 //   if (usuario.intentosFallidos == 3)
-                //    {
-                     //   MessageBox.Show("El usuario " + usuario.nombre + " " + usuario.apellido + " se ha bloqueado." );
-                  //      usuario.bloqueado = true;
-                //    }
-                    return false;
-                }
-                if (usuario.bloqueado == true)
-                {
-                //    MessageBox.Show("El usuario esta bloqueado");
-                    return false;
-                }
-                
-               
-            }
-
-          //  MessageBox.Show("El usuario no se encuentra en la base de datos");
-            return false;
-        }
 
         //INICIA SESION CON UN USUARIO EXISTENTE EN LA LISTA DE USUARIOS DEL BANCO//    
         //  public bool AltaCajaAhorro(Usuario usuario)
@@ -719,7 +628,64 @@ namespace HomeBankingDV
             return false;
         }
 
+        //*Metodos modificados para el 2do TP - Inicio
+        public Banco()
+        {
+            usuarios = new List<Usuario>();
+            cajas = new List<CajaDeAhorro>();
+            tarjetas = new List<TarjetaDeCredito>();
+            pagos = new List<Pago>();
+            movimientos = new List<Movimiento>();
+            pfs = new List<PlazoFijo>();
+            misDomicilios = new List<Domicilio>();
+            DB = new CONNECTION();
+            inicializarAtributos();
+        }
 
+        private void inicializarAtributos() // faltan agregar los atributos restantes!
+        {   usuarios = DB.inicializarUsuarios();
+            misDomicilios = DB.inicializarDomicilios();}
+
+
+        public bool AltaUsuario(int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado)
+        {   if (!existeUsuario(dni)){
+                try{    DB.agregaragregarUsuario_v2(dni, nombre, apellido, mail, password);
+                        this.ActualizarDB_usuario();
+                        return true;
+                }catch (Exception) { return false; }
+            }return false;
+        }
+
+        public void ActualizarDB_usuario(){usuarios.Clear();usuarios = DB.inicializarUsuarios();}
+
+        public bool IniciarSesion(int DNI, string Contraseña)
+        {
+            foreach (Usuario usuario in usuarios)
+            {
+                if (usuario.dni == DNI && usuario.password == Contraseña && usuario.bloqueado == false)
+                {
+                    usuarioActual = usuario;
+                    return true;
+                }
+                if (usuario.dni == DNI && usuario.password != Contraseña && usuario.bloqueado == false)
+                {
+                    //  usuario.intentosFallidos++;
+                    // MessageBox.Show("Password mal. A los 3 intentos fallidos se bloqueara cuenta." +
+                    //  "Intentos Fallidos: " + usuario.intentosFallidos);
+                    //   if (usuario.intentosFallidos == 3)
+                    //    {
+                    //   MessageBox.Show("El usuario " + usuario.nombre + " " + usuario.apellido + " se ha bloqueado." );
+                    //      usuario.bloqueado = true;
+                    //    }
+
+                    return false;
+                }
+                if (usuario.bloqueado == true) { return false; }
+            }
+            return false;
+        }
+
+        //*Metodos modificados para el 2do TP - Fin
     }
 }
 
