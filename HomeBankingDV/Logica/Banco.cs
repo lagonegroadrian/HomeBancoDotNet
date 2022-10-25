@@ -685,6 +685,51 @@ namespace HomeBankingDV
             return false;
         }
 
+        //*****************************
+        public bool AltaCajaAhorro_v2()
+        {
+            //ESTAS LISTAS PASARLAS AL CONSTRUCTOR DE CAJA DE AHORRO//
+
+            //Buscamos el id que vamos a asignar
+            int id = 0;
+            if (cajas.Count > 0)
+            {
+                //si hay al menos 1 elemento en la lista previamente
+                var lastItem = cajas[^1];//accede al ultimo elemento de la lista
+                id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
+            }
+            else
+            {
+                //si la lista esta vacia (count = 0)
+                id = 1;
+            }
+            //Genera CBU a partir del DNI.
+            int cbu = usuarioActual.dni * 1000;
+
+
+            Random rd = new Random();
+            int rand_num = rd.Next(cbu, cbu * 1109);
+            cbu = rand_num;
+
+
+            //Inicializamos las listas
+
+
+            List<Usuario> titulares = null;
+            List<Movimiento> movimientos = null;
+
+            //Agregamos la caja
+            CajaDeAhorro caja = new CajaDeAhorro(id, cbu, titulares, 0, movimientos);
+
+            caja.titulares.Add(usuarioActual); // lo doy de alta como titular 
+
+            cajas.Add(caja);
+            usuarioActual.cajas.Add(caja);
+
+            return true;
+        }
+        //*****************************
+
         //*Metodos modificados para el 2do TP - Fin
     }
 }
