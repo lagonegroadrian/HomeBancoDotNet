@@ -305,6 +305,7 @@ namespace HomeBankingDV
 
 
 
+
         public int agregaragregaTitular_v2(int _idUser, int _idCA)
         {
             int resultadoQuery;
@@ -331,6 +332,49 @@ namespace HomeBankingDV
                 }
                 return resultadoQuery;
             }
+        }
+
+
+        public List<CajaDeAhorro> inicializarCajasDeAhorro()
+        {
+            List<CajaDeAhorro> misCajaDeAhorro = new List<CajaDeAhorro>();
+
+            //Defino el string con la consulta que quiero realizar
+            string queryString = "SELECT * from dbo.cajaAhorro_v2";
+
+            // Creo una conexión SQL con un Using, de modo que al finalizar, la conexión se cierra y se liberan recursos
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                // Defino el comando a enviar al motor SQL con la consulta y la conexión
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                try
+                {
+                    //Abro la conexión
+                    connection.Open();
+                    //mi objecto DataReader va a obtener los resultados de la consulta, notar que a comando se le pide ExecuteReader()
+                    SqlDataReader reader = command.ExecuteReader();
+                    CajaDeAhorro aux;
+                    //mientras haya registros/filas en mi DataReader, sigo leyendo
+                    while (reader.Read())
+                    {
+                        aux = new CajaDeAhorro( reader.GetInt32(1), 0);
+                        misCajaDeAhorro.Add(aux);
+                    }
+                    //En este punto ya recorrí todas las filas del resultado de la query
+                    reader.Close();
+
+
+
+                    //YA cargué todos los domicilios, sólo me resta vincular
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return misCajaDeAhorro;
         }
 
         //tp2 - fin

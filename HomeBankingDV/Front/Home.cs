@@ -37,7 +37,9 @@ namespace HomeBankingDV
         private void llenarDatosDataGrid1()
         {
             dataGridView1.Rows.Clear();
-            foreach (CajaDeAhorro salida in elBanco.usuarioActual.MostrarCajasDeAhorro()) { dataGridView1.Rows.Add(salida.id, salida.cbu, salida.saldo); }
+            //foreach (CajaDeAhorro salida in elBanco.usuarioActual.MostrarCajasDeAhorro()) { dataGridView1.Rows.Add(salida.id, salida.cbu, salida.saldo); }
+            foreach (CajaDeAhorro salida in elBanco.obtenerCajas()) { dataGridView1.Rows.Add(salida.id, salida.cbu, salida.saldo); }
+            
         }
 
 

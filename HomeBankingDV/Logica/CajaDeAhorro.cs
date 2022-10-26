@@ -28,24 +28,24 @@ namespace HomeBankingDV
         }
 
 
-        public CajaDeAhorro(int cbu)
+        public CajaDeAhorro(int _cbu, int _saldo)
         {
             movimientos = new List<Movimiento>();
             titulares = new List<Usuario>();
-            this.cbu = cbu;
-            this.saldo = 0;
+            this.cbu = _cbu;
+            this.saldo = _saldo;
         }
-        
-        //constructor sobrecargado; al momento de crear una caja de ahorro ... no tengo movimientos 
-        public CajaDeAhorro(int _cbu, Usuario userActual)
-        {
-            movimientos = new List<Movimiento>();
-            titulares = new List<Usuario>();
 
-            id = aux++;
-            cbu = _cbu;
-            saldo = 0;
-            titulares.Add(userActual);
-        }
+        //constructor sobrecargado; al momento de crear una caja de ahorro ... no tengo movimientos 
+        //public CajaDeAhorro(int _cbu, Usuario userActual)
+        //{
+        //movimientos = new List<Movimiento>();
+        //titulares = new List<Usuario>();
+
+        //id = aux++;
+        //cbu = _cbu;
+        //saldo = 0;
+        //titulares.Add(userActual);
+        //}
     }
 }

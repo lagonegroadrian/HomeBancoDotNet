@@ -444,7 +444,8 @@ namespace HomeBankingDV
 
         public List<CajaDeAhorro> obtenerCajas()
         {
-            return usuarioActual.cajas.ToList();
+            //return usuarioActual.cajas.ToList();
+            return cajas.ToList().ToList(); 
         }
 
         public List<Movimiento> obtenerMovimientos(int idCaja)
@@ -643,8 +644,11 @@ namespace HomeBankingDV
         }
 
         private void inicializarAtributos() // faltan agregar los atributos restantes!
-        {   usuarios = DB.inicializarUsuarios();
-            misDomicilios = DB.inicializarDomicilios();}
+        {   
+            usuarios = DB.inicializarUsuarios();
+            misDomicilios = DB.inicializarDomicilios();
+            cajas = DB.inicializarCajasDeAhorro();
+        }
 
 
         public bool AltaUsuario(int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado)
@@ -664,7 +668,7 @@ namespace HomeBankingDV
             {
                 if (usuario.dni == DNI && usuario.password == Contraseña && usuario.bloqueado == false)
                 {
-                    usuarioActual = usuario;
+                    usuarioActual = usuario; // al ID hay que sumarle 1 porque viene de la lista de usuarios
                     return true;
                 }
                 if (usuario.dni == DNI && usuario.password != Contraseña && usuario.bloqueado == false)
@@ -697,14 +701,14 @@ namespace HomeBankingDV
             cbu = rand_num;
 
             int idCa = DB.agregaragregarCajaAhorro_v2(cbu);
-            DB.agregaragregaTitular_v2(usuarioActual.id, idCa);
+            DB.agregaragregaTitular_v2(usuarioActual.id +1, idCa); // se le suma 1 al id del usuario xq lo levanta del listado de usuarios
 
             //luego poner alta titular respecto de caja de ahorro
             //usuarioActual.id
 
 
             //Agregamos la caja
-            CajaDeAhorro caja = new CajaDeAhorro(cbu);
+            CajaDeAhorro caja = new CajaDeAhorro(cbu,0);
 
             caja.titulares.Add(usuarioActual); // lo doy de alta como titular 
 
