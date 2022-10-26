@@ -31,8 +31,6 @@ namespace HomeBankingDV
             InitializeComponent();
             List <string> cajasDeAhorro = new List<string>();
             List<CajaDeAhorro> cajaDeAhorroList = new List<CajaDeAhorro>();
-            cajaDeAhorroList.Add(new CajaDeAhorro(123, 2323, null, 213322, null));
-            cajaDeAhorroList.Add(new CajaDeAhorro(12243, 2132323, null, 2163322, null));
             llenarDatosDataGrid1();
         }
 
@@ -47,7 +45,8 @@ namespace HomeBankingDV
         {
             //Form crearCaja = new CrearNuevaCaja();
             //crearCaja.Show();
-            elBanco.AltaCajaAhorro();
+            //elBanco.AltaCajaAhorro();
+            elBanco.AltaCajaAhorro_v2();
             llenarDatosDataGrid1();
         }
 

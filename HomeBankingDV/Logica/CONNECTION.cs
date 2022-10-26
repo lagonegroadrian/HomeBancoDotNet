@@ -93,82 +93,14 @@ namespace HomeBankingDV
 
 
 
-        public int agregaragregarUsuario_v2(int _Dni, string _Nombre, string _Apellido, string _Mail, string _Password)
-        {
-            int resultadoQuery;
-
-            string connectionString = Properties.Resources.ConnectionStr;
-            string queryString = "INSERT INTO [dbo].[Usuario] ([userDni],[userNombre],[userApellido],[userMail],[userPassword],[userIsAdmin],[userBloqueado]) VALUES (@userDni,@userNombre,@userApellido,@userMail,@userPassword,@userIsAdmin,@UserBloqueado);";
-            using (SqlConnection connection =
-                new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.Add(new SqlParameter("@userDni", SqlDbType.Int));
-                command.Parameters.Add(new SqlParameter("@userNombre", SqlDbType.NVarChar));
-                command.Parameters.Add(new SqlParameter("@userApellido", SqlDbType.NVarChar));
-                command.Parameters.Add(new SqlParameter("@userMail", SqlDbType.NVarChar));
-                command.Parameters.Add(new SqlParameter("@userPassword", SqlDbType.NVarChar));
-                command.Parameters.Add(new SqlParameter("@userIsAdmin", SqlDbType.Bit));
-                command.Parameters.Add(new SqlParameter("@userBloqueado", SqlDbType.Bit));
-                command.Parameters["@UserDni"].Value = _Dni;
-                command.Parameters["@userNombre"].Value = _Nombre;
-                command.Parameters["@userApellido"].Value = _Apellido;
-                command.Parameters["@userMail"].Value = _Mail;
-                command.Parameters["@userPassword"].Value = _Password;
-                command.Parameters["@userIsAdmin"].Value = 0;
-                command.Parameters["@userBloqueado"].Value = 0;
-
-                try
-                {
-                    connection.Open();
-                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
-                    resultadoQuery = command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return -1;
-                }
-                return resultadoQuery;
-            }
-        }
+        
 
 
 
 
 
 
-        public List<Usuario> traerUsuarios_v2()
-        {
-            List<Usuario> posts = new List<Usuario>();
-
-            string queryString = "SELECT userId , userDni , userNombre , userApellido , userMail , userPassword , userIsAdmin , userBloqueado from dbo.usuario ";
-
-            using (SqlConnection connection =
-                new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand(queryString, connection);
-
-                try
-                {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    Usuario auxv2;
-
-                    while (reader.Read())
-                    {
-                        auxv2 = new Usuario(reader.GetInt32(0),reader.GetInt32(1),reader.GetString(2),reader.GetString(3),reader.GetString(4),reader.GetString(5),reader.GetBoolean(6),reader.GetBoolean(7));
-                        posts.Add(auxv2);
-                    }
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            return posts;
-        }
+     
 
 
 
@@ -287,6 +219,121 @@ namespace HomeBankingDV
                 }
             }
         }
+
+
+        //tp2 - inicio
+        public int agregaragregarUsuario_v2(int _Dni, string _Nombre, string _Apellido, string _Mail, string _Password)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "INSERT INTO [dbo].[Usuario] ([userDni],[userNombre],[userApellido],[userMail],[userPassword],[userIsAdmin],[userBloqueado]) VALUES (@userDni,@userNombre,@userApellido,@userMail,@userPassword,@userIsAdmin,@UserBloqueado);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@userDni", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@userNombre", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@userApellido", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@userMail", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@userPassword", SqlDbType.NVarChar));
+                command.Parameters.Add(new SqlParameter("@userIsAdmin", SqlDbType.Bit));
+                command.Parameters.Add(new SqlParameter("@userBloqueado", SqlDbType.Bit));
+                command.Parameters["@UserDni"].Value = _Dni;
+                command.Parameters["@userNombre"].Value = _Nombre;
+                command.Parameters["@userApellido"].Value = _Apellido;
+                command.Parameters["@userMail"].Value = _Mail;
+                command.Parameters["@userPassword"].Value = _Password;
+                command.Parameters["@userIsAdmin"].Value = 0;
+                command.Parameters["@userBloqueado"].Value = 0;
+
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
+
+
+        public int agregaragregarCajaAhorro_v2(int _cbu)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "INSERT INTO [dbo].[cajaAhorro_v2] ([cbuCajaDeAhorro],[saldoCajaDeAhorro]) VALUES (@cbuCajaDeAhorro,@saldoCajaDeAhorro);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@cbuCajaDeAhorro", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@saldoCajaDeAhorro", SqlDbType.Float));
+                command.Parameters["@cbuCajaDeAhorro"].Value = _cbu;
+                command.Parameters["@saldoCajaDeAhorro"].Value = 0;
+
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    resultadoQuery = command.ExecuteNonQuery();
+
+
+                    //Ahora hago esta query para obtener el ID
+                    string ConsultaID = "SELECT MAX([idCajaDeAhorro]) FROM [dbo].[cajaAhorro_v2]";
+                    command = new SqlCommand(ConsultaID, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    resultadoQuery = reader.GetInt32(0);
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
+
+
+        public int agregaragregaTitular_v2(int _idUser, int _idCA)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "INSERT INTO [dbo].[titulares_v2] ([idCAtitular],[idUstitular]) VALUES (@idCAtitular,@idUstitular);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@idCAtitular", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@idUstitular", SqlDbType.Int));
+                command.Parameters["@idCAtitular"].Value = _idCA;
+                command.Parameters["@idUstitular"].Value = _idUser;
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
+        //tp2 - fin
 
     }
 }
