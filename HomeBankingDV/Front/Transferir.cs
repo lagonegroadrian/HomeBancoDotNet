@@ -16,7 +16,8 @@ namespace HomeBankingDV.Front
 
         private int elCBUorigen;
         private int elCBUdestino;
-        private int monto;
+        //private int monto;
+        private float monto;
 
         private Banco elBanco;
 
@@ -52,7 +53,7 @@ namespace HomeBankingDV.Front
         private void button2_Click(object sender, EventArgs e)
         {
             elCBUdestino = Int32.Parse(textBox2.Text);
-            monto= Int32.Parse(textBox3.Text);
+            monto= float.Parse(textBox3.Text);
 
             elBanco.TransferirDinero(monto, elCBUorigen, elCBUdestino);
             this.delegadoTransferirClose(elCBUorigen);

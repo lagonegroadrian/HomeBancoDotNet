@@ -12,7 +12,7 @@ namespace HomeBankingDV
         public int cbu { get; set; }
         public List<Usuario> titulares { get; set; } 
         public float saldo { get; set; }
-        public List<Movimiento> movimientos { get; set; }    
+        public List<Movimiento> movimientos { get; set; }
         static int aux { get; set; }
 
         //constructor CREAR LAS LISTAS ACA

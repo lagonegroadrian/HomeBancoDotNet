@@ -240,7 +240,8 @@ namespace HomeBankingDV
                 }
             }
             //Agregamos el movimiento
-            Movimiento m = new Movimiento(id, monto, cajaInfo, detalle, fecha);     
+            //Movimiento m = new Movimiento(id, monto, cajaInfo, detalle, fecha);
+            Movimiento m = new Movimiento(id, monto, cajaInfo, detalle);
             movimientos.Add(m); //guardamos en banco
             
             cajaInfo.movimientos.Add(m);
@@ -492,10 +493,18 @@ namespace HomeBankingDV
         }
 
         // Operaciones del usuario..
-        public bool TransferirDinero(int MontoTranferido, int CBUOrigen, int CBUDestino)
+        public bool TransferirDinero(float MontoTranferido, int CBUOrigen, int CBUDestino)
         {
             bool salida = false;
 
+            if(this.RetirarDinero(MontoTranferido, CBUOrigen)) 
+            {
+                this.DepositarDinero(MontoTranferido, CBUDestino);
+                salida = true;
+            }
+
+
+            /*
             foreach (CajaDeAhorro Caja in usuarioActual.cajas)
             {
                 if (Caja.cbu == CBUOrigen)
@@ -515,6 +524,7 @@ namespace HomeBankingDV
                     }
                 }
             }
+            */
             return salida;
         }
 
