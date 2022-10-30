@@ -1,1 +1,309 @@
-﻿{"metadata":{"kernel_spec":{"name":"SQL","language":"sql","display_name":"SQL"},"language_info":{"name":"sql","version":""}},"nbformat":4,"nbformat_minor":2,"cells":[{"cell_type":"markdown","source":["# [BancoDB]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']","object_type":"Database"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["USE [master]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']","object_type":"Database"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Database [BancoDB]    Script Date: 26/10/2022 01:20:20 ******/\r\nCREATE DATABASE [BancoDB]\r\n CONTAINMENT = NONE\r\n ON  PRIMARY \r\n( NAME = N'BancoDB', FILENAME = N'C:\\Program Files\\Microsoft SQL Server\\MSSQL15.SQLSERVERLOCAL\\MSSQL\\DATA\\BancoDB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )\r\n LOG ON \r\n( NAME = N'BancoDB_log', FILENAME = N'C:\\Program Files\\Microsoft SQL Server\\MSSQL15.SQLSERVERLOCAL\\MSSQL\\DATA\\BancoDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )\r\n WITH CATALOG_COLLATION = DATABASE_DEFAULT\r\n","GO\r\n","ALTER DATABASE [BancoDB] SET COMPATIBILITY_LEVEL = 150\r\n","GO\r\n","IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))\r\nbegin\r\nEXEC [BancoDB].[dbo].[sp_fulltext_database] @action = 'enable'\r\nend\r\n","GO\r\n","ALTER DATABASE [BancoDB] SET ANSI_NULL_DEFAULT OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET ANSI_NULLS OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET ANSI_PADDING OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET ANSI_WARNINGS OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET ARITHABORT OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET AUTO_CLOSE OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET AUTO_SHRINK OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET AUTO_UPDATE_STATISTICS ON \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET CURSOR_CLOSE_ON_COMMIT OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET CURSOR_DEFAULT  GLOBAL \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET CONCAT_NULL_YIELDS_NULL OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET NUMERIC_ROUNDABORT OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET QUOTED_IDENTIFIER OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET RECURSIVE_TRIGGERS OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET  DISABLE_BROKER \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET DATE_CORRELATION_OPTIMIZATION OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET TRUSTWORTHY OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET ALLOW_SNAPSHOT_ISOLATION OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET PARAMETERIZATION SIMPLE \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET READ_COMMITTED_SNAPSHOT OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET HONOR_BROKER_PRIORITY OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET RECOVERY SIMPLE \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET  MULTI_USER \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET PAGE_VERIFY CHECKSUM  \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET DB_CHAINING OFF \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET TARGET_RECOVERY_TIME = 60 SECONDS \r\n","GO\r\n","ALTER DATABASE [BancoDB] SET DELAYED_DURABILITY = DISABLED \r\n","GO\r\n","EXEC sys.sp_db_vardecimal_storage_format N'BancoDB', N'ON'\r\n","GO\r\n","ALTER DATABASE [BancoDB] SET QUERY_STORE = OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']","object_type":"Database"}},{"cell_type":"markdown","source":["# [dbo].[cajaAhorro]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='cajaAhorro' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["USE [BancoDB]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='cajaAhorro' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[cajaAhorro]    Script Date: 26/10/2022 01:20:21 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[cajaAhorro](\r\n\t[idCajaDeAhorro] [int] IDENTITY(1,1) NOT NULL,\r\n\t[userId] [int] NULL,\r\n\t[idMovimiento] [int] NULL,\r\n\t[cbu] [int] NULL,\r\n\t[saldo] [float] NULL,\r\n CONSTRAINT [PK_cajaAhorro] PRIMARY KEY CLUSTERED \r\n(\r\n\t[idCajaDeAhorro] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='cajaAhorro' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[cajaAhorro_v2]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='cajaAhorro_v2' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[cajaAhorro_v2]    Script Date: 26/10/2022 01:20:21 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[cajaAhorro_v2](\r\n\t[idCajaDeAhorro] [int] IDENTITY(1,1) NOT NULL,\r\n\t[cbuCajaDeAhorro] [int] NULL,\r\n\t[saldoCajaDeAhorro] [float] NULL,\r\n CONSTRAINT [PK_cajaAhorro_v2] PRIMARY KEY CLUSTERED \r\n(\r\n\t[idCajaDeAhorro] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='cajaAhorro_v2' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[Domicilio]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='Domicilio' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[Domicilio]    Script Date: 26/10/2022 01:20:21 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[Domicilio](\r\n\t[idDomicilio] [int] IDENTITY(1,1) NOT NULL,\r\n\t[calle] [varchar](50) NULL,\r\n\t[altura] [int] NULL,\r\n\t[ciudad] [varchar](50) NULL,\r\n\t[provincia] [varchar](50) NULL,\r\n\t[userId] [int] NULL,\r\n CONSTRAINT [PK_Domicilio] PRIMARY KEY CLUSTERED \r\n(\r\n\t[idDomicilio] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='Domicilio' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[movimiento]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='movimiento' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[movimiento]    Script Date: 26/10/2022 01:20:21 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[movimiento](\r\n\t[idMovimiento] [int] IDENTITY(1,1) NOT NULL,\r\n\t[monto] [float] NULL,\r\n\t[idCajaDeAhorro] [int] NULL,\r\n\t[detalle] [varchar](50) NULL,\r\n\t[fecha] [date] NULL,\r\n CONSTRAINT [PK_movimiento] PRIMARY KEY CLUSTERED \r\n(\r\n\t[idMovimiento] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='movimiento' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[Pago]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='Pago' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[Pago]    Script Date: 26/10/2022 01:20:21 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[Pago](\r\n\t[idPago] [int] IDENTITY(1,1) NOT NULL,\r\n\t[userId] [int] NULL,\r\n\t[nombre] [varchar](50) NULL,\r\n\t[monto] [float] NULL,\r\n\t[pagado] [bit] NULL,\r\n\t[metodo] [varchar](50) NULL,\r\n CONSTRAINT [PK_Pago] PRIMARY KEY CLUSTERED \r\n(\r\n\t[idPago] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='Pago' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[PlazoFijo]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='PlazoFijo' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[PlazoFijo]    Script Date: 26/10/2022 01:20:21 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[PlazoFijo](\r\n\t[idPlazoFijo] [int] IDENTITY(1,1) NOT NULL,\r\n\t[userId] [int] NULL,\r\n\t[monto] [float] NULL,\r\n\t[fechaIni] [date] NULL,\r\n\t[fechaFin] [date] NULL,\r\n\t[tasa] [float] NULL,\r\n\t[pagado] [bit] NULL,\r\n CONSTRAINT [PK_PlazoFijo] PRIMARY KEY CLUSTERED \r\n(\r\n\t[idPlazoFijo] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='PlazoFijo' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[TarjetaDeCredito]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='TarjetaDeCredito' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[TarjetaDeCredito]    Script Date: 26/10/2022 01:20:21 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[TarjetaDeCredito](\r\n\t[idTarjetaDeCredito] [int] IDENTITY(1,1) NOT NULL,\r\n\t[userId] [int] NULL,\r\n\t[numero] [int] NULL,\r\n\t[codigV] [int] NULL,\r\n\t[limite] [float] NULL,\r\n\t[consumos] [float] NULL,\r\n CONSTRAINT [PK_TarjetaDeCredito] PRIMARY KEY CLUSTERED \r\n(\r\n\t[idTarjetaDeCredito] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='TarjetaDeCredito' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[titular_CA]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titular_CA' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[titular_CA]    Script Date: 26/10/2022 01:20:21 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[titular_CA](\r\n\t[idTitular] [int] NULL,\r\n\t[idCA] [int] NULL,\r\n\t[idUser] [int] NULL\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titular_CA' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[titulares_v2]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titulares_v2' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[titulares_v2]    Script Date: 26/10/2022 01:20:21 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[titulares_v2](\r\n\t[idtitular] [int] IDENTITY(1,1) NOT NULL,\r\n\t[idCAtitular] [int] NULL,\r\n\t[idUstitular] [int] NULL,\r\n CONSTRAINT [PK_titulares_v2] PRIMARY KEY CLUSTERED \r\n(\r\n\t[idtitular] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titulares_v2' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[usuario]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='usuario' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[usuario]    Script Date: 26/10/2022 01:20:21 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[usuario](\r\n\t[userId] [int] IDENTITY(1,1) NOT NULL,\r\n\t[userDni] [int] NOT NULL,\r\n\t[userNombre] [varchar](50) NULL,\r\n\t[userApellido] [varchar](50) NULL,\r\n\t[userMail] [varchar](50) NULL,\r\n\t[userPassword] [varchar](50) NULL,\r\n\t[userIsAdmin] [bit] NULL,\r\n\t[userBloqueado] [bit] NULL,\r\n\t[idCajaAhorro] [int] NULL,\r\n\t[idPlazoFijo] [int] NULL,\r\n\t[idTarjetaDeCredito] [int] NULL,\r\n\t[idPago] [int] NULL,\r\n\t[idDomicilio] [int] NULL,\r\n CONSTRAINT [PK_usuario] PRIMARY KEY CLUSTERED \r\n(\r\n\t[userId] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='usuario' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [FK_cajaAhorro_usuario]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='cajaAhorro' and @Schema='dbo']/ForeignKey[@Name='FK_cajaAhorro_usuario']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[cajaAhorro]  WITH CHECK ADD  CONSTRAINT [FK_cajaAhorro_usuario] FOREIGN KEY([userId])\r\nREFERENCES [dbo].[usuario] ([userId])\r\n","GO\r\n","ALTER TABLE [dbo].[cajaAhorro] CHECK CONSTRAINT [FK_cajaAhorro_usuario]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='cajaAhorro' and @Schema='dbo']/ForeignKey[@Name='FK_cajaAhorro_usuario']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK_Domicilio_usuario]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='Domicilio' and @Schema='dbo']/ForeignKey[@Name='FK_Domicilio_usuario']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[Domicilio]  WITH CHECK ADD  CONSTRAINT [FK_Domicilio_usuario] FOREIGN KEY([userId])\r\nREFERENCES [dbo].[usuario] ([userId])\r\n","GO\r\n","ALTER TABLE [dbo].[Domicilio] CHECK CONSTRAINT [FK_Domicilio_usuario]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='Domicilio' and @Schema='dbo']/ForeignKey[@Name='FK_Domicilio_usuario']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK_movimiento_cajaAhorro]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='movimiento' and @Schema='dbo']/ForeignKey[@Name='FK_movimiento_cajaAhorro']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[movimiento]  WITH CHECK ADD  CONSTRAINT [FK_movimiento_cajaAhorro] FOREIGN KEY([idCajaDeAhorro])\r\nREFERENCES [dbo].[cajaAhorro] ([idCajaDeAhorro])\r\n","GO\r\n","ALTER TABLE [dbo].[movimiento] CHECK CONSTRAINT [FK_movimiento_cajaAhorro]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='movimiento' and @Schema='dbo']/ForeignKey[@Name='FK_movimiento_cajaAhorro']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK_Pago_usuario1]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='Pago' and @Schema='dbo']/ForeignKey[@Name='FK_Pago_usuario1']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[Pago]  WITH CHECK ADD  CONSTRAINT [FK_Pago_usuario1] FOREIGN KEY([userId])\r\nREFERENCES [dbo].[usuario] ([userId])\r\n","GO\r\n","ALTER TABLE [dbo].[Pago] CHECK CONSTRAINT [FK_Pago_usuario1]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='Pago' and @Schema='dbo']/ForeignKey[@Name='FK_Pago_usuario1']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK_PlazoFijo_usuario]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='PlazoFijo' and @Schema='dbo']/ForeignKey[@Name='FK_PlazoFijo_usuario']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[PlazoFijo]  WITH CHECK ADD  CONSTRAINT [FK_PlazoFijo_usuario] FOREIGN KEY([userId])\r\nREFERENCES [dbo].[usuario] ([userId])\r\n","GO\r\n","ALTER TABLE [dbo].[PlazoFijo] CHECK CONSTRAINT [FK_PlazoFijo_usuario]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='PlazoFijo' and @Schema='dbo']/ForeignKey[@Name='FK_PlazoFijo_usuario']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK_TarjetaDeCredito_usuario]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='TarjetaDeCredito' and @Schema='dbo']/ForeignKey[@Name='FK_TarjetaDeCredito_usuario']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[TarjetaDeCredito]  WITH CHECK ADD  CONSTRAINT [FK_TarjetaDeCredito_usuario] FOREIGN KEY([userId])\r\nREFERENCES [dbo].[usuario] ([userId])\r\n","GO\r\n","ALTER TABLE [dbo].[TarjetaDeCredito] CHECK CONSTRAINT [FK_TarjetaDeCredito_usuario]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='TarjetaDeCredito' and @Schema='dbo']/ForeignKey[@Name='FK_TarjetaDeCredito_usuario']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK_titularCA_CajaAhorro]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titular_CA' and @Schema='dbo']/ForeignKey[@Name='FK_titularCA_CajaAhorro']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[titular_CA]  WITH CHECK ADD  CONSTRAINT [FK_titularCA_CajaAhorro] FOREIGN KEY([idCA])\r\nREFERENCES [dbo].[cajaAhorro_v2] ([idCajaDeAhorro])\r\n","GO\r\n","ALTER TABLE [dbo].[titular_CA] CHECK CONSTRAINT [FK_titularCA_CajaAhorro]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titular_CA' and @Schema='dbo']/ForeignKey[@Name='FK_titularCA_CajaAhorro']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK_titularCA_usuario]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titular_CA' and @Schema='dbo']/ForeignKey[@Name='FK_titularCA_usuario']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[titular_CA]  WITH CHECK ADD  CONSTRAINT [FK_titularCA_usuario] FOREIGN KEY([idTitular])\r\nREFERENCES [dbo].[usuario] ([userId])\r\n","GO\r\n","ALTER TABLE [dbo].[titular_CA] CHECK CONSTRAINT [FK_titularCA_usuario]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titular_CA' and @Schema='dbo']/ForeignKey[@Name='FK_titularCA_usuario']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK_titulares_CA]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titulares_v2' and @Schema='dbo']/ForeignKey[@Name='FK_titulares_CA']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[titulares_v2]  WITH CHECK ADD  CONSTRAINT [FK_titulares_CA] FOREIGN KEY([idCAtitular])\r\nREFERENCES [dbo].[cajaAhorro_v2] ([idCajaDeAhorro])\r\n","GO\r\n","ALTER TABLE [dbo].[titulares_v2] CHECK CONSTRAINT [FK_titulares_CA]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titulares_v2' and @Schema='dbo']/ForeignKey[@Name='FK_titulares_CA']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK_titulares_usuario]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titulares_v2' and @Schema='dbo']/ForeignKey[@Name='FK_titulares_usuario']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[titulares_v2]  WITH CHECK ADD  CONSTRAINT [FK_titulares_usuario] FOREIGN KEY([idUstitular])\r\nREFERENCES [dbo].[usuario] ([userId])\r\n","GO\r\n","ALTER TABLE [dbo].[titulares_v2] CHECK CONSTRAINT [FK_titulares_usuario]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']/Table[@Name='titulares_v2' and @Schema='dbo']/ForeignKey[@Name='FK_titulares_usuario']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [BancoDB]"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']","object_type":"Database"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["USE [master]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']","object_type":"Database"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER DATABASE [BancoDB] SET  READ_WRITE \r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='DESKTOP-7HF6F66\\SQLSERVERLOCAL']/Database[@Name='BancoDB']","object_type":"Database"}}]}
+﻿USE [master]
+GO
+/****** Object:  Database [BancoDB]    Script Date: 30/10/2022 08:27:41 ******/
+CREATE DATABASE [BancoDB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'BancoDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLSERVERLOCAL\MSSQL\DATA\BancoDB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'BancoDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLSERVERLOCAL\MSSQL\DATA\BancoDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [BancoDB] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [BancoDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [BancoDB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [BancoDB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [BancoDB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [BancoDB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [BancoDB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [BancoDB] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [BancoDB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [BancoDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [BancoDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [BancoDB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [BancoDB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [BancoDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [BancoDB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [BancoDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [BancoDB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [BancoDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [BancoDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [BancoDB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [BancoDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [BancoDB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [BancoDB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [BancoDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [BancoDB] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [BancoDB] SET  MULTI_USER 
+GO
+ALTER DATABASE [BancoDB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [BancoDB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [BancoDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [BancoDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [BancoDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'BancoDB', N'ON'
+GO
+ALTER DATABASE [BancoDB] SET QUERY_STORE = OFF
+GO
+USE [BancoDB]
+GO
+/****** Object:  Table [dbo].[cajaAhorro]    Script Date: 30/10/2022 08:27:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[cajaAhorro](
+	[idCajaDeAhorro] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[idMovimiento] [int] NULL,
+	[cbu] [int] NULL,
+	[saldo] [float] NULL,
+ CONSTRAINT [PK_cajaAhorro] PRIMARY KEY CLUSTERED 
+(
+	[idCajaDeAhorro] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[cajaAhorro_v2]    Script Date: 30/10/2022 08:27:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[cajaAhorro_v2](
+	[idCajaDeAhorro] [int] IDENTITY(1,1) NOT NULL,
+	[cbuCajaDeAhorro] [int] NULL,
+	[saldoCajaDeAhorro] [float] NULL,
+ CONSTRAINT [PK_cajaAhorro_v2] PRIMARY KEY CLUSTERED 
+(
+	[idCajaDeAhorro] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Domicilio]    Script Date: 30/10/2022 08:27:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Domicilio](
+	[idDomicilio] [int] IDENTITY(1,1) NOT NULL,
+	[calle] [varchar](50) NULL,
+	[altura] [int] NULL,
+	[ciudad] [varchar](50) NULL,
+	[provincia] [varchar](50) NULL,
+	[userId] [int] NULL,
+ CONSTRAINT [PK_Domicilio] PRIMARY KEY CLUSTERED 
+(
+	[idDomicilio] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[movimiento]    Script Date: 30/10/2022 08:27:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[movimiento](
+	[idMovimiento] [int] IDENTITY(1,1) NOT NULL,
+	[monto] [float] NULL,
+	[idCajaDeAhorro] [int] NULL,
+	[detalle] [varchar](50) NULL,
+	[fecha] [date] NULL,
+ CONSTRAINT [PK_movimiento] PRIMARY KEY CLUSTERED 
+(
+	[idMovimiento] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Pago]    Script Date: 30/10/2022 08:27:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Pago](
+	[idPago] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[nombre] [varchar](50) NULL,
+	[monto] [float] NULL,
+	[pagado] [bit] NULL,
+	[metodo] [varchar](50) NULL,
+ CONSTRAINT [PK_Pago] PRIMARY KEY CLUSTERED 
+(
+	[idPago] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PlazoFijo]    Script Date: 30/10/2022 08:27:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PlazoFijo](
+	[idPlazoFijo] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[monto] [float] NULL,
+	[fechaIni] [date] NULL,
+	[fechaFin] [date] NULL,
+	[tasa] [float] NULL,
+	[pagado] [bit] NULL,
+ CONSTRAINT [PK_PlazoFijo] PRIMARY KEY CLUSTERED 
+(
+	[idPlazoFijo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TarjetaDeCredito]    Script Date: 30/10/2022 08:27:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TarjetaDeCredito](
+	[idTarjetaDeCredito] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[numero] [int] NULL,
+	[codigV] [int] NULL,
+	[limite] [float] NULL,
+	[consumos] [float] NULL,
+ CONSTRAINT [PK_TarjetaDeCredito] PRIMARY KEY CLUSTERED 
+(
+	[idTarjetaDeCredito] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[titular_CA]    Script Date: 30/10/2022 08:27:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[titular_CA](
+	[idTitular] [int] NULL,
+	[idCA] [int] NULL,
+	[idUser] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[titulares_v2]    Script Date: 30/10/2022 08:27:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[titulares_v2](
+	[idtitular] [int] IDENTITY(1,1) NOT NULL,
+	[idCAtitular] [int] NULL,
+	[idUstitular] [int] NULL,
+ CONSTRAINT [PK_titulares_v2] PRIMARY KEY CLUSTERED 
+(
+	[idtitular] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[usuario]    Script Date: 30/10/2022 08:27:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[usuario](
+	[userId] [int] IDENTITY(1,1) NOT NULL,
+	[userDni] [int] NOT NULL,
+	[userNombre] [varchar](50) NULL,
+	[userApellido] [varchar](50) NULL,
+	[userMail] [varchar](50) NULL,
+	[userPassword] [varchar](50) NULL,
+	[userIsAdmin] [bit] NULL,
+	[userBloqueado] [bit] NULL,
+	[idCajaAhorro] [int] NULL,
+	[idPlazoFijo] [int] NULL,
+	[idTarjetaDeCredito] [int] NULL,
+	[idPago] [int] NULL,
+	[idDomicilio] [int] NULL,
+ CONSTRAINT [PK_usuario] PRIMARY KEY CLUSTERED 
+(
+	[userId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[cajaAhorro]  WITH CHECK ADD  CONSTRAINT [FK_cajaAhorro_usuario] FOREIGN KEY([userId])
+REFERENCES [dbo].[usuario] ([userId])
+GO
+ALTER TABLE [dbo].[cajaAhorro] CHECK CONSTRAINT [FK_cajaAhorro_usuario]
+GO
+ALTER TABLE [dbo].[Domicilio]  WITH CHECK ADD  CONSTRAINT [FK_Domicilio_usuario] FOREIGN KEY([userId])
+REFERENCES [dbo].[usuario] ([userId])
+GO
+ALTER TABLE [dbo].[Domicilio] CHECK CONSTRAINT [FK_Domicilio_usuario]
+GO
+ALTER TABLE [dbo].[movimiento]  WITH CHECK ADD  CONSTRAINT [FK_movimiento_cajaAhorro] FOREIGN KEY([idCajaDeAhorro])
+REFERENCES [dbo].[cajaAhorro] ([idCajaDeAhorro])
+GO
+ALTER TABLE [dbo].[movimiento] CHECK CONSTRAINT [FK_movimiento_cajaAhorro]
+GO
+ALTER TABLE [dbo].[Pago]  WITH CHECK ADD  CONSTRAINT [FK_Pago_usuario1] FOREIGN KEY([userId])
+REFERENCES [dbo].[usuario] ([userId])
+GO
+ALTER TABLE [dbo].[Pago] CHECK CONSTRAINT [FK_Pago_usuario1]
+GO
+ALTER TABLE [dbo].[PlazoFijo]  WITH CHECK ADD  CONSTRAINT [FK_PlazoFijo_usuario] FOREIGN KEY([userId])
+REFERENCES [dbo].[usuario] ([userId])
+GO
+ALTER TABLE [dbo].[PlazoFijo] CHECK CONSTRAINT [FK_PlazoFijo_usuario]
+GO
+ALTER TABLE [dbo].[TarjetaDeCredito]  WITH CHECK ADD  CONSTRAINT [FK_TarjetaDeCredito_usuario] FOREIGN KEY([userId])
+REFERENCES [dbo].[usuario] ([userId])
+GO
+ALTER TABLE [dbo].[TarjetaDeCredito] CHECK CONSTRAINT [FK_TarjetaDeCredito_usuario]
+GO
+ALTER TABLE [dbo].[titular_CA]  WITH CHECK ADD  CONSTRAINT [FK_titularCA_CajaAhorro] FOREIGN KEY([idCA])
+REFERENCES [dbo].[cajaAhorro_v2] ([idCajaDeAhorro])
+GO
+ALTER TABLE [dbo].[titular_CA] CHECK CONSTRAINT [FK_titularCA_CajaAhorro]
+GO
+ALTER TABLE [dbo].[titular_CA]  WITH CHECK ADD  CONSTRAINT [FK_titularCA_usuario] FOREIGN KEY([idTitular])
+REFERENCES [dbo].[usuario] ([userId])
+GO
+ALTER TABLE [dbo].[titular_CA] CHECK CONSTRAINT [FK_titularCA_usuario]
+GO
+ALTER TABLE [dbo].[titulares_v2]  WITH CHECK ADD  CONSTRAINT [FK_titulares_CA] FOREIGN KEY([idCAtitular])
+REFERENCES [dbo].[cajaAhorro_v2] ([idCajaDeAhorro])
+GO
+ALTER TABLE [dbo].[titulares_v2] CHECK CONSTRAINT [FK_titulares_CA]
+GO
+ALTER TABLE [dbo].[titulares_v2]  WITH CHECK ADD  CONSTRAINT [FK_titulares_usuario] FOREIGN KEY([idUstitular])
+REFERENCES [dbo].[usuario] ([userId])
+GO
+ALTER TABLE [dbo].[titulares_v2] CHECK CONSTRAINT [FK_titulares_usuario]
+GO
+USE [master]
+GO
+ALTER DATABASE [BancoDB] SET  READ_WRITE 
+GO

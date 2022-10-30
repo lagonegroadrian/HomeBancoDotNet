@@ -638,7 +638,8 @@ namespace HomeBankingDV
             pagos = new List<Pago>();
             movimientos = new List<Movimiento>();
             pfs = new List<PlazoFijo>();
-            misDomicilios = new List<Domicilio>();
+            //misDomicilios = new List<Domicilio>();
+            //misTitulares = new List<Domicilio>();
             DB = new CONNECTION();
             inicializarAtributos();
         }
@@ -646,7 +647,9 @@ namespace HomeBankingDV
         private void inicializarAtributos() // faltan agregar los atributos restantes!
         {   
             usuarios = DB.inicializarUsuarios();
-            misDomicilios = DB.inicializarDomicilios();
+            usuarios = DB.inicializarUsuarios();
+
+            //misDomicilios = DB.inicializarDomicilios();
             cajas = DB.inicializarCajasDeAhorro();
         }
 

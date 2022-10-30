@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms.PropertyGridInternal;
+using HomeBankingDV.Logica;
 
 namespace HomeBankingDV
 {
@@ -376,6 +377,51 @@ namespace HomeBankingDV
             }
             return misCajaDeAhorro;
         }
+
+
+
+        public List<TitularesRel> inicializarTituLaresRel()
+        {
+            List<TitularesRel> misCajaDeAhorro = new List<TitularesRel>();
+
+            //Defino el string con la consulta que quiero realizar
+            string queryString = "SELECT * from dbo.titulares_v2";
+
+            // Creo una conexión SQL con un Using, de modo que al finalizar, la conexión se cierra y se liberan recursos
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                // Defino el comando a enviar al motor SQL con la consulta y la conexión
+                SqlCommand command = new SqlCommand(queryString, connection);
+
+                try
+                {
+                    //Abro la conexión
+                    connection.Open();
+                    //mi objecto DataReader va a obtener los resultados de la consulta, notar que a comando se le pide ExecuteReader()
+                    SqlDataReader reader = command.ExecuteReader();
+                    TitularesRel aux;
+                    //mientras haya registros/filas en mi DataReader, sigo leyendo
+                    while (reader.Read())
+                    {
+                        aux = new TitularesRel(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2));
+                        misCajaDeAhorro.Add(aux);
+                    }
+                    //En este punto ya recorrí todas las filas del resultado de la query
+                    reader.Close();
+
+
+
+                    //YA cargué todos los domicilios, sólo me resta vincular
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return misCajaDeAhorro;
+        }
+
 
         //tp2 - fin
 
