@@ -227,7 +227,7 @@ namespace HomeBankingDV
 
 
 
-        public int agregaragregarDeposito(int _idCaja, float _monto)
+        public int cambiarMontoEnCajaDeAhorro(int _idCaja, float _monto)
         {
             int resultadoQuery;
 

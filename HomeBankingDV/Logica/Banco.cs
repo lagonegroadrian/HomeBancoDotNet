@@ -534,7 +534,7 @@ namespace HomeBankingDV
                     //metodo para depositar dinero en base de datos
                     try
                     {
-                        DB.agregaragregarDeposito(Caja.id, Caja.saldo);
+                        DB.cambiarMontoEnCajaDeAhorro(Caja.id, Caja.saldo);
                         return true;
                     }
                     catch (Exception) { return false; }
@@ -557,6 +557,15 @@ namespace HomeBankingDV
                 {
                     Caja.saldo = Caja.saldo - _monto;
                     Caja.movimientos.Add(new Movimiento(99, _monto, Caja, " (-) Extraccion de dinero: "));
+
+                    //update sobre la base de datos
+                    try
+                    {
+                        DB.cambiarMontoEnCajaDeAhorro(Caja.id, Caja.saldo);
+                        return true;
+                    }
+                    catch (Exception) { return false; }
+
                     resultado = true;
                     return resultado;
                 }
