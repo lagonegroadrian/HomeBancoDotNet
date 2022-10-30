@@ -534,7 +534,7 @@ namespace HomeBankingDV
                     //metodo para depositar dinero en base de datos
                     try
                     {
-                        DB.agregaragregarDeposito(Caja.id, _monto);
+                        DB.agregaragregarDeposito(Caja.id, Caja.saldo);
                         return true;
                     }
                     catch (Exception) { return false; }
@@ -547,7 +547,7 @@ namespace HomeBankingDV
             return resultado;
         }
 
-        public bool RetirarDinero(int _monto, int cbu)
+        public bool RetirarDinero(float _monto, int cbu)
         {
             bool resultado = false;
 

@@ -15,7 +15,8 @@ namespace HomeBankingDV.Front
         public DelegadoRetirarClose delegadoRetirarClose;
 
         private int elCBU;
-        private int monto;
+        //private int monto;
+        private float monto;
         private Banco elBanco;
 
         public Retirar(Banco _elBanco, int _elCBU)
@@ -43,7 +44,7 @@ namespace HomeBankingDV.Front
         private void button2_Click(object sender, EventArgs e)
         {
             //retirar monto
-            monto = Int32.Parse(textBox2.Text);
+            monto = float.Parse(textBox2.Text);
             elBanco.RetirarDinero(monto, elCBU);
             this.delegadoRetirarClose(elCBU);
         }
