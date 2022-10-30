@@ -1,5 +1,6 @@
 ﻿
 
+using HomeBankingDV.Logica;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -22,7 +23,10 @@ namespace HomeBankingDV
 
         public Usuario usuarioActual { get; set; }
 
-        private List<Domicilio> misDomicilios;
+        //private List<Domicilio> misDomicilios;
+
+        private List<TitularesRel> misTitulares;
+        
 
         private CONNECTION DB; 
   
@@ -448,6 +452,11 @@ namespace HomeBankingDV
             return cajas.ToList().ToList(); 
         }
 
+        public List<TitularesRel> obtenerTitulares()
+        {
+            return misTitulares.ToList().ToList();
+        }
+
         public List<Movimiento> obtenerMovimientos(int idCaja)
         {
             List<Movimiento> listaMovimientos = null;
@@ -639,18 +648,16 @@ namespace HomeBankingDV
             movimientos = new List<Movimiento>();
             pfs = new List<PlazoFijo>();
             //misDomicilios = new List<Domicilio>();
-            //misTitulares = new List<Domicilio>();
+            misTitulares = new List<TitularesRel>();
             DB = new CONNECTION();
             inicializarAtributos();
         }
 
-        private void inicializarAtributos() // faltan agregar los atributos restantes!
-        {   
-            usuarios = DB.inicializarUsuarios();
-            usuarios = DB.inicializarUsuarios();
-
-            //misDomicilios = DB.inicializarDomicilios();
-            cajas = DB.inicializarCajasDeAhorro();
+        private void inicializarAtributos()
+        {
+            usuarios = DB.inicializarUsuarios();            // levanto todos los usuarios
+            misTitulares = DB.inicializarTituLaresRel();    // levanto todos los titulares
+            cajas = DB.inicializarCajasDeAhorro();          // levanto todas las CA
         }
 
 
@@ -671,7 +678,7 @@ namespace HomeBankingDV
             {
                 if (usuario.dni == DNI && usuario.password == Contraseña && usuario.bloqueado == false)
                 {
-                    usuarioActual = usuario; // al ID hay que sumarle 1 porque viene de la lista de usuarios
+                    usuarioActual = usuario;
                     return true;
                 }
                 if (usuario.dni == DNI && usuario.password != Contraseña && usuario.bloqueado == false)

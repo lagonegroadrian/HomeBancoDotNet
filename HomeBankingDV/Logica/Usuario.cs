@@ -36,7 +36,7 @@ namespace HomeBankingDV
         //constructor
         public Usuario(int id, int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado)
         {
-            //this.id = id;
+            this.id = id;
             this.dni = dni;
             this.nombre = nombre;
             this.apellido = apellido;
@@ -49,7 +49,7 @@ namespace HomeBankingDV
             tarjetas = new List<TarjetaDeCredito>();
             pagos = new List<Pago>();
             misDirecciones = new List<Domicilio>();
-            this.id = aux++;
+            //this.id = aux++;
             this.isAdmin = isAdmin;
 
         }

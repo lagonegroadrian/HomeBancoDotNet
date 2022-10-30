@@ -1,4 +1,5 @@
 ﻿using HomeBankingDV.Front;
+using HomeBankingDV.Logica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,12 +19,9 @@ namespace HomeBankingDV
         //public DelegadoRegistroStart delegadoRegistroStart;
         public DelegadoCloseHomme delegadoCloseHomme;
         public DelegadoHommeToCA delegadoHommeToCA;
-
-        
         public Banco elBanco;
         public int dniIngresado;
         public string contraseniaIngresada;
-        
 
         public Home(Banco elBancoFora)
         {
@@ -38,8 +36,21 @@ namespace HomeBankingDV
         {
             dataGridView1.Rows.Clear();
             //foreach (CajaDeAhorro salida in elBanco.usuarioActual.MostrarCajasDeAhorro()) { dataGridView1.Rows.Add(salida.id, salida.cbu, salida.saldo); }
-            foreach (CajaDeAhorro salida in elBanco.obtenerCajas()) { dataGridView1.Rows.Add(salida.id, salida.cbu, salida.saldo); }
-            
+
+            foreach (TitularesRel osTitulares in elBanco.obtenerTitulares()) // Le traigo los titulares
+            {
+                if (elBanco.usuarioActual.id == (osTitulares.idUs)) // filtro esos titulares por el usuario logueado
+                {
+                    foreach (CajaDeAhorro asCaixas in elBanco.obtenerCajas()) // Traigo las Caixas de ahorro
+                    {
+                        if ((osTitulares.idCa)==(asCaixas.id)) 
+                        {
+                            dataGridView1.Rows.Add(asCaixas.id, asCaixas.cbu, asCaixas.saldo);
+                            elBanco.usuarioActual.cajas.Add(asCaixas);
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -71,7 +82,8 @@ namespace HomeBankingDV
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             int nroCBU = 0;
-            int valorSaldo = 0;
+            //int valorSaldo = 0;
+            Double valorSaldo = 0;
 
             object elCBU = dataGridView1.Rows[e.RowIndex].Cells[1].Value;
             object elSaldo = dataGridView1.Rows[e.RowIndex].Cells[2].Value;
@@ -80,7 +92,10 @@ namespace HomeBankingDV
 
 
             nroCBU = Int32.Parse(elCBU.ToString());
-            valorSaldo = Int32.Parse(elSaldo.ToString());
+            
+            //valorSaldo = Int32.Parse(elSaldo.ToString());
+            valorSaldo = Double.Parse(elSaldo.ToString());
+
 
             this.delegadoHommeToCA(nroCBU);
 

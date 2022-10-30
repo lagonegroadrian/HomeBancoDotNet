@@ -36,6 +36,15 @@ namespace HomeBankingDV
             this.saldo = _saldo;
         }
 
+        public CajaDeAhorro(int _id, int _cbu, float _saldo)
+        {
+            movimientos = new List<Movimiento>();
+            titulares = new List<Usuario>();
+            this.id = _id;
+            this.cbu = _cbu;
+            this.saldo = _saldo;
+        }
+
         //constructor sobrecargado; al momento de crear una caja de ahorro ... no tengo movimientos 
         //public CajaDeAhorro(int _cbu, Usuario userActual)
         //{

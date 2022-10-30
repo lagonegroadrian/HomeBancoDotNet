@@ -342,6 +342,8 @@ namespace HomeBankingDV
 
             //Defino el string con la consulta que quiero realizar
             string queryString = "SELECT * from dbo.cajaAhorro_v2";
+            //string queryString = "SELECT idCajaDeAhorro ,CAST(saldoCajaDeAhorro AS INT) as saldoCajaDeAhorro ,saldoCajaDeAhorro from dbo.cajaAhorro_v2";
+            
 
             // Creo una conexión SQL con un Using, de modo que al finalizar, la conexión se cierra y se liberan recursos
             using (SqlConnection connection =
@@ -360,7 +362,7 @@ namespace HomeBankingDV
                     //mientras haya registros/filas en mi DataReader, sigo leyendo
                     while (reader.Read())
                     {
-                        aux = new CajaDeAhorro( reader.GetInt32(1), 0);
+                        aux = new CajaDeAhorro(reader.GetInt32(0), reader.GetInt32(1), (float)reader.GetDouble(2));
                         misCajaDeAhorro.Add(aux);
                     }
                     //En este punto ya recorrí todas las filas del resultado de la query
