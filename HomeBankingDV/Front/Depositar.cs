@@ -16,8 +16,10 @@ namespace HomeBankingDV.Front
         public DelegadoDespositarClose delegadoDespositarClose;
 
         private int elCBU;
-        private int monto;
-        
+        //private int monto;
+        //private Double monto;
+        private float monto;
+
         private Banco elBanco;
 
         public Depositar(Banco _elBanco, int _elCBU)
@@ -44,7 +46,8 @@ namespace HomeBankingDV.Front
 
         private void btn_depositar_Click(object sender, EventArgs e)
         {
-            monto = Int32.Parse(textMonto.Text);
+            //monto = Int32.Parse(textMonto.Text);
+            monto = float.Parse(textMonto.Text);
             elBanco.DepositarDinero(monto, elCBU);
             this.delegadoDespositarClose(elCBU);
         }

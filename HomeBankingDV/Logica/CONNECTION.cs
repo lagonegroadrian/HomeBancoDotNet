@@ -223,6 +223,42 @@ namespace HomeBankingDV
 
 
         //tp2 - inicio
+
+
+
+
+        public int agregaragregarDeposito(int _idCaja, float _monto)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "UPDATE [dbo].[cajaAhorro_v2] SET saldoCajaDeAhorro = @saldoCajaDeAhorro where idCajaDeAhorro = @idCajaDeAhorro;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@idCajaDeAhorro", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@saldoCajaDeAhorro", SqlDbType.Float));
+                command.Parameters["@idCajaDeAhorro"].Value = _idCaja;
+                command.Parameters["@saldoCajaDeAhorro"].Value = _monto;
+                try
+                {
+                    connection.Open();
+                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
+
+
+
         public int agregaragregarUsuario_v2(int _Dni, string _Nombre, string _Apellido, string _Mail, string _Password)
         {
             int resultadoQuery;

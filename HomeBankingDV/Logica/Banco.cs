@@ -518,7 +518,8 @@ namespace HomeBankingDV
             return salida;
         }
 
-        public bool DepositarDinero(int _monto, int cbu)
+        //public bool DepositarDinero(int _monto, int cbu)
+        public bool DepositarDinero(float _monto, int cbu)
         {
             bool resultado=false;
 
@@ -529,6 +530,14 @@ namespace HomeBankingDV
                     Caja.saldo = Caja.saldo + _monto;
 
                     Caja.movimientos.Add(new Movimiento(99, _monto, Caja, " (+) Deposito de dinero: "));
+
+                    //metodo para depositar dinero en base de datos
+                    try
+                    {
+                        DB.agregaragregarDeposito(Caja.id, _monto);
+                        return true;
+                    }
+                    catch (Exception) { return false; }
 
                     resultado =true;
                     return resultado;
