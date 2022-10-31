@@ -14,6 +14,15 @@ namespace HomeBankingDV
         public string detalle { get; set; }
         public DateTime fecha { get; set; }
 
+        public Movimiento(int id, float monto, CajaDeAhorro caja, string detalle, DateTime fecha)
+        {
+            this.id = id;
+            this.monto = monto;
+            this.caja = caja;
+            this.detalle = detalle;
+            this.fecha = fecha;
+        }
+
         public Movimiento(int id, float monto, CajaDeAhorro caja, string detalle)
         {
             this.id = id;

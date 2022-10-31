@@ -94,21 +94,6 @@ namespace HomeBankingDV
 
 
 
-        
-
-
-
-
-
-
-     
-
-
-
-
-
-
-
 
 
 
@@ -226,6 +211,124 @@ namespace HomeBankingDV
 
 
 
+        public int insertarMovimiento(int _idCajaAhorro, float _monto, string _accion)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "INSERT INTO [dbo].[movimiento] ([monto],[idCajaDeAhorro],[detalle],[fecha]) VALUES (@monto,@idCajaDeAhorro,@detalle,CURRENT_TIMESTAMP);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@monto", SqlDbType.Float));
+                command.Parameters.Add(new SqlParameter("@idCajaDeAhorro", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@detalle", SqlDbType.NVarChar));
+
+                command.Parameters["@monto"].Value = _monto;
+                command.Parameters["@idCajaDeAhorro"].Value = _idCajaAhorro;
+                command.Parameters["@detalle"].Value = _accion;
+
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+
+                    string ConsultaID = "SELECT MAX([idMovimiento]) FROM [dbo].[movimiento]";
+                    command = new SqlCommand(ConsultaID, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    resultadoQuery = reader.GetInt32(0);
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
+
+
+
+
+
+        public CajaDeAhorro TraerCajaAhorro(int _idCaja)
+        {
+            CajaDeAhorro laCajaDeAhorro = null;
+            string queryString = "SELECT * from dbo.cajaAhorro_v2 where idCajaDeAhorro = @idCajaDeAhorro";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@idCajaDeAhorro", SqlDbType.Int));
+                command.Parameters["@idCajaDeAhorro"].Value = _idCaja;
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        laCajaDeAhorro = new CajaDeAhorro(reader.GetInt32(0), reader.GetInt32(1), (float)reader.GetDouble(2));
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return laCajaDeAhorro;
+        }
+
+
+
+
+
+
+
+
+        public List<Movimiento> inicializarMovimientos()
+        {
+            List<Movimiento> misMovimientos = new List<Movimiento>();
+
+            string queryString = "SELECT * from dbo.movimiento";
+
+            using (SqlConnection connection =new SqlConnection(connectionString))
+            {   SqlCommand command = new SqlCommand(queryString, connection);
+                try {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    Movimiento aux;
+                    while (reader.Read())
+                    {
+                        int idCajaAhooro = reader.GetInt32(2);
+                        CajaDeAhorro lacaja = this.TraerCajaAhorro(idCajaAhooro);
+                        aux = new Movimiento(reader.GetInt32(0), (float)reader.GetDouble(1), lacaja, reader.GetString(3), reader.GetDateTime(4));
+                        misMovimientos.Add(aux);
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return misMovimientos;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
         public int cambiarMontoEnCajaDeAhorro(int _idCaja, float _monto)
         {
@@ -315,15 +418,10 @@ namespace HomeBankingDV
                 command.Parameters.Add(new SqlParameter("@saldoCajaDeAhorro", SqlDbType.Float));
                 command.Parameters["@cbuCajaDeAhorro"].Value = _cbu;
                 command.Parameters["@saldoCajaDeAhorro"].Value = 0;
-
                 try
-                {
-                    connection.Open();
-                    //esta consulta NO espera un resultado para leer, es del tipo NON Query
+                {   connection.Open();
                     resultadoQuery = command.ExecuteNonQuery();
 
-
-                    //Ahora hago esta query para obtener el ID
                     string ConsultaID = "SELECT MAX([idCajaDeAhorro]) FROM [dbo].[cajaAhorro_v2]";
                     command = new SqlCommand(ConsultaID, connection);
                     SqlDataReader reader = command.ExecuteReader();

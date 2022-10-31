@@ -1,6 +1,6 @@
 ﻿USE [master]
 GO
-/****** Object:  Database [BancoDB]    Script Date: 30/10/2022 08:27:41 ******/
+/****** Object:  Database [BancoDB]    Script Date: 31/10/2022 01:14:32 ******/
 CREATE DATABASE [BancoDB]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -80,7 +80,7 @@ ALTER DATABASE [BancoDB] SET QUERY_STORE = OFF
 GO
 USE [BancoDB]
 GO
-/****** Object:  Table [dbo].[cajaAhorro]    Script Date: 30/10/2022 08:27:42 ******/
+/****** Object:  Table [dbo].[cajaAhorro]    Script Date: 31/10/2022 01:14:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -97,7 +97,7 @@ CREATE TABLE [dbo].[cajaAhorro](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[cajaAhorro_v2]    Script Date: 30/10/2022 08:27:42 ******/
+/****** Object:  Table [dbo].[cajaAhorro_v2]    Script Date: 31/10/2022 01:14:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -112,7 +112,7 @@ CREATE TABLE [dbo].[cajaAhorro_v2](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Domicilio]    Script Date: 30/10/2022 08:27:42 ******/
+/****** Object:  Table [dbo].[Domicilio]    Script Date: 31/10/2022 01:14:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -130,7 +130,7 @@ CREATE TABLE [dbo].[Domicilio](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[movimiento]    Script Date: 30/10/2022 08:27:42 ******/
+/****** Object:  Table [dbo].[movimiento]    Script Date: 31/10/2022 01:14:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -147,7 +147,7 @@ CREATE TABLE [dbo].[movimiento](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Pago]    Script Date: 30/10/2022 08:27:42 ******/
+/****** Object:  Table [dbo].[Pago]    Script Date: 31/10/2022 01:14:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -165,7 +165,7 @@ CREATE TABLE [dbo].[Pago](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PlazoFijo]    Script Date: 30/10/2022 08:27:42 ******/
+/****** Object:  Table [dbo].[PlazoFijo]    Script Date: 31/10/2022 01:14:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -184,7 +184,7 @@ CREATE TABLE [dbo].[PlazoFijo](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TarjetaDeCredito]    Script Date: 30/10/2022 08:27:42 ******/
+/****** Object:  Table [dbo].[TarjetaDeCredito]    Script Date: 31/10/2022 01:14:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -202,7 +202,7 @@ CREATE TABLE [dbo].[TarjetaDeCredito](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[titular_CA]    Script Date: 30/10/2022 08:27:42 ******/
+/****** Object:  Table [dbo].[titular_CA]    Script Date: 31/10/2022 01:14:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -213,7 +213,7 @@ CREATE TABLE [dbo].[titular_CA](
 	[idUser] [int] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[titulares_v2]    Script Date: 30/10/2022 08:27:42 ******/
+/****** Object:  Table [dbo].[titulares_v2]    Script Date: 31/10/2022 01:14:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -228,7 +228,7 @@ CREATE TABLE [dbo].[titulares_v2](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[usuario]    Script Date: 30/10/2022 08:27:42 ******/
+/****** Object:  Table [dbo].[usuario]    Script Date: 31/10/2022 01:14:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -262,11 +262,6 @@ ALTER TABLE [dbo].[Domicilio]  WITH CHECK ADD  CONSTRAINT [FK_Domicilio_usuario]
 REFERENCES [dbo].[usuario] ([userId])
 GO
 ALTER TABLE [dbo].[Domicilio] CHECK CONSTRAINT [FK_Domicilio_usuario]
-GO
-ALTER TABLE [dbo].[movimiento]  WITH CHECK ADD  CONSTRAINT [FK_movimiento_cajaAhorro] FOREIGN KEY([idCajaDeAhorro])
-REFERENCES [dbo].[cajaAhorro] ([idCajaDeAhorro])
-GO
-ALTER TABLE [dbo].[movimiento] CHECK CONSTRAINT [FK_movimiento_cajaAhorro]
 GO
 ALTER TABLE [dbo].[Pago]  WITH CHECK ADD  CONSTRAINT [FK_Pago_usuario1] FOREIGN KEY([userId])
 REFERENCES [dbo].[usuario] ([userId])

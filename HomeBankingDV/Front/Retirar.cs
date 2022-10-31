@@ -45,7 +45,7 @@ namespace HomeBankingDV.Front
         {
             //retirar monto
             monto = float.Parse(textBox2.Text);
-            elBanco.RetirarDinero(monto, elCBU);
+            elBanco.RetirarDinero(monto, elCBU,"");
             this.delegadoRetirarClose(elCBU);
         }
 
