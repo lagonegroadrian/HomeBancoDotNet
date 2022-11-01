@@ -1,0 +1,443 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Security;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.VisualBasic;
+using System.Data.SqlClient;
+using System.Configuration;
+
+public class ConexionDDBB
+{
+    private SqlClient.SqlConnection oConexion;
+    public SqlClient.SqlCommand oComando;
+    private static SqlConnection cx = new SqlConnection(ObtenerConexion());
+    public static string MSGConexion = "Ha ocurrido un error en la conexión a la base de datos, consulte con el administrador.";
+    /// <summary>
+    ///     ''' Diferentes tipos de Consultas para utilizar en la función "Ejecutar"
+    ///     ''' </summary>
+    ///     ''' <remarks></remarks>
+    enum eTipoConsulta
+    {
+        Query,
+        StoreProcedure
+    }
+    /// <summary>
+    ///     ''' Diferentes tipos de resultados que retornará la función "Ejecutar"
+    ///     ''' </summary>
+    ///     ''' <remarks></remarks>
+    enum eTipoResultado
+    {
+        Escalar,
+        Tupla,
+        SinResultado
+    }
+
+    /// <summary>
+    ///     ''' Inicia la conexión y la abre.
+    ///     ''' </summary>
+    ///     ''' <remarks></remarks>
+    public void ConexionIniciar()
+    {
+        oConexion = new SqlConnection();
+        try
+        {
+            oConexion.ConnectionString = ObtenerConexion();
+            oConexion.Open();
+            oComando = new SqlCommand();
+            oComando.Connection = oConexion;
+        }
+        catch (Exception ex)
+        {
+            Exception MiExcepcion = new Exception(MSGConexion.ToString, ex);
+            throw Excepciones.ManejarExcepcion(MiExcepcion);
+        }
+    }
+    /// <summary>
+    ///     ''' Inicia la transacción
+    ///     ''' </summary>
+    ///     ''' <remarks></remarks>
+    public void TransaccionIniciar()
+    {
+        try
+        {
+            oComando.Transaction = oConexion.BeginTransaction(IsolationLevel.ReadUncommitted);
+        }
+        catch (Exception ex)
+        {
+            Exception MiExcepcion = new Exception(MSGConexion.ToString, ex);
+            throw Excepciones.ManejarExcepcion(MiExcepcion);
+        }
+    }
+    /// <summary>
+    ///     ''' Ejecuta la consulta
+    ///     ''' </summary>
+    ///     ''' <param name="pConsulta"> Es la consulta embebida que recibe o el nombre del Store Procedure</param>
+    ///     ''' <param name="pTipoConsulta"> Tipo de consulta Query o SP</param>
+    ///     ''' <param name="pTipoResultado"> Resultado que retonará: DT, Escalar, o sin resultado</param>
+    ///     ''' <param name="pParametros">Array de parámetros</param>
+    ///     ''' <returns></returns>
+    ///     ''' <remarks></remarks>
+    public object Ejecutar(string pConsulta, eTipoConsulta pTipoConsulta, eTipoResultado pTipoResultado, params object[] pParametros)
+    {
+        try
+        {
+            oComando.Parameters.Clear();
+
+            string Parametros = null;
+
+            oComando.CommandType = pTipoConsulta;
+            oComando.CommandText = pConsulta;
+
+            List<string> Lista = new List<string>();
+
+            Lista =ObtenerParametrosEnQuery(pConsulta);
+
+            for (var index = 0; index <= pParametros.Length - 1; index++)
+             {
+                SqlParameter NuevoParametro = new SqlParameter();
+
+                NuevoParametro.ParameterName = Lista[index];
+                NuevoParametro.Value = pParametros[index];
+
+                oComando.Parameters.Add(NuevoParametro);
+            }
+
+            switch (pTipoResultado)
+            {
+                case eTipoResultado.SinResultado:
+                    {
+                        oComando.ExecuteNonQuery();
+
+                        return null;
+                    }
+
+                case eTipoResultado.Escalar:
+                    {
+                        return oComando.ExecuteScalar();
+                    }
+
+                case eTipoResultado.Tupla:
+                    {
+                        DataTable resultado = new DataTable();
+
+                        SqlDataReader dataReader;
+
+                        oComando.CommandTimeout = 9999;
+                        dataReader = oComando.ExecuteReader();
+
+                        resultado.Load(dataReader);
+
+                        dataReader.Close();
+
+                        return resultado;
+                    }
+            }
+        }
+        catch (Exception ex)
+        {
+            Exception MiExcepcion = new Exception(MSGConexion.ToString, ex);
+            throw Excepciones.ManejarExcepcion(MiExcepcion);
+        }
+
+        return null;
+    }
+    /// <summary>
+    ///     ''' Realiza el commit de la transacción
+    ///     ''' </summary>
+    ///     ''' <remarks></remarks>
+    public void TransaccionAceptar()
+    {
+        try
+        {
+            oComando.Transaction.Commit();
+        }
+        catch (Exception ex)
+        {
+            Exception MiExcepcion = new Exception(MSGConexion.ToString, ex);
+            throw Excepciones.ManejarExcepcion(MiExcepcion);
+        }
+    }
+    /// <summary>
+    ///     ''' Realiza el Rollback de la transacción.
+    ///     ''' </summary>
+    ///     ''' <remarks></remarks>
+    public void TransaccionCancelar()
+    {
+        try
+        {
+            oComando.Transaction.Rollback();
+        }
+        catch (Exception ex)
+        {
+            Exception MiExcepcion = new Exception(MSGConexion.ToString, ex);
+            throw Excepciones.ManejarExcepcion(MiExcepcion);
+        }
+    }
+    /// <summary>
+    ///     ''' Cierra la conexión.
+    ///     ''' </summary>
+    ///     ''' <remarks></remarks>
+    public void ConexionFinalizar()
+    {
+        try
+        {
+            if (!oConexion.State == ConnectionState.Closed)
+                oConexion.Close();
+        }
+        catch (Exception ex)
+        {
+            Exception MiExcepcion = new Exception(MSGConexion.ToString, ex);
+            throw Excepciones.ManejarExcepcion(MiExcepcion);
+        }
+    }
+
+    private static SqlConnection GetConexion()
+    {
+        try
+        {
+            if (!cx.State == ConnectionState.Open)
+                cx.Open();
+            return cx;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error en Conectividad.getConeccion", ex);
+        }
+    }
+
+
+    /// <summary>
+    ///     ''' Esta función permite cerrar la conexión con la base de datos
+    ///     ''' </summary>
+    ///     ''' <returns>Boolean</returns>
+    ///     ''' <remarks></remarks>
+    private static bool CloseConnection()
+    {
+        try
+        {
+            if (!cx.State == ConnectionState.Closed)
+                cx.Close();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error en Conectividad.CloseConnection", ex);
+        }
+    }
+    /// <summary>
+    ///     ''' Esta función ejecuta un comando
+    ///     ''' </summary>
+    ///     ''' <param name="unComando">SqlCommand</param>
+    ///     ''' <returns>Integer</returns>
+    ///     ''' <remarks></remarks>
+    public static int ExecuteCommand(SqlCommand unComando)
+    {
+        try
+        {
+            SqlConnection cx = ConexionDDBB.getConexion();
+            unComando.Connection = cx;
+            int results = unComando.ExecuteNonQuery();
+            ConexionDDBB.CloseConnection();
+            return results;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error en Conectividad.ExecuteCommand", ex);
+        }
+    }
+    /// <summary>
+    ///     ''' Esta función ejecuta un comando
+    ///     ''' </summary>
+    ///     ''' <param name="unaListaComandos">List(Of SqlCommand)</param>
+    ///     ''' <returns>Integer</returns>
+    ///     ''' <remarks></remarks>
+    public static int ExecuteCommand(List<SqlCommand> unaListaComandos)
+    {
+        SqlConnection cx;
+        SqlTransaction tr;
+        try
+        {
+            cx = ConexionDDBB.getConexion();
+            tr = cx.BeginTransaction();
+            try
+            {
+                int results = 0;
+                foreach (SqlCommand unComando in unaListaComandos)
+                {
+                    unComando.Connection = cx;
+                    unComando.Transaction = tr;
+                    results += unComando.ExecuteNonQuery();
+                }
+                if (results != 0)
+                    tr.Rollback();
+                else
+                    tr.Commit();
+                ConexionDDBB.CloseConnection();
+                return results;
+            }
+            catch (Exception ex)
+            {
+                tr.Rollback();
+                throw;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error en Conectividad.ExecuteCommand", ex);
+        }
+    }
+    public static SqlDataReader ExecuteReader(SqlCommand unComando)
+    {
+        try
+        {
+            unComando.Connection = ConexionDDBB.getConexion();
+            return unComando.ExecuteReader();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error en Conectividad.ExecuteReader", ex);
+        }
+    }
+
+
+    /// <summary>
+    ///     ''' Esta función ejecuta un scalar
+    ///     ''' </summary>
+    ///     ''' <param name="unComando">SqlCommand</param>
+    ///     ''' <returns>Integer</returns>
+    ///     ''' <remarks></remarks>
+    public static int ExecuteScalar(SqlCommand unComando)
+    {
+        try
+        {
+            unComando.Connection = ConexionDDBB.getConexion();
+            return unComando.ExecuteScalar();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error en Conectividad.ExecuteScalar", ex);
+        }
+    }
+
+    /// <summary>
+    ///     ''' Esta función ejecuta un DataTable
+    ///     ''' </summary>
+    ///     ''' <param name="cmd">SqlCommand</param>
+    ///     ''' <returns>DataTable</returns>
+    ///     ''' <remarks></remarks>
+    public static DataTable ExecuteDataTable(SqlCommand cmd)
+    {
+        try
+        {
+            cmd.Connection = ConexionDDBB.getConexion();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error en Conectividad.ExecuteDataTable", ex);
+        }
+    }
+    public static DataSet ExecuteDataset(SqlCommand cmd)
+    {
+        SqlConnection cnx = new SqlConnection();
+
+        try
+        {
+            cnx = ConexionDDBB.GetConexion();
+
+            if (cnx.State == ConnectionState.Closed)
+                cnx.Open();
+
+            cmd.Connection = cnx;
+            SqlDataAdapter oDataAdapter = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            oDataAdapter.Fill(ds);
+            return ds;
+        }
+        catch (Exception exc)
+        {
+            throw exc;
+        }
+        finally
+        {
+            if (cnx.State == ConnectionState.Open)
+                cnx.Close();
+        }
+    }
+
+    public static void ObtenerConexion()
+    {
+        string ConnectionString = "";
+
+        try
+        {
+            ConnectionString = ConfigurationManager.ConnectionStrings("LocalSqlServer").ConnectionString;
+        }
+        catch (Exception ex)
+        {
+        }
+        return ConnectionString;
+    }
+
+    public static List<string> ObtenerParametrosEnQuery(string pConsulta)
+    {
+
+        var Resultado = new List<string>();
+
+        int Inicio = Strings.InStr(pConsulta, "@");
+        try
+        {
+            while (Inicio > 0)
+            {
+
+                var ArrayFinal = new int[3];
+                ArrayFinal[0] = Strings.InStr(Inicio, pConsulta, " ");
+                ArrayFinal[1] = Strings.InStr(Inicio, pConsulta, ",");
+                ArrayFinal[2] = Strings.InStr(Inicio, pConsulta, ")");
+
+                Array.Sort(ArrayFinal);
+
+                int ValorMinimo = 1999999999;
+                if (ArrayFinal[2] > 0)
+                    ValorMinimo = ArrayFinal[2];
+                if (ArrayFinal[1] > 0)
+                    ValorMinimo = ArrayFinal[1];
+                if (ArrayFinal[0] > 0)
+                    ValorMinimo = ArrayFinal[0];
+
+
+                Resultado.Add(Strings.Mid(pConsulta, Inicio, ValorMinimo - Inicio));
+
+                Inicio = Strings.InStr(ValorMinimo + 1, pConsulta, "@");
+
+            }
+        }
+        catch (Exception ex)
+        {
+
+            var MiExcepcion = new Exception(MSGConexion.ToString, ex);
+            throw Excepciones.ManejarExcepcion(MiExcepcion);
+        }
+        return Resultado;
+
+    }
+
+
+    // Agregar estas líneas en el config. Reemplazar SERVER, DB, USER y PASS
+    // <connectionStrings>
+    //<remove name = "LocalSqlServer" />
+    //< add name="LocalSqlServer" connectionString="Data Source=SERVER;database=DB;User Id=USER;Password=PASS" providerName="System.Data.SqlClient"/>
+    //</connectionStrings>
+
+
+}
