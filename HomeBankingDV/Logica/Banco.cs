@@ -30,7 +30,7 @@ namespace HomeBankingDV
 
         private CONNECTION DB; 
   
-
+        //banco
 
         public bool existeUsuario(int dni)
         {   foreach (Usuario usuario in usuarios){if (usuario.dni == dni){return true;}}
@@ -45,7 +45,7 @@ namespace HomeBankingDV
           foreach (CajaDeAhorro laCajaDeAhorro in usuarioActual.cajas)
             {
                 if(laCajaDeAhorro.cbu == _elCBU)
-                {  saldo_= laCajaDeAhorro.saldo; }
+                { return saldo_ = laCajaDeAhorro.saldo; }
 
             }
         return saldo_;
@@ -418,7 +418,9 @@ namespace HomeBankingDV
                         DB.insertarMovimiento(Caja.id, _monto, _accion);
                         //Caja.movimientos.Add(new Movimiento(DB.insertarMovimiento(Caja.id, _monto, _accion), _monto, Caja, _accion));
 
-                        if (_adicional == "") { inicializarMovs(); }
+                        //if (_adicional == "") { inicializarMovs(); } 
+                        if (_adicional == "") { inicializarAtributos(); }
+                        
                         return true;
                     }
                     catch (Exception) { return false; }
@@ -512,18 +514,20 @@ namespace HomeBankingDV
 
         private void inicializarAtributos()
         {
+            usuarios.Clear();
+            misTitulares.Clear();
+            cajas.Clear();
+            movimientos.Clear();
+
             usuarios = DB.inicializarUsuarios();            // levanto todos los usuarios
             misTitulares = DB.inicializarTituLaresRel();    // levanto todos los titulares
             cajas = DB.inicializarCajasDeAhorro();          // levanto todas las CA
-            //movimientos = DB.inicializarMovimientos();      // levanto todos los movimientos
-            this.inicializarMovs();
+            inicializarMovs();
         }
 
         private void inicializarMovs()
         {
-            movimientos.Clear();
             movimientos = DB.inicializarMovimientos();      // levanto todos los movimientos
-
             this.relacionarCAconMovs();
         }
 
@@ -588,26 +592,26 @@ namespace HomeBankingDV
         {
             
             //Genera CBU a partir del DNI.
-            int cbu = usuarioActual.dni * 1000;
+            int cbu = usuarioActual.dni * 10;
 
             Random rd = new Random();
-            int rand_num = rd.Next(cbu, cbu * 1109);
+            //int rand_num = rd.Next(cbu, cbu * 1109);
+            int rand_num = rd.Next(cbu + 1);
             cbu = rand_num;
 
             int idCa = DB.agregaragregarCajaAhorro_v2(cbu);
-            DB.agregaragregaTitular_v2(usuarioActual.id +1, idCa); // se le suma 1 al id del usuario xq lo levanta del listado de usuarios
+            DB.agregaragregaTitular_v2(usuarioActual.id, idCa); // se le suma 1 al id del usuario xq lo levanta del listado de usuarios
 
             //luego poner alta titular respecto de caja de ahorro
             //usuarioActual.id
+            inicializarAtributos();
 
 
             //Agregamos la caja
-            CajaDeAhorro caja = new CajaDeAhorro(cbu,0);
-
-            caja.titulares.Add(usuarioActual); // lo doy de alta como titular 
-
-            cajas.Add(caja);
-            usuarioActual.cajas.Add(caja);
+            //CajaDeAhorro caja = new CajaDeAhorro(cbu,0);
+            //caja.titulares.Add(usuarioActual); // lo doy de alta como titular 
+            //cajas.Add(caja);
+            //usuarioActual.cajas.Add(caja);
 
             return true;
         }

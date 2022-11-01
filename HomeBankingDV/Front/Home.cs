@@ -35,6 +35,8 @@ namespace HomeBankingDV
         private void llenarDatosDataGrid1()
         {
             dataGridView1.Rows.Clear();
+            elBanco.usuarioActual.cajas.Clear();
+
             //foreach (CajaDeAhorro salida in elBanco.usuarioActual.MostrarCajasDeAhorro()) { dataGridView1.Rows.Add(salida.id, salida.cbu, salida.saldo); }
 
             foreach (TitularesRel osTitulares in elBanco.obtenerTitulares()) // Le traigo los titulares
@@ -156,6 +158,11 @@ namespace HomeBankingDV
         }
 
         private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
