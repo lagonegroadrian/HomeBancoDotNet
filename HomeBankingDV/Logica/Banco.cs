@@ -71,28 +71,26 @@ namespace HomeBankingDV
         return result;
         }
 
-   
-        
+
         public bool AgregarTitularCajaAhorro (int _cbu, int _dni)
         {
-
             foreach (CajaDeAhorro cajaU in usuarioActual.cajas)
             {
                 if (cajaU.cbu == _cbu)
                 {
                     foreach (Usuario usuario in usuarios)
-	                {
+                    {
                         if(usuario.dni == _dni)
                         {
                             cajaU.titulares.Add(usuario);
-                            
+
+                            DB.agregaragregaTitular_v2(usuario.id , cajaU.id );
+
                             //foreach (CajaDeAhorro caja in cajas){if(caja.cbu == _cbu){caja.titulares.Add(usuario);}}
                             return true;
                         }
-	                }  
-                    
+                    }
                 }
-
                 //NO EXISTE LA CAJA DE AHORRO//
             }
             return false;
@@ -364,6 +362,12 @@ namespace HomeBankingDV
 
         public List<TitularesRel> obtenerTitulares(){return misTitulares.ToList().ToList();}
 
+        public List<Usuario> obtenerTitularesXcaja(int _cbu) 
+        { 
+        
+            return usuarios; 
+        }
+
         public List<Movimiento> obtenerMovimientos(int idCaja) // revisar returns
         {
             List<Movimiento> listaMovimientos = null;
@@ -506,7 +510,9 @@ namespace HomeBankingDV
             pagos = new List<Pago>();
             movimientos = new List<Movimiento>();
             pfs = new List<PlazoFijo>();
+
             //misDomicilios = new List<Domicilio>();
+
             misTitulares = new List<TitularesRel>();
             DB = new CONNECTION();
             inicializarAtributos();
@@ -522,7 +528,35 @@ namespace HomeBankingDV
             usuarios = DB.inicializarUsuarios();            // levanto todos los usuarios
             misTitulares = DB.inicializarTituLaresRel();    // levanto todos los titulares
             cajas = DB.inicializarCajasDeAhorro();          // levanto todas las CA
+
+            cargarTitularesEnCajaDeAhorroYcajaEnUsuario();
             inicializarMovs();
+        }
+
+        private void cargarTitularesEnCajaDeAhorroYcajaEnUsuario()
+        {
+            foreach(Usuario usu in usuarios)
+            {
+                int idUsuario = usu.id;
+
+                foreach(TitularesRel titu in misTitulares) //tiene cajas de ahorro asociada?
+                {
+                    if(titu.idUs == idUsuario)
+                    {
+                        int idCaja = titu.idCa;
+
+                        foreach(CajaDeAhorro caja in cajas)
+                        {
+                            if(idCaja == caja.id)
+                            { 
+                                caja.titulares.Add(usu);
+                                usu.cajas.Add(caja);
+                            }
+                        }
+
+                    }
+                }
+            }
         }
 
         private void inicializarMovs()

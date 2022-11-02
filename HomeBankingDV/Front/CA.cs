@@ -1,4 +1,5 @@
 ﻿using HomeBankingDV.Front;
+using HomeBankingDV.Logica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,12 +39,18 @@ namespace HomeBankingDV
 
             label6.Text = elBanco.MostrarSaldoDeCAdeUsuarioActual(_elCBU).ToString();
 
-            foreach (Usuario titul in elBanco.usuarioActual.MostrarTitularesCajasDeAhorro(_elCBU))
-            {
-                listBox1.Items.Add(titul.apellido + ", " + titul.nombre);
-            }
+            this.mostrarTitulares(_elCBU);
         }
 
+        private void mostrarTitulares(int _elCBU) {
+
+            //foreach (Usuario usu in elBanco.obtenerTitularesXcaja(_elCBU)) 
+            //{
+                //listBox1.Items.Add(usu.apellido + ", " + usu.nombre);
+            //};
+
+            foreach (Usuario titul in elBanco.usuarioActual.MostrarTitularesCajasDeAhorro(_elCBU)){listBox1.Items.Add(titul.apellido + ", " + titul.nombre);}
+        }
 
         private void Registrar_Click(object sender, EventArgs e)
         {

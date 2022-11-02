@@ -33,9 +33,9 @@ namespace HomeBankingDV.Front
         private void llenarDatosDataGrid1()
         {
             dataGridView1.Rows.Clear();
-            List<Usuario> detalles = elBanco.usuarios;
+            List<Usuario> allUser = elBanco.usuarios;
 
-            foreach (Usuario salida in detalles)
+            foreach (Usuario salida in allUser)
             {
                 string aux_ = "No";
                 //INI
