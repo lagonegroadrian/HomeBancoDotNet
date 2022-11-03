@@ -64,6 +64,14 @@ namespace HomeBankingDV
                     {
                     cajas.Remove(caja);
                     usuarioActual.cajas.Remove(caja);
+                        //eliminar de la base de datos (eliminar tambien, los titulares)
+
+                        if (DB.eliminarTitularesDeCajaDeAhorro(caja.id) > 0)
+                        {
+                            DB.eliminarCajaDeAhorro(caja.id);
+                            DB.eliminarMovimientosDeCajaDeAhorro(caja.id);
+                        }
+
                     return result = true; // para que una vez que lo remueva del listado, salga.
                     }
             }

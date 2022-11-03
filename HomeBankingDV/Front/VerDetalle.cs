@@ -29,19 +29,26 @@ namespace HomeBankingDV.Front
         {
             dataGridView1.Rows.Clear();
             
-            List<Movimiento> detalles = elBanco.BuscarMovimientos(laCAja);
+            //List<Movimiento> detalles = elBanco.BuscarMovimientos(laCAja);
 
-            foreach (Movimiento salida in detalles)
+            
+            foreach(Movimiento movimiento in elBanco.movimientos) 
             {
-                dataGridView1.Rows.Add(salida.id, salida.monto, salida.detalle, salida.fecha);
-            }            
+                if(movimiento.caja.cbu == laCAja)
+                {
+                    dataGridView1.Rows.Add(movimiento.id,movimiento.monto,movimiento.detalle, movimiento.fecha);
+                }
+            }
+
+
+            //foreach (Movimiento salida in detalles){dataGridView1.Rows.Add(salida.id, salida.monto, salida.detalle, salida.fecha);}
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e){}
 
         private void VerDetalle_Load(object sender, EventArgs e)
         {
-
+            llenarDatosDataGrid1();
         }
     }
 }

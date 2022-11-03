@@ -470,6 +470,85 @@ namespace HomeBankingDV
         }
 
 
+        public int eliminarMovimientosDeCajaDeAhorro(int _idCA)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "DELETE FROM [dbo].[movimiento] WHERE idCajaDeAhorro = @idCajaDeAhorro;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@idCajaDeAhorro", SqlDbType.Int));
+                command.Parameters["@idCajaDeAhorro"].Value = _idCA;
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
+        public int eliminarCajaDeAhorro(int _idCA)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "DELETE FROM [dbo].[cajaAhorro_v2] WHERE idCajaDeAhorro = @idCAtitular and saldoCajaDeAhorro < 1;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@idCAtitular", SqlDbType.Int));
+                command.Parameters["@idCAtitular"].Value = _idCA;
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
+
+        public int eliminarTitularesDeCajaDeAhorro(int _idCA)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "DELETE FROM [dbo].[titulares_v2] WHERE idCAtitular = @idCAtitular ;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@idCAtitular", SqlDbType.Int));
+                command.Parameters["@idCAtitular"].Value = _idCA;
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
         public int eliminarTitular_v2(int _idUser, int _idCA)
         {
             int resultadoQuery;
