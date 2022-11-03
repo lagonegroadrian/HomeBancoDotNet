@@ -35,6 +35,7 @@
             this.apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EsTitular = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 39;
-            this.dataGridView1.Size = new System.Drawing.Size(433, 128);
+            this.dataGridView1.Size = new System.Drawing.Size(433, 168);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -95,20 +96,34 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(26, 181);
+            this.button1.Location = new System.Drawing.Point(23, 252);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(71, 24);
             this.button1.TabIndex = 2;
-            this.button1.Text = "Cancelar";
+            this.button1.Text = "Cerrar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.DarkKhaki;
+            this.label2.Font = new System.Drawing.Font("Corbel", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label2.Location = new System.Drawing.Point(78, 212);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(377, 18);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Clicar 2 veces (sobre registro) para agregar o quitar titular";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // TitularesAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 225);
+            this.ClientSize = new System.Drawing.Size(467, 287);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
@@ -131,5 +146,6 @@
         private DataGridViewTextBoxColumn nombre;
         private DataGridViewTextBoxColumn apellido;
         private DataGridViewTextBoxColumn EsTitular;
+        private Label label2;
     }
 }

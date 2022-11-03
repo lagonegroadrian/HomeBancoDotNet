@@ -88,6 +88,11 @@ namespace HomeBankingDV.Front
             // recargar...
             llenarDatosDataGrid1();
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     public delegate void DelegadoCArecargar(int elCBU);
 }

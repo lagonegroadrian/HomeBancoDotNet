@@ -111,6 +111,7 @@ namespace HomeBankingDV
                             if(usuario.dni == _dni)
                             {
                                 cajaU.titulares.Remove(usuario);
+                                DB.eliminarTitular_v2(usuario.id,cajaU.id);
                                 return true;
                             }
                         }  

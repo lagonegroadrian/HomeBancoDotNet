@@ -470,6 +470,34 @@ namespace HomeBankingDV
         }
 
 
+        public int eliminarTitular_v2(int _idUser, int _idCA)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "DELETE FROM [dbo].[titulares_v2] WHERE idCAtitular = @idCAtitular AND idUstitular = @idUstitular;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@idCAtitular", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@idUstitular", SqlDbType.Int));
+                command.Parameters["@idCAtitular"].Value = _idCA;
+                command.Parameters["@idUstitular"].Value = _idUser;
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
         public List<CajaDeAhorro> inicializarCajasDeAhorro()
         {
             List<CajaDeAhorro> misCajaDeAhorro = new List<CajaDeAhorro>();
