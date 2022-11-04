@@ -52,11 +52,53 @@ namespace HomeBankingDV.Front
 
         private void button2_Click(object sender, EventArgs e)
         {
-            elCBUdestino = Int32.Parse(textBox2.Text);
-            monto= float.Parse(textBox3.Text);
+            try
+            {
+                if (textBox2.Text == "")
+                {
+                    MessageBox.Show("por favor ingrese CBU");
+                }
+                else
+                {
+                    elCBUdestino = Int32.Parse(textBox2.Text);
+                }
 
-            elBanco.TransferirDinero(monto, elCBUorigen, elCBUdestino);
-            this.delegadoTransferirClose(elCBUorigen);
+                if (textBox3.Text == "" || float.Parse(textBox3.Text)<=0)
+                {
+                    MessageBox.Show("por favor ingrese un monto valido.");
+                }
+                else
+                {
+                    monto = float.Parse(textBox3.Text);
+                }
+                foreach (CajaDeAhorro cajasU in elBanco.usuarioActual.cajas)
+                {
+                   if(cajasU.cbu == elCBUorigen)
+                    {
+                        if (cajasU.saldo > 0 && cajasU.saldo <= monto)
+                        {
+                            elBanco.TransferirDinero(monto, elCBUorigen, elCBUdestino);
+                            MessageBox.Show("transferencia realizada con exito.");
+                            this.delegadoTransferirClose(elCBUorigen);
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("saldo insuficiente.");
+                            this.delegadoTransferirClose(elCBUorigen);
+                        }
+                    }
+                    
+                }
+                
+               
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("error en la operacion.");
+                throw;
+            }
+
         }
 
         private void Transferir_Load(object sender, EventArgs e)

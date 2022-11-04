@@ -14,7 +14,7 @@ namespace HomeBankingDV
 {
     public class Banco
     {
-        public List<Usuario> usuarios {get; set;}
+        public List<Usuario> usuarios { get; set; }
         public List<CajaDeAhorro> cajas { get; set; }
         public List<PlazoFijo> plazosfijos { get; set; }
         public List<TarjetaDeCredito> tarjetas { get; set; }
@@ -25,40 +25,40 @@ namespace HomeBankingDV
 
         private List<TitularesRel> misTitulares;
 
-        private CONNECTION DB; 
+        private CONNECTION DB;
 
         public bool existeUsuario(int dni)
         {
-            foreach (Usuario usuario in usuarios){if (usuario.dni == dni){return true;}}
+            foreach (Usuario usuario in usuarios) { if (usuario.dni == dni) { return true; } }
             return false;
         }
 
         public float MostrarSaldoDeCAdeUsuarioActual(int _elCBU)
         {
-          float saldo_ = 0;
+            float saldo_ = 0;
 
-          foreach (CajaDeAhorro laCajaDeAhorro in usuarioActual.cajas)
+            foreach (CajaDeAhorro laCajaDeAhorro in usuarioActual.cajas)
             {
-                if(laCajaDeAhorro.cbu == _elCBU)
+                if (laCajaDeAhorro.cbu == _elCBU)
                 { return saldo_ = laCajaDeAhorro.saldo; }
 
             }
-        return saldo_;
+            return saldo_;
         }
 
 
-     
+
         public bool BajaCajaAhorro(int _elCBU)
         {
-        bool result = false;
-        foreach (CajaDeAhorro caja in usuarioActual.cajas)
-        {
-            if (caja.cbu == _elCBU)
+            bool result = false;
+            foreach (CajaDeAhorro caja in usuarioActual.cajas)
             {
+                if (caja.cbu == _elCBU)
+                {
                     if (caja.saldo == 0)
                     {
-                    cajas.Remove(caja);
-                    usuarioActual.cajas.Remove(caja);
+                        cajas.Remove(caja);
+                        usuarioActual.cajas.Remove(caja);
                         //eliminar de la base de datos (eliminar tambien, los titulares)
 
                         if (DB.eliminarTitularesDeCajaDeAhorro(caja.id) > 0)
@@ -67,15 +67,15 @@ namespace HomeBankingDV
                             DB.eliminarMovimientosDeCajaDeAhorro(caja.id);
                         }
 
-                    return result = true; // para que una vez que lo remueva del listado, salga.
+                        return result = true; // para que una vez que lo remueva del listado, salga.
                     }
+                }
             }
-        }
-        return result;
+            return result;
         }
 
 
-        public bool AgregarTitularCajaAhorro (int _cbu, int _dni)
+        public bool AgregarTitularCajaAhorro(int _cbu, int _dni)
         {
             foreach (CajaDeAhorro cajaU in usuarioActual.cajas)
             {
@@ -83,11 +83,11 @@ namespace HomeBankingDV
                 {
                     foreach (Usuario usuario in usuarios)
                     {
-                        if(usuario.dni == _dni)
+                        if (usuario.dni == _dni)
                         {
                             cajaU.titulares.Add(usuario);
 
-                            DB.agregaragregaTitular_v2(usuario.id , cajaU.id );
+                            DB.agregaragregaTitular_v2(usuario.id, cajaU.id);
 
                             //foreach (CajaDeAhorro caja in cajas){if(caja.cbu == _cbu){caja.titulares.Add(usuario);}}
                             return true;
@@ -105,32 +105,32 @@ namespace HomeBankingDV
         {//REEMPLAZAR POR DATO IDENTIFICABLE DNI O ID, NUNCA PASAR OBJETO DESD LA VISTA
             foreach (CajaDeAhorro cajaU in usuarioActual.cajas)
             {
-                if (cajaU.cbu == _cbu )
+                if (cajaU.cbu == _cbu)
                 {
                     if (cajaU.titulares.Count >= 2)
                     {
                         foreach (Usuario usuario in usuarios)
-	                    {
-                            if(usuario.dni == _dni)
+                        {
+                            if (usuario.dni == _dni)
                             {
                                 cajaU.titulares.Remove(usuario);
-                                DB.eliminarTitular_v2(usuario.id,cajaU.id);
+                                DB.eliminarTitular_v2(usuario.id, cajaU.id);
                                 return true;
                             }
-                        }  
-                        
+                        }
+
                     }
                     return false; //tiene 1 o menos titulares
-                }   
+                }
             }
             return false;
         }
 
 
         //AGREGA UN MOVIMIENTO A LA LISTA DE MOVIMIENTOS DEL BANCO Y A LA LISTA DE MOVIMIENTOS DE LA CAJA A LA QUE PERTENECE EL MOVIMIENTO//   
-        public bool AltaMovimiento (float monto, int idCaja, string detalle, DateTime fecha) //LA FECHA DATETIME .NOW()
+        public bool AltaMovimiento(float monto, int idCaja, string detalle, DateTime fecha) //LA FECHA DATETIME .NOW()
         {
-            
+
             //Buscamos el id que vamos a asignar
             int id = 0;
             if (movimientos.Count > 0)
@@ -139,7 +139,7 @@ namespace HomeBankingDV
                 var lastItem = movimientos[^1];//accede al ultimo elemento de la lista
                 id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
             }
-            else { 
+            else {
                 //si la lista esta vacia (count = 0)
                 id = 1;
             }
@@ -148,8 +148,8 @@ namespace HomeBankingDV
             CajaDeAhorro cajaInfo = null;
 
             foreach (CajaDeAhorro caja in usuarioActual.cajas)
-	        {
-                if(caja.id == idCaja)
+            {
+                if (caja.id == idCaja)
                 {
                     cajaInfo = caja;
                 }
@@ -158,7 +158,7 @@ namespace HomeBankingDV
             //Movimiento m = new Movimiento(id, monto, cajaInfo, detalle, fecha);
             Movimiento m = new Movimiento(id, monto, cajaInfo, detalle);
             movimientos.Add(m); //guardamos en banco
-            
+
             cajaInfo.movimientos.Add(m);
 
             return true;
@@ -187,13 +187,13 @@ namespace HomeBankingDV
                 var lastItem = pagos[^1];//accede al ultimo elemento de la lista
                 id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
             }
-            else { 
+            else {
                 //si la lista esta vacia (count = 0)
                 id = 1;
             }
 
             //Agregamos el pago
-            Pago p = new Pago (id, usuarioActual, nombre, monto, pagado, metodo);
+            Pago p = new Pago(id, usuarioActual, nombre, monto, pagado, metodo);
             usuarioActual.pagos.Add(p); //agregamos al usuario
             pagos.Add(p);
             return true;
@@ -202,9 +202,9 @@ namespace HomeBankingDV
         //ELIMINA UN PAGO DE LA LISTA DE PAGOS DEL BANCO Y DE LA LISTA DE PAGOS DE UN USUARIO EN PARTICULAR//
         public bool BajaPago(int id)
         {
-            foreach(Pago p in usuarioActual.pagos)
+            foreach (Pago p in usuarioActual.pagos)
             {
-                if(p.id == id)
+                if (p.id == id)
                 {
                     pagos.Remove(p);
                     usuarioActual.pagos.Remove(p);
@@ -217,10 +217,10 @@ namespace HomeBankingDV
         //MODIFICA UN PAGO DE LA LISTA DE PAGOS DEL BANCO Y DE LA LISTA DE PAGOS DE UN USUARIO EN PARTICULAR//
         public bool ModificarPago(int id, bool pagado, string metodo)
         {
-            
-            foreach(Pago pU in usuarioActual.pagos)
+
+            foreach (Pago pU in usuarioActual.pagos)
             {
-                if(pU.id == id)
+                if (pU.id == id)
                 {
                     pU.pagado = pagado;
                     pU.metodo = metodo;
@@ -245,7 +245,7 @@ namespace HomeBankingDV
 
         //AGREGA UN PLAZO FIJO A LA LISTA DE PFS DEL BANCO Y A LA LISTA DE PFS DE UN USUARIO EN PARTICULAR//
         public bool AltaPlazoFijo(float monto, DateTime fechaIni, DateTime fechaFin, float tasa, bool pagado)
-        {   
+        {
             //Buscamos el id que vamos a asignar
             int id = 0;
             if (plazosfijos.Count > 0)
@@ -254,7 +254,7 @@ namespace HomeBankingDV
                 var lastItem = plazosfijos[^1];//accede al ultimo elemento de la lista
                 id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
             }
-            else { 
+            else {
                 //si la lista esta vacia (count = 0)
                 id = 1;
             }
@@ -269,14 +269,14 @@ namespace HomeBankingDV
         //ELIMINA UN PFS DE LA LISTA DE PFS DEL BANCO Y DE LA LISTA DE PFS DE UN USUARIO EN PARTICULAR//
         public bool BajaPlazoFijo(int id)
         {
-            foreach(PlazoFijo pf in usuarioActual.pfs)
+            foreach (PlazoFijo pf in usuarioActual.pfs)
             {
-                if(pf.id == id)
+                if (pf.id == id)
                 {
-                    if(pf.pagado == true)
+                    if (pf.pagado == true)
                     {
                         TimeSpan fecha = DateTime.Now - pf.fechaFin;
-                        if(fecha.Days >= 30)
+                        if (fecha.Days >= 30)
                         {
                             plazosfijos.Remove(pf);
                             usuarioActual.pfs.Remove(pf);
@@ -308,13 +308,13 @@ namespace HomeBankingDV
                 var lastItem = tarjetas[^1];//accede al ultimo elemento de la lista
                 id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
             }
-            else { 
+            else {
                 //si la lista esta vacia (count = 0)
                 id = 1;
             }
 
             //Agregamos la tarjeta
-            TarjetaDeCredito tj = new TarjetaDeCredito(id, usuarioActual, numero, codigoV,limite, consumos);
+            TarjetaDeCredito tj = new TarjetaDeCredito(id, usuarioActual, numero, codigoV, limite, consumos);
             tarjetas.Add(tj);
             usuarioActual.tarjetas.Add(tj);
             return true;
@@ -323,15 +323,15 @@ namespace HomeBankingDV
         //ELIMINA UNA TJ DE LA LISTA DE TJS DEL BANCO Y DE LA LISTA DE TJS DE UN USUARIO EN PARTICULAR//
         public bool BajaTarjetaCredito(int id)
         {
-            foreach(TarjetaDeCredito tj in usuarioActual.tarjetas)
+            foreach (TarjetaDeCredito tj in usuarioActual.tarjetas)
             {
-                if(tj.id == id)
+                if (tj.id == id)
                 {
-                    if(tj.consumos == 0)
+                    if (tj.consumos == 0)
                     {
-                            tarjetas.Remove(tj);
-                            usuarioActual.tarjetas.Remove(tj);
-                            return true;
+                        tarjetas.Remove(tj);
+                        usuarioActual.tarjetas.Remove(tj);
+                        return true;
                     }
                 }
                 return false;
@@ -343,15 +343,15 @@ namespace HomeBankingDV
         //MODIFICA EL LIMITE DE UNA TJ DE LA LISTA DE TJS DEL BANCO Y DE LA LISTA DE TJS DE UN USUARIO EN PARTICULAR//
         public bool ModificarTarjetaCredito(int id, float limite)
         {
-            foreach(TarjetaDeCredito tj in usuarioActual.tarjetas)
+            foreach (TarjetaDeCredito tj in usuarioActual.tarjetas)
             {
-                if(tj.id == id)
+                if (tj.id == id)
                 {
                     tj.limite = limite;
 
                     foreach (TarjetaDeCredito tarjeta in tarjetas)
                     {
-                        if(tarjeta.id == id) {
+                        if (tarjeta.id == id) {
                             tarjeta.limite = limite;
                         }
                     }
@@ -362,20 +362,20 @@ namespace HomeBankingDV
             return false;
         }
 
-        public List<CajaDeAhorro> obtenerCajas(){return cajas.ToList().ToList(); }
+        public List<CajaDeAhorro> obtenerCajas() { return cajas.ToList().ToList(); }
 
-        public List<TitularesRel> obtenerTitulares(){return misTitulares.ToList().ToList();}
+        public List<TitularesRel> obtenerTitulares() { return misTitulares.ToList().ToList(); }
 
-        public List<Usuario> obtenerTitularesXcaja(int _cbu) 
-        { 
-        
-            return usuarios; 
+        public List<Usuario> obtenerTitularesXcaja(int _cbu)
+        {
+
+            return usuarios;
         }
 
         public List<Movimiento> obtenerMovimientos(int idCaja) // revisar returns
         {
             List<Movimiento> listaMovimientos = null;
-            foreach(CajaDeAhorro caja in usuarioActual.cajas)
+            foreach (CajaDeAhorro caja in usuarioActual.cajas)
             {
                 if (caja.id == idCaja)
                 {
@@ -398,16 +398,37 @@ namespace HomeBankingDV
         {
             bool salida = false;
             string _mensaje = "(x) transferencia ";
-            if (this.RetirarDinero(MontoTranferido, CBUOrigen, _mensaje))
+            try
             {
-                this.DepositarDinero(MontoTranferido, CBUDestino, _mensaje);
+                foreach (CajaDeAhorro cajaU in usuarioActual.cajas)
+                {
+                    if (cajaU.cbu == CBUOrigen)
+                    {
+                        if (cajaU.saldo > 0 && MontoTranferido <= cajaU.saldo)
+                        {
+                            if (this.RetirarDinero(MontoTranferido, CBUOrigen, _mensaje))
+                            {
+                                this.DepositarDinero(MontoTranferido, CBUDestino, _mensaje);
 
-                salida = true;
+                                salida = true;
+                            }
+                            inicializarMovs();
+
+                            return salida;
+                        }
+
+
+                    }
+                }
             }
-            inicializarMovs();
-
+            catch (Exception)
+            {
+                
+                throw;
+            }
             return salida;
         }
+          
 
 
         public bool DepositarDinero(float _monto, int cbu, string _adicional)
