@@ -17,7 +17,7 @@ namespace HomeBankingDV
         {
             //Cargo la cadena de conexión desde el archivo de properties
             connectionString = Properties.Resources.ConnectionStr;
-             
+
         }
         public List<Usuario> inicializarUsuarios()
         {
@@ -90,13 +90,6 @@ namespace HomeBankingDV
             }
             return misDomicilios;
         }
-
-
-
-
-
-
-
 
         //devuelve el ID del usuario agregado a la base, si algo falla devuelve -1
         public int agregarUsuario(int Dni, string Nombre, string Mail, string Password, bool IsAdmin, bool Bloqueado)
@@ -251,11 +244,6 @@ namespace HomeBankingDV
             }
         }
 
-
-
-
-
-
         public CajaDeAhorro TraerCajaAhorro(int _idCaja)
         {
             CajaDeAhorro laCajaDeAhorro = null;
@@ -282,22 +270,15 @@ namespace HomeBankingDV
             }
             return laCajaDeAhorro;
         }
-
-
-
-
-
-
-
-
+       
         public List<Movimiento> inicializarMovimientos()
         {
             List<Movimiento> misMovimientos = new List<Movimiento>();
 
             string queryString = "SELECT * from dbo.movimiento";
-
             using (SqlConnection connection =new SqlConnection(connectionString))
-            {   SqlCommand command = new SqlCommand(queryString, connection);
+            { 
+                SqlCommand command = new SqlCommand(queryString, connection);
                 try {
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
@@ -313,23 +294,12 @@ namespace HomeBankingDV
                 }
                 catch (Exception ex)
                 {
+                  
                     Console.WriteLine(ex.Message);
                 }
             }
             return misMovimientos;
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
         public int cambiarMontoEnCajaDeAhorro(int _idCaja, float _monto)
         {
@@ -363,7 +333,7 @@ namespace HomeBankingDV
 
 
 
-        public int agregaragregarUsuario_v2(int _Dni, string _Nombre, string _Apellido, string _Mail, string _Password)
+        public int agregarUsuario(int _Dni, string _Nombre, string _Apellido, string _Mail, string _Password)
         {
             int resultadoQuery;
 
@@ -691,12 +661,6 @@ namespace HomeBankingDV
             }
             return misPlazosFijos;
         }
-
-
-
-
-
-
 
         public Usuario quienEsEsteId(int _idUser)
         {

@@ -27,6 +27,65 @@ namespace HomeBankingDV
 
         private CONNECTION DB;
 
+        public Banco()
+        {
+            usuarios = new List<Usuario>();
+            cajas = new List<CajaDeAhorro>();
+            tarjetas = new List<TarjetaDeCredito>();
+            pagos = new List<Pago>();
+            movimientos = new List<Movimiento>();
+            plazosfijos = new List<PlazoFijo>();
+
+            //misDomicilios = new List<Domicilio>();
+
+            misTitulares = new List<TitularesRel>();
+            DB = new CONNECTION();
+            inicializarAtributos();
+        }
+
+        private void inicializarAtributos()
+        {
+            usuarios.Clear();
+            misTitulares.Clear();
+            cajas.Clear();
+            movimientos.Clear();
+            plazosfijos.Clear();
+
+            usuarios = DB.inicializarUsuarios();            // levanto todos los usuarios
+            misTitulares = DB.inicializarTituLaresRel();    // levanto todos los titulares
+            cajas = DB.inicializarCajasDeAhorro();          // levanto todas las CA
+            plazosfijos = DB.inicializarPlazosFijos();      // levanto todos los plazo fijo
+
+            cargarTitularesEnCajaDeAhorroYcajaEnUsuario();
+            cargarPlazosFijoEnUsuarios();
+
+            inicializarMovs();
+        }
+
+        private void inicializarMovs()
+        {
+            movimientos = DB.inicializarMovimientos();      // levanto todos los movimientos
+            this.relacionarCAconMovs();
+        }
+
+        private void relacionarCAconMovs()
+        {
+
+
+            foreach (Movimiento movs in movimientos)
+            {
+                foreach (CajaDeAhorro lacaja in cajas)
+                {
+                    //cajas.movimientos.Clear();
+
+                    if (movs.caja.id == lacaja.id)
+                    {
+                        lacaja.movimientos.Add(movs);
+                    }
+                }
+            }
+        }
+
         public bool existeUsuario(int dni)
         {
             foreach (Usuario usuario in usuarios) { if (usuario.dni == dni) { return true; } }
@@ -438,7 +497,7 @@ namespace HomeBankingDV
 
             if (_adicional != "") { _accion = "(+) transf. de $" + _monto + " en cbu: " + cbu; }
 
-            foreach (CajaDeAhorro Caja in usuarioActual.cajas)
+            foreach (CajaDeAhorro Caja in cajas)
             {   if (Caja.cbu == cbu)
                 {   Caja.saldo = Caja.saldo + _monto;
                     try
@@ -534,40 +593,7 @@ namespace HomeBankingDV
         }
 
         //*Metodos modificados para el 2do TP - Inicio
-        public Banco()
-        {
-            usuarios = new List<Usuario>();
-            cajas = new List<CajaDeAhorro>();
-            tarjetas = new List<TarjetaDeCredito>();
-            pagos = new List<Pago>();
-            movimientos = new List<Movimiento>();
-            plazosfijos = new List<PlazoFijo>();
-
-            //misDomicilios = new List<Domicilio>();
-
-            misTitulares = new List<TitularesRel>();
-            DB = new CONNECTION();
-            inicializarAtributos();
-        }
-
-        private void inicializarAtributos()
-        {
-            usuarios.Clear();
-            misTitulares.Clear();
-            cajas.Clear();
-            movimientos.Clear();
-            plazosfijos.Clear();
-
-            usuarios = DB.inicializarUsuarios();            // levanto todos los usuarios
-            misTitulares = DB.inicializarTituLaresRel();    // levanto todos los titulares
-            cajas = DB.inicializarCajasDeAhorro();          // levanto todas las CA
-            plazosfijos = DB.inicializarPlazosFijos();      // levanto todos los plazo fijo
-
-            cargarTitularesEnCajaDeAhorroYcajaEnUsuario();
-            cargarPlazosFijoEnUsuarios();
-
-            inicializarMovs();
-        }
+       
 
         private void cargarPlazosFijoEnUsuarios()
         {
@@ -611,33 +637,11 @@ namespace HomeBankingDV
             }
         }
 
-        private void inicializarMovs()
-        {
-            movimientos = DB.inicializarMovimientos();      // levanto todos los movimientos
-            this.relacionarCAconMovs();
-        }
-
-        private void relacionarCAconMovs()
-        {
-            
-
-            foreach (Movimiento movs in movimientos)
-            {
-                foreach (CajaDeAhorro lacaja in cajas)
-                {
-                    //cajas.movimientos.Clear();
-
-                    if (movs.caja.id == lacaja.id)
-                    { 
-                        lacaja.movimientos.Add(movs); 
-                    }
-                }
-            }
-        }
+      
 
         public bool AltaUsuario(int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado)
         {   if (!existeUsuario(dni)){
-                try{    DB.agregaragregarUsuario_v2(dni, nombre, apellido, mail, password);
+                try{    DB.agregarUsuario(dni, nombre, apellido, mail, password);
                         this.ActualizarDB_usuario();
                         return true;
                 }catch (Exception) { return false; }
@@ -657,15 +661,7 @@ namespace HomeBankingDV
                 }
                 if (usuario.dni == DNI && usuario.password != Contraseña && usuario.bloqueado == false)
                 {
-                    //  usuario.intentosFallidos++;
-                    // MessageBox.Show("Password mal. A los 3 intentos fallidos se bloqueara cuenta." +
-                    //  "Intentos Fallidos: " + usuario.intentosFallidos);
-                    //   if (usuario.intentosFallidos == 3)
-                    //    {
-                    //   MessageBox.Show("El usuario " + usuario.nombre + " " + usuario.apellido + " se ha bloqueado." );
-                    //      usuario.bloqueado = true;
-                    //    }
-
+              
                     return false;
                 }
                 if (usuario.bloqueado == true) { return false; }
@@ -691,13 +687,6 @@ namespace HomeBankingDV
             //luego poner alta titular respecto de caja de ahorro
             //usuarioActual.id
             inicializarAtributos();
-
-
-            //Agregamos la caja
-            //CajaDeAhorro caja = new CajaDeAhorro(cbu,0);
-            //caja.titulares.Add(usuarioActual); // lo doy de alta como titular 
-            //cajas.Add(caja);
-            //usuarioActual.cajas.Add(caja);
 
             return true;
         }

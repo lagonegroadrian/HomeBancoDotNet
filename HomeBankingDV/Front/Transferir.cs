@@ -37,7 +37,9 @@ namespace HomeBankingDV.Front
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+       
+               
+            
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -52,50 +54,63 @@ namespace HomeBankingDV.Front
 
         private void button2_Click(object sender, EventArgs e)
         {
+            bool saldoCero = true;
+            bool noExisteCbu = true;
+
             try
             {
                 if (textBox2.Text == "")
-                {
-                    MessageBox.Show("por favor ingrese CBU");
-                }
-                else
-                {
+            {
+                    MessageBox.Show("ingrese CBU !");
+                  
+            }
+            else
+            {
                     elCBUdestino = Int32.Parse(textBox2.Text);
                 }
 
-                if (textBox3.Text == "" || float.Parse(textBox3.Text)<=0)
+            foreach (CajaDeAhorro cajaBanco in elBanco.cajas)
+            {
+                    if(cajaBanco.cbu == elCBUdestino)
                 {
-                    MessageBox.Show("por favor ingrese un monto valido.");
+                        noExisteCbu = false;
+                }
+            }
+            if (textBox3.Text == "")
+                {
+                    MessageBox.Show("ingrese MONTO !");
                 }
                 else
                 {
                     monto = float.Parse(textBox3.Text);
                 }
-                foreach (CajaDeAhorro cajasU in elBanco.usuarioActual.cajas)
+                foreach(CajaDeAhorro cajaUsuario in elBanco.usuarioActual.cajas)
                 {
-                   if(cajasU.cbu == elCBUorigen)
+                    if(cajaUsuario.cbu == elCBUorigen)
                     {
-                        if (cajasU.saldo > 0 && cajasU.saldo <= monto)
+                       if(cajaUsuario.saldo >0)
                         {
-                            elBanco.TransferirDinero(monto, elCBUorigen, elCBUdestino);
-                            MessageBox.Show("transferencia realizada con exito.");
-                            this.delegadoTransferirClose(elCBUorigen);
-
+                            saldoCero = false;
                         }
-                        else
-                        {
-                            MessageBox.Show("saldo insuficiente.");
-                            this.delegadoTransferirClose(elCBUorigen);
-                        }
+                        
                     }
-                    
                 }
-                
-               
+                if(saldoCero == false && noExisteCbu == false)
+                {
+                    elBanco.TransferirDinero(monto, elCBUorigen, elCBUdestino);
+                    MessageBox.Show("Operacion realizada con Exito.");
+                    this.delegadoTransferirClose(elCBUorigen);
+              
+                }
+                if(noExisteCbu == true)
+                {
+                    MessageBox.Show("ingrese CBU valido !");
+                }
             }
             catch (Exception)
             {
-                MessageBox.Show("error en la operacion.");
+                MessageBox.Show("Error catastrofico.");
+               // this.delegadoTransferirClose(elCBUorigen);
                 throw;
             }
 
