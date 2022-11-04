@@ -428,10 +428,11 @@ namespace HomeBankingDV
                     try
                     {
                         DB.cambiarMontoEnCajaDeAhorro(Caja.id, Caja.saldo);
-                        DB.insertarMovimiento(Caja.id, _monto, _accion);
-                        //Caja.movimientos.Add(new Movimiento(DB.insertarMovimiento(Caja.id, _monto, _accion), _monto, Caja, _accion));
-
-                        //if (_adicional == "") { inicializarMovs(); } 
+                        if (_monto <= 0)
+                        {
+                            DB.insertarMovimiento(Caja.id, _monto, _accion);
+                        }
+                  
                         if (_adicional == "") { inicializarAtributos(); }
                         
                         return true;
@@ -454,15 +455,21 @@ namespace HomeBankingDV
             {
                 if (Caja.cbu == cbu)
                 {
-                    Caja.saldo = Caja.saldo - _monto;
+                    if (Caja.saldo > 0) 
+                    {
+                        Caja.saldo = Caja.saldo - _monto;
+                    }
+                  
                     try
                     {
-                        DB.cambiarMontoEnCajaDeAhorro(Caja.id, Caja.saldo);
-                        DB.insertarMovimiento(Caja.id, _monto, _accion);
-                        //Caja.movimientos.Add(new Movimiento(DB.insertarMovimiento(Caja.id, _monto, _accion), _monto, Caja, _accion));
-                        //inicializarMovs();
-                        if (_adicional == "") { inicializarMovs(); }
-                        return true;
+
+                        if (DB.TraerCajaAhorro(Caja.id).saldo > 0)
+                        {
+                            DB.cambiarMontoEnCajaDeAhorro(Caja.id, Caja.saldo);
+                            DB.insertarMovimiento(Caja.id, _monto, _accion);
+                            if (_adicional == "") { inicializarMovs(); }
+                            return true;
+                        }      
                     }
                     catch (Exception) { return false; }
 

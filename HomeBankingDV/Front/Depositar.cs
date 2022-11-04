@@ -46,10 +46,40 @@ namespace HomeBankingDV.Front
 
         private void btn_depositar_Click(object sender, EventArgs e)
         {
-            //monto = Int32.Parse(textMonto.Text);
-            monto = float.Parse(textMonto.Text);
-            elBanco.DepositarDinero(monto, elCBU , "");
-            this.delegadoDespositarClose(elCBU);
+           
+            try
+            {
+                if (textMonto.Text == "")
+                {
+                    MessageBox.Show("por favor ingrese monto:");
+                }
+                else
+                {
+                    monto = float.Parse(textMonto.Text);
+                }
+                    
+                    if (monto > 0)
+                    {
+                        elBanco.DepositarDinero(monto, elCBU, "");
+                        MessageBox.Show("deposito realizado con exito.");
+                        this.delegadoDespositarClose(elCBU);
+
+                    }else
+                {
+                    MessageBox.Show("verifique monto ingresado.");
+                }
+                
+                }
+            catch (Exception)
+            {
+                MessageBox.Show("error en la operacion.");
+                this.delegadoDespositarClose(elCBU);
+                throw;
+            
+            }  
+          
+           
+           
         }
 
         private void textCuentaOrigen_TextChanged(object sender, EventArgs e)

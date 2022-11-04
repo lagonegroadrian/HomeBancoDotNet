@@ -111,5 +111,10 @@ namespace HomeBankingDV
         }
 
         public delegate void DelegadoCloseRegistro();
+
+        private void textBoxMail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

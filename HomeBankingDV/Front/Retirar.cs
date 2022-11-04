@@ -44,9 +44,44 @@ namespace HomeBankingDV.Front
         private void button2_Click(object sender, EventArgs e)
         {
             //retirar monto
-            monto = float.Parse(textBox2.Text);
-            elBanco.RetirarDinero(monto, elCBU,"");
-            this.delegadoRetirarClose(elCBU);
+
+
+            try
+            {
+                foreach (CajaDeAhorro cajaU in elBanco.usuarioActual.cajas)
+                {
+                    if (cajaU.cbu == elCBU)
+                    {
+                        if (cajaU.saldo > 0)
+                        {
+                            if (textBox2.Text == "" || float.Parse(textBox2.Text) <= 0)
+                            {
+                                MessageBox.Show("por favor ingrese monto valido:");
+
+                            }
+
+                            else
+                            {
+                                monto = float.Parse(textBox2.Text);
+                                elBanco.RetirarDinero(monto, elCBU, "");
+                                MessageBox.Show("operacion realizada con exito.");
+                                this.delegadoRetirarClose(elCBU);
+                            }
+                        }else
+                        {
+                            MessageBox.Show("saldo insuficiente.");
+                            this.delegadoRetirarClose(elCBU);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("error en la operacion !");
+                throw;
+            }
+            
+          
         }
 
         private void Retirar_Load(object sender, EventArgs e)
