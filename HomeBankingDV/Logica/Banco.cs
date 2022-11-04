@@ -16,27 +16,22 @@ namespace HomeBankingDV
     {
         public List<Usuario> usuarios {get; set;}
         public List<CajaDeAhorro> cajas { get; set; }
-        public List<PlazoFijo> pfs { get; set; }
+        public List<PlazoFijo> plazosfijos { get; set; }
         public List<TarjetaDeCredito> tarjetas { get; set; }
         public List<Pago> pagos { get; set; }
         public List<Movimiento> movimientos { get; set; }
 
         public Usuario usuarioActual { get; set; }
 
-     
-
         private List<TitularesRel> misTitulares;
-        
 
         private CONNECTION DB; 
-  
-        //banco
 
         public bool existeUsuario(int dni)
-        {   foreach (Usuario usuario in usuarios){if (usuario.dni == dni){return true;}}
-            return false;}
-
-
+        {
+            foreach (Usuario usuario in usuarios){if (usuario.dni == dni){return true;}}
+            return false;
+        }
 
         public float MostrarSaldoDeCAdeUsuarioActual(int _elCBU)
         {
@@ -253,10 +248,10 @@ namespace HomeBankingDV
         {   
             //Buscamos el id que vamos a asignar
             int id = 0;
-            if (pfs.Count > 0)
+            if (plazosfijos.Count > 0)
             {
                 //si hay al menos 1 elemento en la lista previamente
-                var lastItem = pfs[^1];//accede al ultimo elemento de la lista
+                var lastItem = plazosfijos[^1];//accede al ultimo elemento de la lista
                 id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
             }
             else { 
@@ -265,8 +260,8 @@ namespace HomeBankingDV
             }
 
             //Agregamos el plazo fijo
-            PlazoFijo pf = new PlazoFijo(id, usuarioActual, monto, fechaIni, fechaFin, tasa, pagado);     
-            pfs.Add(pf);
+            PlazoFijo pf = new PlazoFijo(id, usuarioActual, monto, fechaIni, fechaFin, tasa, pagado);
+            plazosfijos.Add(pf);
             usuarioActual.pfs.Add(pf);
             return true;
         }
@@ -283,7 +278,7 @@ namespace HomeBankingDV
                         TimeSpan fecha = DateTime.Now - pf.fechaFin;
                         if(fecha.Days >= 30)
                         {
-                            pfs.Remove(pf);
+                            plazosfijos.Remove(pf);
                             usuarioActual.pfs.Remove(pf);
                             return true;
                         }
@@ -525,7 +520,7 @@ namespace HomeBankingDV
             tarjetas = new List<TarjetaDeCredito>();
             pagos = new List<Pago>();
             movimientos = new List<Movimiento>();
-            pfs = new List<PlazoFijo>();
+            plazosfijos = new List<PlazoFijo>();
 
             //misDomicilios = new List<Domicilio>();
 
@@ -540,14 +535,34 @@ namespace HomeBankingDV
             misTitulares.Clear();
             cajas.Clear();
             movimientos.Clear();
+            plazosfijos.Clear();
 
             usuarios = DB.inicializarUsuarios();            // levanto todos los usuarios
             misTitulares = DB.inicializarTituLaresRel();    // levanto todos los titulares
             cajas = DB.inicializarCajasDeAhorro();          // levanto todas las CA
+            plazosfijos = DB.inicializarPlazosFijos();      // levanto todos los plazo fijo
 
             cargarTitularesEnCajaDeAhorroYcajaEnUsuario();
+            cargarPlazosFijoEnUsuarios();
+
             inicializarMovs();
         }
+
+        private void cargarPlazosFijoEnUsuarios()
+        {
+            foreach (Usuario usu in usuarios)
+            {
+                foreach (PlazoFijo oPLazoFizo in plazosfijos) //tiene cajas de ahorro asociada?
+                {
+                    if(oPLazoFizo.titular.id == usu.id) 
+                    {
+                        usu.pfs.Add(oPLazoFizo);
+                    }
+
+                }
+            }
+        }
+
 
         private void cargarTitularesEnCajaDeAhorroYcajaEnUsuario()
         {

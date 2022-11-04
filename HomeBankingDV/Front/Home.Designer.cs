@@ -41,15 +41,8 @@ namespace HomeBankingDV
             this.Saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.plazoFijoTab = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.dataGridView7 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button13 = new System.Windows.Forms.Button();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button2 = new System.Windows.Forms.Button();
             this.pagosTab = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
@@ -83,12 +76,15 @@ namespace HomeBankingDV
             this.button4 = new System.Windows.Forms.Button();
             this.labelIntentos = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.inifin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.cajasDeAhorroTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.plazoFijoTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
             this.pagosTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
@@ -190,43 +186,12 @@ namespace HomeBankingDV
             // 
             // plazoFijoTab
             // 
-            this.plazoFijoTab.Controls.Add(this.label8);
-            this.plazoFijoTab.Controls.Add(this.label9);
-            this.plazoFijoTab.Controls.Add(this.dataGridView7);
             this.plazoFijoTab.Controls.Add(this.button13);
             this.plazoFijoTab.Controls.Add(this.dataGridView6);
             this.plazoFijoTab.Controls.Add(this.button2);
             resources.ApplyResources(this.plazoFijoTab, "plazoFijoTab");
             this.plazoFijoTab.Name = "plazoFijoTab";
             this.plazoFijoTab.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label8.Name = "label8";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label9.Name = "label9";
-            // 
-            // dataGridView7
-            // 
-            this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView7.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn12});
-            resources.ApplyResources(this.dataGridView7, "dataGridView7");
-            this.dataGridView7.Name = "dataGridView7";
-            this.dataGridView7.RowTemplate.Height = 25;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            resources.ApplyResources(this.dataGridViewTextBoxColumn12, "dataGridViewTextBoxColumn12");
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
             // 
             // button13
             // 
@@ -242,26 +207,12 @@ namespace HomeBankingDV
             this.dataGridView6.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn9,
             this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11});
+            this.inifin,
+            this.Estado});
             resources.ApplyResources(this.dataGridView6, "dataGridView6");
             this.dataGridView6.Name = "dataGridView6";
             this.dataGridView6.RowTemplate.Height = 25;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            resources.ApplyResources(this.dataGridViewTextBoxColumn9, "dataGridViewTextBoxColumn9");
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            resources.ApplyResources(this.dataGridViewTextBoxColumn10, "dataGridViewTextBoxColumn10");
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            resources.ApplyResources(this.dataGridViewTextBoxColumn11, "dataGridViewTextBoxColumn11");
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridView6.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView6_CellContentClick);
             // 
             // button2
             // 
@@ -515,6 +466,30 @@ namespace HomeBankingDV
             this.label1.Name = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // dataGridViewTextBoxColumn9
+            // 
+            resources.ApplyResources(this.dataGridViewTextBoxColumn9, "dataGridViewTextBoxColumn9");
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            resources.ApplyResources(this.dataGridViewTextBoxColumn10, "dataGridViewTextBoxColumn10");
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            // 
+            // inifin
+            // 
+            this.inifin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            resources.ApplyResources(this.inifin, "inifin");
+            this.inifin.Name = "inifin";
+            this.inifin.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            resources.ApplyResources(this.Estado, "Estado");
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            // 
             // Home
             // 
             resources.ApplyResources(this, "$this");
@@ -532,8 +507,6 @@ namespace HomeBankingDV
             this.cajasDeAhorroTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.plazoFijoTab.ResumeLayout(false);
-            this.plazoFijoTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
             this.pagosTab.ResumeLayout(false);
             this.pagosTab.PerformLayout();
@@ -583,14 +556,7 @@ namespace HomeBankingDV
         private Label label5;
         private DataGridView dataGridView4;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private Label label8;
-        private Label label9;
-        private DataGridView dataGridView7;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private Button button13;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private DataGridView dataGridView8;
         private Button button16;
         private Button button15;
@@ -598,10 +564,14 @@ namespace HomeBankingDV
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private Button button17;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn cbu;
         private DataGridViewTextBoxColumn Saldo;
-        private Button button17;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private DataGridViewTextBoxColumn inifin;
+        private DataGridViewTextBoxColumn Estado;
     }
 }
 
