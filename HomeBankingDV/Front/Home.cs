@@ -30,6 +30,7 @@ namespace HomeBankingDV
             List <string> cajasDeAhorro = new List<string>();
             List<CajaDeAhorro> cajaDeAhorroList = new List<CajaDeAhorro>();
             llenarDatosDataGrid1();
+            llenarDatosDataGrid6();
         }
 
         private void llenarDatosDataGrid1()
@@ -51,6 +52,27 @@ namespace HomeBankingDV
                             elBanco.usuarioActual.cajas.Add(asCaixas);
                         }
                     }
+                }
+            }
+        }
+
+
+        private void llenarDatosDataGrid6()
+        {
+            dataGridView6.Rows.Clear();
+            elBanco.usuarioActual.pfs.Clear();
+
+            foreach (PlazoFijo oPlazo in elBanco.plazosfijos) 
+            {
+                if (elBanco.usuarioActual.id == (oPlazo.titular.id))
+                {
+                    string aux = "EnCurso";
+
+                    if (oPlazo.pagado) { aux = "Acobrar"; }
+
+                    dataGridView6.Rows.Add(oPlazo.id , oPlazo.monto, oPlazo.fechaIni.Date + " A " + oPlazo.fechaFin.Date , aux);
+                    elBanco.usuarioActual.pfs.Add(oPlazo);
+
                 }
             }
         }
@@ -165,6 +187,11 @@ namespace HomeBankingDV
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void dataGridView6_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //aca datagrid del plazo fijo
         }
     }
 

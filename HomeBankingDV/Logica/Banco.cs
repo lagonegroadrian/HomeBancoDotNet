@@ -23,20 +23,15 @@ namespace HomeBankingDV
 
         public Usuario usuarioActual { get; set; }
 
-     
-
         private List<TitularesRel> misTitulares;
-        
 
         private CONNECTION DB; 
-  
-        //banco
 
         public bool existeUsuario(int dni)
-        {   foreach (Usuario usuario in usuarios){if (usuario.dni == dni){return true;}}
-            return false;}
-
-
+        {
+            foreach (Usuario usuario in usuarios){if (usuario.dni == dni){return true;}}
+            return false;
+        }
 
         public float MostrarSaldoDeCAdeUsuarioActual(int _elCBU)
         {
@@ -538,11 +533,29 @@ namespace HomeBankingDV
             usuarios = DB.inicializarUsuarios();            // levanto todos los usuarios
             misTitulares = DB.inicializarTituLaresRel();    // levanto todos los titulares
             cajas = DB.inicializarCajasDeAhorro();          // levanto todas las CA
-            plazosfijos = DB.inicializarPlazosFijos();
+            plazosfijos = DB.inicializarPlazosFijos();      // levanto todos los plazo fijo
 
             cargarTitularesEnCajaDeAhorroYcajaEnUsuario();
+            cargarPlazosFijoEnUsuarios();
+
             inicializarMovs();
         }
+
+        private void cargarPlazosFijoEnUsuarios()
+        {
+            foreach (Usuario usu in usuarios)
+            {
+                foreach (PlazoFijo oPLazoFizo in plazosfijos) //tiene cajas de ahorro asociada?
+                {
+                    if(oPLazoFizo.titular.id == usu.id) 
+                    {
+                        usu.pfs.Add(oPLazoFizo);
+                    }
+
+                }
+            }
+        }
+
 
         private void cargarTitularesEnCajaDeAhorroYcajaEnUsuario()
         {
