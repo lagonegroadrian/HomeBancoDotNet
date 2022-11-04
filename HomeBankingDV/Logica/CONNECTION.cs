@@ -97,6 +97,7 @@ namespace HomeBankingDV
 
 
 
+
         //devuelve el ID del usuario agregado a la base, si algo falla devuelve -1
         public int agregarUsuario(int Dni, string Nombre, string Mail, string Password, bool IsAdmin, bool Bloqueado)
         {
@@ -664,6 +665,67 @@ namespace HomeBankingDV
             }
             return misCajaDeAhorro;
         }
+
+
+        public List<PlazoFijo> inicializarPlazosFijos()
+        {   
+            List<PlazoFijo> misPlazosFijos = new List<PlazoFijo>();
+            string queryString = "SELECT * from dbo.PlazoFijo";
+            using (SqlConnection connection =new SqlConnection(connectionString))
+            {   SqlCommand command = new SqlCommand(queryString, connection);
+                try
+                {   connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    PlazoFijo aux;
+                    while (reader.Read())
+                    {
+                        aux = new PlazoFijo(reader.GetInt32(0),this.quienEsEsteId(reader.GetInt32(1)),(float)reader.GetDouble(2),reader.GetDateTime(3),reader.GetDateTime(4), (float)reader.GetDouble(5),reader.GetBoolean(6));
+                        misPlazosFijos.Add(aux);
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return misPlazosFijos;
+        }
+
+
+
+
+
+
+
+        public Usuario quienEsEsteId(int _idUser)
+        {
+            Usuario elUsuario = null;
+
+            string queryString = "SELECT * from dbo.Usuario where userId = @userId";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@userId", SqlDbType.Int));
+                command.Parameters["@userId"].Value = _idUser;
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        elUsuario = new Usuario(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetBoolean(6), reader.GetBoolean(7));
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return elUsuario;
+        }
+
 
 
         //tp2 - fin
