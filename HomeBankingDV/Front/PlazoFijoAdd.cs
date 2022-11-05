@@ -14,9 +14,7 @@ namespace HomeBankingDV.Front
     {
         public DelegadoClosePL delegadoClosePL;
 
-
-        private int elCBUdestino;
-        private float monto;
+        private float montoCuentaOrigen { get; set; }
 
         private Banco elBanco;
 
@@ -71,15 +69,24 @@ namespace HomeBankingDV.Front
             float _tasa = float.Parse(textBox3.Text);
             int _dias = Int32.Parse(textBox4.Text);
 
-            if (elBanco.RetirarDinero(_monto, _cuenta, "[PlazoFijo]")) 
+            if(montoCuentaOrigen < _monto) 
+            { 
+                MessageBox.Show("Monto Insuficiente."); 
+            } 
+            else 
             {
-            if (elBanco.AltaPlazoFijo(_monto, _dias)) 
+                elBanco.RetirarDinero(_monto, _cuenta, "[PlazoFijo]");
+            
+                if (elBanco.AltaPlazoFijo(_monto, _dias))
                 {
                     MessageBox.Show("Plazo fijo creado con éxito.");
                     this.MostrarCBUs();
                 };
-            }else
-            { MessageBox.Show("Monto Insuficiente."); };
+            }
+
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox4.Text = "";
         }
 
         private void PlazoFijoAdd_Load(object sender, EventArgs e)
@@ -92,11 +99,17 @@ namespace HomeBankingDV.Front
         {
             int nroCBU = 0;
 
-            object elCBU = dataGridView1.Rows[e.RowIndex].Cells[0].Value;
+            float montoOrigen;
+
+            object elCBU = dataGridView1.Rows[e.RowIndex].Cells[0].Value;            
+            object auxMontoO = dataGridView1.Rows[e.RowIndex].Cells[1].Value;
 
             if ((elCBU is DBNull)) { return; } // por si viene nulo que salga del metodo
 
             nroCBU = Int32.Parse(elCBU.ToString());
+
+            montoCuentaOrigen = Int32.Parse(auxMontoO.ToString());
+
             textBox1.Text = elCBU.ToString();
         }
 

@@ -31,9 +31,9 @@ namespace HomeBankingDV
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button17 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.cajasDeAhorroTab = new System.Windows.Forms.TabPage();
-            this.button17 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,7 +41,6 @@ namespace HomeBankingDV
             this.Saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.plazoFijoTab = new System.Windows.Forms.TabPage();
-            this.button13 = new System.Windows.Forms.Button();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,6 +79,7 @@ namespace HomeBankingDV
             this.button4 = new System.Windows.Forms.Button();
             this.labelIntentos = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.cajasDeAhorroTab.SuspendLayout();
@@ -107,6 +107,17 @@ namespace HomeBankingDV
             this.panel1.Name = "panel1";
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // button17
+            // 
+            this.button17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.button17.FlatAppearance.BorderSize = 4;
+            this.button17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+            this.button17.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.button17, "button17");
+            this.button17.Name = "button17";
+            this.button17.UseVisualStyleBackColor = false;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.cajasDeAhorroTab);
@@ -126,17 +137,6 @@ namespace HomeBankingDV
             this.cajasDeAhorroTab.Name = "cajasDeAhorroTab";
             this.cajasDeAhorroTab.UseVisualStyleBackColor = true;
             this.cajasDeAhorroTab.Click += new System.EventHandler(this.cajasDeAhorroTab_Click);
-            // 
-            // button17
-            // 
-            this.button17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button17.FlatAppearance.BorderSize = 4;
-            this.button17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
-            this.button17.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            resources.ApplyResources(this.button17, "button17");
-            this.button17.Name = "button17";
-            this.button17.UseVisualStyleBackColor = false;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // label2
             // 
@@ -186,20 +186,12 @@ namespace HomeBankingDV
             // 
             // plazoFijoTab
             // 
-            this.plazoFijoTab.Controls.Add(this.button13);
+            this.plazoFijoTab.Controls.Add(this.label8);
             this.plazoFijoTab.Controls.Add(this.dataGridView6);
             this.plazoFijoTab.Controls.Add(this.button2);
             resources.ApplyResources(this.plazoFijoTab, "plazoFijoTab");
             this.plazoFijoTab.Name = "plazoFijoTab";
             this.plazoFijoTab.UseVisualStyleBackColor = true;
-            // 
-            // button13
-            // 
-            this.button13.BackColor = System.Drawing.Color.DarkRed;
-            this.button13.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            resources.ApplyResources(this.button13, "button13");
-            this.button13.Name = "button13";
-            this.button13.UseVisualStyleBackColor = false;
             // 
             // dataGridView6
             // 
@@ -491,6 +483,12 @@ namespace HomeBankingDV
             this.label1.Name = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.BackColor = System.Drawing.Color.DarkKhaki;
+            this.label8.Name = "label8";
+            // 
             // Home
             // 
             resources.ApplyResources(this, "$this");
@@ -508,6 +506,7 @@ namespace HomeBankingDV
             this.cajasDeAhorroTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.plazoFijoTab.ResumeLayout(false);
+            this.plazoFijoTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
             this.pagosTab.ResumeLayout(false);
             this.pagosTab.PerformLayout();
@@ -557,7 +556,6 @@ namespace HomeBankingDV
         private Label label5;
         private DataGridView dataGridView4;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private Button button13;
         private DataGridView dataGridView8;
         private Button button16;
         private Button button15;
@@ -573,6 +571,7 @@ namespace HomeBankingDV
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private DataGridViewTextBoxColumn inifin;
         private DataGridViewTextBoxColumn Estado;
+        private Label label8;
     }
 }
 

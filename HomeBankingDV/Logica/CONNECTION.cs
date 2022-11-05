@@ -478,6 +478,34 @@ namespace HomeBankingDV
         }
 
 
+        public int eliminarPlazoFijo(int _idPlazo)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "DELETE FROM [dbo].[PlazoFijo] WHERE idPlazoFijo = @idPlazoFijo;";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@idPlazoFijo", SqlDbType.Int));
+                command.Parameters["@idPlazoFijo"].Value = _idPlazo;
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
+
+
         public int eliminarMovimientosDeCajaDeAhorro(int _idCA)
         {
             int resultadoQuery;

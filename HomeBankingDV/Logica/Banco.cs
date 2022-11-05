@@ -106,6 +106,15 @@ namespace HomeBankingDV
         }
 
 
+        public bool BajaPlazoFijo(int _elId)
+        {
+             if (Convert.ToBoolean(DB.eliminarPlazoFijo(_elId))) 
+            { inicializarAtributos(); 
+                return true; } 
+            else { return false; };
+           
+        }
+
 
         public bool BajaCajaAhorro(int _elCBU)
         {
@@ -317,28 +326,7 @@ namespace HomeBankingDV
         }
 
         //ELIMINA UN PFS DE LA LISTA DE PFS DEL BANCO Y DE LA LISTA DE PFS DE UN USUARIO EN PARTICULAR//
-        public bool BajaPlazoFijo(int id)
-        {
-            foreach (PlazoFijo pf in usuarioActual.pfs)
-            {
-                if (pf.id == id)
-                {
-                    if (pf.pagado == true)
-                    {
-                        TimeSpan fecha = DateTime.Now - pf.fechaFin;
-                        if (fecha.Days >= 30)
-                        {
-                            plazosfijos.Remove(pf);
-                            usuarioActual.pfs.Remove(pf);
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-                return false;
-            }
-            return false;
-        }
+
 
 
         //NO IMPLEMENTAR//
