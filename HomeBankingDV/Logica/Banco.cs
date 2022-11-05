@@ -303,25 +303,15 @@ namespace HomeBankingDV
 
 
         //AGREGA UN PLAZO FIJO A LA LISTA DE PFS DEL BANCO Y A LA LISTA DE PFS DE UN USUARIO EN PARTICULAR//
-        public bool AltaPlazoFijo(float monto, DateTime fechaIni, DateTime fechaFin, float tasa, bool pagado)
+        public bool AltaPlazoFijo(float _monto, int _cantDias , float _tasa)
         {
-            //Buscamos el id que vamos a asignar
-            int id = 0;
-            if (plazosfijos.Count > 0)
-            {
-                //si hay al menos 1 elemento en la lista previamente
-                var lastItem = plazosfijos[^1];//accede al ultimo elemento de la lista
-                id = lastItem.id + 1; //aca accedemos a su id y le sumamos 1
-            }
-            else {
-                //si la lista esta vacia (count = 0)
-                id = 1;
-            }
 
             //Agregamos el plazo fijo
-            PlazoFijo pf = new PlazoFijo(id, usuarioActual, monto, fechaIni, fechaFin, tasa, pagado);
-            plazosfijos.Add(pf);
-            usuarioActual.pfs.Add(pf);
+            
+            //PlazoFijo pf = new PlazoFijo(id, usuarioActual, monto, fechaIni, fechaFin, tasa, pagado);
+            //plazosfijos.Add(pf);
+            //usuarioActual.pfs.Add(pf);
+
             return true;
         }
 

@@ -38,9 +38,12 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cbu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -151,15 +154,6 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Dias";
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(16, 43);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(248, 79);
-            this.listBox1.TabIndex = 10;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -179,15 +173,42 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(117, 23);
             this.textBox4.TabIndex = 20;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cbu,
+            this.saldo});
+            this.dataGridView1.Location = new System.Drawing.Point(12, 49);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(251, 88);
+            this.dataGridView1.TabIndex = 21;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // cbu
+            // 
+            this.cbu.HeaderText = "cbu";
+            this.cbu.Name = "cbu";
+            this.cbu.ReadOnly = true;
+            this.cbu.Width = 120;
+            // 
+            // saldo
+            // 
+            this.saldo.HeaderText = "saldo";
+            this.saldo.Name = "saldo";
+            this.saldo.Width = 70;
             // 
             // PlazoFijoAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(272, 379);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -203,6 +224,7 @@
             this.Name = "PlazoFijoAdd";
             this.Text = "PlazoFijoAdd";
             this.Load += new System.EventHandler(this.PlazoFijoAdd_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,8 +242,10 @@
         private Button button1;
         private Button button2;
         private Label label5;
-        private ListBox listBox1;
         private Label label6;
         private TextBox textBox4;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn cbu;
+        private DataGridViewTextBoxColumn saldo;
     }
 }
