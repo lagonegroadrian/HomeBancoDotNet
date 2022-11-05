@@ -12,11 +12,10 @@ namespace HomeBankingDV.Front
 {
     public partial class PlazoFijoAdd : Form
     {
-        public DelegadoPlazoFijoAddClose delegadoPlazoFijoAddClose;
+        public DelegadoClosePL delegadoClosePL;
 
 
         private int elCBUdestino;
-        //private int monto;
         private float monto;
 
         private Banco elBanco;
@@ -25,19 +24,20 @@ namespace HomeBankingDV.Front
         {
             elBanco = _elBanco;
             InitializeComponent();
-            
-            textBox3.Text = "1.2";
+
+            textBox3.Text = "1";
 
             MostrarCBUs();
         }
 
         private void MostrarCBUs()
         {
+            dataGridView1.Rows.Clear();
+
             foreach (CajaDeAhorro caixa in elBanco.usuarioActual.cajas)
-            {
-                dataGridView1.Rows.Add(caixa.cbu, caixa.saldo);
-            }
+            {dataGridView1.Rows.Add(caixa.cbu, caixa.saldo);}
         }
+
 
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -60,17 +60,26 @@ namespace HomeBankingDV.Front
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Close();
+            this.delegadoClosePL();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             // boton crear plazo fijo
-
             int _cuenta = Int32.Parse(textBox1.Text);
-            float monto = float.Parse(textBox2.Text);
-            float tasa = float.Parse(textBox3.Text);
-            int dias = Int32.Parse(textBox4.Text);
+            float _monto = float.Parse(textBox2.Text);
+            float _tasa = float.Parse(textBox3.Text);
+            int _dias = Int32.Parse(textBox4.Text);
+
+            if (elBanco.RetirarDinero(_monto, _cuenta, "[PlazoFijo]")) 
+            {
+            if (elBanco.AltaPlazoFijo(_monto, _dias)) 
+                {
+                    MessageBox.Show("Plazo fijo creado con éxito.");
+                    this.MostrarCBUs();
+                };
+            }else
+            { MessageBox.Show("Monto Insuficiente."); };
         }
 
         private void PlazoFijoAdd_Load(object sender, EventArgs e)
@@ -97,5 +106,5 @@ namespace HomeBankingDV.Front
         }
     }
 
-    public delegate void DelegadoPlazoFijoAddClose(int _elCBU);
+    public delegate void DelegadoClosePL();
 }

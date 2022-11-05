@@ -52,9 +52,8 @@ namespace HomeBankingDV
         {
             InitializeComponent();
             hijoPlazoFijo = new PlazoFijoAdd(elBanco);
-
             hijoPlazoFijo.MdiParent = this;
-            //hijoPlazoFijo.delegadoClosePL += DelegadoClosePL;
+            hijoPlazoFijo.delegadoClosePL += DelegadoClosePL;
 
             hijoPlazoFijo.Show();
         }
@@ -246,7 +245,13 @@ namespace HomeBankingDV
             hijoCA.Close();
             ActivoHomme();
         }
-        
+
+        private void DelegadoClosePL()
+        {
+            hijoPlazoFijo.Close();
+            ActivoHomme();
+        }
+
 
         private void DelegadoHommeStart()
         {

@@ -98,6 +98,7 @@ namespace HomeBankingDV
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Lavender;
+            this.panel1.Controls.Add(this.button17);
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.labelIntentos);
@@ -118,7 +119,6 @@ namespace HomeBankingDV
             // 
             // cajasDeAhorroTab
             // 
-            this.cajasDeAhorroTab.Controls.Add(this.button17);
             this.cajasDeAhorroTab.Controls.Add(this.label2);
             this.cajasDeAhorroTab.Controls.Add(this.dataGridView1);
             this.cajasDeAhorroTab.Controls.Add(this.button1);

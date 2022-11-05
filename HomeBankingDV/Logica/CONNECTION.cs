@@ -204,6 +204,43 @@ namespace HomeBankingDV
         //tp2 - inicio
 
 
+        public int insertarPlazoFijo(int _userId, float _monto, int _aDias)
+        {
+            int resultadoQuery;
+
+            string connectionString = Properties.Resources.ConnectionStr;
+            string queryString = "INSERT INTO [dbo].[PlazoFijo] ([userId],[monto],[fechaIni],[fechaFin], [tasa], [pagado]) " +
+                "VALUES (@userId , @monto,CURRENT_TIMESTAMP , CURRENT_TIMESTAMP + @aDias, @tasa , 0);";
+            using (SqlConnection connection =
+                new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add(new SqlParameter("@userId", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@monto", SqlDbType.Float));
+                command.Parameters.Add(new SqlParameter("@aDias", SqlDbType.Int));
+                command.Parameters.Add(new SqlParameter("@tasa", SqlDbType.Float));
+
+                command.Parameters["@userId"].Value = _userId;
+                command.Parameters["@monto"].Value = _monto;
+                command.Parameters["@aDias"].Value = _aDias;
+                command.Parameters["@tasa"].Value =1;
+
+                try
+                {
+                    connection.Open();
+                    resultadoQuery = command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return -1;
+                }
+                return resultadoQuery;
+            }
+        }
+
+
+
 
         public int insertarMovimiento(int _idCajaAhorro, float _monto, string _accion)
         {

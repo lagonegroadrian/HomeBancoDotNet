@@ -303,16 +303,17 @@ namespace HomeBankingDV
 
 
         //AGREGA UN PLAZO FIJO A LA LISTA DE PFS DEL BANCO Y A LA LISTA DE PFS DE UN USUARIO EN PARTICULAR//
-        public bool AltaPlazoFijo(float _monto, int _cantDias , float _tasa)
+        public bool AltaPlazoFijo(float _monto, int _cantDias)
         {
-
-            //Agregamos el plazo fijo
-            
-            //PlazoFijo pf = new PlazoFijo(id, usuarioActual, monto, fechaIni, fechaFin, tasa, pagado);
-            //plazosfijos.Add(pf);
-            //usuarioActual.pfs.Add(pf);
-
-            return true;
+            if (
+                 Convert.ToBoolean(DB.insertarPlazoFijo(usuarioActual.id , _monto, _cantDias))
+                )
+                {
+                this.inicializarAtributos();
+                return true;
+            } 
+            else 
+            { return false; };
         }
 
         //ELIMINA UN PFS DE LA LISTA DE PFS DEL BANCO Y DE LA LISTA DE PFS DE UN USUARIO EN PARTICULAR//
@@ -446,7 +447,7 @@ namespace HomeBankingDV
         public bool TransferirDinero(float MontoTranferido, int CBUOrigen, int CBUDestino)
         {
             bool salida = false;
-            string _mensaje = "(x) transferencia ";
+            string _mensaje = "[transf]";
             try
             {
                 foreach (CajaDeAhorro cajaU in usuarioActual.cajas)
@@ -483,9 +484,10 @@ namespace HomeBankingDV
         public bool DepositarDinero(float _monto, int cbu, string _adicional)
         {   bool resultado = false;
 
-            string _accion = "(+) Deposito de $" + _monto + " en cbu: " + cbu;
+            string _accion = "(+) Depo: $" + _monto + "; cbu:" + cbu;
 
-            if (_adicional != "") { _accion = "(+) transf. de $" + _monto + " en cbu: " + cbu; }
+            if (_adicional != "") //{ _accion = "(+) transf. de $" + _monto + " en cbu: " + cbu; }
+            { _accion += _adicional; }
 
             foreach (CajaDeAhorro Caja in cajas)
             {   if (Caja.cbu == cbu)
@@ -493,7 +495,7 @@ namespace HomeBankingDV
                     try
                     {
                         DB.cambiarMontoEnCajaDeAhorro(Caja.id, Caja.saldo);
-                        if (_monto <= 0)
+                        if (_monto > 0)
                         {
                             DB.insertarMovimiento(Caja.id, _monto, _accion);
                         }
@@ -512,9 +514,10 @@ namespace HomeBankingDV
         public bool RetirarDinero(float _monto, int cbu , string _adicional)
         {
             bool resultado = false;
-            string _accion = "(-) Extraccion de $" + _monto + " en cbu: " + cbu;
+            string _accion = "(-) Extrac: $" + _monto + "; cbu:" + cbu;
 
-            if (_adicional != "") { _accion = "(-) transf. de $" + _monto + " en cbu: " + cbu; }
+            if (_adicional != "") //{ _accion = "(-) transf.$" + _monto + "; cbu:" + cbu + ";  + _adicional; }
+            {_accion += _adicional; }
 
             foreach (CajaDeAhorro Caja in usuarioActual.cajas)
             {
