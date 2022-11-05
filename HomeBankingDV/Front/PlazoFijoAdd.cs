@@ -14,17 +14,16 @@ namespace HomeBankingDV.Front
     {
         public DelegadoPlazoFijoAddClose delegadoPlazoFijoAddClose;
 
-        private int elCBUorigen;
+
         private int elCBUdestino;
         //private int monto;
         private float monto;
 
         private Banco elBanco;
 
-        public PlazoFijoAdd(Banco _elBanco, int _elCBUorigen)
+        public PlazoFijoAdd(Banco _elBanco)
         {
             elBanco = _elBanco;
-            elCBUorigen = _elCBUorigen;
             InitializeComponent();
         }
 
@@ -56,12 +55,12 @@ namespace HomeBankingDV.Front
             monto= float.Parse(textBox3.Text);
 
             //elBanco.PlazoFijoAdd(monto, elCBUorigen, elCBUdestino);
-            this.delegadoPlazoFijoAddClose(elCBUorigen);
+            //this.delegadoPlazoFijoAddClose(elCBUorigen);
         }
 
         private void PlazoFijoAdd_Load(object sender, EventArgs e)
         {
-            textBox1.Text = elCBUorigen.ToString();
+            //textBox1.Text = elCBUorigen.ToString();
         }
     }
     

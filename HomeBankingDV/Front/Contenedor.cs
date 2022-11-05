@@ -12,15 +12,12 @@ namespace HomeBankingDV
         Transferir hijoTransferir;
         VerDetalle hijoDetalle;
         TitularesAdd hijoModificarCA;
+        PlazoFijoAdd hijoPlazoFijo;
 
         public Banco elBanco = new Banco();
 
-
         public Contenedor()
         {
-            //elBanco.AltaUsuario(1, "Tomas", "Rodriguez", "rodriguezt@banco.com", "1", false, false);
-            //elBanco.AltaUsuario(35147312, "Adrian", "Lagonegro", "Lagonegro@cobanco.com", "123", false, false);
-
             ActivoLogin();
         }
 
@@ -47,9 +44,19 @@ namespace HomeBankingDV
             hijoCA.delegadoVerDetalle += DelegadoVerDetalle;
             hijoCA.delegadoBajaCA += DelegadoBajaCA;
             hijoCA.delegadoModificar += DelegadoModificar;
-            
 
             hijoCA.Show();
+        }
+
+        public void ActivoPL()
+        {
+            InitializeComponent();
+            hijoPlazoFijo = new PlazoFijoAdd(elBanco);
+
+            hijoPlazoFijo.MdiParent = this;
+            //hijoPlazoFijo.delegadoClosePL += DelegadoClosePL;
+
+            hijoPlazoFijo.Show();
         }
 
         public void ActivoVerDetalle(int _elCBU)
@@ -76,6 +83,7 @@ namespace HomeBankingDV
             hijoHomme.MdiParent = this;
             hijoHomme.delegadoCloseHomme += DelegadoCloseHomme;
             hijoHomme.delegadoHommeToCA += DelegadoHommeToCA;
+            hijoHomme.delegadoPlazoFijo += DelegadoPlazoFijo;
             hijoHomme.Show();
         }
 
@@ -119,6 +127,12 @@ namespace HomeBankingDV
         {
             hijoHomme.Close();
             ActivoCA(_elCBU);
+        }
+
+        private void DelegadoPlazoFijo()
+        {
+            hijoHomme.Close();
+            ActivoPL();
         }
 
 

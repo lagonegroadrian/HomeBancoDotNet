@@ -19,6 +19,7 @@ namespace HomeBankingDV
         //public DelegadoRegistroStart delegadoRegistroStart;
         public DelegadoCloseHomme delegadoCloseHomme;
         public DelegadoHommeToCA delegadoHommeToCA;
+        public DelegadoPlazoFijo delegadoPlazoFijo;
         public Banco elBanco;
         public int dniIngresado;
         public string contraseniaIngresada;
@@ -193,9 +194,17 @@ namespace HomeBankingDV
         {
             //aca datagrid del plazo fijo
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // llamar al plazo fijo
+            this.delegadoPlazoFijo();
+        }
     }
 
     //public delegate void TransfDelegado();
     public delegate void DelegadoCloseHomme();
     public delegate void DelegadoHommeToCA(int nroCBU);
+    public delegate void DelegadoPlazoFijo();
+
 }
