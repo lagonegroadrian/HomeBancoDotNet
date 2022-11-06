@@ -314,6 +314,8 @@ namespace HomeBankingDV
         //AGREGA UN PLAZO FIJO A LA LISTA DE PFS DEL BANCO Y A LA LISTA DE PFS DE UN USUARIO EN PARTICULAR//
         public bool AltaPlazoFijo(float _monto, int _cantDias)
         {
+           
+            
             if (
                  Convert.ToBoolean(DB.insertarPlazoFijo(usuarioActual.id , _monto, _cantDias))
                 )
@@ -438,7 +440,7 @@ namespace HomeBankingDV
             string _mensaje = "[transf]";
             try
             {
-                foreach (CajaDeAhorro cajaU in usuarioActual.cajas)
+                foreach (CajaDeAhorro cajaU in cajas)
                 {
                     if (cajaU.cbu == CBUOrigen)
                     {

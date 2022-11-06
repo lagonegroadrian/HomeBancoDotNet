@@ -66,6 +66,7 @@ namespace HomeBankingDV.Front
             // boton crear plazo fijo
             int _cuenta = Int32.Parse(textBox1.Text);
             float _monto = float.Parse(textBox2.Text);
+            
             float _tasa = float.Parse(textBox3.Text);
             int _dias = Int32.Parse(textBox4.Text);
 
