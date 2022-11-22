@@ -28,8 +28,7 @@ namespace HomeBankingDV
         {
             elBanco = elBancoFora;
             InitializeComponent();
-            List <string> cajasDeAhorro = new List<string>();
-            List<CajaDeAhorro> cajaDeAhorroList = new List<CajaDeAhorro>();
+
             llenarDatosDataGrid1();
             llenarDatosDataGrid6();
         }
@@ -37,42 +36,29 @@ namespace HomeBankingDV
         private void llenarDatosDataGrid1()
         {
             dataGridView1.Rows.Clear();
-            elBanco.usuarioActual.cajas.Clear();
+          //  elBanco.traerUsuario().cajas.Clear();
 
-            //foreach (CajaDeAhorro salida in elBanco.usuarioActual.MostrarCajasDeAhorro()) { dataGridView1.Rows.Add(salida.id, salida.cbu, salida.saldo); }
+            foreach (CajaDeAhorro salida in elBanco.traerUsuario().cajas) { dataGridView1.Rows.Add(salida.idCajaDeAhorro, salida.cbu, salida.saldo); }
 
-            foreach (TitularesRel osTitulares in elBanco.obtenerTitulares()) // Le traigo los titulares
-            {
-                if (elBanco.usuarioActual.id == (osTitulares.idUs)) // filtro esos titulares por el usuario logueado
-                {
-                    foreach (CajaDeAhorro asCaixas in elBanco.obtenerCajas()) // Traigo las Caixas de ahorro
-                    {
-                        if ((osTitulares.idCa)==(asCaixas.id)) 
-                        {
-                            dataGridView1.Rows.Add(asCaixas.id, asCaixas.cbu, asCaixas.saldo);
-                            elBanco.usuarioActual.cajas.Add(asCaixas);
-                        }
-                    }
-                }
-            }
+         
         }
 
 
         private void llenarDatosDataGrid6()
         {
             dataGridView6.Rows.Clear();
-            elBanco.usuarioActual.pfs.Clear();
+          //  elBanco.traerUsuario().pfs.Clear();
 
-            foreach (PlazoFijo oPlazo in elBanco.plazosfijos) 
+            foreach (PlazoFijo oPlazo in elBanco.obtenerPlazosFijos()) 
             {
-                if (elBanco.usuarioActual.id == (oPlazo.titular.id))
+                if (elBanco.traerUsuario().idUsuario == (oPlazo.titularP.idUsuario))
                 {
                     string aux = "EnCurso";
 
                     if (oPlazo.pagado) { aux = "Acobrar"; }
 
-                    dataGridView6.Rows.Add(oPlazo.id , oPlazo.monto, oPlazo.fechaIni.Date + " A " + oPlazo.fechaFin.Date , aux);
-                    elBanco.usuarioActual.pfs.Add(oPlazo);
+                    dataGridView6.Rows.Add(oPlazo.idPlazoFijo , oPlazo.monto, oPlazo.fechaIni.Date + " A " + oPlazo.fechaFin.Date , aux);
+                    elBanco.traerUsuario().pfs.Add(oPlazo);
 
                 }
             }
@@ -84,7 +70,7 @@ namespace HomeBankingDV
             //Form crearCaja = new CrearNuevaCaja();
             //crearCaja.Show();
             //elBanco.AltaCajaAhorro();
-            elBanco.AltaCajaAhorro_v2();
+            elBanco.AltaCajaAhorro();
             llenarDatosDataGrid1();
         }
 

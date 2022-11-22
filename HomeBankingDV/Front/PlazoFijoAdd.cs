@@ -32,7 +32,7 @@ namespace HomeBankingDV.Front
         {
             dataGridView1.Rows.Clear();
 
-            foreach (CajaDeAhorro caixa in elBanco.usuarioActual.cajas)
+            foreach (CajaDeAhorro caixa in elBanco.traerUsuario().cajas)
             {dataGridView1.Rows.Add(caixa.cbu, caixa.saldo);}
         }
 

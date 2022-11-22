@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeBankingDV
 {
     public class TarjetaDeCredito
     {
-        public int id { get; set; }
+        public int idTarjetaDeCredito { get; set; }
         public Usuario titular { get; set; }
         public int numero { get; set; }
         public int codigoV { get; set; }
@@ -16,9 +17,10 @@ namespace HomeBankingDV
         public float consumos { get; set; }
 
         //constructor
+        public TarjetaDeCredito() { }
         public TarjetaDeCredito(int id, Usuario titular, int numero, int codigoV, float limite, float consumos)
         {
-            this.id = id;
+            this.idTarjetaDeCredito = id;
             this.titular = titular;
             this.numero = numero;
             this.codigoV = codigoV;

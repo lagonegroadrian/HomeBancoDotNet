@@ -32,11 +32,11 @@ namespace HomeBankingDV.Front
             //List<Movimiento> detalles = elBanco.BuscarMovimientos(laCAja);
 
             
-            foreach(Movimiento movimiento in elBanco.movimientos) 
+            foreach(Movimiento movimiento in elBanco.obtenerTodosLosMovimientos()) 
             {
                 if(movimiento.caja.cbu == laCAja)
                 {
-                    dataGridView1.Rows.Add(movimiento.id,movimiento.monto,movimiento.detalle, movimiento.fecha);
+                    dataGridView1.Rows.Add(movimiento.idMovimiento,movimiento.monto,movimiento.detalle, movimiento.fecha);
                 }
             }
 

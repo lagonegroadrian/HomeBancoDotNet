@@ -44,11 +44,33 @@ namespace HomeBankingDV
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {   try {   dniIngresado = int.Parse(textUsuario.Text);
+      
+         {   try {   dniIngresado = int.Parse(textUsuario.Text);
                     contraseniaIngresada = textContrasenia.Text;
-                    if (elBanco.IniciarSesion(dniIngresado, contraseniaIngresada)){delegadoHommeStart();}else { MessageBox.Show("Password Erronea"); }
-                } catch (Exception){MessageBox.Show("Error en el ingreso de datos.");}
+
+
+                Usuario user = elBanco.hacerLogin(dniIngresado, contraseniaIngresada);
+
+                if (user.dni == dniIngresado) 
+                {
+                    //elBanco.obtenerCajasDeAhorroPorUsuario(elBanco.usuarioActual);
+
+                    delegadoHommeStart();
+                } 
+                else 
+                { MessageBox.Show("Password Erronea"); }
+
+                //if (elBanco.IniciarSesion(dniIngresado, contraseniaIngresada)){delegadoHommeStart();}else { MessageBox.Show("Password Erronea"); }
+            } catch (Exception){MessageBox.Show("Error en el ingreso de datos.");}
         }
+        
+        
+        
+        // {   try {   dniIngresado = int.Parse(textUsuario.Text);
+          //          contraseniaIngresada = textContrasenia.Text;
+            //        if (elBanco.hacerLogin(dniIngresado, contraseniaIngresada)){delegadoHommeStart();}else { MessageBox.Show("Password Erronea"); }
+              //  } catch (Exception){MessageBox.Show("Error en el ingreso de datos.");}
+       // }
 
         private void Cancelar_Click(object sender, EventArgs e)
         {

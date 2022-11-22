@@ -6,55 +6,62 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using HomeBankingDV.Front;
+using HomeBankingDV.Logica;
 
 namespace HomeBankingDV
 {
     public class Usuario
     {
-        public int id { get; set; }
+        public int idUsuario { get; set; }
         public int dni { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string mail { get; set; }
         public string password { get; set; }
-        
-        //public int intentosFallidos { get; set; }
-
+       
         public bool isAdmin { get; set; }
 
         public bool bloqueado { get; set; }
 
-        public List<CajaDeAhorro> cajas { get; set; }
-        public List<PlazoFijo> pfs { get; set; }
-        public List<TarjetaDeCredito> tarjetas { get; set; }
-        public List<Pago> pagos { get; set; }
+        public ICollection<CajaDeAhorro> cajas { get;}= new List<CajaDeAhorro>();
+        
+        public List<TitularesRel> UserCajas { get; set; }
+        public List<PlazoFijo> pfs { get;}= new List<PlazoFijo>();
+        public List<TarjetaDeCredito> tarjetas { get;} = new List<TarjetaDeCredito>();
 
-        private List<Domicilio> misDirecciones;
+        public List<Pago> pagos { get;} = new List<Pago>();
 
-        static int aux { get; set; }
+
+       
+
+
+
 
         //constructor
-        public Usuario(int id, int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado)
+        public Usuario() { }
+        public Usuario( int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado)
         {
-            this.id = id;
+            this.idUsuario = idUsuario;
             this.dni = dni;
             this.nombre = nombre;
             this.apellido = apellido;
             this.mail = mail;
             this.password = password;
-          //  intentosFallidos = 0;
-            bloqueado = false;
+            this.isAdmin = isAdmin;
+            this.bloqueado = bloqueado;
             cajas = new List<CajaDeAhorro>();
             pfs = new List<PlazoFijo>();
             tarjetas = new List<TarjetaDeCredito>();
             pagos = new List<Pago>();
-            misDirecciones = new List<Domicilio>();
-            //this.id = aux++;
-            this.isAdmin = isAdmin;
-
+       
+            
+        
+          
         }
 
-        public List<CajaDeAhorro> MostrarCajasDeAhorro() { return cajas; }
+        public List<CajaDeAhorro> MostrarCajasDeAhorro() { return cajas.ToList(); }
 
         public List<Usuario> MostrarTitularesCajasDeAhorro(int _cbu)
         {

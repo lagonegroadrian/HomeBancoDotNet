@@ -1,6 +1,8 @@
 namespace HomeBankingDV
 {
     using Front;
+    using System.Diagnostics.Eventing.Reader;
+
     public partial class Contenedor : Form
     {
         Login hijoLogin;
@@ -271,10 +273,15 @@ namespace HomeBankingDV
             this.Dispose();
         }
 
+        private Usuario GetUsuario()
+        {
+            return elBanco.traerUsuario();
+        }
+
         private void DelegadoCloseHomme()
         {
             hijoHomme.Close();
-            elBanco.usuarioActual = null;
+          // elBanco.traerUsuario() = null;
             ActivoLogin();
         }
 

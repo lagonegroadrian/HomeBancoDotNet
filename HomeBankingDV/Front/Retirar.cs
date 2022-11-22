@@ -48,7 +48,7 @@ namespace HomeBankingDV.Front
 
             try
             {
-                foreach (CajaDeAhorro cajaU in elBanco.usuarioActual.cajas)
+                foreach (CajaDeAhorro cajaU in elBanco.traerUsuario().cajas)
                 {
                     if (cajaU.cbu == elCBU)
                     {

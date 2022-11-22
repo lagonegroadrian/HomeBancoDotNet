@@ -33,15 +33,15 @@ namespace HomeBankingDV.Front
         private void llenarDatosDataGrid1()
         {
             dataGridView1.Rows.Clear();
-            List<Usuario> allUser = elBanco.usuarios;
+            List<Usuario> allUser = elBanco.obtenerUsuarios();
 
             foreach (Usuario salida in allUser)
             {
                 string aux_ = "No";
                 //INI
-                elBanco.usuarioActual.MostrarTitularesCajasDeAhorro(elCBU);
+                elBanco.traerUsuario().MostrarTitularesCajasDeAhorro(elCBU);
 
-                foreach (Usuario titul in elBanco.usuarioActual.MostrarTitularesCajasDeAhorro(elCBU))
+                foreach (Usuario titul in elBanco.traerUsuario().MostrarTitularesCajasDeAhorro(elCBU))
                 {
                     if(salida.dni == titul.dni) { aux_ = "Si"; }
                 }

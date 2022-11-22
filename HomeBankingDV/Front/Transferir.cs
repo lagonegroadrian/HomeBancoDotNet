@@ -69,7 +69,7 @@ namespace HomeBankingDV.Front
                     elCBUdestino = Int32.Parse(textBox2.Text);
                 }
 
-            foreach (CajaDeAhorro cajaBanco in elBanco.cajas)
+            foreach (CajaDeAhorro cajaBanco in elBanco.obtenerCajas())
             {
                     if(cajaBanco.cbu == elCBUdestino)
                 {
@@ -84,7 +84,7 @@ namespace HomeBankingDV.Front
                 {
                     monto = float.Parse(textBox3.Text);
                 }
-                foreach(CajaDeAhorro cajaUsuario in elBanco.usuarioActual.cajas)
+                foreach(CajaDeAhorro cajaUsuario in elBanco.traerUsuario().cajas)
                 {
                     if(cajaUsuario.cbu == elCBUorigen)
                     {
