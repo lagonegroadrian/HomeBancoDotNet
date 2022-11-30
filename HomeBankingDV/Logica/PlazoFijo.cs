@@ -11,7 +11,7 @@ namespace HomeBankingDV
     public class PlazoFijo
     {
         public int idPlazoFijo { get; set; }
-        public int idUsuario { get; set; }
+        public int NumUsuario { get; set; }
         public Usuario titularP { get; set; }
         public float monto { get; set; }
         public DateTime fechaIni { get; set; }

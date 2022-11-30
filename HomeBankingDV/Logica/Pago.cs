@@ -18,6 +18,8 @@ namespace HomeBankingDV
         public bool pagado { get; set; }
         public string metodo { get; set; }
 
+        public TarjetaDeCredito tarjeta { get; set; }
+
         //constructor
 
         public Pago() { }
@@ -28,7 +30,7 @@ namespace HomeBankingDV
             this.nombre = nombre;
             this.monto = monto;
             this.pagado = pagado;
-            this.metodo = metodo;
+            this.metodo = metodo; 
         }
     }
 }

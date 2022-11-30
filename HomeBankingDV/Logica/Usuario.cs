@@ -29,19 +29,15 @@ namespace HomeBankingDV
         
         public List<TitularesRel> UserCajas { get; set; } = new List<TitularesRel>();
         public List<PlazoFijo> pfs { get;}= new List<PlazoFijo>();
-        public List<TarjetaDeCredito> tarjetas { get;} = new List<TarjetaDeCredito>();
+        public ICollection<TarjetaDeCredito> tarjetas { get;} = new List<TarjetaDeCredito>();
 
-        public List<Pago> pagos { get;} = new List<Pago>();
+        public ICollection<Pago> pagos { get;} = new List<Pago>();
 
-
-       
-
-
-
+     
 
         //constructor
         public Usuario() { }
-        public Usuario( int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado)
+        public Usuario(int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado)
         {
             this.idUsuario = idUsuario;
             this.dni = dni;
@@ -53,12 +49,11 @@ namespace HomeBankingDV
             this.bloqueado = bloqueado;
             cajas = new List<CajaDeAhorro>();
             pfs = new List<PlazoFijo>();
-            tarjetas = new List<TarjetaDeCredito>();
-            pagos = new List<Pago>();
-       
+            this.tarjetas = new List<TarjetaDeCredito>();
+            this.pagos = new List<Pago>();
             
-        
-          
+       
+
         }
 
         public List<CajaDeAhorro> MostrarCajasDeAhorro() { return cajas.ToList(); }

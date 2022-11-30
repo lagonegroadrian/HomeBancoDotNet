@@ -25,7 +25,7 @@ namespace HomeBankingDV
 
         public DbSet<TitularesRel> titulares { get; set; }
 
-        public DbSet<Domicilio> domicilios { get; set; }
+       
         public MiContexto() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -63,7 +63,7 @@ namespace HomeBankingDV
             modelBuilder.Entity<PlazoFijo>(
                 plazoFijo =>
                 {
-                    plazoFijo.Property(p => p.idUsuario).HasColumnType("int");
+                    plazoFijo.Property(p => p.NumUsuario).HasColumnType("int");
                     plazoFijo.Property(p => p.monto).HasColumnType("float");
                     plazoFijo.Property(p => p.fechaIni).HasColumnType("Date");
                     plazoFijo.Property(p => p.fechaFin).HasColumnType("Date");
@@ -71,17 +71,18 @@ namespace HomeBankingDV
                     plazoFijo.Property(p => p.pagado).HasColumnType("bit");
                 });
 
-            modelBuilder.Entity<TarjetaDeCredito>().ToTable("tarjetaDeCredito").HasKey(t => t.idTarjetaDeCredito);
+            modelBuilder.Entity<TarjetaDeCredito>().ToTable("TarjetaDeCredito").HasKey(t => t.idTarjetaDeCredito);
             modelBuilder.Entity<TarjetaDeCredito>(
                 tarjetaDeCredito =>
                 {
-                    tarjetaDeCredito.Property(t => t.idUsuario).HasColumnType("int");
+                    tarjetaDeCredito.Property(t => t.NumUsuario).HasColumnType("int");
                     tarjetaDeCredito.Property(t => t.numero).HasColumnType("int");
                     tarjetaDeCredito.Property(t => t.codigoV).HasColumnType("int");
                     tarjetaDeCredito.Property(t => t.limite).HasColumnType("float");
                     tarjetaDeCredito.Property(t => t.consumos).HasColumnType("float");
                 });
-            modelBuilder.Entity<Pago>().ToTable("tarjetaDeCredito").HasKey(p => p.idPago);
+
+            modelBuilder.Entity<Pago>().ToTable("Pago").HasKey(p => p.idPago);
             modelBuilder.Entity<Pago>(
                 pago =>
                 {
@@ -110,17 +111,7 @@ namespace HomeBankingDV
                     titulares.Property(t => t.idUs).HasColumnType("int");
                 });
 
-            modelBuilder.Entity<Domicilio>().ToTable("domicilios").HasKey(d => d.idDomicilio);
-            modelBuilder.Entity<Domicilio>(
-                domicilio =>
-                {
-                    domicilio.Property(d => d.calle).HasColumnType("varchar(50)");
-                    domicilio.Property(d => d.altura).HasColumnType("int");
-                    domicilio.Property(d => d.ciudad).HasColumnType("varchar(50)");
-                    domicilio.Property(d => d.provincia).HasColumnType("varchar(50)");
-                    domicilio.Property(d => d.idUsuario).HasColumnType("int");
-
-                });
+    
 
 
             // asignacion de las relaciones :
@@ -133,7 +124,7 @@ namespace HomeBankingDV
                 );
             // definicion de relacion uno a muchos Usuario-plazoFijo :
 
-            modelBuilder.Entity<PlazoFijo>().HasOne(d => d.titularP).WithMany(u => u.pfs).HasForeignKey(d => d.idUsuario).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<PlazoFijo>().HasOne(d => d.titularP).WithMany(u => u.pfs).HasForeignKey(d => d.NumUsuario).OnDelete(DeleteBehavior.Cascade);
 
             // definicion de relacion uno a muchos cajaDeAhorro-movimientos :
 
@@ -141,12 +132,25 @@ namespace HomeBankingDV
 
             // definicion de relacion uno a muchos tarjetaDeCredito-Usuario:
 
-            //modelBuilder.Entity<TarjetaDeCredito>().HasOne(m => m.titular).WithMany(t => t.tarjetas).HasForeignKey(d => d.idTarjetaDeCredito).OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<TarjetaDeCredito>().HasOne(m => m.titular).WithMany(t => t.tarjetas).HasForeignKey(d => d.idUsuario).OnDelete(DeleteBehavior.Cascade);
+           
+            modelBuilder.Entity<TarjetaDeCredito>().HasOne(m => m.titular).WithMany(t => t.tarjetas).HasForeignKey(d => d.NumUsuario).OnDelete(DeleteBehavior.Cascade);
 
             // definicion de relacion uno a muchos usuario-pago
 
             modelBuilder.Entity<Pago>().HasOne(m => m.user).WithMany(t => t.pagos).HasForeignKey(d => d.idPago).OnDelete(DeleteBehavior.Cascade);
+            // definicion de relacion uno a uno pago-tarjeta
+            modelBuilder.Entity<Pago>()
+               .HasOne(U => U.tarjeta)
+               .WithOne(D => D.pago)
+               .HasForeignKey<TarjetaDeCredito>(D => D.idTarjetaDeCredito)
+               .OnDelete(DeleteBehavior.Cascade);
+            
+            modelBuilder.Entity<TarjetaDeCredito>()
+                .HasOne(D => D.pago)
+                .WithOne(U => U.tarjeta)
+                .HasForeignKey<Pago>(D => D.idPago)
+                .OnDelete(DeleteBehavior.Cascade);
+
 
             // ingreso de datos :
 
@@ -165,31 +169,28 @@ namespace HomeBankingDV
 
             modelBuilder.Entity<TitularesRel>().HasData(
                 new { idTi = 1, idCa = 1, idUs = 1 }, 
-                new { idTi = 2, idCa = 2, idUs = 1 }, 
+                new { idTi = 2, idCa = 2, idUs = 2 }, 
                 new { idTi = 3, idCa = 2, idUs = 3 },
-                new { idTi = 4, idCa = 4, idUs = 3 }
+                new { idTi = 4, idCa = 4, idUs = 4 }
                 );
 
             modelBuilder.Entity<PlazoFijo>().HasData(
-                new { idPlazoFijo = 1, idUsuario = 1, monto = 200F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false },
-                new { idPlazoFijo = 2, idUsuario = 1, monto = 310F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false },
-                new { idPlazoFijo = 3, idUsuario = 2, monto = 420F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false },
-                new { idPlazoFijo = 4, idUsuario = 3, monto = 530F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false });
+                new { idPlazoFijo = 1, NumUsuario = 1, monto = 200F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false },
+                new { idPlazoFijo = 2, NumUsuario = 2, monto = 310F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false },
+                new { idPlazoFijo = 3, NumUsuario = 3, monto = 420F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false },
+                new { idPlazoFijo = 4, NumUsuario = 4, monto = 530F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false });
 
             modelBuilder.Entity<TarjetaDeCredito>().HasData(
-                new { idTarjetaDeCredito = 1, idUsuario = 1, numero = 200, codigoV = 2, limite = 8F, consumos = 7F},
-                new { idTarjetaDeCredito = 2, idUsuario = 2, numero = 310, codigoV = 3, limite = 8F, consumos = 7F},
-                new { idTarjetaDeCredito = 3, idUsuario = 3, numero = 420, codigoV = 4, limite = 8F, consumos = 7F},
-                new { idTarjetaDeCredito = 4, idUsuario = 3, numero = 530, codigoV = 5, limite = 9F, consumos = 9F});
+                new { idTarjetaDeCredito = 1, NumUsuario = 1, numero = 200, codigoV = 2, limite = 8F, consumos = 7F},
+                new { idTarjetaDeCredito = 2, NumUsuario = 2, numero = 310, codigoV = 3, limite = 8F, consumos = 7F},
+                new { idTarjetaDeCredito = 3, NumUsuario = 3, numero = 420, codigoV = 4, limite = 8F, consumos = 7F},
+                new { idTarjetaDeCredito = 4, NumUsuario = 4, numero = 530, codigoV = 5, limite = 9F, consumos = 9F});
 
 
 
 
             // ignoramos la clase Banco para que no genere la tabla.
-            modelBuilder.Ignore<Banco>();
-            modelBuilder.Ignore<Domicilio>();
-            //modelBuilder.Ignore<TarjetaDeCredito>();
-            modelBuilder.Ignore<Pago>();
+            modelBuilder.Ignore<Banco>();     
         }
 
 

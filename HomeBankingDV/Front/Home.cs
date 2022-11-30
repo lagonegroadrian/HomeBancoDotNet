@@ -214,7 +214,7 @@ namespace HomeBankingDV
         {
             //aca dar de baja
             //elBanco.DarDeBajaTarjeta();
-            llenarDatosDataGrid8()
+            llenarDatosDataGrid8();
         }
     }
 

@@ -621,7 +621,7 @@ namespace HomeBankingDV
             {
                 if (!existeUsuario(dni))
                 {
-                    Usuario u = new Usuario(  dni,  nombre,  apellido, mail, password,isAdmin,bloqueado);
+                    Usuario u = new Usuario(dni,  nombre,  apellido, mail, password,isAdmin,bloqueado);
                     contexto.usuarios.Add(u);
                     contexto.SaveChanges();
                     return true;
