@@ -27,7 +27,7 @@ namespace HomeBankingDV
 
         public ICollection<CajaDeAhorro> cajas { get;}= new List<CajaDeAhorro>();
         
-        public List<TitularesRel> UserCajas { get; set; }
+        public List<TitularesRel> UserCajas { get; set; } = new List<TitularesRel>();
         public List<PlazoFijo> pfs { get;}= new List<PlazoFijo>();
         public List<TarjetaDeCredito> tarjetas { get;} = new List<TarjetaDeCredito>();
 

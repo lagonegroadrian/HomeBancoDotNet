@@ -14,9 +14,9 @@ namespace HomeBankingDV
         public int cbu { get; set; }
         public ICollection<Usuario> titulares { get; set; } = new List<Usuario>();
         public float saldo { get; set; }
-        public List<Movimiento> movimientos { get; set; }
+        public List<Movimiento> movimientos { get; set; } = new List<Movimiento>();
 
-        public List<TitularesRel> UserCajas { get; set; }
+        public List<TitularesRel> UserCajas { get; set; } = new List<TitularesRel>();
 
         public CajaDeAhorro(int idCajaDeAhorro, int cbu, List<Usuario> titulares, float saldo, List<Movimiento> movimientos)
         {

@@ -31,7 +31,7 @@ namespace HomeBankingDV
             {
                 contexto = new MiContexto();
 
-                contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Load();
+                contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(p => p.pagos).Include(u => u.UserCajas).Load();
                 contexto.usuarios.Load();
                 contexto.cajaDeAhorros.Load();
                 contexto.plazoFijos.Load();
@@ -39,9 +39,7 @@ namespace HomeBankingDV
                 contexto.pago.Load();
                 contexto.movimientos.Load();
                 contexto.titulares.Load();
-                contexto.domicilios.Load();
-
-                //contexto.SaveChanges();--- solo cuando hay modificaciones
+             
             }
             catch (Exception)
             {
@@ -99,7 +97,7 @@ namespace HomeBankingDV
             {
                 foreach (PlazoFijo plazo in contexto.plazoFijos)
                 {
-                    if (plazo.idPlazoFijo == _elId)
+                    if (plazo.idPlazoFijo == _elId && plazo.pagado == true)
                     {
                         contexto.plazoFijos.Remove(plazo);
                         usuarioActual.pfs.Remove(plazo);
@@ -162,7 +160,7 @@ namespace HomeBankingDV
          
         }
 
-
+        // revisar!
         public bool AgregarTitularCajaAhorro(int _cbu, int _dni)
         {
             try
@@ -197,29 +195,6 @@ namespace HomeBankingDV
             if (salida)
                 contexto.SaveChanges();
             return salida;
-
-            /*
-            foreach (CajaDeAhorro cajaU in contexto.cajaDeAhorros)
-            {
-                if (cajaU.cbu == _cbu)
-                {
-                    if (cajaU.titulares.Count >= 2)
-                    {
-                        foreach (Usuario usuario in contexto.usuarios)
-                        {
-                            if (usuario.dni == _dni)
-                            {
-                                cajaU.titulares.Remove(usuario);
-                                contexto.SaveChanges();
-                                return true;
-                            }
-                        }
-
-                    }
-                    return false; 
-                }
-            }*/
-            return false;
         }
 
 
@@ -232,16 +207,6 @@ namespace HomeBankingDV
                 contexto.movimientos.Add(m);
 
                 caja.movimientos.Add(m);
-
-                /*foreach (CajaDeAhorro cajaM in contexto.cajaDeAhorros)
-                {
-                    if (cajaM.idCajaDeAhorro == caja.idCajaDeAhorro)
-                    {
-                        cajaM.movimientos.Add(m);
-                        return true;
-                    }
-                }
-                */
             }
             catch (Exception)
             {
@@ -390,7 +355,6 @@ namespace HomeBankingDV
         {
             try
             {
-                //TarjetaDeCredito tj = new TarjetaDeCredito(idTarjeta, usuarioActual, numero, codigoV, limite, consumos);
                 TarjetaDeCredito tj = new TarjetaDeCredito(usuarioActual, numero, codigoV, limite, consumos);
                 contexto.tarjetaDeCredito.Add(tj);
                 usuarioActual.tarjetas.Add(tj);
@@ -474,6 +438,7 @@ namespace HomeBankingDV
         }
         public List<Movimiento> obtenerTodosLosMovimientos() { return contexto.movimientos.ToList(); }
 
+        // esta ok?
         public List<Movimiento> obtenerMovimientosXcbu(int _cbu) 
         {
             foreach (Movimiento movimiento in obtenerTodosLosMovimientos())
@@ -602,34 +567,38 @@ namespace HomeBankingDV
                 contexto.SaveChanges();return true;
                 }catch (Exception){return false;}return false;
         }
-   
 
- 
+
+
         public bool PagarTarjeta(int NumeroDeTarjeta, int CBU, String detalle, DateTime fecha)
         {
-            foreach (TarjetaDeCredito TarjetaAPagar in usuarioActual.tarjetas)
+            try
             {
-                if (TarjetaAPagar.numero == NumeroDeTarjeta)
+                foreach (TarjetaDeCredito TarjetaAPagar in usuarioActual.tarjetas)
                 {
-                    float Saldo = TarjetaAPagar.consumos;
-                    foreach (CajaDeAhorro CajaDePago in usuarioActual.cajas)
+                    if (TarjetaAPagar.numero == NumeroDeTarjeta)
                     {
-                        if (CajaDePago.idCajaDeAhorro == CBU)
+                        float Saldo = TarjetaAPagar.consumos;
+                        foreach (CajaDeAhorro CajaDePago in usuarioActual.cajas)
                         {
-                            CajaDePago.saldo = CajaDePago.saldo - Saldo;
-                            TarjetaAPagar.consumos = 0;
-                            AltaMovimiento(TarjetaAPagar.consumos, CajaDePago, detalle, fecha);
-                            return true;
+                            if (CajaDePago.idCajaDeAhorro == CBU)
+                            {
+                                CajaDePago.saldo = CajaDePago.saldo - Saldo;
+                                TarjetaAPagar.consumos = 0;
+                                AltaMovimiento(TarjetaAPagar.consumos, CajaDePago, detalle, fecha);
+
+                                return true;
+                            }
                         }
-                        return false;
                     }
-                    return false;
                 }
+            }
+            catch (Exception)
+            {
                 return false;
             }
             return false;
         }
-
         private void cargarPlazosFijoEnUsuarios()
         {
             foreach (Usuario usu in contexto.usuarios)
@@ -662,7 +631,7 @@ namespace HomeBankingDV
             return false;
         }
 
-        //public void Actualizar_usuarios(){contexto.usuarios.Load();}
+      
 
         public bool IniciarSesion(int DNI, string Contraseña)
         {
@@ -681,6 +650,7 @@ namespace HomeBankingDV
                         else
                         {
                             intentos++; /// cod 887
+                            contexto.Update(intentos);
                             return false;
                         }
                     } else
@@ -691,7 +661,7 @@ namespace HomeBankingDV
                     {
                         usuario.bloqueado = true;
                         contexto.Update(usuario);
-                        //contexto.SaveChanges(); ---
+                        
                     }
                 }
             }catch (Exception)
