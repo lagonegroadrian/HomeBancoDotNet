@@ -50,6 +50,7 @@ namespace HomeBankingDV
 
 
                 Usuario user = elBanco.hacerLogin(dniIngresado, contraseniaIngresada);
+                elBanco.ponerUsuario(user);
 
                 if (user.dni == dniIngresado) 
                 {

@@ -270,6 +270,7 @@ namespace HomeBankingDV
         private void DelegadoCloseLogin()
         {
             hijoLogin.Close();
+            elBanco.cerrarPrograma();
             this.Dispose();
         }
 

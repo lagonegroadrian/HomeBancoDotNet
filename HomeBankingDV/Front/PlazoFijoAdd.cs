@@ -64,15 +64,21 @@ namespace HomeBankingDV.Front
         private void button2_Click(object sender, EventArgs e)
         {
             // boton crear plazo fijo
+
+
+            
             int _cuenta = Int32.Parse(textBox1.Text);
             float _monto = float.Parse(textBox2.Text);
+
             
+
             float _tasa = float.Parse(textBox3.Text);
             int _dias = Int32.Parse(textBox4.Text);
 
-            if(montoCuentaOrigen < _monto) 
+            
+                if (montoCuentaOrigen < _monto && montoCuentaOrigen <1) 
             { 
-                MessageBox.Show("Monto Insuficiente."); 
+                MessageBox.Show("Monto Insuficiente.");
             } 
             else 
             {
@@ -84,6 +90,7 @@ namespace HomeBankingDV.Front
                     this.MostrarCBUs();
                 };
             }
+            
 
             textBox1.Text = "";
             textBox2.Text = "";

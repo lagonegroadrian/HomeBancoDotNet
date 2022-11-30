@@ -18,9 +18,9 @@ namespace HomeBankingDV.Logica
         public Usuario us { get; set; }
 
         public TitularesRel() { }
-        public TitularesRel(int _idTi, int _idCa, int _idUs)
+        public TitularesRel(/*int _idTi,*/ int _idCa, int _idUs)
         {
-            this.idTi = _idTi;
+            //this.idTi = _idTi;
             this.idCa = _idCa;
             this.idUs = _idUs;
         }

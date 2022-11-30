@@ -41,6 +41,7 @@ namespace HomeBankingDV
             this.Saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.plazoFijoTab = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,11 +76,12 @@ namespace HomeBankingDV
             this.dataGridView8 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigoV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Consumos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button4 = new System.Windows.Forms.Button();
             this.labelIntentos = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.cajasDeAhorroTab.SuspendLayout();
@@ -192,6 +194,12 @@ namespace HomeBankingDV
             resources.ApplyResources(this.plazoFijoTab, "plazoFijoTab");
             this.plazoFijoTab.Name = "plazoFijoTab";
             this.plazoFijoTab.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.BackColor = System.Drawing.Color.DarkKhaki;
+            this.label8.Name = "label8";
             // 
             // dataGridView6
             // 
@@ -424,6 +432,7 @@ namespace HomeBankingDV
             resources.ApplyResources(this.button15, "button15");
             this.button15.Name = "button15";
             this.button15.UseVisualStyleBackColor = false;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button14
             // 
@@ -439,26 +448,46 @@ namespace HomeBankingDV
             this.dataGridView8.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn13,
             this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15});
+            this.codigoV,
+            this.dataGridViewTextBoxColumn15,
+            this.Consumos});
             resources.ApplyResources(this.dataGridView8, "dataGridView8");
             this.dataGridView8.Name = "dataGridView8";
             this.dataGridView8.RowTemplate.Height = 25;
+            this.dataGridView8.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView8_CellContentClick);
             // 
             // dataGridViewTextBoxColumn13
             // 
+            this.dataGridViewTextBoxColumn13.Frozen = true;
             resources.ApplyResources(this.dataGridViewTextBoxColumn13, "dataGridViewTextBoxColumn13");
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn14
             // 
+            this.dataGridViewTextBoxColumn14.Frozen = true;
             resources.ApplyResources(this.dataGridViewTextBoxColumn14, "dataGridViewTextBoxColumn14");
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             // 
+            // codigoV
+            // 
+            this.codigoV.Frozen = true;
+            resources.ApplyResources(this.codigoV, "codigoV");
+            this.codigoV.Name = "codigoV";
+            this.codigoV.ReadOnly = true;
+            // 
             // dataGridViewTextBoxColumn15
             // 
+            this.dataGridViewTextBoxColumn15.Frozen = true;
             resources.ApplyResources(this.dataGridViewTextBoxColumn15, "dataGridViewTextBoxColumn15");
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            // 
+            // Consumos
+            // 
+            this.Consumos.Frozen = true;
+            resources.ApplyResources(this.Consumos, "Consumos");
+            this.Consumos.Name = "Consumos";
+            this.Consumos.ReadOnly = true;
             // 
             // button4
             // 
@@ -482,12 +511,6 @@ namespace HomeBankingDV
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Name = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.BackColor = System.Drawing.Color.DarkKhaki;
-            this.label8.Name = "label8";
             // 
             // Home
             // 
@@ -560,9 +583,6 @@ namespace HomeBankingDV
         private Button button16;
         private Button button15;
         private Button button14;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private Button button17;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn cbu;
@@ -572,6 +592,11 @@ namespace HomeBankingDV
         private DataGridViewTextBoxColumn inifin;
         private DataGridViewTextBoxColumn Estado;
         private Label label8;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private DataGridViewTextBoxColumn codigoV;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private DataGridViewTextBoxColumn Consumos;
     }
 }
 

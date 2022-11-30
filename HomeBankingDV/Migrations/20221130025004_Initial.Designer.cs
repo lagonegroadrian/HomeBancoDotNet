@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeBankingDV.Migrations
 {
     [DbContext(typeof(MiContexto))]
-    [Migration("20221122183150_inicial")]
-    partial class inicial
+    [Migration("20221130025004_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,6 +61,12 @@ namespace HomeBankingDV.Migrations
                             idCajaDeAhorro = 3,
                             cbu = 935147310,
                             saldo = 0.0
+                        },
+                        new
+                        {
+                            idCajaDeAhorro = 4,
+                            cbu = 335189011,
+                            saldo = 0.0
                         });
                 });
 
@@ -103,7 +109,13 @@ namespace HomeBankingDV.Migrations
                         {
                             idTi = 3,
                             idCa = 2,
-                            idUs = 2
+                            idUs = 3
+                        },
+                        new
+                        {
+                            idTi = 4,
+                            idCa = 4,
+                            idUs = 3
                         });
                 });
 
@@ -197,6 +209,84 @@ namespace HomeBankingDV.Migrations
                             monto = 420.0,
                             pagado = false,
                             tasa = 7.0
+                        },
+                        new
+                        {
+                            idPlazoFijo = 4,
+                            fechaFin = new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            fechaIni = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            idUsuario = 3,
+                            monto = 530.0,
+                            pagado = false,
+                            tasa = 7.0
+                        });
+                });
+
+            modelBuilder.Entity("HomeBankingDV.TarjetaDeCredito", b =>
+                {
+                    b.Property<int>("idTarjetaDeCredito")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idTarjetaDeCredito"));
+
+                    b.Property<int>("codigoV")
+                        .HasColumnType("int");
+
+                    b.Property<double>("consumos")
+                        .HasColumnType("float");
+
+                    b.Property<int>("idUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<double>("limite")
+                        .HasColumnType("float");
+
+                    b.Property<int>("numero")
+                        .HasColumnType("int");
+
+                    b.HasKey("idTarjetaDeCredito");
+
+                    b.HasIndex("idUsuario");
+
+                    b.ToTable("tarjetaDeCredito", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            idTarjetaDeCredito = 1,
+                            codigoV = 2,
+                            consumos = 7.0,
+                            idUsuario = 1,
+                            limite = 8.0,
+                            numero = 200
+                        },
+                        new
+                        {
+                            idTarjetaDeCredito = 2,
+                            codigoV = 3,
+                            consumos = 7.0,
+                            idUsuario = 2,
+                            limite = 8.0,
+                            numero = 310
+                        },
+                        new
+                        {
+                            idTarjetaDeCredito = 3,
+                            codigoV = 4,
+                            consumos = 7.0,
+                            idUsuario = 3,
+                            limite = 8.0,
+                            numero = 420
+                        },
+                        new
+                        {
+                            idTarjetaDeCredito = 4,
+                            codigoV = 5,
+                            consumos = 9.0,
+                            idUsuario = 3,
+                            limite = 9.0,
+                            numero = 530
                         });
                 });
 
@@ -268,18 +358,18 @@ namespace HomeBankingDV.Migrations
                             dni = 35147312,
                             isAdmin = true,
                             mail = "111@111",
-                            nombre = "adriancin",
+                            nombre = "adrian",
                             password = "123"
                         },
                         new
                         {
                             idUsuario = 4,
-                            apellido = "Lagonegro",
+                            apellido = "Eltoga",
                             bloqueado = true,
                             dni = 35147313,
                             isAdmin = true,
                             mail = "222@222",
-                            nombre = "adrianzon",
+                            nombre = "Moro",
                             password = "123"
                         });
                 });
@@ -325,6 +415,17 @@ namespace HomeBankingDV.Migrations
                     b.Navigation("titularP");
                 });
 
+            modelBuilder.Entity("HomeBankingDV.TarjetaDeCredito", b =>
+                {
+                    b.HasOne("HomeBankingDV.Usuario", "titular")
+                        .WithMany("tarjetas")
+                        .HasForeignKey("idUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("titular");
+                });
+
             modelBuilder.Entity("HomeBankingDV.CajaDeAhorro", b =>
                 {
                     b.Navigation("UserCajas");
@@ -337,6 +438,8 @@ namespace HomeBankingDV.Migrations
                     b.Navigation("UserCajas");
 
                     b.Navigation("pfs");
+
+                    b.Navigation("tarjetas");
                 });
 #pragma warning restore 612, 618
         }

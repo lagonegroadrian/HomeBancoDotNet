@@ -23,19 +23,16 @@ namespace HomeBankingDV
         private Usuario usuarioActual;
        
 
-        public Banco()
-        {
-
-            inicializarAtributos();
-        }
+        public Banco(){inicializarAtributos();}
 
         private void inicializarAtributos()
         {
             try
             {
                 contexto = new MiContexto();
-              
-                contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Load();
+
+                contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Load();
+                contexto.usuarios.Load();
                 contexto.cajaDeAhorros.Load();
                 contexto.plazoFijos.Load();
                 contexto.tarjetaDeCredito.Load();
@@ -44,7 +41,7 @@ namespace HomeBankingDV
                 contexto.titulares.Load();
                 contexto.domicilios.Load();
 
-                contexto.SaveChanges();
+                //contexto.SaveChanges();--- solo cuando hay modificaciones
             }
             catch (Exception)
             {
@@ -71,7 +68,10 @@ namespace HomeBankingDV
         }
 
         public Usuario hacerLogin(int _dni, string _contraseña)
-        { return contexto.usuarios.Where(U => U.dni == _dni && U.password == _contraseña).FirstOrDefault(); }
+        {
+            return contexto.usuarios.Where(U => U.dni == _dni && U.password == _contraseña).FirstOrDefault(); 
+            // asignar a usuario logueado... no puedo regresar el user completo
+        }
 
         public float MostrarSaldoDeCAdeUsuarioActual(int _elCBU)
         {
@@ -92,8 +92,8 @@ namespace HomeBankingDV
                 return saldo_;
             }
         }
-        // faltan condicionales que cumplan consigna!
-        public bool BajaPlazoFijo(int _elId)
+
+        public bool BajaPlazoFijo(int _elId) // code9983
         {
             try
             {
@@ -122,6 +122,21 @@ namespace HomeBankingDV
 
         public bool BajaCajaAhorro(int _elCBU)
         {
+
+            CajaDeAhorro laCA = contexto.cajaDeAhorros.Where(u => u.cbu == _elCBU).FirstOrDefault();
+
+            bool salida = false;
+            foreach (CajaDeAhorro caj in contexto.cajaDeAhorros)
+            {
+                if (caj.idCajaDeAhorro== laCA.idCajaDeAhorro) { contexto.cajaDeAhorros.Remove(caj); salida = true; }
+            }
+            if (salida)
+                contexto.SaveChanges();
+            return salida;
+
+
+
+            /*
             try
             {
                 foreach (CajaDeAhorro caja in contexto.cajaDeAhorros)
@@ -143,7 +158,7 @@ namespace HomeBankingDV
             catch (Exception)
             {
                 return false;
-            }
+            }*/
          
         }
 
@@ -152,31 +167,38 @@ namespace HomeBankingDV
         {
             try
             {
-                foreach (CajaDeAhorro cajaU in contexto.cajaDeAhorros)
-                {
-                    if (cajaU.cbu == _cbu)
-                    {
-                        foreach (Usuario usuario in contexto.usuarios)
-                        {
-                            if (usuario.dni == _dni)
-                            {
-                                cajaU.titulares.Add(usuario);
-                                contexto.cajaDeAhorros.Add(cajaU);
-                                contexto.SaveChanges();
-                                return true;
-                            }
-                        }
-                    }
-                }
-            } catch (Exception)
-            {
-                return false;
-            }
+                CajaDeAhorro laCA = contexto.cajaDeAhorros.Where(u => u.cbu == _cbu).FirstOrDefault();
+                Usuario elUser = contexto.usuarios.Where(U => U.dni == _dni).FirstOrDefault();
+                laCA.titulares.Add(elUser);
+
+                //TitularesRel t = new TitularesRel(laCA.idCajaDeAhorro, elUser.idUsuario);
+                //contexto.titulares.Add(t);
+                elUser.cajas.Add(laCA);
+
+                contexto.SaveChanges();
+
+                //contexto.SaveChanges();
+                return true;
+
+            } catch (Exception){return false;}
             return false;
         }
 
         public bool EliminarTitularCajaAhorro(int _cbu, int _dni)
-        {//REEMPLAZAR POR DATO IDENTIFICABLE DNI O ID, NUNCA PASAR OBJETO DESD LA VISTA
+        {
+            CajaDeAhorro laCA = contexto.cajaDeAhorros.Where(u => u.cbu == _cbu).FirstOrDefault();
+            Usuario elUser = contexto.usuarios.Where(U => U.dni == _dni).FirstOrDefault();
+
+            bool salida = false;
+            foreach (TitularesRel elTitu in contexto.titulares) 
+            {
+                if(elTitu.idCa == laCA.idCajaDeAhorro && elTitu.idUs == elUser.idUsuario) { contexto.titulares.Remove(elTitu); salida = true; }
+            }
+            if (salida)
+                contexto.SaveChanges();
+            return salida;
+
+            /*
             foreach (CajaDeAhorro cajaU in contexto.cajaDeAhorros)
             {
                 if (cajaU.cbu == _cbu)
@@ -187,30 +209,31 @@ namespace HomeBankingDV
                         {
                             if (usuario.dni == _dni)
                             {
-                                
                                 cajaU.titulares.Remove(usuario);
-                                    contexto.SaveChanges();
+                                contexto.SaveChanges();
                                 return true;
                             }
                         }
 
                     }
-                    return false; //tiene 1 o menos titulares
+                    return false; 
                 }
-            }
+            }*/
             return false;
         }
 
 
-        //AGREGA UN MOVIMIENTO A LA LISTA DE MOVIMIENTOS DEL BANCO Y A LA LISTA DE MOVIMIENTOS DE LA CAJA A LA QUE PERTENECE EL MOVIMIENTO//   
-        public bool AltaMovimiento(float monto, CajaDeAhorro caja, string detalle, DateTime fecha) //LA FECHA DATETIME .NOW()
+        public bool AltaMovimiento(float monto, CajaDeAhorro caja, string detalle, DateTime fecha) 
         {
 
             try
             {
                 Movimiento m = new Movimiento(monto, caja, detalle, fecha);
                 contexto.movimientos.Add(m);
-                foreach (CajaDeAhorro cajaM in contexto.cajaDeAhorros)
+
+                caja.movimientos.Add(m);
+
+                /*foreach (CajaDeAhorro cajaM in contexto.cajaDeAhorros)
                 {
                     if (cajaM.idCajaDeAhorro == caja.idCajaDeAhorro)
                     {
@@ -218,6 +241,7 @@ namespace HomeBankingDV
                         return true;
                     }
                 }
+                */
             }
             catch (Exception)
             {
@@ -248,32 +272,7 @@ namespace HomeBankingDV
             return false;
         }
 
-        //NO IMPLEMENTAR//
-        public bool ModificarMovimiento(int id, float monto, CajaDeAhorro caja, string detalle, DateTime fecha)
-        {
-            try
-            {
-                foreach(Movimiento mov in contexto.movimientos)
-                {
-                    if (mov.idMovimiento == id)
-                    {
-                        mov.monto = monto;
-                        mov.caja = caja;
-                        mov.detalle = detalle;
-                        mov.fecha = fecha;
-                        contexto.movimientos.Update(mov);
-                        return true;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            return false;
-        }
 
-        //AGREGA UN PAGO A LA LISTA DE PAGOS DEL BANCO Y A LA LISTA DE PAGOS DE UN USUARIO EN PARTICULAR//
         public bool AltaPago(int id, Usuario user, string nombre, float monto, bool pagado, string metodo)
         {
             try
@@ -287,7 +286,6 @@ namespace HomeBankingDV
             return false;
         }
 
-        //ELIMINA UN PAGO DE LA LISTA DE PAGOS DEL BANCO Y DE LA LISTA DE PAGOS DE UN USUARIO EN PARTICULAR//
         public bool BajaPago(int id)
         {
             try
@@ -312,7 +310,6 @@ namespace HomeBankingDV
             return false;
         }
 
-        //MODIFICA UN PAGO DE LA LISTA DE PAGOS DEL BANCO Y DE LA LISTA DE PAGOS DE UN USUARIO EN PARTICULAR//
         public bool ModificarPago(int id, bool pagado, string metodo)
         {
             try 
@@ -339,8 +336,7 @@ namespace HomeBankingDV
             return false;
         }
 
-
-        //AGREGA UN PLAZO FIJO A LA LISTA DE PFS DEL BANCO Y A LA LISTA DE PFS DE UN USUARIO EN PARTICULAR//
+       
         public bool AltaPlazoFijo(float _monto, int _cantDias)
         {
             PlazoFijo plazo;
@@ -354,11 +350,8 @@ namespace HomeBankingDV
 
             try
             {
-              
-
-                plazo = new PlazoFijo(idPlazoFijo,titular,_monto,fechaIni,fechaFin,tasa,pagado);
+                plazo = new PlazoFijo(titular, _monto, fechaIni, fechaFin, tasa, pagado);
                 contexto.plazoFijos.Add(plazo);
-                usuarioActual.pfs.Add(plazo);
                 contexto.SaveChanges();
                 return true;
             }
@@ -369,7 +362,6 @@ namespace HomeBankingDV
             return false;
         }
 
-        //ELIMINA UN PFS DE LA LISTA DE PFS DEL BANCO Y DE LA LISTA DE PFS DE UN USUARIO EN PARTICULAR//
         public bool eliminarPlazoFijo(int id)
         {
             try
@@ -393,38 +385,13 @@ namespace HomeBankingDV
         }
 
 
-        //NO IMPLEMENTAR//
-        public bool ModificarPlazoFijo(int id,Usuario titular,float monto,DateTime fechaIni ,DateTime fechaFin,float tasa,bool pagado)
-        {
-            try
-            {
-                foreach(PlazoFijo plazo in contexto.plazoFijos)
-                {
-                    plazo.titularP = titular;
-                    plazo.monto = monto;
-                    plazo.fechaIni = fechaIni;
-                    plazo.fechaFin = fechaFin;
-                    plazo.tasa = tasa;
-                    plazo.pagado = pagado;
 
-                    contexto.plazoFijos.Update(plazo);
-                    contexto.SaveChanges();
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            return false;
-        }
-
-        //AGREGA UNA TARJETA DE CREDITO A LA LISTA DE PFS DEL BANCO Y A LA LISTA DE TARJETAS DE CREDITO DE UN USUARIO EN PARTICULAR//
         public bool AltaTarjetaCredito(int numero, int codigoV, float limite, float consumos,int idTarjeta)
         {
             try
             {
-                TarjetaDeCredito tj = new TarjetaDeCredito(idTarjeta, usuarioActual, numero, codigoV, limite, consumos);
+                //TarjetaDeCredito tj = new TarjetaDeCredito(idTarjeta, usuarioActual, numero, codigoV, limite, consumos);
+                TarjetaDeCredito tj = new TarjetaDeCredito(usuarioActual, numero, codigoV, limite, consumos);
                 contexto.tarjetaDeCredito.Add(tj);
                 usuarioActual.tarjetas.Add(tj);
                 contexto.SaveChanges();
@@ -438,7 +405,6 @@ namespace HomeBankingDV
             return false;
         }
 
-        //ELIMINA UNA TJ DE LA LISTA DE TJS DEL BANCO Y DE LA LISTA DE TJS DE UN USUARIO EN PARTICULAR//
         public bool BajaTarjetaCredito(int id)
         {
             foreach (TarjetaDeCredito tj in usuarioActual.tarjetas)
@@ -458,8 +424,6 @@ namespace HomeBankingDV
             return false;
         }
 
-
-        //MODIFICA EL LIMITE DE UNA TJ DE LA LISTA DE TJS DEL BANCO Y DE LA LISTA DE TJS DE UN USUARIO EN PARTICULAR//
         public bool ModificarTarjetaCredito(int id, float limite)
         {
             try
@@ -509,7 +473,21 @@ namespace HomeBankingDV
          
         }
         public List<Movimiento> obtenerTodosLosMovimientos() { return contexto.movimientos.ToList(); }
-        public List<Movimiento> obtenerMovimientos(int idCaja) // revisar returns
+
+        public List<Movimiento> obtenerMovimientosXcbu(int _cbu) 
+        {
+            foreach (Movimiento movimiento in obtenerTodosLosMovimientos())
+            {
+                if (movimiento.caja.cbu == _cbu)
+                {
+                    return movimiento.caja.movimientos.ToList();
+                }
+            }
+            return null;
+        } 
+
+
+        public List<Movimiento> obtenerMovimientos(int idCaja)
         {
             List<Movimiento> listaMovimientos = null;
             foreach (CajaDeAhorro caja in usuarioActual.cajas)
@@ -529,7 +507,12 @@ namespace HomeBankingDV
 
         public List<TarjetaDeCredito> obtenerTarjetasDeCredito(){return usuarioActual.tarjetas.ToList();}
 
-        public Usuario traerUsuario(){return usuarioActual;}
+        public Usuario traerUsuario(){ //code9938
+            // solo retornar el dato que necesitas
+            return usuarioActual;
+        }
+
+        public  void ponerUsuario(Usuario _elUser){usuarioActual = _elUser;}
 
         public List<Usuario> obtenerUsuarios() { return contexto.usuarios.ToList();}
 
@@ -569,10 +552,9 @@ namespace HomeBankingDV
         public bool DepositarDinero(float _monto, int cbu, string _adicional)
         {   bool resultado = false;
 
-            string _accion = "(+) Depo: $" + _monto + "; cbu:" + cbu;
+            string _accion = "(+) Depo - cbu:" + cbu;
 
-            if (_adicional != "") //{ _accion = "(+) transf. de $" + _monto + " en cbu: " + cbu; }
-            { _accion += _adicional; }
+            if (_adicional != ""){ _accion += _adicional; }
 
             foreach (CajaDeAhorro Caja in usuarioActual.cajas)
             {   if (Caja.cbu == cbu)
@@ -584,7 +566,7 @@ namespace HomeBankingDV
                         if (_monto > 0)
                         {
                             contexto.cajaDeAhorros.Update(Caja);
-                          Movimiento mov = new Movimiento(_monto,Caja,_accion,fecha);
+                            Movimiento mov = new Movimiento(_monto,Caja,_accion,fecha);
                             contexto.movimientos.Add(mov);
                             contexto.SaveChanges();
                             return true;
@@ -599,41 +581,26 @@ namespace HomeBankingDV
 
         public bool RetirarDinero(float _monto, int cbu, string _adicional)
         {
+            string _accion = "(-) Extraccion - cbu:" + cbu;
 
-            string _accion = "(-) Extrac: $" + _monto + "; cbu:" + cbu;
-
-            if (_adicional != "") //{ _accion = "(-) transf.$" + _monto + "; cbu:" + cbu + ";  + _adicional; }
-            { _accion += _adicional; }
-
-        
-                    try
-                    {
+            if (_adicional != ""){ _accion += _adicional; }
+            try{
                 foreach (CajaDeAhorro Caja in usuarioActual.cajas)
                 {
                     if (Caja.cbu == cbu)
                     {
+                        if (Caja.saldo > _monto) {
+                       Caja.saldo = Caja.saldo - _monto;
 
-                        if (Caja.saldo > 0)
-                        {
-                            Caja.saldo = Caja.saldo - _monto;
-                        }
                         DateTime fecha=DateTime.Now;
                         contexto.cajaDeAhorros.Update(Caja);
                         Movimiento mov = new Movimiento(_monto, Caja, _accion, fecha);
                         contexto.movimientos.Add(mov);
+                        }
                     }
-                }   
-                    contexto.SaveChanges();
-                        return true;
-                 
                 }
-                    
-                    catch (Exception)
-                {
-                    return false;
-                }
-                return false;
-            
+                contexto.SaveChanges();return true;
+                }catch (Exception){return false;}return false;
         }
    
 
@@ -663,9 +630,6 @@ namespace HomeBankingDV
             return false;
         }
 
-        //*Metodos modificados para el 2do TP - Inicio
-       
-
         private void cargarPlazosFijoEnUsuarios()
         {
             foreach (Usuario usu in contexto.usuarios)
@@ -688,23 +652,18 @@ namespace HomeBankingDV
             {
                 if (!existeUsuario(dni))
                 {
-                  
-                    
                     Usuario u = new Usuario(  dni,  nombre,  apellido, mail, password,isAdmin,bloqueado);
                     contexto.usuarios.Add(u);
                     contexto.SaveChanges();
                     return true;
                 }
             }
-            catch (Exception)
-            {
-                return false;
-            }
+            catch (Exception){return false;}
             return false;
         }
 
-        public void Actualizar_usuarios(){contexto.usuarios.Load();}
-        // inicio de sesion:
+        //public void Actualizar_usuarios(){contexto.usuarios.Load();}
+
         public bool IniciarSesion(int DNI, string Contraseña)
         {
             int intentos = 0;
@@ -721,7 +680,7 @@ namespace HomeBankingDV
                         }
                         else
                         {
-                            intentos++;
+                            intentos++; /// cod 887
                             return false;
                         }
                     } else
@@ -732,6 +691,7 @@ namespace HomeBankingDV
                     {
                         usuario.bloqueado = true;
                         contexto.Update(usuario);
+                        //contexto.SaveChanges(); ---
                     }
                 }
             }catch (Exception)
@@ -740,45 +700,44 @@ namespace HomeBankingDV
             }
             return false;
         }
-            
 
-        //*****************************
         public bool AltaCajaAhorro()
-        {
-            try 
-            {
-                //Genera CBU a partir del DNI.
+        {try {
                 int cbu = usuarioActual.dni * 10;
 
                 Random rd = new Random();
-                //int rand_num = rd.Next(cbu, cbu * 1109);
                 int rand_num = rd.Next(cbu + 1);
                 cbu = rand_num;
                 float saldo=0;
-               int idCajaDeAhorro = rd.Next(cbu + 2);
-                List<Usuario> titulares = new List<Usuario>();
-                List<Movimiento> movimientos = new List<Movimiento>();
+                int idCajaDeAhorro = rd.Next(cbu + 2);
 
-                CajaDeAhorro c = new CajaDeAhorro(idCajaDeAhorro, cbu, titulares, saldo, movimientos);
-                usuarioActual.cajas.Add(c);
+                CajaDeAhorro c = new CajaDeAhorro(cbu, saldo);
                 contexto.cajaDeAhorros.Add(c);
+
+                c.titulares.Add(usuarioActual);
+                usuarioActual.cajas.Add(c);
+
                 contexto.SaveChanges();
 
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+                contexto.cajaDeAhorros.Load();
+                CajaDeAhorro nuevaCA = contexto.cajaDeAhorros.Where(u => u.cbu == cbu).FirstOrDefault();
+                if (nuevaCA.idCajaDeAhorro >= 0) 
+                {
+                    TitularesRel t = new TitularesRel(nuevaCA.idCajaDeAhorro, usuarioActual.idUsuario);
+                    contexto.titulares.Add(t);
 
+                    Movimiento mov = new Movimiento(0, nuevaCA, "(*) Alta caja de ahorro", DateTime.Now);
+                    contexto.movimientos.Add(mov);
+
+                    contexto.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception){return false;}
             return false;
         }
-       
-        public void cerrarPrograma()
-        {
-            contexto.Dispose();
-        }
 
-        //*Metodos modificados para el 2do TP - Fin
+        public void cerrarPrograma(){contexto.Dispose();}
     }
 }
 

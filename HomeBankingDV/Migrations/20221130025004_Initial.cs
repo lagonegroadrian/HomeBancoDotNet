@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HomeBankingDV.Migrations
 {
     /// <inheritdoc />
-    public partial class inicial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -93,6 +93,29 @@ namespace HomeBankingDV.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tarjetaDeCredito",
+                columns: table => new
+                {
+                    idTarjetaDeCredito = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    idUsuario = table.Column<int>(type: "int", nullable: false),
+                    numero = table.Column<int>(type: "int", nullable: false),
+                    codigoV = table.Column<int>(type: "int", nullable: false),
+                    limite = table.Column<double>(type: "float", nullable: false),
+                    consumos = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tarjetaDeCredito", x => x.idTarjetaDeCredito);
+                    table.ForeignKey(
+                        name: "FK_tarjetaDeCredito_Usuarios_idUsuario",
+                        column: x => x.idUsuario,
+                        principalTable: "Usuarios",
+                        principalColumn: "idUsuario",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "titulares",
                 columns: table => new
                 {
@@ -125,7 +148,8 @@ namespace HomeBankingDV.Migrations
                 {
                     { 1, 935147312, 0.0 },
                     { 2, 935147311, 0.0 },
-                    { 3, 935147310, 0.0 }
+                    { 3, 935147310, 0.0 },
+                    { 4, 335189011, 0.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -135,8 +159,8 @@ namespace HomeBankingDV.Migrations
                 {
                     { 1, "perez", false, 31859480, true, "jose@jose.com.ar", "Jose", "1234" },
                     { 2, "Upalala", false, 31859481, false, "Carlos@Upalala.com.ar", "Carlos", "1234" },
-                    { 3, "Lagonegro", false, 35147312, true, "111@111", "adriancin", "123" },
-                    { 4, "Lagonegro", true, 35147313, true, "222@222", "adrianzon", "123" }
+                    { 3, "Lagonegro", false, 35147312, true, "111@111", "adrian", "123" },
+                    { 4, "Eltoga", true, 35147313, true, "222@222", "Moro", "123" }
                 });
 
             migrationBuilder.InsertData(
@@ -146,7 +170,19 @@ namespace HomeBankingDV.Migrations
                 {
                     { 1, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 200.0, false, 7.0 },
                     { 2, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 310.0, false, 7.0 },
-                    { 3, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 420.0, false, 7.0 }
+                    { 3, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 420.0, false, 7.0 },
+                    { 4, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 530.0, false, 7.0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "tarjetaDeCredito",
+                columns: new[] { "idTarjetaDeCredito", "codigoV", "consumos", "idUsuario", "limite", "numero" },
+                values: new object[,]
+                {
+                    { 1, 2, 7.0, 1, 8.0, 200 },
+                    { 2, 3, 7.0, 2, 8.0, 310 },
+                    { 3, 4, 7.0, 3, 8.0, 420 },
+                    { 4, 5, 9.0, 3, 9.0, 530 }
                 });
 
             migrationBuilder.InsertData(
@@ -156,7 +192,8 @@ namespace HomeBankingDV.Migrations
                 {
                     { 1, 1, 1 },
                     { 2, 2, 1 },
-                    { 3, 2, 2 }
+                    { 3, 2, 3 },
+                    { 4, 4, 3 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -167,6 +204,11 @@ namespace HomeBankingDV.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_PlazoFijo_idUsuario",
                 table: "PlazoFijo",
+                column: "idUsuario");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tarjetaDeCredito_idUsuario",
+                table: "tarjetaDeCredito",
                 column: "idUsuario");
 
             migrationBuilder.CreateIndex(
@@ -188,6 +230,9 @@ namespace HomeBankingDV.Migrations
 
             migrationBuilder.DropTable(
                 name: "PlazoFijo");
+
+            migrationBuilder.DropTable(
+                name: "tarjetaDeCredito");
 
             migrationBuilder.DropTable(
                 name: "titulares");

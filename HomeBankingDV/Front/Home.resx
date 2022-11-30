@@ -232,6 +232,27 @@
   <data name="&gt;&gt;cajasDeAhorroTab.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label8.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Corbel, 11.25pt, style=Bold</value>
+  </data>
+  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>159, 265</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 18</value>
+  </data>
+  <data name="label8.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Clicar 2 veces para eliminar Plazo Fijo</value>
+  </data>
   <data name="&gt;&gt;label8.Name" xml:space="preserve">
     <value>label8</value>
   </data>
@@ -244,6 +265,51 @@
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="dataGridViewTextBoxColumn9.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn9.HeaderText" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn9.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn10.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn10.HeaderText" xml:space="preserve">
+    <value>Monto</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn10.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn10.Width" type="System.Int32, mscorlib">
+    <value>90</value>
+  </data>
+  <metadata name="inifin.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="inifin.HeaderText" xml:space="preserve">
+    <value>Inicio - Fin</value>
+  </data>
+  <metadata name="Estado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Estado.HeaderText" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="dataGridView6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 6</value>
+  </data>
+  <data name="dataGridView6.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="dataGridView6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>406, 256</value>
+  </data>
+  <data name="dataGridView6.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;dataGridView6.Name" xml:space="preserve">
     <value>dataGridView6</value>
   </data>
@@ -255,6 +321,21 @@
   </data>
   <data name="&gt;&gt;dataGridView6.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 309</value>
+  </data>
+  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 29</value>
+  </data>
+  <data name="button2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>Crear Plazo FIjo</value>
   </data>
   <data name="&gt;&gt;button2.Name" xml:space="preserve">
     <value>button2</value>
@@ -295,6 +376,30 @@
   <data name="&gt;&gt;plazoFijoTab.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt, style=Bold</value>
+  </data>
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>109, 279</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 15</value>
+  </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>&lt;- Seleccione metodo de pago-&gt;</value>
+  </data>
+  <data name="label7.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
   </data>
@@ -306,6 +411,30 @@
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
+    <value>Numero tarjeta</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn8.MinimumWidth" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn8.Width" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <data name="dataGridView5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>255, 323</value>
+  </data>
+  <data name="dataGridView5.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="dataGridView5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 66</value>
+  </data>
+  <data name="dataGridView5.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
   <data name="&gt;&gt;dataGridView5.Name" xml:space="preserve">
     <value>dataGridView5</value>
@@ -319,6 +448,30 @@
   <data name="&gt;&gt;dataGridView5.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>303, 294</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 20</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Tarjetas</value>
+  </data>
+  <data name="label6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
@@ -330,6 +483,30 @@
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 294</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 20</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Cuentas</value>
+  </data>
+  <data name="label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -343,6 +520,30 @@
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <metadata name="dataGridViewTextBoxColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
+    <value>CBU</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.MinimumWidth" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.Width" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <data name="dataGridView4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 323</value>
+  </data>
+  <data name="dataGridView4.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="dataGridView4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 66</value>
+  </data>
+  <data name="dataGridView4.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
   <data name="&gt;&gt;dataGridView4.Name" xml:space="preserve">
     <value>dataGridView4</value>
   </data>
@@ -354,6 +555,21 @@
   </data>
   <data name="&gt;&gt;dataGridView4.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="button12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>298, 406</value>
+  </data>
+  <data name="button12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 29</value>
+  </data>
+  <data name="button12.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="button12.Text" xml:space="preserve">
+    <value>Pagar</value>
   </data>
   <data name="&gt;&gt;button12.Name" xml:space="preserve">
     <value>button12</value>
@@ -367,6 +583,21 @@
   <data name="&gt;&gt;button12.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="button11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>186, 406</value>
+  </data>
+  <data name="button11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 29</value>
+  </data>
+  <data name="button11.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="button11.Text" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
   <data name="&gt;&gt;button11.Name" xml:space="preserve">
     <value>button11</value>
   </data>
@@ -378,6 +609,21 @@
   </data>
   <data name="&gt;&gt;button11.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="button10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 406</value>
+  </data>
+  <data name="button10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 29</value>
+  </data>
+  <data name="button10.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="button10.Text" xml:space="preserve">
+    <value>Crear Nuevo Pago</value>
   </data>
   <data name="&gt;&gt;button10.Name" xml:space="preserve">
     <value>button10</value>
@@ -391,6 +637,54 @@
   <data name="&gt;&gt;button10.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <metadata name="dataGridViewTextBoxColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.MinimumWidth" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.Width" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
+    <value>Monto</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="dataGridView3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 188</value>
+  </data>
+  <data name="dataGridView3.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="dataGridView3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>406, 89</value>
+  </data>
+  <data name="dataGridView3.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
   <data name="&gt;&gt;dataGridView3.Name" xml:space="preserve">
     <value>dataGridView3</value>
   </data>
@@ -402,6 +696,30 @@
   </data>
   <data name="&gt;&gt;dataGridView3.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>133, 155</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 20</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Pagos Pendientes</value>
+  </data>
+  <data name="label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
   </data>
   <data name="&gt;&gt;label4.Name" xml:space="preserve">
     <value>label4</value>
@@ -415,6 +733,30 @@
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 18</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 20</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Pagos Realizados</value>
+  </data>
+  <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
   <data name="&gt;&gt;label3.Name" xml:space="preserve">
     <value>label3</value>
   </data>
@@ -426,6 +768,54 @@
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>Monto</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="dataGridView2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 48</value>
+  </data>
+  <data name="dataGridView2.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="dataGridView2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>406, 89</value>
+  </data>
+  <data name="dataGridView2.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="&gt;&gt;dataGridView2.Name" xml:space="preserve">
     <value>dataGridView2</value>
@@ -463,6 +853,21 @@
   <data name="&gt;&gt;pagosTab.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="button16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 248</value>
+  </data>
+  <data name="button16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 29</value>
+  </data>
+  <data name="button16.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="button16.Text" xml:space="preserve">
+    <value>Pagar</value>
+  </data>
   <data name="&gt;&gt;button16.Name" xml:space="preserve">
     <value>button16</value>
   </data>
@@ -474,6 +879,21 @@
   </data>
   <data name="&gt;&gt;button16.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="button15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>224, 248</value>
+  </data>
+  <data name="button15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 29</value>
+  </data>
+  <data name="button15.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="button15.Text" xml:space="preserve">
+    <value>Dar de Baja</value>
   </data>
   <data name="&gt;&gt;button15.Name" xml:space="preserve">
     <value>button15</value>
@@ -487,6 +907,21 @@
   <data name="&gt;&gt;button15.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="button14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 370</value>
+  </data>
+  <data name="button14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 30</value>
+  </data>
+  <data name="button14.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="button14.Text" xml:space="preserve">
+    <value>Crear Nueva Tarjeta</value>
+  </data>
   <data name="&gt;&gt;button14.Name" xml:space="preserve">
     <value>button14</value>
   </data>
@@ -498,6 +933,72 @@
   </data>
   <data name="&gt;&gt;button14.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn13.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn13.MinimumWidth" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn13.Width" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn14.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
+    <value>Numero</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn14.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn14.Width" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <metadata name="codigoV.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="codigoV.HeaderText" xml:space="preserve">
+    <value>codigoV</value>
+  </data>
+  <data name="codigoV.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <metadata name="dataGridViewTextBoxColumn15.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewTextBoxColumn15.HeaderText" xml:space="preserve">
+    <value>Limite</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn15.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn15.Width" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <metadata name="Consumos.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Consumos.HeaderText" xml:space="preserve">
+    <value>Consumos</value>
+  </data>
+  <data name="Consumos.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="dataGridView8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 13</value>
+  </data>
+  <data name="dataGridView8.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="dataGridView8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>406, 220</value>
+  </data>
+  <data name="dataGridView8.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;dataGridView8.Name" xml:space="preserve">
     <value>dataGridView8</value>
@@ -661,762 +1162,6 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="dataGridViewTextBoxColumn9.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dataGridViewTextBoxColumn10.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="inifin.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Estado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridView6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 6</value>
-  </data>
-  <data name="dataGridView6.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="dataGridView6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 256</value>
-  </data>
-  <data name="dataGridView6.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;dataGridView6.Name" xml:space="preserve">
-    <value>dataGridView6</value>
-  </data>
-  <data name="&gt;&gt;dataGridView6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridView6.Parent" xml:space="preserve">
-    <value>plazoFijoTab</value>
-  </data>
-  <data name="&gt;&gt;dataGridView6.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn9.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn9.HeaderText" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn9.Width" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn10.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn10.HeaderText" xml:space="preserve">
-    <value>Monto</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn10.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn10.Width" type="System.Int32, mscorlib">
-    <value>90</value>
-  </data>
-  <metadata name="inifin.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="inifin.HeaderText" xml:space="preserve">
-    <value>Inicio - Fin</value>
-  </data>
-  <metadata name="Estado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Estado.HeaderText" xml:space="preserve">
-    <value>Estado</value>
-  </data>
-  <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 309</value>
-  </data>
-  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 29</value>
-  </data>
-  <data name="button2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="button2.Text" xml:space="preserve">
-    <value>Crear Plazo FIjo</value>
-  </data>
-  <data name="&gt;&gt;button2.Name" xml:space="preserve">
-    <value>button2</value>
-  </data>
-  <data name="&gt;&gt;button2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
-    <value>plazoFijoTab</value>
-  </data>
-  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt, style=Bold</value>
-  </data>
-  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 279</value>
-  </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 15</value>
-  </data>
-  <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>&lt;- Seleccione metodo de pago-&gt;</value>
-  </data>
-  <data name="label7.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
-  </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridView5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 323</value>
-  </data>
-  <data name="dataGridView5.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="dataGridView5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 66</value>
-  </data>
-  <data name="dataGridView5.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;dataGridView5.Name" xml:space="preserve">
-    <value>dataGridView5</value>
-  </data>
-  <data name="&gt;&gt;dataGridView5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridView5.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;dataGridView5.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
-    <value>Numero tarjeta</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn8.MinimumWidth" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn8.Width" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
-  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
-  </data>
-  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>303, 294</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 20</value>
-  </data>
-  <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Tarjetas</value>
-  </data>
-  <data name="label6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
-  </data>
-  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 294</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 20</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Cuentas</value>
-  </data>
-  <data name="label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridView4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 323</value>
-  </data>
-  <data name="dataGridView4.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="dataGridView4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 66</value>
-  </data>
-  <data name="dataGridView4.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;dataGridView4.Name" xml:space="preserve">
-    <value>dataGridView4</value>
-  </data>
-  <data name="&gt;&gt;dataGridView4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridView4.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;dataGridView4.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
-    <value>CBU</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn7.MinimumWidth" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn7.Width" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
-  <data name="button12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 406</value>
-  </data>
-  <data name="button12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 29</value>
-  </data>
-  <data name="button12.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="button12.Text" xml:space="preserve">
-    <value>Pagar</value>
-  </data>
-  <data name="&gt;&gt;button12.Name" xml:space="preserve">
-    <value>button12</value>
-  </data>
-  <data name="&gt;&gt;button12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button12.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;button12.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="button11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>186, 406</value>
-  </data>
-  <data name="button11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 29</value>
-  </data>
-  <data name="button11.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="button11.Text" xml:space="preserve">
-    <value>Eliminar</value>
-  </data>
-  <data name="&gt;&gt;button11.Name" xml:space="preserve">
-    <value>button11</value>
-  </data>
-  <data name="&gt;&gt;button11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button11.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;button11.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="button10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 406</value>
-  </data>
-  <data name="button10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 29</value>
-  </data>
-  <data name="button10.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="button10.Text" xml:space="preserve">
-    <value>Crear Nuevo Pago</value>
-  </data>
-  <data name="&gt;&gt;button10.Name" xml:space="preserve">
-    <value>button10</value>
-  </data>
-  <data name="&gt;&gt;button10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button10.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;button10.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dataGridViewTextBoxColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dataGridViewTextBoxColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridView3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 188</value>
-  </data>
-  <data name="dataGridView3.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="dataGridView3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 89</value>
-  </data>
-  <data name="dataGridView3.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;dataGridView3.Name" xml:space="preserve">
-    <value>dataGridView3</value>
-  </data>
-  <data name="&gt;&gt;dataGridView3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridView3.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;dataGridView3.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
-    <value>Usuario</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn4.MinimumWidth" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn4.Width" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
-    <value>Nombre</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn5.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn5.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
-    <value>Monto</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn6.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
-  </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 155</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 20</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Pagos Pendientes</value>
-  </data>
-  <data name="label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
-  </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 18</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 20</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Pagos Realizados</value>
-  </data>
-  <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridView2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 48</value>
-  </data>
-  <data name="dataGridView2.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="dataGridView2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 89</value>
-  </data>
-  <data name="dataGridView2.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;dataGridView2.Name" xml:space="preserve">
-    <value>dataGridView2</value>
-  </data>
-  <data name="&gt;&gt;dataGridView2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridView2.Parent" xml:space="preserve">
-    <value>pagosTab</value>
-  </data>
-  <data name="&gt;&gt;dataGridView2.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
-    <value>Usuario</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>Nombre</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
-    <value>Monto</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn3.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <data name="button16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 248</value>
-  </data>
-  <data name="button16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 29</value>
-  </data>
-  <data name="button16.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="button16.Text" xml:space="preserve">
-    <value>Pagar</value>
-  </data>
-  <data name="&gt;&gt;button16.Name" xml:space="preserve">
-    <value>button16</value>
-  </data>
-  <data name="&gt;&gt;button16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button16.Parent" xml:space="preserve">
-    <value>tarjetasDeCredito</value>
-  </data>
-  <data name="&gt;&gt;button16.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="button15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 248</value>
-  </data>
-  <data name="button15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 29</value>
-  </data>
-  <data name="button15.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="button15.Text" xml:space="preserve">
-    <value>Dar de Baja</value>
-  </data>
-  <data name="&gt;&gt;button15.Name" xml:space="preserve">
-    <value>button15</value>
-  </data>
-  <data name="&gt;&gt;button15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button15.Parent" xml:space="preserve">
-    <value>tarjetasDeCredito</value>
-  </data>
-  <data name="&gt;&gt;button15.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="button14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="button14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 370</value>
-  </data>
-  <data name="button14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 30</value>
-  </data>
-  <data name="button14.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="button14.Text" xml:space="preserve">
-    <value>Crear Nueva Tarjeta</value>
-  </data>
-  <data name="&gt;&gt;button14.Name" xml:space="preserve">
-    <value>button14</value>
-  </data>
-  <data name="&gt;&gt;button14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button14.Parent" xml:space="preserve">
-    <value>tarjetasDeCredito</value>
-  </data>
-  <data name="&gt;&gt;button14.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn13.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dataGridViewTextBoxColumn14.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dataGridViewTextBoxColumn15.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridView8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 54</value>
-  </data>
-  <data name="dataGridView8.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="dataGridView8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 89</value>
-  </data>
-  <data name="dataGridView8.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;dataGridView8.Name" xml:space="preserve">
-    <value>dataGridView8</value>
-  </data>
-  <data name="&gt;&gt;dataGridView8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridView8.Parent" xml:space="preserve">
-    <value>tarjetasDeCredito</value>
-  </data>
-  <data name="&gt;&gt;dataGridView8.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn13.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
-    <value>Titular</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn13.MinimumWidth" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn13.Width" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn14.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
-    <value>Numero</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn14.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn14.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <metadata name="dataGridViewTextBoxColumn15.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewTextBoxColumn15.HeaderText" xml:space="preserve">
-    <value>Limite</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn15.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="dataGridViewTextBoxColumn15.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label8.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Corbel, 11.25pt, style=Bold</value>
-  </data>
-  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 265</value>
-  </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 18</value>
-  </data>
-  <data name="label8.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Clicar 2 veces para eliminar Plazo Fijo</value>
-  </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
-  </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>plazoFijoTab</value>
-  </data>
-  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1540,10 +1285,22 @@
   <data name="&gt;&gt;dataGridViewTextBoxColumn14.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;codigoV.Name" xml:space="preserve">
+    <value>codigoV</value>
+  </data>
+  <data name="&gt;&gt;codigoV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn15.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn15</value>
   </data>
   <data name="&gt;&gt;dataGridViewTextBoxColumn15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Consumos.Name" xml:space="preserve">
+    <value>Consumos</value>
+  </data>
+  <data name="&gt;&gt;Consumos.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

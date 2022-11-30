@@ -15,8 +15,6 @@ namespace HomeBankingDV
 {
     public partial class Home : Form
     {
-    
-        //public DelegadoRegistroStart delegadoRegistroStart;
         public DelegadoCloseHomme delegadoCloseHomme;
         public DelegadoHommeToCA delegadoHommeToCA;
         public DelegadoPlazoFijo delegadoPlazoFijo;
@@ -31,45 +29,40 @@ namespace HomeBankingDV
 
             llenarDatosDataGrid1();
             llenarDatosDataGrid6();
+            llenarDatosDataGrid8();
+            
         }
 
         private void llenarDatosDataGrid1()
         {
             dataGridView1.Rows.Clear();
-          //  elBanco.traerUsuario().cajas.Clear();
-
             foreach (CajaDeAhorro salida in elBanco.traerUsuario().cajas) { dataGridView1.Rows.Add(salida.idCajaDeAhorro, salida.cbu, salida.saldo); }
+        }
 
-         
+        private void llenarDatosDataGrid8()
+        {
+            dataGridView8.Rows.Clear();
+            foreach (TarjetaDeCredito salida in elBanco.traerUsuario().tarjetas)
+            {
+                dataGridView8.Rows.Add(salida.idTarjetaDeCredito, salida.numero, salida.codigoV, salida.limite, salida.consumos);
+            }
         }
 
 
-        private void llenarDatosDataGrid6()
-        {
-            dataGridView6.Rows.Clear();
-          //  elBanco.traerUsuario().pfs.Clear();
-
-            foreach (PlazoFijo oPlazo in elBanco.obtenerPlazosFijos()) 
+        private void llenarDatosDataGrid6() // llenar plazo fijo
+        {   dataGridView6.Rows.Clear();
+            foreach (PlazoFijo salida in elBanco.traerUsuario().pfs)
             {
-                if (elBanco.traerUsuario().idUsuario == (oPlazo.titularP.idUsuario))
-                {
-                    string aux = "EnCurso";
+                string aux = "EnCurso";
+                if (salida.pagado) { aux = "Acobrar"; }
 
-                    if (oPlazo.pagado) { aux = "Acobrar"; }
-
-                    dataGridView6.Rows.Add(oPlazo.idPlazoFijo , oPlazo.monto, oPlazo.fechaIni.Date + " A " + oPlazo.fechaFin.Date , aux);
-                    elBanco.traerUsuario().pfs.Add(oPlazo);
-
-                }
+                dataGridView6.Rows.Add(salida.idPlazoFijo, salida.monto, salida.fechaIni.Date + " A " + salida.fechaFin.Date, aux);
             }
         }
 
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            //Form crearCaja = new CrearNuevaCaja();
-            //crearCaja.Show();
-            //elBanco.AltaCajaAhorro();
             elBanco.AltaCajaAhorro();
             llenarDatosDataGrid1();
         }
@@ -79,22 +72,11 @@ namespace HomeBankingDV
 
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //Form formulario = new Depositar();
-            //formulario.Show();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            //aca
-        }
+        private void button6_Click(object sender, EventArgs e){}
+        private void label1_Click(object sender, EventArgs e){}
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            int nroCBU = 0;
-            //int valorSaldo = 0;
-            Double valorSaldo = 0;
 
             object elCBU = dataGridView1.Rows[e.RowIndex].Cells[1].Value;
             object elSaldo = dataGridView1.Rows[e.RowIndex].Cells[2].Value;
@@ -102,10 +84,9 @@ namespace HomeBankingDV
             if ((elCBU is DBNull) || (elSaldo is DBNull)) { return; } // por si viene nulo que salga del metodo
 
 
-            nroCBU = Int32.Parse(elCBU.ToString());
-            
-            //valorSaldo = Int32.Parse(elSaldo.ToString());
-            valorSaldo = Double.Parse(elSaldo.ToString());
+            int nroCBU = Int32.Parse(elCBU.ToString());
+
+            Double valorSaldo = Double.Parse(elSaldo.ToString());
 
 
             this.delegadoHommeToCA(nroCBU);
@@ -222,6 +203,18 @@ namespace HomeBankingDV
         {
             // llamar al plazo fijo
             this.delegadoPlazoFijo();
+        }
+
+        private void dataGridView8_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // completar este dataGrid
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //aca dar de baja
+            //elBanco.DarDeBajaTarjeta();
+            llenarDatosDataGrid8()
         }
     }
 

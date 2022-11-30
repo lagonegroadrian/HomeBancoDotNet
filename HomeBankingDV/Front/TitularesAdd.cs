@@ -70,8 +70,6 @@ namespace HomeBankingDV.Front
             DialogResult result;
 
             if (esTitu == "Si") { message = "Sacar Titular"; }
-
-                // Displays the MessageBox.
                 result = MessageBox.Show(message, caption, buttons);
 
             if (result == System.Windows.Forms.DialogResult.Yes)

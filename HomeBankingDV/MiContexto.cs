@@ -63,7 +63,6 @@ namespace HomeBankingDV
             modelBuilder.Entity<PlazoFijo>(
                 plazoFijo =>
                 {
-                   
                     plazoFijo.Property(p => p.idUsuario).HasColumnType("int");
                     plazoFijo.Property(p => p.monto).HasColumnType("float");
                     plazoFijo.Property(p => p.fechaIni).HasColumnType("Date");
@@ -76,7 +75,7 @@ namespace HomeBankingDV
             modelBuilder.Entity<TarjetaDeCredito>(
                 tarjetaDeCredito =>
                 {
-               
+                    tarjetaDeCredito.Property(t => t.idUsuario).HasColumnType("int");
                     tarjetaDeCredito.Property(t => t.numero).HasColumnType("int");
                     tarjetaDeCredito.Property(t => t.codigoV).HasColumnType("int");
                     tarjetaDeCredito.Property(t => t.limite).HasColumnType("float");
@@ -86,7 +85,6 @@ namespace HomeBankingDV
             modelBuilder.Entity<Pago>(
                 pago =>
                 {
-                  
                     pago.Property(p => p.nombre).HasColumnType("varchar(50)");
                     pago.Property(p => p.monto).HasColumnType("float");
                     pago.Property(p => p.pagado).HasColumnType("bit");
@@ -143,7 +141,8 @@ namespace HomeBankingDV
 
             // definicion de relacion uno a muchos tarjetaDeCredito-Usuario:
 
-            modelBuilder.Entity<TarjetaDeCredito>().HasOne(m => m.titular).WithMany(t => t.tarjetas).HasForeignKey(d => d.idTarjetaDeCredito).OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<TarjetaDeCredito>().HasOne(m => m.titular).WithMany(t => t.tarjetas).HasForeignKey(d => d.idTarjetaDeCredito).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<TarjetaDeCredito>().HasOne(m => m.titular).WithMany(t => t.tarjetas).HasForeignKey(d => d.idUsuario).OnDelete(DeleteBehavior.Cascade);
 
             // definicion de relacion uno a muchos usuario-pago
 
@@ -154,23 +153,34 @@ namespace HomeBankingDV
             modelBuilder.Entity<Usuario>().HasData(
                 new { idUsuario = 1, dni = 31859480, nombre = "Jose", apellido = "perez", mail = "jose@jose.com.ar", password = "1234", isAdmin = true, bloqueado = false },
                 new { idUsuario = 2, dni = 31859481, nombre = "Carlos", apellido = "Upalala", mail = "Carlos@Upalala.com.ar", password = "1234", isAdmin = false, bloqueado = false },
-                new { idUsuario = 3, dni = 35147312, nombre = "adriancin", apellido = "Lagonegro", mail = "111@111", password = "123", isAdmin = true, bloqueado = false },
-                new { idUsuario = 4, dni = 35147313, nombre = "adrianzon", apellido = "Lagonegro", mail = "222@222", password = "123", isAdmin = true, bloqueado = true }
+                new { idUsuario = 3, dni = 35147312, nombre = "adrian", apellido = "Lagonegro", mail = "111@111", password = "123", isAdmin = true, bloqueado = false },
+                new { idUsuario = 4, dni = 35147313, nombre = "Moro", apellido = "Eltoga", mail = "222@222", password = "123", isAdmin = true, bloqueado = true }
                 );
 
             modelBuilder.Entity<CajaDeAhorro>().HasData(
                 new { idCajaDeAhorro = 1, cbu = 935147312, saldo = 0F },
                 new { idCajaDeAhorro = 2, cbu = 935147311, saldo = 0F },
-                new { idCajaDeAhorro = 3, cbu = 935147310, saldo = 0F });
+                new { idCajaDeAhorro = 3, cbu = 935147310, saldo = 0F },
+                new { idCajaDeAhorro = 4, cbu = 335189011, saldo = 0F });
 
-            modelBuilder.Entity<TitularesRel>().HasData(new { idTi = 1, idCa = 1, idUs = 1 }, new { idTi = 2, idCa = 2, idUs = 1 }, new { idTi = 3, idCa = 2, idUs = 2 });
+            modelBuilder.Entity<TitularesRel>().HasData(
+                new { idTi = 1, idCa = 1, idUs = 1 }, 
+                new { idTi = 2, idCa = 2, idUs = 1 }, 
+                new { idTi = 3, idCa = 2, idUs = 3 },
+                new { idTi = 4, idCa = 4, idUs = 3 }
+                );
 
             modelBuilder.Entity<PlazoFijo>().HasData(
                 new { idPlazoFijo = 1, idUsuario = 1, monto = 200F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false },
                 new { idPlazoFijo = 2, idUsuario = 1, monto = 310F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false },
-                new { idPlazoFijo = 3, idUsuario = 2, monto = 420F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false });
+                new { idPlazoFijo = 3, idUsuario = 2, monto = 420F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false },
+                new { idPlazoFijo = 4, idUsuario = 3, monto = 530F, fechaIni = new DateTime().Date, fechaFin = new DateTime().Date.AddMonths(8), tasa = 7F, pagado = false });
 
-
+            modelBuilder.Entity<TarjetaDeCredito>().HasData(
+                new { idTarjetaDeCredito = 1, idUsuario = 1, numero = 200, codigoV = 2, limite = 8F, consumos = 7F},
+                new { idTarjetaDeCredito = 2, idUsuario = 2, numero = 310, codigoV = 3, limite = 8F, consumos = 7F},
+                new { idTarjetaDeCredito = 3, idUsuario = 3, numero = 420, codigoV = 4, limite = 8F, consumos = 7F},
+                new { idTarjetaDeCredito = 4, idUsuario = 3, numero = 530, codigoV = 5, limite = 9F, consumos = 9F});
 
 
 
@@ -178,10 +188,10 @@ namespace HomeBankingDV
             // ignoramos la clase Banco para que no genere la tabla.
             modelBuilder.Ignore<Banco>();
             modelBuilder.Ignore<Domicilio>();
-            modelBuilder.Ignore<TarjetaDeCredito>();
+            //modelBuilder.Ignore<TarjetaDeCredito>();
             modelBuilder.Ignore<Pago>();
         }
-        
+
 
 
     }

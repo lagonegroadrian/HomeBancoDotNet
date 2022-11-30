@@ -32,5 +32,15 @@ namespace HomeBankingDV
             this.tasa = tasa;
             this.pagado = pagado;
         }
+
+        public PlazoFijo(Usuario titular, float monto, DateTime fechaIni, DateTime fechaFin, float tasa, bool pagado)
+        {
+            this.titularP = titular;
+            this.monto = monto;
+            this.fechaIni = fechaIni;
+            this.fechaFin = fechaFin;
+            this.tasa = tasa;
+            this.pagado = pagado;
+        }
     }
 }
