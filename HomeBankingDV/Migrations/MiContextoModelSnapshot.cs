@@ -144,6 +144,30 @@ namespace HomeBankingDV.Migrations
                     b.ToTable("movimiento", (string)null);
                 });
 
+            modelBuilder.Entity("HomeBankingDV.Pago", b =>
+                {
+                    b.Property<int>("idPago")
+                        .HasColumnType("int");
+
+                    b.Property<string>("metodo")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<double>("monto")
+                        .HasColumnType("float");
+
+                    b.Property<string>("nombre")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<bool>("pagado")
+                        .HasColumnType("bit");
+
+                    b.HasKey("idPago");
+
+                    b.ToTable("Pago", (string)null);
+                });
+
             modelBuilder.Entity("HomeBankingDV.PlazoFijo", b =>
                 {
                     b.Property<int>("idPlazoFijo")
@@ -401,6 +425,25 @@ namespace HomeBankingDV.Migrations
                     b.Navigation("caja");
                 });
 
+            modelBuilder.Entity("HomeBankingDV.Pago", b =>
+                {
+                    b.HasOne("HomeBankingDV.TarjetaDeCredito", "tarjeta")
+                        .WithOne("pago")
+                        .HasForeignKey("HomeBankingDV.Pago", "idPago")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("HomeBankingDV.Usuario", "user")
+                        .WithMany("pagos")
+                        .HasForeignKey("idPago")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("tarjeta");
+
+                    b.Navigation("user");
+                });
+
             modelBuilder.Entity("HomeBankingDV.PlazoFijo", b =>
                 {
                     b.HasOne("HomeBankingDV.Usuario", "titularP")
@@ -430,9 +473,17 @@ namespace HomeBankingDV.Migrations
                     b.Navigation("movimientos");
                 });
 
+            modelBuilder.Entity("HomeBankingDV.TarjetaDeCredito", b =>
+                {
+                    b.Navigation("pago")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HomeBankingDV.Usuario", b =>
                 {
                     b.Navigation("UserCajas");
+
+                    b.Navigation("pagos");
 
                     b.Navigation("pfs");
 

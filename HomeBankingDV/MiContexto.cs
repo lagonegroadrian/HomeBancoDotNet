@@ -82,15 +82,15 @@ namespace HomeBankingDV
                     tarjetaDeCredito.Property(t => t.consumos).HasColumnType("float");
                 });
 
-            //modelBuilder.Entity<Pago>().ToTable("Pago").HasKey(p => p.idPago);
-            //modelBuilder.Entity<Pago>(
-            //pago =>
-            //{
-            //pago.Property(p => p.nombre).HasColumnType("varchar(50)");
-            //pago.Property(p => p.monto).HasColumnType("float");
-            //pago.Property(p => p.pagado).HasColumnType("bit");
-            //pago.Property(p => p.metodo).HasColumnType("varchar(50)");
-            //});
+            modelBuilder.Entity<Pago>().ToTable("Pago").HasKey(p => p.idPago);
+            modelBuilder.Entity<Pago>(
+            pago =>
+            {
+            pago.Property(p => p.nombre).HasColumnType("varchar(50)");
+            pago.Property(p => p.monto).HasColumnType("float");
+            pago.Property(p => p.pagado).HasColumnType("bit");
+            pago.Property(p => p.metodo).HasColumnType("varchar(50)");
+            });
 
             modelBuilder.Entity<Movimiento>().ToTable("movimiento").HasKey(m => m.idMovimiento);
             modelBuilder.Entity<Movimiento>(
@@ -133,16 +133,27 @@ namespace HomeBankingDV
             // definicion de relacion uno a muchos tarjetaDeCredito-Usuario:
 
            
-            modelBuilder.Entity<TarjetaDeCredito>().HasOne(m => m.titular).WithMany(t => t.tarjetas).HasForeignKey(d => d.NumUsuario).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<TarjetaDeCredito>().HasOne(m => m.titular).WithMany(t => t.tarjetas).HasForeignKey(d => d.NumUsuario);
+           
+
+
+            // definicion de relacion uno a uno pago-tarjeta
+
+              modelBuilder.Entity<TarjetaDeCredito>()
+                .HasOne(U => U.pago)
+                .WithOne(D => D.tarjeta)
+                .HasForeignKey<Pago>(D => D.idPago)
+                .OnDelete(DeleteBehavior.NoAction);
+             modelBuilder.Entity<Pago>()
+                .HasOne(D => D.tarjeta)
+                .WithOne(U => U.pago)
+                .HasForeignKey<Pago>(D => D.idPago)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             // definicion de relacion uno a muchos usuario-pago
 
-            //modelBuilder.Entity<Pago>().HasOne(m => m.user).WithMany(t => t.pagos).HasForeignKey(d => d.idPago).OnDelete(DeleteBehavior.Cascade);
-            // definicion de relacion uno a uno pago-tarjeta
-            //modelBuilder.Entity<Pago>().HasOne(U => U.tarjeta).WithOne(D => D.pago).HasForeignKey<TarjetaDeCredito>(D => D.idTarjetaDeCredito).OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<TarjetaDeCredito>().HasOne(D => D.pago).WithOne(U => U.tarjeta).HasForeignKey<Pago>(D => D.idPago).OnDelete(DeleteBehavior.Cascade);
-
+           modelBuilder.Entity<Pago>().HasOne(m => m.user).WithMany(t => t.pagos).HasForeignKey(d => d.idPago).OnDelete(DeleteBehavior.NoAction);
 
             // ingreso de datos :
 
@@ -183,7 +194,7 @@ namespace HomeBankingDV
 
             // ignoramos la clase Banco para que no genere la tabla.
             modelBuilder.Ignore<Banco>();
-            modelBuilder.Ignore<Pago>();
+          
         }
 
 

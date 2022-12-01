@@ -16,7 +16,9 @@ namespace HomeBankingDV
         public int codigoV { get; set; }
         public float limite { get; set; }
         public float consumos { get; set; }
+
         public Pago pago { get; set; }
+      
 
         //constructor
        public TarjetaDeCredito() { }
@@ -29,6 +31,7 @@ namespace HomeBankingDV
             this.codigoV = codigoV;
             this.limite = limite;
             this.consumos = consumos;
+
         }
     }
 }

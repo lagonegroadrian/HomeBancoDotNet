@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HomeBankingDV.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -141,6 +141,31 @@ namespace HomeBankingDV.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Pago",
+                columns: table => new
+                {
+                    idPago = table.Column<int>(type: "int", nullable: false),
+                    nombre = table.Column<string>(type: "varchar(50)", nullable: false),
+                    monto = table.Column<double>(type: "float", nullable: false),
+                    pagado = table.Column<bool>(type: "bit", nullable: false),
+                    metodo = table.Column<string>(type: "varchar(50)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pago", x => x.idPago);
+                    table.ForeignKey(
+                        name: "FK_Pago_TarjetaDeCredito_idPago",
+                        column: x => x.idPago,
+                        principalTable: "TarjetaDeCredito",
+                        principalColumn: "idTarjetaDeCredito");
+                    table.ForeignKey(
+                        name: "FK_Pago_Usuarios_idPago",
+                        column: x => x.idPago,
+                        principalTable: "Usuarios",
+                        principalColumn: "idUsuario");
+                });
+
             migrationBuilder.InsertData(
                 table: "CajaAhorro",
                 columns: new[] { "idCajaDeAhorro", "cbu", "saldo" },
@@ -229,13 +254,16 @@ namespace HomeBankingDV.Migrations
                 name: "movimiento");
 
             migrationBuilder.DropTable(
+                name: "Pago");
+
+            migrationBuilder.DropTable(
                 name: "PlazoFijo");
 
             migrationBuilder.DropTable(
-                name: "TarjetaDeCredito");
+                name: "titulares");
 
             migrationBuilder.DropTable(
-                name: "titulares");
+                name: "TarjetaDeCredito");
 
             migrationBuilder.DropTable(
                 name: "CajaAhorro");
