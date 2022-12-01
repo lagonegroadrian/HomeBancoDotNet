@@ -143,12 +143,12 @@ namespace HomeBankingDV
                 .HasOne(U => U.pago)
                 .WithOne(D => D.tarjeta)
                 .HasForeignKey<Pago>(D => D.idPago)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
              modelBuilder.Entity<Pago>()
                 .HasOne(D => D.tarjeta)
                 .WithOne(U => U.pago)
                 .HasForeignKey<Pago>(D => D.idPago)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             // definicion de relacion uno a muchos usuario-pago

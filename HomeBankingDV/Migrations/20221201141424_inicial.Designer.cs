@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeBankingDV.Migrations
 {
     [DbContext(typeof(MiContexto))]
-    [Migration("20221201140519_inicial")]
+    [Migration("20221201141424_inicial")]
     partial class inicial
     {
         /// <inheritdoc />
