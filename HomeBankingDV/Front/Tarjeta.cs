@@ -13,44 +13,35 @@ using System.Windows.Forms;
 
 namespace HomeBankingDV
 {
-    public partial class CA : Form
+    public partial class Tarjeta : Form
     {    
-        public DelegadoCloseCA delegadoCloseCA;
-        public DelegadoDepositar delegadoDepositar;
-        public DelegadoRetirar delegadoRetirar;
-        public DelegadoTransferir delegadoTransferir;
-        public DelegadoVerDetalle delegadoVerDetalle;
-        public DelegadoBajaCA delegadoBajaCA;
-        public DelegadoModificar delegadoModificar;
+        public DelegadoCloseTar delegadoCloseTar;
+        //public DelegadoDepositar delegadoDepositar;
+        public DelegadoModLimite delegadoModLimite;
+        //public DelegadoTransferir delegadoTransferir;
+        //public DelegadoVerDetalle delegadoVerDetalle;
+        //public DelegadoBajaCA delegadoBajaCA;
+        //public DelegadoModificar delegadoModificar;
 
 
         public Banco elBanco;
-        public int dniIngresado;
-        public string contraseniaIngresada;
-        public int elCBU;
+        private int idTarjeta;
+        private float limite;
 
-        public CA(Banco elBancoFora, int _elCBU)
+        public Tarjeta(Banco elBancoFora, int _elidTar, int _numeroTarjeta, int _codigoTarjeta, float _limiteTarjeta, float _consumoTarjeta)
         {
             elBanco = elBancoFora;
-            elCBU = _elCBU;
+            idTarjeta = _elidTar;
 
             InitializeComponent();
-            label5.Text = _elCBU.ToString();
-
-            label6.Text = elBanco.MostrarSaldoDeCAdeUsuarioActual(_elCBU).ToString();
-
-            this.mostrarTitulares(_elCBU);
+            label5.Text = _elidTar.ToString();
+            label6.Text = _numeroTarjeta.ToString();
+            label9.Text = _codigoTarjeta.ToString();
+            label10.Text = _limiteTarjeta.ToString();
+            label11.Text = _consumoTarjeta.ToString();
         }
 
-        private void mostrarTitulares(int _elCBU) {
 
-            //foreach (Usuario usu in elBanco.obtenerTitularesXcaja(_elCBU)) 
-            //{
-                //listBox1.Items.Add(usu.apellido + ", " + usu.nombre);
-            //};
-
-            foreach (Usuario titul in elBanco.traerUsuario().MostrarTitularesCajasDeAhorro(_elCBU)){listBox1.Items.Add(titul.apellido + ", " + titul.nombre);}
-        }
 
         private void Registrar_Click(object sender, EventArgs e)
         {
@@ -72,7 +63,7 @@ namespace HomeBankingDV
 
         private void Cancelar_Click(object sender, EventArgs e)
         {
-            delegadoCloseCA();
+            delegadoCloseTar();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -102,43 +93,43 @@ namespace HomeBankingDV
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.delegadoCloseCA();
+            this.delegadoCloseTar();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            this.delegadoDepositar(elCBU);
+            //this.delegadoDepositar(elCBU);
             //Form formulario = new Depositar(elBanco, elCBU);
             //formulario.Show();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            this.delegadoRetirar(elCBU);
+            //this.delegadoRetirar(elCBU);
             //Form formulario = new Retirar(elBanco, elCBU);
             //formulario.Show();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            this.delegadoTransferir(elCBU);
+            //this.delegadoTransferir(elCBU);
             //Form formulario = new Transferir(elBanco, elCBU);
             //formulario.Show();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            this.delegadoVerDetalle(elCBU);
+            //this.delegadoVerDetalle(elCBU);
             //Form formulario = new VerDetalle();
             //formulario.Show();
         }
 
-        private void CA_Load(object sender, EventArgs e)
+        private void Tarjeta_Load(object sender, EventArgs e)
         {
             
         }
 
-        private void CA_Load_1(object sender, EventArgs e)
+        private void Tarjeta_Load_1(object sender, EventArgs e)
         {
 
         }
@@ -147,8 +138,10 @@ namespace HomeBankingDV
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            //this.delegadoBajaCA(elCBU);
-            elBanco.BajaCajaAhorro(elCBU);
+            string salida = "No fue posible eliminar tarjeta, recuerde que debe tener 0 consumos";
+            if (elBanco.BajaTarjetaCredito(idTarjeta)) { salida = "Tarjeta dada de baja correctamente";  };
+            MessageBox.Show(salida);
+            delegadoCloseTar();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -158,15 +151,20 @@ namespace HomeBankingDV
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.delegadoModificar(elCBU);
+            this.delegadoModLimite(idTarjeta,limite);
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 
-    public delegate void DelegadoCloseCA();
-    public delegate void DelegadoDepositar(int elCBU);
-    public delegate void DelegadoRetirar(int elCBU);
-    public delegate void DelegadoTransferir(int elCBU);
-    public delegate void DelegadoVerDetalle(int elCBU);
-    public delegate void DelegadoBajaCA(int elCBU);
-    public delegate void DelegadoModificar(int elCBU);
+    public delegate void DelegadoCloseTar();
+    //public delegate void DelegadoDepositar(int elCBU);
+    public delegate void DelegadoModLimite(int idTarjeta, float limite);
+    //public delegate void DelegadoTransferir(int elCBU);
+    //public delegate void DelegadoVerDetalle(int elCBU);
+    //public delegate void DelegadoBajaCA(int elCBU);   
+    //public delegate void DelegadoModificar(int elCBU);
 }

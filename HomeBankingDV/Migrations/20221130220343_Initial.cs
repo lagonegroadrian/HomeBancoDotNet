@@ -74,7 +74,7 @@ namespace HomeBankingDV.Migrations
                 {
                     idPlazoFijo = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    idUsuario = table.Column<int>(type: "int", nullable: false),
+                    NumUsuario = table.Column<int>(type: "int", nullable: false),
                     monto = table.Column<double>(type: "float", nullable: false),
                     fechaIni = table.Column<DateTime>(type: "Date", nullable: false),
                     fechaFin = table.Column<DateTime>(type: "Date", nullable: false),
@@ -85,20 +85,20 @@ namespace HomeBankingDV.Migrations
                 {
                     table.PrimaryKey("PK_PlazoFijo", x => x.idPlazoFijo);
                     table.ForeignKey(
-                        name: "FK_PlazoFijo_Usuarios_idUsuario",
-                        column: x => x.idUsuario,
+                        name: "FK_PlazoFijo_Usuarios_NumUsuario",
+                        column: x => x.NumUsuario,
                         principalTable: "Usuarios",
                         principalColumn: "idUsuario",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "tarjetaDeCredito",
+                name: "TarjetaDeCredito",
                 columns: table => new
                 {
                     idTarjetaDeCredito = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    idUsuario = table.Column<int>(type: "int", nullable: false),
+                    NumUsuario = table.Column<int>(type: "int", nullable: false),
                     numero = table.Column<int>(type: "int", nullable: false),
                     codigoV = table.Column<int>(type: "int", nullable: false),
                     limite = table.Column<double>(type: "float", nullable: false),
@@ -106,10 +106,10 @@ namespace HomeBankingDV.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tarjetaDeCredito", x => x.idTarjetaDeCredito);
+                    table.PrimaryKey("PK_TarjetaDeCredito", x => x.idTarjetaDeCredito);
                     table.ForeignKey(
-                        name: "FK_tarjetaDeCredito_Usuarios_idUsuario",
-                        column: x => x.idUsuario,
+                        name: "FK_TarjetaDeCredito_Usuarios_NumUsuario",
+                        column: x => x.NumUsuario,
                         principalTable: "Usuarios",
                         principalColumn: "idUsuario",
                         onDelete: ReferentialAction.Cascade);
@@ -165,24 +165,24 @@ namespace HomeBankingDV.Migrations
 
             migrationBuilder.InsertData(
                 table: "PlazoFijo",
-                columns: new[] { "idPlazoFijo", "fechaFin", "fechaIni", "idUsuario", "monto", "pagado", "tasa" },
+                columns: new[] { "idPlazoFijo", "NumUsuario", "fechaFin", "fechaIni", "monto", "pagado", "tasa" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 200.0, false, 7.0 },
-                    { 2, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 310.0, false, 7.0 },
-                    { 3, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 420.0, false, 7.0 },
-                    { 4, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 530.0, false, 7.0 }
+                    { 1, 1, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 200.0, false, 7.0 },
+                    { 2, 2, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 310.0, false, 7.0 },
+                    { 3, 3, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 420.0, false, 7.0 },
+                    { 4, 4, new DateTime(1, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 530.0, false, 7.0 }
                 });
 
             migrationBuilder.InsertData(
-                table: "tarjetaDeCredito",
-                columns: new[] { "idTarjetaDeCredito", "codigoV", "consumos", "idUsuario", "limite", "numero" },
+                table: "TarjetaDeCredito",
+                columns: new[] { "idTarjetaDeCredito", "NumUsuario", "codigoV", "consumos", "limite", "numero" },
                 values: new object[,]
                 {
-                    { 1, 2, 7.0, 1, 8.0, 200 },
-                    { 2, 3, 7.0, 2, 8.0, 310 },
-                    { 3, 4, 7.0, 3, 8.0, 420 },
-                    { 4, 5, 9.0, 3, 9.0, 530 }
+                    { 1, 1, 2, 7.0, 8.0, 200 },
+                    { 2, 2, 3, 7.0, 8.0, 310 },
+                    { 3, 3, 4, 7.0, 8.0, 420 },
+                    { 4, 4, 5, 9.0, 9.0, 530 }
                 });
 
             migrationBuilder.InsertData(
@@ -191,9 +191,9 @@ namespace HomeBankingDV.Migrations
                 values: new object[,]
                 {
                     { 1, 1, 1 },
-                    { 2, 2, 1 },
+                    { 2, 2, 2 },
                     { 3, 2, 3 },
-                    { 4, 4, 3 }
+                    { 4, 4, 4 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -202,14 +202,14 @@ namespace HomeBankingDV.Migrations
                 column: "idCaja");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlazoFijo_idUsuario",
+                name: "IX_PlazoFijo_NumUsuario",
                 table: "PlazoFijo",
-                column: "idUsuario");
+                column: "NumUsuario");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tarjetaDeCredito_idUsuario",
-                table: "tarjetaDeCredito",
-                column: "idUsuario");
+                name: "IX_TarjetaDeCredito_NumUsuario",
+                table: "TarjetaDeCredito",
+                column: "NumUsuario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_titulares_idCa",
@@ -232,7 +232,7 @@ namespace HomeBankingDV.Migrations
                 name: "PlazoFijo");
 
             migrationBuilder.DropTable(
-                name: "tarjetaDeCredito");
+                name: "TarjetaDeCredito");
 
             migrationBuilder.DropTable(
                 name: "titulares");

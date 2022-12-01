@@ -25,6 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Front\ModLimite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Front\Tarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Front\Home.cs">
       <SubType>Form</SubType>
     </Compile>

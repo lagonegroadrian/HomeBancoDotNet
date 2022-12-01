@@ -70,9 +70,7 @@ namespace HomeBankingDV
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tarjetasDeCredito = new System.Windows.Forms.TabPage();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.dataGridView8 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,6 +80,7 @@ namespace HomeBankingDV
             this.button4 = new System.Windows.Forms.Button();
             this.labelIntentos = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.cajasDeAhorroTab.SuspendLayout();
@@ -409,38 +408,21 @@ namespace HomeBankingDV
             // 
             // tarjetasDeCredito
             // 
-            this.tarjetasDeCredito.Controls.Add(this.button16);
-            this.tarjetasDeCredito.Controls.Add(this.button15);
-            this.tarjetasDeCredito.Controls.Add(this.button14);
+            this.tarjetasDeCredito.Controls.Add(this.label9);
+            this.tarjetasDeCredito.Controls.Add(this.button3);
             this.tarjetasDeCredito.Controls.Add(this.dataGridView8);
             resources.ApplyResources(this.tarjetasDeCredito, "tarjetasDeCredito");
             this.tarjetasDeCredito.Name = "tarjetasDeCredito";
             this.tarjetasDeCredito.UseVisualStyleBackColor = true;
             // 
-            // button16
+            // button3
             // 
-            this.button16.BackColor = System.Drawing.Color.ForestGreen;
-            this.button16.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            resources.ApplyResources(this.button16, "button16");
-            this.button16.Name = "button16";
-            this.button16.UseVisualStyleBackColor = false;
-            // 
-            // button15
-            // 
-            this.button15.BackColor = System.Drawing.Color.DarkRed;
-            this.button15.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            resources.ApplyResources(this.button15, "button15");
-            this.button15.Name = "button15";
-            this.button15.UseVisualStyleBackColor = false;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
-            // 
-            // button14
-            // 
-            this.button14.BackColor = System.Drawing.Color.Black;
-            this.button14.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            resources.ApplyResources(this.button14, "button14");
-            this.button14.Name = "button14";
-            this.button14.UseVisualStyleBackColor = false;
+            this.button3.BackColor = System.Drawing.Color.Black;
+            this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            resources.ApplyResources(this.button3, "button3");
+            this.button3.Name = "button3";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // dataGridView8
             // 
@@ -512,6 +494,12 @@ namespace HomeBankingDV
             this.label1.Name = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.BackColor = System.Drawing.Color.DarkKhaki;
+            this.label9.Name = "label9";
+            // 
             // Home
             // 
             resources.ApplyResources(this, "$this");
@@ -538,6 +526,7 @@ namespace HomeBankingDV
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tarjetasDeCredito.ResumeLayout(false);
+            this.tarjetasDeCredito.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).EndInit();
             this.ResumeLayout(false);
 
@@ -580,9 +569,6 @@ namespace HomeBankingDV
         private DataGridView dataGridView4;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private DataGridView dataGridView8;
-        private Button button16;
-        private Button button15;
-        private Button button14;
         private Button button17;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn cbu;
@@ -597,6 +583,8 @@ namespace HomeBankingDV
         private DataGridViewTextBoxColumn codigoV;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private DataGridViewTextBoxColumn Consumos;
+        private Button button3;
+        private Label label9;
     }
 }
 

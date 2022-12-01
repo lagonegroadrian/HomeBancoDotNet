@@ -31,7 +31,8 @@ namespace HomeBankingDV
             {
                 contexto = new MiContexto();
 
-                contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(p => p.pagos).Include(u => u.UserCajas).Load();
+                //contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(p => p.pagos).Include(u => u.UserCajas).Load();
+                contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(u => u.UserCajas).Load();
                 contexto.usuarios.Load();
                 contexto.cajaDeAhorros.Load();
                 contexto.plazoFijos.Load();
@@ -350,9 +351,16 @@ namespace HomeBankingDV
         }
 
 
-
-        public bool AltaTarjetaCredito(int numero, int codigoV, float limite, float consumos,int idTarjeta)
+        //public bool AltaTarjetaCredito(int numero, int codigoV, float limite, float consumos,int idTarjeta)
+        public bool AltaTarjetaCredito()
         {
+            Random rd = new Random();
+
+            int numero = rd.Next(23232, 32323);
+            int codigoV = rd.Next(100, 999);
+            float limite = 12000F;
+            float consumos = 0F;
+
             try
             {
                 TarjetaDeCredito tj = new TarjetaDeCredito(usuarioActual, numero, codigoV, limite, consumos);
@@ -383,16 +391,13 @@ namespace HomeBankingDV
                         return true;
                     }
                 }
-                return false;
             }
             return false;
         }
 
         public bool ModificarTarjetaCredito(int id, float limite)
-        {
-            try
-            {
-                foreach (TarjetaDeCredito tj in usuarioActual.tarjetas)
+        {   try
+            {   foreach (TarjetaDeCredito tj in usuarioActual.tarjetas)
                 {
                     if (tj.idTarjetaDeCredito == id)
                     {
@@ -400,16 +405,10 @@ namespace HomeBankingDV
                         contexto.tarjetaDeCredito.Update(tj);
                         contexto.SaveChanges();
                         return true;
-
                     }
-                    return false;
                 }
-            }
-            catch (Exception)
-            {
                 return false;
-            }
-          
+            }catch (Exception){return false;}
             return false;
         }
 
@@ -511,7 +510,6 @@ namespace HomeBankingDV
             }
             return salida;
         }
-          
 
 
         public bool DepositarDinero(float _monto, int cbu, string _adicional)
@@ -631,8 +629,6 @@ namespace HomeBankingDV
             return false;
         }
 
-      
-
         public bool IniciarSesion(int DNI, string Contraseña)
         {
             int intentos = 0;
@@ -661,7 +657,6 @@ namespace HomeBankingDV
                     {
                         usuario.bloqueado = true;
                         contexto.Update(usuario);
-                        
                     }
                 }
             }catch (Exception)
@@ -710,4 +705,3 @@ namespace HomeBankingDV
         public void cerrarPrograma(){contexto.Dispose();}
     }
 }
-

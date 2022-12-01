@@ -18,6 +18,7 @@ namespace HomeBankingDV
         public DelegadoCloseHomme delegadoCloseHomme;
         public DelegadoHommeToCA delegadoHommeToCA;
         public DelegadoPlazoFijo delegadoPlazoFijo;
+        public DelegadoHommeToTarjeta delegadoHommeToTarjeta;
         public Banco elBanco;
         public int dniIngresado;
         public string contraseniaIngresada;
@@ -26,11 +27,9 @@ namespace HomeBankingDV
         {
             elBanco = elBancoFora;
             InitializeComponent();
-
             llenarDatosDataGrid1();
             llenarDatosDataGrid6();
             llenarDatosDataGrid8();
-            
         }
 
         private void llenarDatosDataGrid1()
@@ -187,7 +186,6 @@ namespace HomeBankingDV
                 {
                         salida = "Plazo Fijo eliminado correctamente";
                         this.llenarDatosDataGrid6();
-
                 }
                 
             }
@@ -207,14 +205,40 @@ namespace HomeBankingDV
 
         private void dataGridView8_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // completar este dataGrid
+            // cuandoDoble click sobre dataGrid8
+
+            object elid = dataGridView8.Rows[e.RowIndex].Cells[0].Value;
+            object elnumero = dataGridView8.Rows[e.RowIndex].Cells[1].Value;
+            object elcodigo = dataGridView8.Rows[e.RowIndex].Cells[2].Value;
+            object ellimite = dataGridView8.Rows[e.RowIndex].Cells[3].Value;
+            object elconsumo = dataGridView8.Rows[e.RowIndex].Cells[4].Value;
+
+            if ((elid is DBNull) ||(elnumero is DBNull) ||(elcodigo is DBNull) ||(ellimite is DBNull) ||(elconsumo is DBNull)){ return; } // por si viene nulo que salga del metodo
+
+            int idTarjeta = Int32.Parse(elid.ToString());
+            int numeroTarjeta = Int32.Parse(elnumero.ToString());
+            int codigoTarjeta = Int32.Parse(elcodigo.ToString());
+            float limiteTarjeta = float.Parse(ellimite.ToString());
+            float consumoTarjeta = float.Parse(elconsumo.ToString());
+
+            this.delegadoHommeToTarjeta(idTarjeta, numeroTarjeta, codigoTarjeta,limiteTarjeta,consumoTarjeta);
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
             //aca dar de baja
             //elBanco.DarDeBajaTarjeta();
-            llenarDatosDataGrid8();
+            //llenarDatosDataGrid8();
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            string salida="Error al crear Tarjeta de credito";
+            if (elBanco.AltaTarjetaCredito()) 
+            { 
+                salida = "Tarjeta de Credito Creada";
+            }
+            MessageBox.Show(salida);
         }
     }
 
@@ -222,5 +246,5 @@ namespace HomeBankingDV
     public delegate void DelegadoCloseHomme();
     public delegate void DelegadoHommeToCA(int nroCBU);
     public delegate void DelegadoPlazoFijo();
-
+    public delegate void DelegadoHommeToTarjeta(int idTarjeta, int numeroTarjeta, int codigoTarjeta, float limiteTarjeta, float consumoTarjeta);
 }

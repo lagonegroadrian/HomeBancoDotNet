@@ -15,6 +15,8 @@ namespace HomeBankingDV
         VerDetalle hijoDetalle;
         TitularesAdd hijoModificarCA;
         PlazoFijoAdd hijoPlazoFijo;
+        Tarjeta hijoTarjetaC;
+        ModLimite hijoModLimite;
 
         public Banco elBanco = new Banco();
 
@@ -48,6 +50,24 @@ namespace HomeBankingDV
             hijoCA.delegadoModificar += DelegadoModificar;
 
             hijoCA.Show();
+        }
+
+        public void ActivoTarjeta(int _elIdTarjeta, int _numeroTarjeta, int _codigoTarjeta, float _limiteTarjeta, float _consumoTarjeta)
+        {
+            InitializeComponent();
+            hijoTarjetaC = new Tarjeta(elBanco, _elIdTarjeta, _numeroTarjeta, _codigoTarjeta, _limiteTarjeta, _consumoTarjeta);
+
+            hijoTarjetaC.MdiParent = this;
+            hijoTarjetaC.delegadoCloseTar += DelegadoCloseTar;
+            hijoTarjetaC.delegadoModLimite += DelegadoModLimite;
+            //hijoCA.delegadoDepositar += DelegadoDepositar;
+            //hijoCA.delegadoRetirar += DelegadoRetirar;
+            //hijoCA.delegadoTransferir += DelegadoTransferir;
+            //hijoCA.delegadoVerDetalle += DelegadoVerDetalle;
+            //hijoCA.delegadoBajaCA += DelegadoBajaCA;
+            //hijoCA.delegadoModificar += DelegadoModificar;
+
+            hijoTarjetaC.Show();
         }
 
         public void ActivoPL()
@@ -85,6 +105,7 @@ namespace HomeBankingDV
             hijoHomme.delegadoCloseHomme += DelegadoCloseHomme;
             hijoHomme.delegadoHommeToCA += DelegadoHommeToCA;
             hijoHomme.delegadoPlazoFijo += DelegadoPlazoFijo;
+            hijoHomme.delegadoHommeToTarjeta += DelegadoHommeToTarjeta;
             hijoHomme.Show();
         }
 
@@ -107,6 +128,16 @@ namespace HomeBankingDV
             hijoRetirar.Show();
         }
 
+        public void ActivoModLimite(int _elId)
+        {
+            hijoModLimite = new ModLimite(elBanco, _elId);
+            hijoModLimite.MdiParent = this;
+            hijoModLimite.delegadoModLimiteClose += DelegadoModLimiteClose;
+
+
+            hijoModLimite.Show();
+        }
+
 
         public void ActivoTransferir(int _elCBU)
         {
@@ -124,10 +155,16 @@ namespace HomeBankingDV
             hijoModificarCA.Show();
         }
 
-        private void DelegadoHommeToCA(int _elCBU) 
+        private void DelegadoHommeToCA(int _elCBU)
         {
             hijoHomme.Close();
             ActivoCA(_elCBU);
+        }
+
+        private void DelegadoHommeToTarjeta(int _elIdTarjeta, int _numeroTarjeta, int _codigoTarjeta, float _limiteTarjeta, float _consumoTarjeta)
+        {
+            hijoHomme.Close();
+            ActivoTarjeta(_elIdTarjeta, _numeroTarjeta, _codigoTarjeta, _limiteTarjeta, _consumoTarjeta);
         }
 
         private void DelegadoPlazoFijo()
@@ -195,6 +232,14 @@ namespace HomeBankingDV
             ActivoCA(_elCBU);
         }
 
+        private void DelegadoModLimiteClose()
+        {
+            hijoModLimite.Close();
+            hijoModLimite.Close();
+            hijoTarjetaC.Close();
+            ActivoHomme();
+        }
+
         private void DelegadoRetirarClose(int _elCBU)
         {
             hijoRetirar.Close();
@@ -236,6 +281,12 @@ namespace HomeBankingDV
             ActivoRetirar(_elCBU);
         }
 
+        private void DelegadoModLimite(int _elid , float _elLimite)
+        {
+            hijoHomme.Close();
+            ActivoModLimite(_elid);
+        }
+
         private void DelegadoRegistroStart()
         {
             hijoLogin.Close();
@@ -245,6 +296,12 @@ namespace HomeBankingDV
         private void DelegadoCloseCA()
         {
             hijoCA.Close();
+            ActivoHomme();
+        }
+
+        private void DelegadoCloseTar()
+        {
+            hijoTarjetaC.Close();
             ActivoHomme();
         }
 
