@@ -94,20 +94,40 @@ namespace HomeBankingDV
 
         public bool BajaPlazoFijo(int _elId) // code9983
         {
+            PlazoFijo elPl = contexto.plazoFijos.Where(u => u.idPlazoFijo == _elId).FirstOrDefault();
+
+            bool salida = false;
+            foreach (PlazoFijo pla in contexto.plazoFijos)
+            {
+                if (pla.idPlazoFijo == elPl.idPlazoFijo) 
+                {
+                    if (pla.pagado) 
+                    { 
+                    contexto.plazoFijos.Remove(pla); 
+                    salida = true;
+                    }
+                }
+            }
+            if (salida)
+                contexto.SaveChanges();
+            return salida;
+
+
+            /*
             try
             {
                 foreach (PlazoFijo plazo in contexto.plazoFijos)
                 {
-                    if (plazo.idPlazoFijo == _elId && plazo.pagado == true)
+                    if (plazo.idPlazoFijo == _elId)
                     {
+                        if (plazo.pagado == true) { 
                         contexto.plazoFijos.Remove(plazo);
                         usuarioActual.pfs.Remove(plazo);
                         contexto.SaveChanges();
                         return true;
-                    }
-                    else
-                    {
-                        return false;
+                        }
+                        else 
+                        { return false; }
                     }
                 }
                 return false;
@@ -115,7 +135,7 @@ namespace HomeBankingDV
             catch (Exception)
             {
                 return false;
-            }
+            }*/
            
         }
 
@@ -303,16 +323,18 @@ namespace HomeBankingDV
         }
 
        
-        public bool AltaPlazoFijo(float _monto, int _cantDias)
+        public bool AltaPlazoFijo(float _monto, int _cantDias , float _tasa)
         {
             PlazoFijo plazo;
             DateTime fechaIni=DateTime.Now;
             DateTime fechaFin = fechaIni.AddDays(_cantDias);
             Usuario titular = usuarioActual;
-            float tasa = 8;
+
+            float tasa = _tasa;
+
             bool pagado = false;
             Random rd = new Random();
-            int idPlazoFijo = rd.Next(usuarioActual.idUsuario + 3);
+            //int idPlazoFijo = rd.Next(usuarioActual.idUsuario + 3);
 
             try
             {
@@ -365,7 +387,7 @@ namespace HomeBankingDV
             {
                 TarjetaDeCredito tj = new TarjetaDeCredito(usuarioActual, numero, codigoV, limite, consumos);
                 contexto.tarjetaDeCredito.Add(tj);
-                usuarioActual.tarjetas.Add(tj);
+                //?usuarioActual.tarjetas.Add(tj);--> no hace falta porque ya con el include en banco lo levanta... sino como que tengo repetido 2 veces el ultimo ingreso
                 contexto.SaveChanges();
                 return true;
 
@@ -505,7 +527,6 @@ namespace HomeBankingDV
             }
             catch (Exception)
             {
-                
                 throw;
             }
             return salida;
@@ -552,7 +573,7 @@ namespace HomeBankingDV
                 {
                     if (Caja.cbu == cbu)
                     {
-                        if (Caja.saldo > _monto) {
+                        if (Caja.saldo >= _monto) {
                        Caja.saldo = Caja.saldo - _monto;
 
                         DateTime fecha=DateTime.Now;

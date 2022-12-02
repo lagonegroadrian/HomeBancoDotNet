@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HomeBankingDV.Migrations
 {
     /// <inheritdoc />
-    public partial class inicial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -158,7 +158,8 @@ namespace HomeBankingDV.Migrations
                         name: "FK_Pago_TarjetaDeCredito_idPago",
                         column: x => x.idPago,
                         principalTable: "TarjetaDeCredito",
-                        principalColumn: "idTarjetaDeCredito");
+                        principalColumn: "idTarjetaDeCredito",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Pago_Usuarios_idPago",
                         column: x => x.idPago,

@@ -162,7 +162,6 @@ namespace HomeBankingDV
             string message = "Desea eliminar Plazo Fijo?";
             string caption = "*Importante*";
 
-
             object auxIdPL = dataGridView6.Rows[e.RowIndex].Cells[0].Value;
             object auxSaldo = dataGridView6.Rows[e.RowIndex].Cells[1].Value;
             object auxEstado = dataGridView6.Rows[e.RowIndex].Cells[3].Value;
@@ -172,29 +171,32 @@ namespace HomeBankingDV
             int  idPlazoFijo = Int32.Parse(auxIdPL.ToString());
             int _saldo = Int32.Parse(auxSaldo.ToString());
             string _estado = auxEstado.ToString();
-            
 
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result;
 
             // Displays the MessageBox.
-            if (_estado == "EnCurso") { 
-            result = MessageBox.Show(message, caption, buttons);
-            if (result == System.Windows.Forms.DialogResult.Yes)
+            if (_estado == "EnCurso")
             {
-                if (elBanco.BajaPlazoFijo(idPlazoFijo))
+                salida = "Plazo Fijo se encuentra en curso";
+            }
+            else
+            { 
+                result = MessageBox.Show(message, caption, buttons);
+                if (result == System.Windows.Forms.DialogResult.Yes)
                 {
+                    if (elBanco.BajaPlazoFijo(idPlazoFijo))
+                    {
                         salida = "Plazo Fijo eliminado correctamente";
                         this.llenarDatosDataGrid6();
+                    }
+                    else 
+                    { 
+                        salida = "Error: Plazo Fijo no se pudo eliminar"; 
+                    }
                 }
-                
             }
-            }
-            else { salida = "Plazo Fijo se encuentra en curso";  }
-
             MessageBox.Show(salida);
-            //FIN
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -237,6 +239,7 @@ namespace HomeBankingDV
             if (elBanco.AltaTarjetaCredito()) 
             { 
                 salida = "Tarjeta de Credito Creada";
+                llenarDatosDataGrid8();
             }
             MessageBox.Show(salida);
         }

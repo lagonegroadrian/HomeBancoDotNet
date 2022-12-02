@@ -430,7 +430,7 @@ namespace HomeBankingDV.Migrations
                     b.HasOne("HomeBankingDV.TarjetaDeCredito", "tarjeta")
                         .WithOne("pago")
                         .HasForeignKey("HomeBankingDV.Pago", "idPago")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HomeBankingDV.Usuario", "user")

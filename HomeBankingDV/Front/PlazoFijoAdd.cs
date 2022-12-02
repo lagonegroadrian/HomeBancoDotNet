@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace HomeBankingDV.Front
             elBanco = _elBanco;
             InitializeComponent();
 
-            textBox3.Text = "1";
+            textBox3.Text = "10.5";
 
             MostrarCBUs();
         }
@@ -70,27 +71,38 @@ namespace HomeBankingDV.Front
             int _cuenta = Int32.Parse(textBox1.Text);
             float _monto = float.Parse(textBox2.Text);
 
-            
+            //float _tasa = float.Parse(textBox3.Text);
 
-            float _tasa = float.Parse(textBox3.Text);
+            //float asd = (float)Convert.ToDouble(textBox3.Text);
+
+            float _tasa = Convert.ToSingle(textBox3.Text, CultureInfo.CreateSpecificCulture("en-US")); // para que me tome el punto como decimal --> https://social.msdn.microsoft.com/Forums/es-ES/111f3149-7b2d-48a8-b6e1-027a4af4ab61/convertir-string-a-float-c-asp?forum=vcses
+
+
+
+
             int _dias = Int32.Parse(textBox4.Text);
 
             
-                if (montoCuentaOrigen < _monto && montoCuentaOrigen <1) 
+            if (montoCuentaOrigen < _monto || montoCuentaOrigen <1 || _monto < 1F)
             { 
-                MessageBox.Show("Monto Insuficiente.");
+                if(_monto < 1F) { MessageBox.Show("Monto ingresado debe ser mayor a cero."); } else { MessageBox.Show("Monto Insuficiente."); }
+                
             } 
             else 
             {
-                elBanco.RetirarDinero(_monto, _cuenta, "[PlazoFijo]");
+                if (elBanco.RetirarDinero(_monto, _cuenta, "[PlazoFijo]")) 
+                { 
             
-                if (elBanco.AltaPlazoFijo(_monto, _dias))
+                if (elBanco.AltaPlazoFijo(_monto, _dias, _tasa))
                 {
                     MessageBox.Show("Plazo fijo creado con éxito.");
                     this.MostrarCBUs();
-                };
+                    this.delegadoClosePL();
+                    }
+                    else { MessageBox.Show("error: Plazo fijo no creado."); }
+                }
+                else { MessageBox.Show("Plazo fijo no creado monto insuficiente."); }
             }
-            
 
             textBox1.Text = "";
             textBox2.Text = "";

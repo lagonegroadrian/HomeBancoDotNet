@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeBankingDV.Migrations
 {
     [DbContext(typeof(MiContexto))]
-    [Migration("20221201141424_inicial")]
-    partial class inicial
+    [Migration("20221201225630_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -433,7 +433,7 @@ namespace HomeBankingDV.Migrations
                     b.HasOne("HomeBankingDV.TarjetaDeCredito", "tarjeta")
                         .WithOne("pago")
                         .HasForeignKey("HomeBankingDV.Pago", "idPago")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HomeBankingDV.Usuario", "user")
