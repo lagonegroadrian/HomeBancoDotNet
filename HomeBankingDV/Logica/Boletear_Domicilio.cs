@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeBankingDV
 {
-    class Domicilio
+    class Boletear_Domicilio
     {
         public int idDomicilio { get; set; }
         public string calle { get; set; }
@@ -18,7 +18,7 @@ namespace HomeBankingDV
 
         public Usuario user { get; set; }
 
-        public Domicilio() { }
+        public Boletear_Domicilio() { }
 
     }
     

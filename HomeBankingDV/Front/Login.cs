@@ -46,21 +46,21 @@ namespace HomeBankingDV
         private void button1_Click(object sender, EventArgs e)
       
          {   try {   dniIngresado = int.Parse(textUsuario.Text);
-                    contraseniaIngresada = textContrasenia.Text;
+                contraseniaIngresada = textContrasenia.Text;
 
+                //Usuario user = elBanco.hacerLogin(dniIngresado, contraseniaIngresada);
+                //elBanco.ponerUsuario(user);
 
-                Usuario user = elBanco.hacerLogin(dniIngresado, contraseniaIngresada);
-                elBanco.ponerUsuario(user);
-
-                if (user.dni == dniIngresado) 
+                //if (user.dni == dniIngresado) 
+                if (elBanco.hacerLogin(dniIngresado, contraseniaIngresada))
                 {
                     //elBanco.obtenerCajasDeAhorroPorUsuario(elBanco.usuarioActual);
-
                     delegadoHommeStart();
                 } 
                 else 
-                { MessageBox.Show("Password Erronea"); }
-
+                { 
+                    MessageBox.Show("Password Usuario/Erronea");// para no darle data al hacker si existe o no el usuario
+                }
                 //if (elBanco.IniciarSesion(dniIngresado, contraseniaIngresada)){delegadoHommeStart();}else { MessageBox.Show("Password Erronea"); }
             } catch (Exception){MessageBox.Show("Error en el ingreso de datos.");}
         }

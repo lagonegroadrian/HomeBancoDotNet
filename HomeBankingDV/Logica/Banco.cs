@@ -21,7 +21,7 @@ namespace HomeBankingDV
 
         private MiContexto contexto;
         private Usuario usuarioActual;
-       
+        private int intentos = 0;
 
         public Banco(){inicializarAtributos();}
 
@@ -30,7 +30,6 @@ namespace HomeBankingDV
             try
             {
                 contexto = new MiContexto();
-
                 //contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(p => p.pagos).Include(u => u.UserCajas).Load();
                 contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(u => u.UserCajas).Load();
                 contexto.usuarios.Load();
@@ -40,23 +39,12 @@ namespace HomeBankingDV
                 contexto.pago.Load();
                 contexto.movimientos.Load();
                 contexto.titulares.Load();
-             
-            }
-            catch (Exception)
-            {
-
-            }
+            }catch (Exception){}
         }
         public bool existeUsuario(int dni)
-        {
-            try
-            {
-                foreach (Usuario usuario in contexto.usuarios)
-                {
-                    if (usuario.dni == dni)
-                    {
-                        return true;
-                    }
+        {   try
+            {   foreach (Usuario usuario in contexto.usuarios)
+                {   if (usuario.dni == dni){return true;}
                 }
             }
             catch (Exception)
@@ -66,9 +54,36 @@ namespace HomeBankingDV
             return false;
         }
 
-        public Usuario hacerLogin(int _dni, string _contraseña)
+        //public Usuario hacerLogin(int _dni, string _contraseña)
+        public bool hacerLogin(int _dni, string _contraseña)
         {
-            return contexto.usuarios.Where(U => U.dni == _dni && U.password == _contraseña).FirstOrDefault(); 
+            //usuarioActual = contexto.usuarios.Where(U => U.dni == _dni && U.password == _contraseña).FirstOrDefault();
+
+            usuarioActual = contexto.usuarios.Where(U => U.dni == _dni).FirstOrDefault();
+
+            if (usuarioActual is null) 
+            {
+                return false;
+            }
+            else
+            {
+                if(usuarioActual.password == _contraseña && usuarioActual.bloqueado==false) { return true; }
+                else
+                {
+                    intentos++;
+                    if (intentos > 2 && usuarioActual.bloqueado == false)
+                    {
+                        usuarioActual.bloqueado = true;
+                        contexto.usuarios.Update(usuarioActual);
+                        contexto.SaveChanges();
+                        intentos = 0;
+                        //contexto.Update(usuarioActual);
+                    }
+                    return false;
+                }
+            }
+
+            //return contexto.usuarios.Where(U => U.dni == _dni && U.password == _contraseña).FirstOrDefault(); 
             // asignar a usuario logueado... no puedo regresar el user completo
         }
 
@@ -92,7 +107,7 @@ namespace HomeBankingDV
             }
         }
 
-        public bool BajaPlazoFijo(int _elId) // code9983
+        public bool BajaPlazoFijo(int _elId)
         {
             PlazoFijo elPl = contexto.plazoFijos.Where(u => u.idPlazoFijo == _elId).FirstOrDefault();
 
@@ -308,7 +323,7 @@ namespace HomeBankingDV
                         pU.metodo = metodo;
 
                         contexto.Update(pU);
-                        usuarioActual.pagos.Add(pU);
+                        //usuarioActual.pagos.Add(pU);
                         contexto.SaveChanges();
                         return true;
                     }
@@ -604,7 +619,7 @@ namespace HomeBankingDV
                             {
                                 CajaDePago.saldo = CajaDePago.saldo - Saldo;
                                 TarjetaAPagar.consumos = 0;
-                                AltaMovimiento(TarjetaAPagar.consumos, CajaDePago, detalle, fecha);
+                                //AltaMovimiento(TarjetaAPagar.consumos, CajaDePago, detalle, fecha);
 
                                 return true;
                             }
