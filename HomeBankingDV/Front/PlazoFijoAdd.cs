@@ -33,7 +33,7 @@ namespace HomeBankingDV.Front
         {
             dataGridView1.Rows.Clear();
 
-            foreach (CajaDeAhorro caixa in elBanco.traerUsuario().cajas)
+            foreach (CajaDeAhorro caixa in elBanco.obtenerUsuarioActualCajasDeAhorro())
             {dataGridView1.Rows.Add(caixa.cbu, caixa.saldo);}
         }
 
@@ -77,22 +77,16 @@ namespace HomeBankingDV.Front
 
             float _tasa = Convert.ToSingle(textBox3.Text, CultureInfo.CreateSpecificCulture("en-US")); // para que me tome el punto como decimal --> https://social.msdn.microsoft.com/Forums/es-ES/111f3149-7b2d-48a8-b6e1-027a4af4ab61/convertir-string-a-float-c-asp?forum=vcses
 
-
-
-
             int _dias = Int32.Parse(textBox4.Text);
 
-            
             if (montoCuentaOrigen < _monto || montoCuentaOrigen <1 || _monto < 1F)
             { 
                 if(_monto < 1F) { MessageBox.Show("Monto ingresado debe ser mayor a cero."); } else { MessageBox.Show("Monto Insuficiente."); }
-                
             } 
-            else 
+            else
             {
                 if (elBanco.RetirarDinero(_monto, _cuenta, "[PlazoFijo]")) 
                 { 
-            
                 if (elBanco.AltaPlazoFijo(_monto, _dias, _tasa))
                 {
                     MessageBox.Show("Plazo fijo creado con éxito.");
@@ -121,7 +115,7 @@ namespace HomeBankingDV.Front
 
             float montoOrigen;
 
-            object elCBU = dataGridView1.Rows[e.RowIndex].Cells[0].Value;            
+            object elCBU = dataGridView1.Rows[e.RowIndex].Cells[0].Value;
             object auxMontoO = dataGridView1.Rows[e.RowIndex].Cells[1].Value;
 
             if ((elCBU is DBNull)) { return; } // por si viene nulo que salga del metodo

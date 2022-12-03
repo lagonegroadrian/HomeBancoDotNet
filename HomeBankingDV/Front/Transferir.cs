@@ -84,7 +84,7 @@ namespace HomeBankingDV.Front
                 {
                     monto = float.Parse(textBox3.Text);
                 }
-                foreach(CajaDeAhorro cajaUsuario in elBanco.traerUsuario().cajas)
+                foreach(CajaDeAhorro cajaUsuario in elBanco.obtenerUsuarioActualCajasDeAhorro())
                 {
                     if(cajaUsuario.cbu == elCBUorigen)
                     {

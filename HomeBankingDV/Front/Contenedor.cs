@@ -158,9 +158,9 @@ namespace HomeBankingDV
             hijoModificarCA.Show();
         }
 
-        public void ActivoPago()
+        public void ActivoPago(int _idPago)
         {
-            hijoPago = new PagarPago(elBanco);
+            hijoPago = new PagarPago(elBanco, _idPago);
             hijoPago.MdiParent = this;
             hijoPago.delegadoClosePago += DelegadoClosePago;
             hijoPago.Show();
@@ -173,10 +173,10 @@ namespace HomeBankingDV
             hijoHomme.Close();
             ActivoCA(_elCBU);
         }
-        private void DelegadoPagar()
+        private void DelegadoPagar(int _idPago)
         {
             hijoHomme.Close();
-            ActivoPago();
+            ActivoPago(_idPago);
         }
         
         private void DelegadoHommeToTarjeta(int _elIdTarjeta, int _numeroTarjeta, int _codigoTarjeta, float _limiteTarjeta, float _consumoTarjeta)
@@ -352,10 +352,7 @@ namespace HomeBankingDV
             this.Dispose();
         }
 
-        private Usuario GetUsuario()
-        {
-            return elBanco.traerUsuario();
-        }
+        //private Usuario GetUsuario(){return elBanco.traerUsuario();}
 
         private void DelegadoCloseHomme()
         {

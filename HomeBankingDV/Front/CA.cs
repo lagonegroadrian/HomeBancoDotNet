@@ -49,7 +49,9 @@ namespace HomeBankingDV
                 //listBox1.Items.Add(usu.apellido + ", " + usu.nombre);
             //};
 
-            foreach (Usuario titul in elBanco.traerUsuario().MostrarTitularesCajasDeAhorro(_elCBU)){listBox1.Items.Add(titul.apellido + ", " + titul.nombre);}
+            
+            foreach (Usuario titul in /*elBanco.traerUsuario().MostrarTitularesCajasDeAhorro(_elCBU)*/
+                elBanco.obtenerTitularesXcaja(_elCBU)) {listBox1.Items.Add(titul.apellido + ", " + titul.nombre);}
         }
 
         private void Registrar_Click(object sender, EventArgs e)

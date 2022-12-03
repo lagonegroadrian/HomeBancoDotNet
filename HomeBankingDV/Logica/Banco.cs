@@ -320,30 +320,27 @@ namespace HomeBankingDV
             return false;
         }
 
-        public bool ModificarPago(int id, bool pagado, string metodo)
+        public bool ModificarPago(int id, bool pagado, string metodo, float _saldoCaPaPagar, int _nroCBU)
         {
-            try 
+            try
             {
-                foreach (Pago pU in contexto.pago)
-                {
-                    if (pU.idPago == id)
-                    {
-                        pU.pagado = pagado;
-                        pU.metodo = metodo;
+                Pago p = contexto.pago.Where(U => U.idPago == id).FirstOrDefault();
+                p.pagado = pagado;
+                p.metodo = metodo;
 
-                        contexto.Update(pU);
-                        //usuarioActual.pagos.Add(pU);
-                        contexto.SaveChanges();
-                        return true;
-                    }
-                }
+                if(p.monto > _saldoCaPaPagar) { return false; }
+
+                this.RetirarDinero(p.monto, _nroCBU, "(x)Pago");
+
+                contexto.Update(p);
+                contexto.SaveChanges();
             }
             catch (Exception)
             {
                 return false;
             }
 
-            return false;
+            return true;
         }
 
        

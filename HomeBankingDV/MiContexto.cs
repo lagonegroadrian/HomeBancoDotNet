@@ -185,12 +185,14 @@ namespace HomeBankingDV
                 new { idTarjetaDeCredito = 3, NumUsuario = 3, numero = 420, codigoV = 4, limite = 8F, consumos = 7F},
                 new { idTarjetaDeCredito = 4, NumUsuario = 4, numero = 530, codigoV = 5, limite = 9F, consumos = 9F});
 
-
-
+            modelBuilder.Entity<Pago>().HasData(
+                new { idPago = 1, NumUsuario = 3, nombre = "200", monto = 8F, pagado = false, metodo = "7F" },
+                new { idPago = 2, NumUsuario = 2, nombre = "310", monto = 8F, pagado = false, metodo = "7F" },
+                new { idPago = 3, NumUsuario = 1, nombre = "420", monto = 8F, pagado = true, metodo = "7F" },
+                new { idPago = 4, NumUsuario = 3, nombre = "530", monto = 9F, pagado = true, metodo = "9F" });
 
             // ignoramos la clase Banco para que no genere la tabla.
             modelBuilder.Ignore<Banco>();
-          
         }
 
 

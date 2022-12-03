@@ -39,13 +39,15 @@ namespace HomeBankingDV
         private void llenarDatosDataGrid1()
         {
             dataGridView1.Rows.Clear();
-            foreach (CajaDeAhorro salida in elBanco.traerUsuario().cajas) { dataGridView1.Rows.Add(salida.idCajaDeAhorro, salida.cbu, salida.saldo); }
+
+            foreach (CajaDeAhorro salida in elBanco.obtenerUsuarioActualCajasDeAhorro())
+                { dataGridView1.Rows.Add(salida.idCajaDeAhorro, salida.cbu, salida.saldo); }
         }
 
         private void llenarDatosDataGrid2()
         {
             dataGridView2.Rows.Clear();
-            foreach (Pago salida in elBanco.traerUsuario().pagos)
+            foreach (Pago salida in elBanco.obtenerUsuarioActualPagos())
             {
                 if (!salida.pagado)
                 { 
@@ -57,7 +59,7 @@ namespace HomeBankingDV
         private void llenarDatosDataGrid3()
         {
             dataGridView3.Rows.Clear();
-            foreach (Pago salida in elBanco.traerUsuario().pagos)
+            foreach (Pago salida in elBanco.obtenerUsuarioActualPagos())
             {   if (salida.pagado)
                 {
                     dataGridView3.Rows.Add(salida.idPago, salida.nombre, salida.monto, salida.metodo);
@@ -69,7 +71,7 @@ namespace HomeBankingDV
         private void llenarDatosDataGrid8()
         {
             dataGridView8.Rows.Clear();
-            foreach (TarjetaDeCredito salida in elBanco.traerUsuario().tarjetas)
+            foreach (TarjetaDeCredito salida in elBanco.obtenerUsuarioActualTarjetasDeCredito())
             {
                 dataGridView8.Rows.Add(salida.idTarjetaDeCredito, salida.numero, salida.codigoV, salida.limite, salida.consumos);
             }
@@ -78,7 +80,7 @@ namespace HomeBankingDV
 
         private void llenarDatosDataGrid6() // llenar plazo fijo
         {   dataGridView6.Rows.Clear();
-            foreach (PlazoFijo salida in elBanco.traerUsuario().pfs)
+            foreach (PlazoFijo salida in elBanco.obtenerUsuarioActualPlazosFijos())
             {
                 string aux = "EnCurso";
                 if (salida.pagado) { aux = "Acobrar"; }
@@ -134,8 +136,13 @@ namespace HomeBankingDV
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //pagos pendientes
-            delegadoPagar();
+            object elId = dataGridView2.Rows[e.RowIndex].Cells[0].Value;
+
+            if ((elId is DBNull)) { return; } // por si viene nulo que salga del metodo
+
+            int elIdPago = Int32.Parse(elId.ToString());
+
+            delegadoPagar(elIdPago);
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -187,7 +194,7 @@ namespace HomeBankingDV
 
         private void dataGridView6_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string salida = "";
+            string salida = " ---- ";
             string message = "Desea eliminar Plazo Fijo?";
             string caption = "*Importante*";
 
@@ -293,6 +300,6 @@ namespace HomeBankingDV
     public delegate void DelegadoCloseHomme();
     public delegate void DelegadoHommeToCA(int nroCBU);
     public delegate void DelegadoPlazoFijo();
-    public delegate void DelegadoPagar();
+    public delegate void DelegadoPagar(int idPago);
     public delegate void DelegadoHommeToTarjeta(int idTarjeta, int numeroTarjeta, int codigoTarjeta, float limiteTarjeta, float consumoTarjeta);
 }

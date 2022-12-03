@@ -39,9 +39,11 @@ namespace HomeBankingDV.Front
             {
                 string aux_ = "No";
                 //INI
-                elBanco.traerUsuario().MostrarTitularesCajasDeAhorro(elCBU);
+                //elBanco.traerUsuario().MostrarTitularesCajasDeAhorro(elCBU);
 
-                foreach (Usuario titul in elBanco.traerUsuario().MostrarTitularesCajasDeAhorro(elCBU))
+                foreach (Usuario titul in elBanco.obtenerTitularesXcaja(elCBU)
+                    /*traerUsuario().MostrarTitularesCajasDeAhorro(elCBU)*/
+                    )
                 {
                     if(salida.dni == titul.dni) { aux_ = "Si"; }
                 }

@@ -18,12 +18,15 @@ namespace HomeBankingDV.Front
         private float montoCuentaOrigen { get; set; }
 
         private Banco elBanco;
+        private int idpago;
+        private float _saldoCa;
+        private int nroCBU;
 
-        public PagarPago(Banco _elBanco)
+        public PagarPago(Banco _elBanco, int _idpago)
         {
             elBanco = _elBanco;
+            idpago = _idpago;
             InitializeComponent();
-
 
             MostrarCBUs();
         }
@@ -32,7 +35,7 @@ namespace HomeBankingDV.Front
         {
             dataGridView1.Rows.Clear();
 
-            foreach (CajaDeAhorro caixa in elBanco.traerUsuario().cajas)
+            foreach (CajaDeAhorro caixa in elBanco.obtenerUsuarioActualCajasDeAhorro())
             {dataGridView1.Rows.Add(caixa.cbu, caixa.saldo);}
         }
 
@@ -63,20 +66,16 @@ namespace HomeBankingDV.Front
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // boton crear plazo fijo
-
-
             
-            int _cuenta = Int32.Parse(textBox1.Text);
+            if (elBanco.ModificarPago(idpago, true, "cajaAhorro", _saldoCa, nroCBU))
+            {
+                MessageBox.Show("Pago realizado con exito");
+            }
+            else { MessageBox.Show("No se pudo procesar el Pago - monto insuficiente");  }
 
-            //float _tasa = float.Parse(textBox3.Text);
+            //int _cuenta = Int32.Parse(textBox1.Text);
 
-            //float asd = (float)Convert.ToDouble(textBox3.Text);
-
-
- 
-
-            textBox1.Text = "";
+            this.delegadoClosePago();
 
         }
 
@@ -87,8 +86,7 @@ namespace HomeBankingDV.Front
 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int nroCBU = 0;
+        {          
 
             float montoOrigen;
 
@@ -99,7 +97,8 @@ namespace HomeBankingDV.Front
 
             nroCBU = Int32.Parse(elCBU.ToString());
 
-            montoCuentaOrigen = Int32.Parse(auxMontoO.ToString());
+            //_saldoCa = Int32.Parse(auxMontoO.ToString());
+            _saldoCa = Convert.ToSingle(auxMontoO.ToString(), CultureInfo.CreateSpecificCulture("en-US"));
 
             textBox1.Text = elCBU.ToString();
         }
