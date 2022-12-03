@@ -15,6 +15,7 @@ namespace HomeBankingDV
         VerDetalle hijoDetalle;
         TitularesAdd hijoModificarCA;
         PlazoFijoAdd hijoPlazoFijo;
+        PagarPago hijoPago;
         Tarjeta hijoTarjetaC;
         ModLimite hijoModLimite;
 
@@ -48,6 +49,7 @@ namespace HomeBankingDV
             hijoCA.delegadoVerDetalle += DelegadoVerDetalle;
             hijoCA.delegadoBajaCA += DelegadoBajaCA;
             hijoCA.delegadoModificar += DelegadoModificar;
+
 
             hijoCA.Show();
         }
@@ -106,6 +108,7 @@ namespace HomeBankingDV
             hijoHomme.delegadoHommeToCA += DelegadoHommeToCA;
             hijoHomme.delegadoPlazoFijo += DelegadoPlazoFijo;
             hijoHomme.delegadoHommeToTarjeta += DelegadoHommeToTarjeta;
+            hijoHomme.delegadoPagar += DelegadoPagar;
             hijoHomme.Show();
         }
 
@@ -155,12 +158,27 @@ namespace HomeBankingDV
             hijoModificarCA.Show();
         }
 
+        public void ActivoPago()
+        {
+            hijoPago = new PagarPago(elBanco);
+            hijoPago.MdiParent = this;
+            hijoPago.delegadoClosePago += DelegadoClosePago;
+            hijoPago.Show();
+        }
+
+
+
         private void DelegadoHommeToCA(int _elCBU)
         {
             hijoHomme.Close();
             ActivoCA(_elCBU);
         }
-
+        private void DelegadoPagar()
+        {
+            hijoHomme.Close();
+            ActivoPago();
+        }
+        
         private void DelegadoHommeToTarjeta(int _elIdTarjeta, int _numeroTarjeta, int _codigoTarjeta, float _limiteTarjeta, float _consumoTarjeta)
         {
             hijoHomme.Close();
@@ -221,8 +239,11 @@ namespace HomeBankingDV
         }
 
 
-        
-
+        private void DelegadoClosePago()
+        {
+            hijoPago.Close();
+            ActivoHomme();
+        }
 
         private void DelegadoDespositarClose(int _elCBU)
         {

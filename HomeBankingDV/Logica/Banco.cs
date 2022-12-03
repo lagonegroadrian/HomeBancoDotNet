@@ -273,12 +273,21 @@ namespace HomeBankingDV
             return false;
         }
 
-
-        public bool AltaPago(int id, Usuario user, string nombre, float monto, bool pagado, string metodo)
+        public bool AltaPago(string _nombre, float _monto, string _metodo)
         {
+            Pago pago;
+            Usuario titular = usuarioActual;
+            bool pagado = false;
+
+            Random rd = new Random();
+            //int idPlazoFijo = rd.Next(usuarioActual.idUsuario + 3);
+
             try
             {
-                Pago p = new Pago(id,user,nombre, monto,pagado,metodo); 
+                Pago p = new Pago(titular, _nombre, _monto, pagado, _metodo);
+                contexto.pago.Add(p);
+                contexto.SaveChanges();
+                return true;
             }
             catch (Exception)
             {
@@ -356,6 +365,7 @@ namespace HomeBankingDV
                 plazo = new PlazoFijo(titular, _monto, fechaIni, fechaFin, tasa, pagado);
                 contexto.plazoFijos.Add(plazo);
                 contexto.SaveChanges();
+                //this.AltaPago("Plazo Fijo", _monto, "a cobrar");
                 return true;
             }
             catch (Exception)
@@ -393,7 +403,7 @@ namespace HomeBankingDV
         {
             Random rd = new Random();
 
-            int numero = rd.Next(23232, 32323);
+            int numero = rd.Next(100, 300);
             int codigoV = rd.Next(100, 999);
             float limite = 12000F;
             float consumos = 0F;
@@ -404,6 +414,9 @@ namespace HomeBankingDV
                 contexto.tarjetaDeCredito.Add(tj);
                 //?usuarioActual.tarjetas.Add(tj);--> no hace falta porque ya con el include en banco lo levanta... sino como que tengo repetido 2 veces el ultimo ingreso
                 contexto.SaveChanges();
+
+                this.AltaPago("tarjeta credito", consumos, "Credito");
+
                 return true;
 
             }

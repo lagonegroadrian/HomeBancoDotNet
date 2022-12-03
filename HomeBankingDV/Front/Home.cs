@@ -20,6 +20,7 @@ namespace HomeBankingDV
         public DelegadoPlazoFijo delegadoPlazoFijo;
         public DelegadoHommeToTarjeta delegadoHommeToTarjeta;
         public Banco elBanco;
+        public DelegadoPagar delegadoPagar;
         public int dniIngresado;
         public string contraseniaIngresada;
 
@@ -134,6 +135,7 @@ namespace HomeBankingDV
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //pagos pendientes
+            delegadoPagar();
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -291,5 +293,6 @@ namespace HomeBankingDV
     public delegate void DelegadoCloseHomme();
     public delegate void DelegadoHommeToCA(int nroCBU);
     public delegate void DelegadoPlazoFijo();
+    public delegate void DelegadoPagar();
     public delegate void DelegadoHommeToTarjeta(int idTarjeta, int numeroTarjeta, int codigoTarjeta, float limiteTarjeta, float consumoTarjeta);
 }

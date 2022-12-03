@@ -24,14 +24,14 @@ namespace HomeBankingDV
         //constructor
 
         public Pago() { }
-        public Pago(int id, Usuario user, string nombre, float monto, bool pagado, string metodo)
+        public Pago(/*int id,*/ Usuario user, string nombre, float monto, bool pagado, string metodo)
         {
-            this.idPago = id;
+            //this.idPago = id;
             this.user = user;
             this.nombre = nombre;
             this.monto = monto;
             this.pagado = pagado;
-            this.metodo = metodo; 
+            this.metodo = metodo;
         }
     }
 }
