@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeBankingDV.Migrations
 {
     [DbContext(typeof(MiContexto))]
-    [Migration("20221201225630_Initial")]
+    [Migration("20221203132511_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -150,6 +150,12 @@ namespace HomeBankingDV.Migrations
             modelBuilder.Entity("HomeBankingDV.Pago", b =>
                 {
                     b.Property<int>("idPago")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idPago"));
+
+                    b.Property<int>("NumUsuario")
                         .HasColumnType("int");
 
                     b.Property<string>("metodo")
@@ -167,6 +173,8 @@ namespace HomeBankingDV.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("idPago");
+
+                    b.HasIndex("NumUsuario");
 
                     b.ToTable("Pago", (string)null);
                 });
@@ -430,19 +438,11 @@ namespace HomeBankingDV.Migrations
 
             modelBuilder.Entity("HomeBankingDV.Pago", b =>
                 {
-                    b.HasOne("HomeBankingDV.TarjetaDeCredito", "tarjeta")
-                        .WithOne("pago")
-                        .HasForeignKey("HomeBankingDV.Pago", "idPago")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HomeBankingDV.Usuario", "user")
                         .WithMany("pagos")
-                        .HasForeignKey("idPago")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("NumUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("tarjeta");
 
                     b.Navigation("user");
                 });
@@ -474,12 +474,6 @@ namespace HomeBankingDV.Migrations
                     b.Navigation("UserCajas");
 
                     b.Navigation("movimientos");
-                });
-
-            modelBuilder.Entity("HomeBankingDV.TarjetaDeCredito", b =>
-                {
-                    b.Navigation("pago")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("HomeBankingDV.Usuario", b =>

@@ -30,6 +30,9 @@ namespace HomeBankingDV
             llenarDatosDataGrid1();
             llenarDatosDataGrid6();
             llenarDatosDataGrid8();
+
+            llenarDatosDataGrid2();
+            llenarDatosDataGrid3();
         }
 
         private void llenarDatosDataGrid1()
@@ -37,6 +40,30 @@ namespace HomeBankingDV
             dataGridView1.Rows.Clear();
             foreach (CajaDeAhorro salida in elBanco.traerUsuario().cajas) { dataGridView1.Rows.Add(salida.idCajaDeAhorro, salida.cbu, salida.saldo); }
         }
+
+        private void llenarDatosDataGrid2()
+        {
+            dataGridView2.Rows.Clear();
+            foreach (Pago salida in elBanco.traerUsuario().pagos)
+            {
+                if (!salida.pagado)
+                { 
+                dataGridView2.Rows.Add(salida.idPago, salida.nombre, salida.monto, salida.metodo);
+                }
+            }
+        }
+
+        private void llenarDatosDataGrid3()
+        {
+            dataGridView3.Rows.Clear();
+            foreach (Pago salida in elBanco.traerUsuario().pagos)
+            {   if (salida.pagado)
+                {
+                    dataGridView3.Rows.Add(salida.idPago, salida.nombre, salida.monto, salida.metodo);
+                }
+            }
+        }
+
 
         private void llenarDatosDataGrid8()
         {
@@ -106,7 +133,7 @@ namespace HomeBankingDV
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            //pagos pendientes
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -242,6 +269,21 @@ namespace HomeBankingDV
                 llenarDatosDataGrid8();
             }
             MessageBox.Show(salida);
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // pagos realizaros
+        }
+
+        private void dataGridView3_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 

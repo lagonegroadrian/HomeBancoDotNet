@@ -69,6 +69,29 @@ namespace HomeBankingDV.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Pago",
+                columns: table => new
+                {
+                    idPago = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NumUsuario = table.Column<int>(type: "int", nullable: false),
+                    nombre = table.Column<string>(type: "varchar(50)", nullable: false),
+                    monto = table.Column<double>(type: "float", nullable: false),
+                    pagado = table.Column<bool>(type: "bit", nullable: false),
+                    metodo = table.Column<string>(type: "varchar(50)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pago", x => x.idPago);
+                    table.ForeignKey(
+                        name: "FK_Pago_Usuarios_NumUsuario",
+                        column: x => x.NumUsuario,
+                        principalTable: "Usuarios",
+                        principalColumn: "idUsuario",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PlazoFijo",
                 columns: table => new
                 {
@@ -141,32 +164,6 @@ namespace HomeBankingDV.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Pago",
-                columns: table => new
-                {
-                    idPago = table.Column<int>(type: "int", nullable: false),
-                    nombre = table.Column<string>(type: "varchar(50)", nullable: false),
-                    monto = table.Column<double>(type: "float", nullable: false),
-                    pagado = table.Column<bool>(type: "bit", nullable: false),
-                    metodo = table.Column<string>(type: "varchar(50)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pago", x => x.idPago);
-                    table.ForeignKey(
-                        name: "FK_Pago_TarjetaDeCredito_idPago",
-                        column: x => x.idPago,
-                        principalTable: "TarjetaDeCredito",
-                        principalColumn: "idTarjetaDeCredito",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Pago_Usuarios_idPago",
-                        column: x => x.idPago,
-                        principalTable: "Usuarios",
-                        principalColumn: "idUsuario");
-                });
-
             migrationBuilder.InsertData(
                 table: "CajaAhorro",
                 columns: new[] { "idCajaDeAhorro", "cbu", "saldo" },
@@ -228,6 +225,11 @@ namespace HomeBankingDV.Migrations
                 column: "idCaja");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pago_NumUsuario",
+                table: "Pago",
+                column: "NumUsuario");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlazoFijo_NumUsuario",
                 table: "PlazoFijo",
                 column: "NumUsuario");
@@ -261,10 +263,10 @@ namespace HomeBankingDV.Migrations
                 name: "PlazoFijo");
 
             migrationBuilder.DropTable(
-                name: "titulares");
+                name: "TarjetaDeCredito");
 
             migrationBuilder.DropTable(
-                name: "TarjetaDeCredito");
+                name: "titulares");
 
             migrationBuilder.DropTable(
                 name: "CajaAhorro");

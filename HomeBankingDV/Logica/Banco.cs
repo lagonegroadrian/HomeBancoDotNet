@@ -31,7 +31,7 @@ namespace HomeBankingDV
             {
                 contexto = new MiContexto();
                 //contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(p => p.pagos).Include(u => u.UserCajas).Load();
-                contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(u => u.UserCajas).Load();
+                contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(u => u.UserCajas).Include(u => u.pagos).Load();
                 contexto.usuarios.Load();
                 contexto.cajaDeAhorros.Load();
                 contexto.plazoFijos.Load();

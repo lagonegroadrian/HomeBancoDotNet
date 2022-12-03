@@ -12,13 +12,14 @@ namespace HomeBankingDV
     //pero no tiene sentido
     {
         public int idPago { get; set; }
+        public int NumUsuario { get; set; }
         public Usuario user { get; set; }
         public string nombre { get; set; }
         public float monto { get; set; }
         public bool pagado { get; set; }
         public string metodo { get; set; }
 
-        public TarjetaDeCredito tarjeta { get; set; }
+        //public TarjetaDeCredito tarjeta { get; set; }
 
         //constructor
 

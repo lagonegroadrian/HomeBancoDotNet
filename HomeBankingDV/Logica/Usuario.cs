@@ -25,13 +25,15 @@ namespace HomeBankingDV
 
         public bool bloqueado { get; set; }
 
-        public ICollection<CajaDeAhorro> cajas { get;}= new List<CajaDeAhorro>();
-        
+        public ICollection<CajaDeAhorro> cajas { get;}= new List<CajaDeAhorro>();        
         public List<TitularesRel> UserCajas { get; set; } = new List<TitularesRel>();
+
         public List<PlazoFijo> pfs { get;}= new List<PlazoFijo>();
         public ICollection<TarjetaDeCredito> tarjetas { get;} = new List<TarjetaDeCredito>();
 
-        public ICollection<Pago> pagos { get;} = new List<Pago>();
+
+        public List<Pago> pagos { get; } = new List<Pago>();
+        //public ICollection<Pago> pagos { get;} = new List<Pago>();
 
      
 

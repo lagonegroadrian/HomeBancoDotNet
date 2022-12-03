@@ -86,6 +86,7 @@ namespace HomeBankingDV
             modelBuilder.Entity<Pago>(
             pago =>
             {
+            pago.Property(t => t.NumUsuario).HasColumnType("int");
             pago.Property(p => p.nombre).HasColumnType("varchar(50)");
             pago.Property(p => p.monto).HasColumnType("float");
             pago.Property(p => p.pagado).HasColumnType("bit");
@@ -139,21 +140,16 @@ namespace HomeBankingDV
 
             // definicion de relacion uno a uno pago-tarjeta
 
-              modelBuilder.Entity<TarjetaDeCredito>()
-                .HasOne(U => U.pago)
-                .WithOne(D => D.tarjeta)
-                .HasForeignKey<Pago>(D => D.idPago)
-                .OnDelete(DeleteBehavior.Cascade);
-             modelBuilder.Entity<Pago>()
-                .HasOne(D => D.tarjeta)
-                .WithOne(U => U.pago)
-                .HasForeignKey<Pago>(D => D.idPago)
-                .OnDelete(DeleteBehavior.Cascade);
+              //modelBuilder.Entity<TarjetaDeCredito>().HasOne(U => U.pago).WithOne(D => D.tarjeta).HasForeignKey<Pago>(D => D.idPago).OnDelete(DeleteBehavior.Cascade);
+             
+            //modelBuilder.Entity<Pago>().HasOne(D => D.user).WithOne(U => U.).HasForeignKey<Pago>(D => D.idPago).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Pago>()     .HasOne(d => d.user)    .WithMany(u => u.pagos).HasForeignKey(d => d.NumUsuario).OnDelete(DeleteBehavior.Cascade);
+           
 
 
             // definicion de relacion uno a muchos usuario-pago
 
-           modelBuilder.Entity<Pago>().HasOne(m => m.user).WithMany(t => t.pagos).HasForeignKey(d => d.idPago).OnDelete(DeleteBehavior.NoAction);
+            //modelBuilder.Entity<Pago>().HasOne(m => m.user).WithMany(t => t.pagos).HasForeignKey(d => d.idPago).OnDelete(DeleteBehavior.NoAction);
 
             // ingreso de datos :
 

@@ -17,7 +17,7 @@ namespace HomeBankingDV
         public float limite { get; set; }
         public float consumos { get; set; }
 
-        public Pago pago { get; set; }
+        //public Pago pago { get; set; } no hay relacion con pago segun DER
       
 
         //constructor
