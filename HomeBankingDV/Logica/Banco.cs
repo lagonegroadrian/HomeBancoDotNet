@@ -162,10 +162,16 @@ namespace HomeBankingDV
             bool salida = false;
             foreach (CajaDeAhorro caj in contexto.cajaDeAhorros)
             {
-                if (caj.idCajaDeAhorro== laCA.idCajaDeAhorro) { contexto.cajaDeAhorros.Remove(caj); salida = true; }
+                if (caj.idCajaDeAhorro== laCA.idCajaDeAhorro && caj.saldo == 0) 
+                { 
+                    contexto.cajaDeAhorros.Remove(caj); 
+                    salida = true; 
+                }
             }
-            if (salida)
+            if (salida) 
+            { 
                 contexto.SaveChanges();
+            }
             return salida;
 
 
@@ -567,7 +573,20 @@ namespace HomeBankingDV
             string _mensaje = "[transf]";
             try
             {
-                foreach (CajaDeAhorro cajaU in usuarioActual.cajas)
+                //foreach (CajaDeAhorro cajaU in usuarioActual.cajas)
+                CajaDeAhorro CAorigen = contexto.cajaDeAhorros.Where(u => u.cbu == CBUOrigen).FirstOrDefault();
+                CajaDeAhorro CAdestino = contexto.cajaDeAhorros.Where(u => u.cbu == CBUDestino).FirstOrDefault();
+
+                this.DepositarDinero(MontoTranferido, CBUDestino, _mensaje);
+                this.RetirarDinero(MontoTranferido, CBUOrigen, _mensaje);
+
+                contexto.cajaDeAhorros.Update(CAorigen);
+                contexto.cajaDeAhorros.Update(CAdestino);
+
+                contexto.SaveChanges();
+
+                /*
+                foreach (CajaDeAhorro cajaU in contexto.cajaDeAhorros)
                 {
                     if (cajaU.cbu == CBUOrigen)
                     {
@@ -576,6 +595,7 @@ namespace HomeBankingDV
                             if (this.RetirarDinero(MontoTranferido, CBUOrigen, _mensaje))
                             {
                                 this.DepositarDinero(MontoTranferido, CBUDestino, _mensaje);
+                                contexto.cajaDeAhorros.Update(cajaU);
                                 contexto.SaveChanges();
                                 salida = true;
                             }
@@ -583,11 +603,9 @@ namespace HomeBankingDV
                         }
                     }
                 }
+                */
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception){throw;}
             return salida;
         }
 

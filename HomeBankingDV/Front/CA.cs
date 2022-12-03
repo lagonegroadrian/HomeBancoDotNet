@@ -149,8 +149,12 @@ namespace HomeBankingDV
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            string mensaje = "No se pudo eliminar la caja de ahorro, debe estar en cero";
+
             //this.delegadoBajaCA(elCBU);
-            elBanco.BajaCajaAhorro(elCBU);
+            if (elBanco.BajaCajaAhorro(elCBU)) { mensaje = "Caja eliminada con exito"; }
+            MessageBox.Show(mensaje);
+            delegadoCloseCA();
         }
 
         private void button5_Click(object sender, EventArgs e)
