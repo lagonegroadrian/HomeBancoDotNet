@@ -276,6 +276,7 @@ namespace HomeBankingDV
             { 
                 salida = "Tarjeta de Credito Creada";
                 llenarDatosDataGrid8();
+                llenarDatosDataGrid2();
             }
             MessageBox.Show(salida);
         }

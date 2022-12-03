@@ -397,7 +397,7 @@ namespace HomeBankingDV
             int numero = rd.Next(100, 300);
             int codigoV = rd.Next(100, 999);
             float limite = 12000F;
-            float consumos = 0F;
+            float consumos = rd.Next(10, 900);
 
             try
             {
