@@ -32,7 +32,7 @@ namespace HomeBankingDV
                 contexto = new MiContexto();
                 //contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(p => p.pagos).Include(u => u.UserCajas).Load();
                 contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(u => u.UserCajas).Include(u => u.pagos).Load();
-                contexto.usuarios.Load();
+              //  contexto.usuarios.Load();
                 contexto.cajaDeAhorros.Load();
                 contexto.plazoFijos.Load();
                 contexto.tarjetaDeCredito.Load();
@@ -515,16 +515,56 @@ namespace HomeBankingDV
             return listaMovimientos;
         }
 
-        public List<Pago> obtenerPagos(){return usuarioActual.pagos.ToList();}
 
-        public List<PlazoFijo> obtenerPlazosFijos(){return usuarioActual.pfs.ToList();}
+        
+        
+        //  METODOS DE RETORNO DE DATOS DEL USUARIO 
 
-        public List<TarjetaDeCredito> obtenerTarjetasDeCredito(){return usuarioActual.tarjetas.ToList();}
+        public int obtenerUsuarioActualId(){return usuarioActual.idUsuario;}
 
-        public Usuario traerUsuario(){ //code9938
-            // solo retornar el dato que necesitas
-            return usuarioActual;
+        public int obtenerUsuarioActualDni() { return usuarioActual.dni;}
+
+        public string obtenerUsuarioActualNombre() { return usuarioActual.nombre; }
+
+        public string obtenerUsuarioActualApellido() { return usuarioActual.apellido; }
+            
+        public string obtenerUsuarioActualMail() {return usuarioActual.mail; }
+        
+        public bool obtenerUsuarioActualIsAdmin()
+        {
+            if (usuarioActual.isAdmin == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }    
+            
+          public bool obtenerUsuarioActualBloqueado()
+        {
+            if(usuarioActual.bloqueado == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+
+        public List<CajaDeAhorro> obtenerUsuarioActualCajasDeAhorro() { return usuarioActual.cajas.ToList();  }  
+                
+        public List<Pago> obtenerUsuarioActualPagos() { return usuarioActual.pagos.ToList(); }
+
+        public List<PlazoFijo> obtenerUsuarioActualPlazosFijos() { return usuarioActual.pfs.ToList(); }
+
+        public List<TarjetaDeCredito> obtenerUsuarioActualTarjetasDeCredito() { return usuarioActual.tarjetas.ToList(); }
+
+        // -----------------------------------------------------------------------------------------------------------
+
+  
 
         public  void ponerUsuario(Usuario _elUser){usuarioActual = _elUser;}
 
