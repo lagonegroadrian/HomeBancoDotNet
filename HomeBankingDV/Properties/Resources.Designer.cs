@@ -61,7 +61,7 @@ namespace HomeBankingDV.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Data Source=DESKTOP-7HF6F66\SQLSERVERLOCAL;Initial Catalog=borrar03;Integrated Security=True;TrustServerCertificate=True;.
+        ///   Busca una cadena traducida similar a Data Source=DESKTOP-7HF6F66\SQLSERVERLOCAL;Initial Catalog=borrar04;Integrated Security=True;TrustServerCertificate=True;.
         /// </summary>
         internal static string ConnectionStr {
             get {

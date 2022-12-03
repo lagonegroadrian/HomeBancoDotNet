@@ -187,6 +187,17 @@ namespace HomeBankingDV.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Pago",
+                columns: new[] { "idPago", "NumUsuario", "metodo", "monto", "nombre", "pagado" },
+                values: new object[,]
+                {
+                    { 1, 3, "7F", 8.0, "200", false },
+                    { 2, 2, "7F", 8.0, "310", false },
+                    { 3, 1, "7F", 8.0, "420", true },
+                    { 4, 3, "9F", 9.0, "530", true }
+                });
+
+            migrationBuilder.InsertData(
                 table: "PlazoFijo",
                 columns: new[] { "idPlazoFijo", "NumUsuario", "fechaFin", "fechaIni", "monto", "pagado", "tasa" },
                 values: new object[,]

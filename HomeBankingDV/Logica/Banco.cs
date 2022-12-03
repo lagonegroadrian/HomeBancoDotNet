@@ -296,28 +296,22 @@ namespace HomeBankingDV
             return false;
         }
 
-        public bool BajaPago(int id)
+        
+        public bool BajaPago(int _id)
         {
             try
             {
-                foreach (Pago p in contexto.pago)
-                {
-                    if (p.idPago == id)
-                    {
-                        contexto.pago.Remove(p);
-                        usuarioActual.pagos.Remove(p);
-                        contexto.SaveChanges();
-                        return true;
-                    }
-                }
+                Pago elPapago = contexto.pago.Where(U => U.idPago== _id).FirstOrDefault();
 
+                contexto.pago.Remove(elPapago);
+                //usuarioActual.pagos.Remove(elPapago);
+                contexto.SaveChanges();
             }
             catch (Exception)
             {
                 return false;
             }
-           
-            return false;
+            return true;
         }
 
         public bool ModificarPago(int id, bool pagado, string metodo, float _saldoCaPaPagar, int _nroCBU)

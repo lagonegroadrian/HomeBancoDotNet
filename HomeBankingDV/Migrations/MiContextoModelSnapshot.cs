@@ -174,6 +174,44 @@ namespace HomeBankingDV.Migrations
                     b.HasIndex("NumUsuario");
 
                     b.ToTable("Pago", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            idPago = 1,
+                            NumUsuario = 3,
+                            metodo = "7F",
+                            monto = 8.0,
+                            nombre = "200",
+                            pagado = false
+                        },
+                        new
+                        {
+                            idPago = 2,
+                            NumUsuario = 2,
+                            metodo = "7F",
+                            monto = 8.0,
+                            nombre = "310",
+                            pagado = false
+                        },
+                        new
+                        {
+                            idPago = 3,
+                            NumUsuario = 1,
+                            metodo = "7F",
+                            monto = 8.0,
+                            nombre = "420",
+                            pagado = true
+                        },
+                        new
+                        {
+                            idPago = 4,
+                            NumUsuario = 3,
+                            metodo = "9F",
+                            monto = 9.0,
+                            nombre = "530",
+                            pagado = true
+                        });
                 });
 
             modelBuilder.Entity("HomeBankingDV.PlazoFijo", b =>

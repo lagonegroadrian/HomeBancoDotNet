@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConnectionStr" xml:space="preserve">
-    <value>Data Source=DESKTOP-7HF6F66\SQLSERVERLOCAL;Initial Catalog=borrar03;Integrated Security=True;TrustServerCertificate=True;</value>
+    <value>Data Source=DESKTOP-7HF6F66\SQLSERVERLOCAL;Initial Catalog=borrar04;Integrated Security=True;TrustServerCertificate=True;</value>
     <comment>cadena de conexion a la base de datos local</comment>
   </data>
 </root>

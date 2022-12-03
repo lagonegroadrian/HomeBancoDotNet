@@ -226,9 +226,9 @@ namespace HomeBankingDV
                         salida = "Plazo Fijo eliminado correctamente";
                         this.llenarDatosDataGrid6();
                     }
-                    else 
+                    else
                     { 
-                        salida = "Error: Plazo Fijo no se pudo eliminar"; 
+                        salida = "Error: Plazo Fijo no se pudo eliminar";
                     }
                 }
             }
@@ -292,7 +292,35 @@ namespace HomeBankingDV
 
         private void dataGridView3_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            //borrar pago
+            string salida = " ---- ";
+            string message = "Desea eliminar el pago?";
+            string caption = "*Importante*";
 
+            object auxIdPL = dataGridView3.Rows[e.RowIndex].Cells[0].Value;
+
+
+            if ((auxIdPL is DBNull)) { return; } // por si viene nulo que salga del metodo
+
+            int idPago = Int32.Parse(auxIdPL.ToString());
+
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
+
+            result = MessageBox.Show(message, caption, buttons);
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                if (elBanco.BajaPago(idPago))
+                {
+                    salida = "Pago eliminado correctamente";
+                    this.llenarDatosDataGrid3();
+                }
+                else
+                {
+                    salida = "Error: Pago no se pudo eliminar";
+                }
+            }
+            MessageBox.Show(salida);
         }
     }
 
