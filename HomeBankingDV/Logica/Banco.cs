@@ -617,7 +617,7 @@ namespace HomeBankingDV
 
             if (_adicional != ""){ _accion += _adicional; }
 
-            foreach (CajaDeAhorro Caja in usuarioActual.cajas)
+            foreach (CajaDeAhorro Caja in contexto.cajaDeAhorros)
             {   if (Caja.cbu == cbu)
                 {   Caja.saldo = Caja.saldo + _monto;
                     try
@@ -646,7 +646,7 @@ namespace HomeBankingDV
 
             if (_adicional != ""){ _accion += _adicional; }
             try{
-                foreach (CajaDeAhorro Caja in usuarioActual.cajas)
+                foreach (CajaDeAhorro Caja in contexto.cajaDeAhorros)
                 {
                     if (Caja.cbu == cbu)
                     {
