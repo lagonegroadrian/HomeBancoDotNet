@@ -32,8 +32,9 @@ namespace HomeBankingDV
                 contexto = new MiContexto();
                 //contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(p => p.pagos).Include(u => u.UserCajas).Load();
                 contexto.usuarios.Include(c => c.cajas).Include(p => p.pfs).Include(t => t.tarjetas).Include(u => u.UserCajas).Include(u => u.pagos).Load();
-              //  contexto.usuarios.Load();
-                contexto.cajaDeAhorros.Load();
+                //  contexto.usuarios.Load();
+              // correccion.!
+                contexto.cajaDeAhorros.Include(m => m.titulares).Include(m => m.movimientos).Load();
                 contexto.plazoFijos.Load();
                 contexto.tarjetaDeCredito.Load();
                 contexto.pago.Load();
@@ -107,21 +108,17 @@ namespace HomeBankingDV
             }
         }
 
+      // corregir redundancia!
         public bool BajaPlazoFijo(int _elId)
         {
             PlazoFijo elPl = contexto.plazoFijos.Where(u => u.idPlazoFijo == _elId).FirstOrDefault();
 
             bool salida = false;
-            foreach (PlazoFijo pla in contexto.plazoFijos)
-            {
-                if (pla.idPlazoFijo == elPl.idPlazoFijo) 
-                {
-                    if (pla.pagado) 
+           
+                    if (elPl.pagado) 
                     { 
-                    contexto.plazoFijos.Remove(pla); 
+                    contexto.plazoFijos.Remove(elPl); 
                     salida = true;
-                    }
-                }
             }
             if (salida)
                 contexto.SaveChanges();
@@ -153,6 +150,33 @@ namespace HomeBankingDV
             }*/
            
         }
+
+
+       // encontrar movimientos que corresponden a los retiros sumarlos y devolverlos.
+
+        public double calcularGastosUsuarioActual()
+        {
+            double TotalMovimientos = 00;
+
+            foreach(CajaDeAhorro caja in usuarioActual.cajas)
+            {
+                foreach (Movimiento mov in caja.movimientos)
+                {
+                    if (mov.detalle == "retiro")
+                    {
+                        TotalMovimientos += mov.monto;
+
+                    }
+
+                }
+
+            }
+
+            return TotalMovimientos;
+
+        }
+
+
 
         public bool BajaCajaAhorro(int _elCBU)
         {
@@ -348,7 +372,9 @@ namespace HomeBankingDV
         {
             PlazoFijo plazo;
             DateTime fechaIni=DateTime.Now;
-            DateTime fechaFin = fechaIni.AddDays(_cantDias);
+            _cantDias = 90;
+             DateTime fechaFin = fechaIni.AddDays(_cantDias);
+            
             Usuario titular = usuarioActual;
 
             float tasa = _tasa;

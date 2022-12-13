@@ -1,0 +1,48 @@
+﻿@model HomeBancoDotNet.Models.Pago
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Pago</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.user)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.user.idUsuario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.monto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.monto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pagado)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pagado)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.metodo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.metodo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.idPago">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

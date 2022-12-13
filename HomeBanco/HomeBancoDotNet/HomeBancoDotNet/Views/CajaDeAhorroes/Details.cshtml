@@ -1,0 +1,30 @@
+﻿@model HomeBancoDotNet.Models.CajaDeAhorro
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>CajaDeAhorro</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.cbu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.cbu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.saldo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.saldo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.idCajaDeAhorro">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,48 @@
+﻿@model HomeBancoDotNet.Models.TarjetaDeCredito
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TarjetaDeCredito</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.titular)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.titular.idUsuario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.numero)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.numero)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.codigoV)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.codigoV)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.limite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.limite)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.consumos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.consumos)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.idTarjetaDeCredito">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<HomeBancoDotNet.Models.PlazoFijo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.titularP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.monto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaIni)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tasa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pagado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.titularP.idUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaIni)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tasa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pagado)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.idPlazoFijo">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.idPlazoFijo">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.idPlazoFijo">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

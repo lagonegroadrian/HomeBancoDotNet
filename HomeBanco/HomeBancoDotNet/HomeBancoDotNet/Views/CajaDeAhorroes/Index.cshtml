@@ -1,0 +1,41 @@
+﻿@model IEnumerable<HomeBancoDotNet.Models.CajaDeAhorro>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cbu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.saldo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cbu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.saldo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.idCajaDeAhorro">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.idCajaDeAhorro">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.idCajaDeAhorro">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
