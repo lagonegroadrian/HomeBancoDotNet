@@ -21,6 +21,8 @@ namespace HomeBancoDotNet.Models
        
         public bool isAdmin { get; set; }
 
+        public int intentos { get; set; }
+
         public bool bloqueado { get; set; }
 
         public ICollection<CajaDeAhorro> cajas { get;}= new List<CajaDeAhorro>();        
@@ -37,7 +39,7 @@ namespace HomeBancoDotNet.Models
 
         //constructor
         public Usuario() { }
-        public Usuario(int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado)
+        public Usuario(int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado,int intentos)
         {
             this.idUsuario = idUsuario;
             this.dni = dni;
@@ -51,6 +53,7 @@ namespace HomeBancoDotNet.Models
             pfs = new List<PlazoFijo>();
             this.tarjetas = new List<TarjetaDeCredito>();
             this.pagos = new List<Pago>();
+            this.intentos = intentos;
             
        
 

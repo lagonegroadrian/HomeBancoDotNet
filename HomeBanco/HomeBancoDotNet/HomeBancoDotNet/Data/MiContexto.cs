@@ -53,6 +53,7 @@ namespace HomeBancoDotNet.Data
                 user.Property(u => u.password).HasColumnType("varchar(50)");
                 user.Property(u => u.isAdmin).HasColumnType("bit");
                 user.Property(u => u.bloqueado).HasColumnType("bit");
+                user.Property(u => u.intentos).HasColumnType("int");
 
 
 
@@ -160,10 +161,10 @@ namespace HomeBancoDotNet.Data
             // ingreso de datos :
 
             modelBuilder.Entity<Usuario>().HasData(
-                new { idUsuario = 1, dni = 31859480, nombre = "Jose", apellido = "perez", mail = "jose@jose.com.ar", password = "1234", isAdmin = true, bloqueado = false },
-                new { idUsuario = 2, dni = 31859481, nombre = "Carlos", apellido = "Upalala", mail = "Carlos@Upalala.com.ar", password = "1234", isAdmin = false, bloqueado = false },
-                new { idUsuario = 3, dni = 35147312, nombre = "adrian", apellido = "Lagonegro", mail = "111@111", password = "123", isAdmin = true, bloqueado = false },
-                new { idUsuario = 4, dni = 35147313, nombre = "Moro", apellido = "Eltoga", mail = "222@222", password = "123", isAdmin = true, bloqueado = true }
+                new { idUsuario = 1, dni = 31859480, nombre = "Jose", apellido = "perez", mail = "jose@jose.com.ar", password = "1234", isAdmin = true, bloqueado = false,intentos=0 },
+                new { idUsuario = 2, dni = 31859481, nombre = "Carlos", apellido = "Upalala", mail = "Carlos@Upalala.com.ar", password = "1234", isAdmin = false, bloqueado = false,intentos = 0 },
+                new { idUsuario = 3, dni = 35147312, nombre = "adrian", apellido = "Lagonegro", mail = "111@111", password = "123", isAdmin = true, bloqueado = false, intentos = 0 },
+                new { idUsuario = 4, dni = 35147313, nombre = "Moro", apellido = "Eltoga", mail = "222@222", password = "123", isAdmin = true, bloqueado = true, intentos = 0 }
                 );
 
             modelBuilder.Entity<CajaDeAhorro>().HasData(
