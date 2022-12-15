@@ -24,22 +24,23 @@ namespace HomeBancoDotNet.Models
         public int intentos { get; set; }
 
         public bool bloqueado { get; set; }
+        public string Rol { get; set; }
 
-        public ICollection<CajaDeAhorro> cajas { get;}= new List<CajaDeAhorro>();        
+        public ICollection<CajaDeAhorro> cajas { get; } = new List<CajaDeAhorro>();
         public List<TitularesRel> UserCajas { get; set; } = new List<TitularesRel>();
 
-        public List<PlazoFijo> pfs { get;}= new List<PlazoFijo>();
-        public ICollection<TarjetaDeCredito> tarjetas { get;} = new List<TarjetaDeCredito>();
+        public List<PlazoFijo> pfs { get; } = new List<PlazoFijo>();
+        public ICollection<TarjetaDeCredito> tarjetas { get; } = new List<TarjetaDeCredito>();
 
 
         public List<Pago> pagos { get; } = new List<Pago>();
         //public ICollection<Pago> pagos { get;} = new List<Pago>();
 
-     
+
 
         //constructor
         public Usuario() { }
-        public Usuario(int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado,int intentos)
+        public Usuario(int dni, string nombre, string apellido, string mail, string password, bool isAdmin, bool bloqueado, int intentos, string Rol)
         {
             this.idUsuario = idUsuario;
             this.dni = dni;
@@ -54,8 +55,7 @@ namespace HomeBancoDotNet.Models
             this.tarjetas = new List<TarjetaDeCredito>();
             this.pagos = new List<Pago>();
             this.intentos = intentos;
-            
-       
+            this.Rol = Rol;
 
         }
 
